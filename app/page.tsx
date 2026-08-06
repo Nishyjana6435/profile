@@ -95,7 +95,7 @@ export default async function Home() {
         />
         <FeaturedProjects projects={featuredProjects} />
         
-        <FAQ items={faqItems} />
+        {/* <FAQ items={faqItems} /> */}
       </main>
       <Contact siteSettings={siteSettings} />
     </div>

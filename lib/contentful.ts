@@ -81,6 +81,33 @@ export interface SiteSettingsFields {
   socialLinks?: EntryFieldTypes.Object<SocialLink[]>;
 }
 
+export interface ServiceFields {
+  title: EntryFieldTypes.Symbol;
+  description: EntryFieldTypes.Text;
+  order?: EntryFieldTypes.Integer;
+}
+
+export interface FaqItemFields {
+  question: EntryFieldTypes.Symbol;
+  answer: EntryFieldTypes.Text;
+  order?: EntryFieldTypes.Integer;
+}
+
+export type ServiceSkeleton = { contentTypeId: "service"; fields: ServiceFields };
+export type FaqItemSkeleton = { contentTypeId: "faqItem"; fields: FaqItemFields };
+
+export interface HirePageFields {
+  badge?: EntryFieldTypes.Symbol;
+  headline: EntryFieldTypes.Symbol;
+  headlineHighlight?: EntryFieldTypes.Symbol;
+  intro: EntryFieldTypes.Text;
+  engagementTypes?: EntryFieldTypes.Array<EntryFieldTypes.Symbol>;
+  services?: EntryFieldTypes.Array<EntryFieldTypes.EntryLink<ServiceSkeleton>>;
+  faqItems?: EntryFieldTypes.Array<EntryFieldTypes.EntryLink<FaqItemSkeleton>>;
+  seoTitle?: EntryFieldTypes.Symbol;
+  seoDescription?: EntryFieldTypes.Text;
+}
+
 export type ProfileEntry = Entry<
   { contentTypeId: "profile"; fields: ProfileFields },
   undefined
@@ -104,6 +131,12 @@ export type ProjectCarouselEntry = Entry<
 export type PostEntry = Entry<{ contentTypeId: "post"; fields: PostFields }, undefined>;
 export type SiteSettingsEntry = Entry<
   { contentTypeId: "siteSettings"; fields: SiteSettingsFields },
+  undefined
+>;
+export type ServiceEntry = Entry<ServiceSkeleton, undefined>;
+export type FaqItemEntry = Entry<FaqItemSkeleton, undefined>;
+export type HirePageEntry = Entry<
+  { contentTypeId: "hirePage"; fields: HirePageFields },
   undefined
 >;
 
@@ -186,6 +219,18 @@ export const getProjectCarousels = cache(async (): Promise<ProjectCarouselEntry[
     include: 2,
   });
   return res.items;
+});
+
+export const getHirePage = cache(async (): Promise<HirePageEntry | null> => {
+  const res = await contentfulClient.getEntries<{
+    contentTypeId: "hirePage";
+    fields: HirePageFields;
+  }>({
+    content_type: "hirePage",
+    include: 2,
+    limit: 1,
+  });
+  return res.items[0] ?? null;
 });
 
 export const getPosts = cache(async (): Promise<PostEntry[]> => {
