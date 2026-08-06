@@ -3,6 +3,7 @@ import {
   getFeaturedProjects,
   getProfile,
 } from "@/lib/contentful";
+import { faqItems } from "@/lib/faq";
 import { richTextToPlainText } from "@/lib/richtext";
 import { SITE_NAME, SITE_URL } from "@/lib/seo";
 
@@ -59,6 +60,17 @@ export async function GET() {
       lines.push(`- **${project.fields.title}**${link}: ${description}`);
     }
     lines.push("");
+  }
+
+  if (faqItems.length > 0) {
+    lines.push("## Frequently Asked Questions");
+    lines.push("");
+    for (const item of faqItems) {
+      lines.push(`### ${item.question}`);
+      lines.push("");
+      lines.push(item.answer);
+      lines.push("");
+    }
   }
 
   lines.push("## Contact");

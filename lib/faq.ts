@@ -55,8 +55,8 @@ export const faqItems: FaqItem[] = [
       "You can reach him by email or connect on LinkedIn and GitHub — links are available in the contact section below. He's happy to discuss full stack development, technical leadership, Next.js/Contentful/Vercel projects, or SEO and performance engineering opportunities.",
   },
   {
-    question: "In Srilanka, I need to hire a full stack developer for my project. Can I contact him?",
+    question: "I need to hire a freelance full stack developer in Sri Lanka — is he available?",
     answer:
-      "You can reach him by email or connect on LinkedIn and GitHub — links are available in the contact section below. He's happy to discuss full stack development, technical leadership, Next.js/Contentful/Vercel projects, or SEO and performance engineering opportunities.",
+      "Yes. He takes on freelance and contract full stack engineering work for clients in Sri Lanka and remotely worldwide — from Next.js/React builds and Contentful-driven marketing sites to Node.js/NestJS/GraphQL backends, AWS integrations, and technical leadership for existing teams. Reach out through the contact section below to discuss your project.",
   },
 ];

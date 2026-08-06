@@ -1,15 +1,18 @@
 import type { ProfileEntry, ProjectEntry, SiteSettingsEntry } from "@/lib/contentful";
+import type { FaqItem } from "@/lib/faq";
 import { richTextToPlainText } from "@/lib/richtext";
-import { SITE_NAME, SITE_URL } from "@/lib/seo";
+import { EXTRA_KEYWORDS, SITE_NAME, SITE_URL } from "@/lib/seo";
 
 export default function StructuredData({
   profile,
   siteSettings,
   projects,
+  faqItems,
 }: {
   profile: ProfileEntry | null;
   siteSettings: SiteSettingsEntry | null;
   projects: ProjectEntry[];
+  faqItems: FaqItem[];
 }) {
   const fields = profile?.fields;
   const avatar = fields?.avatar && "fields" in fields.avatar ? fields.avatar : undefined;
@@ -17,6 +20,7 @@ export default function StructuredData({
   const sameAs = (fields?.socialLinks ?? siteSettings?.fields.socialLinks ?? [])
     .map((link) => link.url)
     .filter(Boolean);
+  const knowsAbout = Array.from(new Set([...(fields?.skills ?? []), ...EXTRA_KEYWORDS]));
 
   const person = {
     "@type": "Person",
@@ -33,7 +37,7 @@ export default function StructuredData({
     worksFor: fields?.currentCompany
       ? { "@type": "Organization", name: fields.currentCompany }
       : undefined,
-    knowsAbout: fields?.skills,
+    knowsAbout,
     sameAs: sameAs.length > 0 ? sameAs : undefined,
   };
 
@@ -77,7 +81,23 @@ export default function StructuredData({
         }
       : null;
 
-  const graph = [person, website, profilePage, itemList].filter(Boolean);
+  const faqPage =
+    faqItems.length > 0
+      ? {
+          "@type": "FAQPage",
+          "@id": `${SITE_URL}/#faq`,
+          mainEntity: faqItems.map((item) => ({
+            "@type": "Question",
+            name: item.question,
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: item.answer,
+            },
+          })),
+        }
+      : null;
+
+  const graph = [person, website, profilePage, itemList, faqPage].filter(Boolean);
 
   return (
     <script
