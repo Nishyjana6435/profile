@@ -11,6 +11,8 @@ import {
   getSiteSettings,
 } from "@/lib/contentful";
 
+export const revalidate = 60000;
+
 export default async function Home() {
   const [profile, experienceItems, featuredProjects, siteSettings] =
     await Promise.all([
