@@ -1,7 +1,31 @@
+import Image from "next/image";
 import type { ProjectEntry } from "@/lib/contentful";
 import { RichText } from "@/lib/richtext";
 
-function ProjectPreview() {
+function ProjectPreview({
+  coverImage,
+  title,
+}: {
+  coverImage: ProjectEntry["fields"]["coverImage"];
+  title: string;
+}) {
+  const asset = coverImage && "fields" in coverImage ? coverImage : undefined;
+  const file = asset?.fields.file;
+
+  if (file?.url) {
+    return (
+      <div className="relative h-64 w-full overflow-hidden rounded-xl bg-white/95 p-8 sm:h-72">
+        <Image
+          src={`https:${file.url}`}
+          alt={asset?.fields.title || title}
+          fill
+          className="object-contain"
+          sizes="(min-width: 640px) 50vw, 100vw"
+        />
+      </div>
+    );
+  }
+
   return (
     <div className="flex h-64 w-full flex-col gap-3 rounded-xl bg-white/95 p-5 text-black/70 sm:h-72">
       <div className="flex h-24 w-24 items-center justify-center self-center rounded border border-black/20">
@@ -41,7 +65,10 @@ export default function FeaturedProjects({
               }`}
             >
               <div className="w-full sm:w-1/2">
-                <ProjectPreview />
+                <ProjectPreview
+                  coverImage={project.fields.coverImage}
+                  title={project.fields.title}
+                />
               </div>
               <div className="w-full sm:w-1/2">
                 <p className="text-xs uppercase tracking-wide text-violet-400">
