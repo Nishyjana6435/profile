@@ -4,6 +4,7 @@ import Hero from "@/components/Hero";
 import WorkExperience from "@/components/WorkExperience";
 import SkillsOrbit from "@/components/SkillsOrbit";
 import FeaturedProjects from "@/components/FeaturedProjects";
+import FAQ from "@/components/FAQ";
 import Contact from "@/components/Contact";
 import StructuredData from "@/components/StructuredData";
 import {
@@ -12,8 +13,9 @@ import {
   getFeaturedProjects,
   getSiteSettings,
 } from "@/lib/contentful";
+import { faqItems } from "@/lib/faq";
 import { richTextToPlainText } from "@/lib/richtext";
-import { SITE_NAME, SITE_URL } from "@/lib/seo";
+import { EXTRA_KEYWORDS, SITE_NAME, SITE_URL } from "@/lib/seo";
 
 export const revalidate = 60000;
 
@@ -33,10 +35,12 @@ export async function generateMetadata(): Promise<Metadata> {
   const avatar = fields?.avatar && "fields" in fields.avatar ? fields.avatar : undefined;
   const avatarUrl = avatar?.fields.file?.url ? `https:${avatar.fields.file.url}` : undefined;
 
+  const keywords = Array.from(new Set([...(fields?.skills ?? []), ...EXTRA_KEYWORDS]));
+
   return {
     title: { absolute: title },
     description,
-    keywords: fields?.skills,
+    keywords,
     authors: fields?.name ? [{ name: fields.name, url: SITE_URL }] : undefined,
     alternates: { canonical: SITE_URL },
     openGraph: {
@@ -71,6 +75,7 @@ export default async function Home() {
         profile={profile}
         siteSettings={siteSettings}
         projects={featuredProjects}
+        faqItems={faqItems}
       />
       <Header />
       <main className="flex-1">
@@ -82,6 +87,7 @@ export default async function Home() {
           skills={profile?.fields.skills ?? []}
         />
         <FeaturedProjects projects={featuredProjects} />
+        <FAQ items={faqItems} />
       </main>
       <Contact siteSettings={siteSettings} />
     </div>
