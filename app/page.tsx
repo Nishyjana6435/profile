@@ -4,6 +4,7 @@ import Hero from "@/components/Hero";
 import WorkExperience from "@/components/WorkExperience";
 import SkillsOrbit from "@/components/SkillsOrbit";
 import FeaturedProjects from "@/components/FeaturedProjects";
+import ProjectCarousel from "@/components/ProjectCarousel";
 import FAQ from "@/components/FAQ";
 import Contact from "@/components/Contact";
 import StructuredData from "@/components/StructuredData";
@@ -11,6 +12,7 @@ import {
   getProfile,
   getExperienceItems,
   getFeaturedProjects,
+  getProjectCarousels,
   getSiteSettings,
 } from "@/lib/contentful";
 import { faqItems } from "@/lib/faq";
@@ -61,11 +63,12 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function Home() {
-  const [profile, experienceItems, featuredProjects, siteSettings] =
+  const [profile, experienceItems, featuredProjects, projectCarousels, siteSettings] =
     await Promise.all([
       getProfile(),
       getExperienceItems(),
       getFeaturedProjects(),
+      getProjectCarousels(),
       getSiteSettings(),
     ]);
 
@@ -80,13 +83,18 @@ export default async function Home() {
       <Header />
       <main className="flex-1">
         <Hero profile={profile} />
+        {projectCarousels.map((carousel) => (
+          <ProjectCarousel key={carousel.sys.id} carousel={carousel} />
+        ))}
         <WorkExperience items={experienceItems} />
+
         <SkillsOrbit
           lookingForText={profile?.fields.lookingForText}
           lookingForHighlight={profile?.fields.lookingForHighlight}
           skills={profile?.fields.skills ?? []}
         />
         <FeaturedProjects projects={featuredProjects} />
+        
         <FAQ items={faqItems} />
       </main>
       <Contact siteSettings={siteSettings} />

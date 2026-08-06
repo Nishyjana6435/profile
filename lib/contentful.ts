@@ -89,8 +89,16 @@ export type ExperienceItemEntry = Entry<
   { contentTypeId: "experienceItem"; fields: ExperienceItemFields },
   undefined
 >;
-export type ProjectEntry = Entry<
-  { contentTypeId: "project"; fields: ProjectFields },
+export type ProjectSkeleton = { contentTypeId: "project"; fields: ProjectFields };
+
+export interface ProjectCarouselFields {
+  title?: EntryFieldTypes.Symbol;
+  projects: EntryFieldTypes.Array<EntryFieldTypes.EntryLink<ProjectSkeleton>>;
+}
+
+export type ProjectEntry = Entry<ProjectSkeleton, undefined>;
+export type ProjectCarouselEntry = Entry<
+  { contentTypeId: "projectCarousel"; fields: ProjectCarouselFields },
   undefined
 >;
 export type PostEntry = Entry<{ contentTypeId: "post"; fields: PostFields }, undefined>;
@@ -168,6 +176,17 @@ export const getProjectBySlug = cache(
     return res.items[0] ?? null;
   }
 );
+
+export const getProjectCarousels = cache(async (): Promise<ProjectCarouselEntry[]> => {
+  const res = await contentfulClient.getEntries<{
+    contentTypeId: "projectCarousel";
+    fields: ProjectCarouselFields;
+  }>({
+    content_type: "projectCarousel",
+    include: 2,
+  });
+  return res.items;
+});
 
 export const getPosts = cache(async (): Promise<PostEntry[]> => {
   const res = await contentfulClient.getEntries<{
