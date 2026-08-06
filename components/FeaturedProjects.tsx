@@ -1,22 +1,17 @@
-// Dummy project data — replace with real case studies later.
-const PROJECTS = [
-  {
-    title: "Example Project",
-    description:
-      "A web app for visualizing personalized Spotify data. View your top artists, top tracks, recently played tracks, and detailed audio information about each track. Create and save new playlists of recommended tracks based on your existing playlists and more.",
-  },
-  {
-    title: "Example Project",
-    description:
-      "A web app for visualizing personalized Spotify data. View your top artists, top tracks, recently played tracks, and detailed audio information about each track. Create and save new playlists of recommended tracks based on your existing playlists and more.",
-  },
-];
+import type { ProjectEntry } from "@/lib/contentful";
+import { RichText } from "@/lib/richtext";
 
 function ProjectPreview() {
   return (
     <div className="flex h-64 w-full flex-col gap-3 rounded-xl bg-white/95 p-5 text-black/70 sm:h-72">
       <div className="flex h-24 w-24 items-center justify-center self-center rounded border border-black/20">
-        <svg viewBox="0 0 24 24" className="h-10 w-10 text-black/30" fill="none" stroke="currentColor" aria-hidden="true">
+        <svg
+          viewBox="0 0 24 24"
+          className="h-10 w-10 text-black/30"
+          fill="none"
+          stroke="currentColor"
+          aria-hidden="true"
+        >
           <path d="M3 3l18 18M21 3L3 21" />
         </svg>
       </div>
@@ -26,15 +21,21 @@ function ProjectPreview() {
   );
 }
 
-export default function FeaturedProjects() {
+export default function FeaturedProjects({
+  projects,
+}: {
+  projects: ProjectEntry[];
+}) {
+  if (projects.length === 0) return null;
+
   return (
     <section className="px-6 py-16">
       <div className="mx-auto flex max-w-6xl flex-col gap-20">
-        {PROJECTS.map((project, index) => {
+        {projects.map((project, index) => {
           const reversed = index % 2 === 1;
           return (
             <div
-              key={index}
+              key={project.sys.id}
               className={`flex flex-col gap-8 sm:flex-row sm:items-center ${
                 reversed ? "sm:flex-row-reverse" : ""
               }`}
@@ -47,11 +48,23 @@ export default function FeaturedProjects() {
                   Featured Project
                 </p>
                 <h3 className="mt-1 text-xl font-semibold text-white">
-                  {project.title}
+                  {project.fields.title}
                 </h3>
-                <p className="mt-3 text-sm leading-6 text-white/60">
-                  {project.description}
-                </p>
+                <div className="mt-3 text-sm leading-6 text-white/60">
+                  <RichText document={project.fields.description} />
+                </div>
+                {project.fields.tags && project.fields.tags.length > 0 && (
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    {project.fields.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="rounded-full border border-white/15 px-3 py-1 text-xs text-white/60"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                )}
               </div>
             </div>
           );

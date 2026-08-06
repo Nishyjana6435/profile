@@ -3,9 +3,9 @@ import Logo from "./Logo";
 
 // Dummy nav — links point at placeholder routes for now.
 const NAV_LINKS = [
-  { label: "Home", href: "/" },
-  { label: "About", href: "/about" },
-  { label: "Lab", href: "/lab" },
+  { label: "", href: "/" },
+  // { label: "About", href: "/about" },
+  // { label: "Lab", href: "/lab" },
 ];
 
 export default function Header() {

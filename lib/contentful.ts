@@ -32,6 +32,20 @@ export interface ProfileFields {
   resumeUrl?: EntryFieldTypes.Symbol;
   skills?: EntryFieldTypes.Array<EntryFieldTypes.Symbol>;
   socialLinks?: EntryFieldTypes.Object<SocialLink[]>;
+  heroTagline?: EntryFieldTypes.Symbol;
+  heroHeadline?: EntryFieldTypes.Symbol;
+  heroHighlightWord?: EntryFieldTypes.Symbol;
+  heroSubheadline?: EntryFieldTypes.Symbol;
+  currentCompany?: EntryFieldTypes.Symbol;
+  lookingForText?: EntryFieldTypes.Text;
+  lookingForHighlight?: EntryFieldTypes.Symbol;
+}
+
+export interface ExperienceItemFields {
+  title: EntryFieldTypes.Symbol;
+  description: EntryFieldTypes.Text;
+  learnMoreUrl?: EntryFieldTypes.Symbol;
+  order?: EntryFieldTypes.Integer;
 }
 
 export interface ProjectFields {
@@ -66,13 +80,23 @@ export interface SiteSettingsFields {
   socialLinks?: EntryFieldTypes.Object<SocialLink[]>;
 }
 
-export type ProfileEntry = Entry<{ contentTypeId: "profile"; fields: ProfileFields }>;
-export type ProjectEntry = Entry<{ contentTypeId: "project"; fields: ProjectFields }>;
-export type PostEntry = Entry<{ contentTypeId: "post"; fields: PostFields }>;
-export type SiteSettingsEntry = Entry<{
-  contentTypeId: "siteSettings";
-  fields: SiteSettingsFields;
-}>;
+export type ProfileEntry = Entry<
+  { contentTypeId: "profile"; fields: ProfileFields },
+  undefined
+>;
+export type ExperienceItemEntry = Entry<
+  { contentTypeId: "experienceItem"; fields: ExperienceItemFields },
+  undefined
+>;
+export type ProjectEntry = Entry<
+  { contentTypeId: "project"; fields: ProjectFields },
+  undefined
+>;
+export type PostEntry = Entry<{ contentTypeId: "post"; fields: PostFields }, undefined>;
+export type SiteSettingsEntry = Entry<
+  { contentTypeId: "siteSettings"; fields: SiteSettingsFields },
+  undefined
+>;
 
 export async function getProfile(): Promise<ProfileEntry | null> {
   const res = await contentfulClient.getEntries<{
@@ -83,6 +107,17 @@ export async function getProfile(): Promise<ProfileEntry | null> {
     limit: 1,
   });
   return res.items[0] ?? null;
+}
+
+export async function getExperienceItems(): Promise<ExperienceItemEntry[]> {
+  const res = await contentfulClient.getEntries<{
+    contentTypeId: "experienceItem";
+    fields: ExperienceItemFields;
+  }>({
+    content_type: "experienceItem",
+    order: ["fields.order"],
+  });
+  return res.items;
 }
 
 export async function getSiteSettings(): Promise<SiteSettingsEntry | null> {

@@ -1,27 +1,45 @@
 import Logo from "./Logo";
 
-// Dummy tool list — replace with the real stack later.
-const TOOLS = ["Fg", "At", "C", "Nd", "Js", "Ts", "Xd", "Sk", "Ai", "Pr"];
+function withHighlight(text: string, highlight?: string) {
+  if (!highlight) return text;
+  const index = text.toLowerCase().indexOf(highlight.toLowerCase());
+  if (index === -1) return text;
+  return (
+    <>
+      {text.slice(0, index)}
+      <span className="text-violet-400">
+        {text.slice(index, index + highlight.length)}
+      </span>
+      {text.slice(index + highlight.length)}
+    </>
+  );
+}
 
-export default function SkillsOrbit() {
+export default function SkillsOrbit({
+  lookingForText,
+  lookingForHighlight,
+  skills,
+}: {
+  lookingForText?: string;
+  lookingForHighlight?: string;
+  skills: string[];
+}) {
   return (
     <section className="px-6 py-20 text-center">
       <div className="mx-auto max-w-2xl">
-        <p className="text-lg text-white/80">
-          I&apos;m currently looking to join a{" "}
-          <span className="text-violet-400">cross-functional</span> team
-        </p>
-        <p className="mt-1 text-sm text-white/50">
-          that values improving people&apos;s lives through accessible design
-        </p>
+        {lookingForText && (
+          <p className="text-lg text-white/80">
+            {withHighlight(lookingForText, lookingForHighlight)}
+          </p>
+        )}
 
         <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-          {TOOLS.map((tool, index) => (
+          {skills.map((skill) => (
             <div
-              key={index}
-              className="flex h-9 w-9 items-center justify-center rounded-lg bg-white/5 text-xs text-white/70 ring-1 ring-white/10"
+              key={skill}
+              className="flex h-9 items-center justify-center rounded-lg bg-white/5 px-3 text-xs text-white/70 ring-1 ring-white/10"
             >
-              {tool}
+              {skill}
             </div>
           ))}
         </div>
