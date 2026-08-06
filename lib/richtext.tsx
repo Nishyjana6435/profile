@@ -1,6 +1,12 @@
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
+import { documentToPlainTextString } from "@contentful/rich-text-plain-text-renderer";
 import { BLOCKS, type Document } from "@contentful/rich-text-types";
 import Image from "next/image";
+
+export function richTextToPlainText(document?: Document): string {
+  if (!document) return "";
+  return documentToPlainTextString(document);
+}
 
 export function RichText({ document }: { document?: Document }) {
   if (!document) return null;

@@ -1,3 +1,4 @@
+import { cache } from "react";
 import { createClient, type Entry, type EntryFieldTypes } from "contentful";
 
 const spaceId = process.env.CONTENTFUL_SPACE_ID;
@@ -98,7 +99,7 @@ export type SiteSettingsEntry = Entry<
   undefined
 >;
 
-export async function getProfile(): Promise<ProfileEntry | null> {
+export const getProfile = cache(async (): Promise<ProfileEntry | null> => {
   const res = await contentfulClient.getEntries<{
     contentTypeId: "profile";
     fields: ProfileFields;
@@ -107,9 +108,9 @@ export async function getProfile(): Promise<ProfileEntry | null> {
     limit: 1,
   });
   return res.items[0] ?? null;
-}
+});
 
-export async function getExperienceItems(): Promise<ExperienceItemEntry[]> {
+export const getExperienceItems = cache(async (): Promise<ExperienceItemEntry[]> => {
   const res = await contentfulClient.getEntries<{
     contentTypeId: "experienceItem";
     fields: ExperienceItemFields;
@@ -118,9 +119,9 @@ export async function getExperienceItems(): Promise<ExperienceItemEntry[]> {
     order: ["fields.order"],
   });
   return res.items;
-}
+});
 
-export async function getSiteSettings(): Promise<SiteSettingsEntry | null> {
+export const getSiteSettings = cache(async (): Promise<SiteSettingsEntry | null> => {
   const res = await contentfulClient.getEntries<{
     contentTypeId: "siteSettings";
     fields: SiteSettingsFields;
@@ -129,9 +130,9 @@ export async function getSiteSettings(): Promise<SiteSettingsEntry | null> {
     limit: 1,
   });
   return res.items[0] ?? null;
-}
+});
 
-export async function getProjects(): Promise<ProjectEntry[]> {
+export const getProjects = cache(async (): Promise<ProjectEntry[]> => {
   const res = await contentfulClient.getEntries<{
     contentTypeId: "project";
     fields: ProjectFields;
@@ -140,9 +141,9 @@ export async function getProjects(): Promise<ProjectEntry[]> {
     order: ["fields.order", "-fields.publishDate"],
   });
   return res.items;
-}
+});
 
-export async function getFeaturedProjects(): Promise<ProjectEntry[]> {
+export const getFeaturedProjects = cache(async (): Promise<ProjectEntry[]> => {
   const res = await contentfulClient.getEntries<{
     contentTypeId: "project";
     fields: ProjectFields;
@@ -152,21 +153,23 @@ export async function getFeaturedProjects(): Promise<ProjectEntry[]> {
     order: ["fields.order", "-fields.publishDate"],
   });
   return res.items;
-}
+});
 
-export async function getProjectBySlug(slug: string): Promise<ProjectEntry | null> {
-  const res = await contentfulClient.getEntries<{
-    contentTypeId: "project";
-    fields: ProjectFields;
-  }>({
-    content_type: "project",
-    "fields.slug": slug,
-    limit: 1,
-  });
-  return res.items[0] ?? null;
-}
+export const getProjectBySlug = cache(
+  async (slug: string): Promise<ProjectEntry | null> => {
+    const res = await contentfulClient.getEntries<{
+      contentTypeId: "project";
+      fields: ProjectFields;
+    }>({
+      content_type: "project",
+      "fields.slug": slug,
+      limit: 1,
+    });
+    return res.items[0] ?? null;
+  }
+);
 
-export async function getPosts(): Promise<PostEntry[]> {
+export const getPosts = cache(async (): Promise<PostEntry[]> => {
   const res = await contentfulClient.getEntries<{
     contentTypeId: "post";
     fields: PostFields;
@@ -175,9 +178,9 @@ export async function getPosts(): Promise<PostEntry[]> {
     order: ["-fields.publishDate"],
   });
   return res.items;
-}
+});
 
-export async function getPostBySlug(slug: string): Promise<PostEntry | null> {
+export const getPostBySlug = cache(async (slug: string): Promise<PostEntry | null> => {
   const res = await contentfulClient.getEntries<{
     contentTypeId: "post";
     fields: PostFields;
@@ -187,4 +190,4 @@ export async function getPostBySlug(slug: string): Promise<PostEntry | null> {
     limit: 1,
   });
   return res.items[0] ?? null;
-}
+});

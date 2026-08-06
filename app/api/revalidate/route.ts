@@ -8,5 +8,6 @@ export async function POST(request: NextRequest) {
   }
 
   revalidatePath("/");
+  revalidatePath("/llms.txt");
   return NextResponse.json({ revalidated: true });
 }
