@@ -7,7 +7,6 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ message: "Invalid secret" }, { status: 401 });
   }
 
-  revalidatePath("/");
-  revalidatePath("/llms.txt");
+  revalidatePath("/", "layout");
   return NextResponse.json({ revalidated: true });
 }
