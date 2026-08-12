@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Logo from "./Logo";
+import { WHATSAPP_URL, WhatsAppIcon } from "./Contact";
 
 // Dummy nav — links point at placeholder routes for now.
 const NAV_LINKS = [
@@ -27,6 +28,16 @@ export default function Header() {
               {link.label}
             </Link>
           ))}
+          <a
+            href={WHATSAPP_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Chat on WhatsApp"
+            className="inline-flex items-center gap-2 rounded-full bg-[#25D366] px-4 py-2 font-semibold text-[#0a0514] shadow-md shadow-[#25D366]/30 transition-transform hover:scale-[1.04] hover:shadow-[#25D366]/50"
+          >
+            <WhatsAppIcon />
+            WhatsApp
+          </a>
         </nav>
       </div>
     </header>
