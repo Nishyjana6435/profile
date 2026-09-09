@@ -1,21 +1,69 @@
 import Image from "next/image";
+import { Fragment, type CSSProperties, type ReactNode } from "react";
 import type { ProfileEntry } from "@/lib/contentful";
 import { RichText } from "@/lib/richtext";
 import TypedText from "./TypedText";
 
-function withHighlight(text: string, highlight?: string) {
-  if (!highlight) return text;
-  const index = text.toLowerCase().indexOf(highlight.toLowerCase());
-  if (index === -1) return text;
-  return (
-    <>
-      {text.slice(0, index)}
-      <span className="rounded-full border border-violet-400/60 px-2 py-0.5 text-violet-300">
-        {text.slice(index, index + highlight.length)}
-      </span>
-      {text.slice(index + highlight.length)}
-    </>
-  );
+function AnimatedHeadline({
+  text,
+  highlight,
+}: {
+  text: string;
+  highlight?: string;
+}) {
+  const words = text.split(/\s+/).filter(Boolean);
+  const hl = highlight?.toLowerCase();
+
+  return words.map((word, wi) => {
+    const idx = hl ? word.toLowerCase().indexOf(hl) : -1;
+    const wordDelay = Math.round((0.35 + wi * 0.09) * 100) / 100;
+    let inner: ReactNode = word;
+    let open = false;
+
+    if (idx !== -1 && hl) {
+      open = true;
+      const before = word.slice(0, idx);
+      const match = word.slice(idx, idx + hl.length);
+      const after = word.slice(idx + hl.length);
+      const dots = /^\.+$/.test(after) ? after.split("") : null;
+      inner = (
+        <>
+          {before}
+          <span
+            className="hero-pill rounded-full border border-violet-400/60 px-2 py-0.5 text-violet-300"
+            style={{ "--d": `${wordDelay}s` } as CSSProperties}
+          >
+            {match}
+          </span>
+          {dots
+            ? dots.map((dot, di) => (
+                <span
+                  key={di}
+                  className="hero-dot"
+                  style={
+                    { "--d": `${(wordDelay + 0.45 + di * 0.16).toFixed(2)}s` } as CSSProperties
+                  }
+                >
+                  {dot}
+                </span>
+              ))
+            : after}
+        </>
+      );
+    }
+
+    return (
+      <Fragment key={wi}>
+        {wi > 0 && " "}
+        <span
+          className={`hero-word${open ? " hero-word--open" : ""}`}
+          style={{ "--d": `${wordDelay}s` } as CSSProperties}
+        >
+          <span>{inner}</span>
+        </span>
+      </Fragment>
+    );
+  });
 }
 
 export default function Hero({ profile }: { profile: ProfileEntry | null }) {
@@ -63,16 +111,29 @@ export default function Hero({ profile }: { profile: ProfileEntry | null }) {
           </div>
 
           <div>
-            <p className="text-sm uppercase tracking-wide text-white/50">
-              {fields?.heroTagline}
-            </p>
+            {fields?.heroTagline && (
+              <p className="hero-tagline text-sm uppercase tracking-wide text-white/50">
+                {fields.heroTagline}
+              </p>
+            )}
             <h1 className="mt-2 text-3xl font-semibold leading-tight text-white sm:text-4xl">
-              {fields?.heroHeadline &&
-                withHighlight(fields.heroHeadline, fields.heroHighlightWord)}
+              {fields?.heroHeadline && (
+                <>
+                  <span className="sr-only">{fields.heroHeadline}</span>
+                  <span aria-hidden="true">
+                    <AnimatedHeadline
+                      text={fields.heroHeadline}
+                      highlight={fields.heroHighlightWord}
+                    />
+                  </span>
+                </>
+              )}
             </h1>
-            <p className="mt-3 max-w-md text-sm italic text-white/50">
-              {fields?.heroSubheadline}
-            </p>
+            {fields?.heroSubheadline && (
+              <p className="hero-sub mt-3 max-w-md text-sm italic text-white/50">
+                {fields.heroSubheadline}
+              </p>
+            )}
           </div>
         </div>
 

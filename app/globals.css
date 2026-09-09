@@ -31,6 +31,153 @@ body {
   }
 }
 
+/* Hero intro sequence */
+@keyframes hero-tagline {
+  from {
+    opacity: 0;
+    letter-spacing: 0.5em;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    letter-spacing: 0.025em;
+    transform: none;
+  }
+}
+
+@keyframes hero-word {
+  from {
+    opacity: 0;
+    transform: translateY(110%) rotate(3deg);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes hero-pop {
+  0% {
+    opacity: 0;
+    transform: translateY(0.35em) scale(0.8);
+  }
+  70% {
+    opacity: 1;
+    transform: translateY(-0.04em) scale(1.04);
+  }
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes hero-pill {
+  from {
+    border-color: transparent;
+    background-color: rgba(139, 92, 246, 0.35);
+    box-shadow: 0 0 0 0 rgba(139, 92, 246, 0);
+  }
+  to {
+    border-color: rgba(167, 139, 250, 0.6);
+    background-color: rgba(139, 92, 246, 0);
+    box-shadow: 0 0 22px -2px rgba(139, 92, 246, 0.45);
+  }
+}
+
+@keyframes hero-glow {
+  0%,
+  100% {
+    box-shadow: 0 0 22px -2px rgba(139, 92, 246, 0.45);
+  }
+  50% {
+    box-shadow: 0 0 30px 2px rgba(139, 92, 246, 0.75);
+  }
+}
+
+@keyframes hero-dot {
+  0% {
+    opacity: 0;
+    transform: translateY(0);
+  }
+  45% {
+    opacity: 1;
+    transform: translateY(-0.25em);
+  }
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes hero-sub {
+  from {
+    opacity: 0;
+    filter: blur(6px);
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+    transform: none;
+  }
+}
+
+.hero-tagline {
+  animation: hero-tagline 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+.hero-word {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+  padding-bottom: 0.15em;
+  margin-bottom: -0.15em;
+}
+
+.hero-word > span {
+  display: inline-block;
+  animation: hero-word 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  animation-delay: var(--d, 0s);
+}
+
+.hero-word--open {
+  overflow: visible;
+}
+
+.hero-word--open > span {
+  animation-name: hero-pop;
+  animation-duration: 0.75s;
+}
+
+.hero-pill {
+  display: inline-block;
+  animation:
+    hero-pill 0.6s ease-out both,
+    hero-glow 3.2s ease-in-out infinite;
+  animation-delay: calc(var(--d, 0s) + 0.45s), calc(var(--d, 0s) + 1.05s);
+}
+
+.hero-dot {
+  display: inline-block;
+  animation: hero-dot 0.5s ease-out both;
+  animation-delay: var(--d, 0s);
+}
+
+.hero-sub {
+  animation: hero-sub 0.9s ease-out both;
+  animation-delay: 1.35s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-tagline,
+  .hero-word > span,
+  .hero-pill,
+  .hero-dot,
+  .hero-sub {
+    animation: none;
+  }
+}
+
 @keyframes carousel-scroll {
   from {
     transform: translateX(0);
