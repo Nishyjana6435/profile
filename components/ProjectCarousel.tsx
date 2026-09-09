@@ -1,5 +1,6 @@
 import Image from "next/image";
 import type { ProjectCarouselEntry, ProjectEntry } from "@/lib/contentful";
+import Reveal from "./Reveal";
 
 function CarouselTile({ project }: { project: ProjectEntry }) {
   const asset =
@@ -21,7 +22,7 @@ function CarouselTile({ project }: { project: ProjectEntry }) {
   );
 
   const className =
-    "group flex h-44 w-80 flex-none items-center justify-center rounded-2xl bg-white/5 px-12 ring-1 ring-white/10 sm:w-96";
+    "group flex h-44 w-80 flex-none items-center justify-center rounded-2xl bg-white/5 px-12 ring-1 ring-white/10 transition-all duration-300 hover:-translate-y-1 hover:bg-white/[0.08] hover:ring-violet-400/40 hover:shadow-[0_24px_60px_-28px_rgba(139,92,246,0.6)] sm:w-96";
 
   if (project.fields.liveUrl) {
     return (
@@ -54,17 +55,17 @@ export default function ProjectCarousel({
     <section className="px-6 py-20">
       <div className="mx-auto max-w-7xl">
         {carousel.fields.title && (
-          <p className="text-center text-sm uppercase tracking-wide text-white/40">
+          <Reveal as="p" variant="fade" className="text-center text-sm uppercase tracking-wide text-white/40">
             {carousel.fields.title}
-          </p>
+          </Reveal>
         )}
-        <div className="mt-10 overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
-          <div className="flex w-max animate-[carousel-scroll_48s_linear_infinite] gap-10 motion-reduce:animate-none">
+        <Reveal variant="fade" delay={150} className="mt-10 overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
+          <div className="flex w-max animate-[carousel-scroll_48s_linear_infinite] gap-10 hover:[animation-play-state:paused] motion-reduce:animate-none">
             {[...projects, ...projects].map((project, index) => (
               <CarouselTile key={`${project.sys.id}-${index}`} project={project} />
             ))}
           </div>
-        </div>
+        </Reveal>
       </div>
     </section>
   );

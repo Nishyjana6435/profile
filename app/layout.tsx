@@ -40,9 +40,14 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} h-full scroll-smooth antialiased motion-reduce:scroll-auto`}
     >
-      <body className="min-h-full flex flex-col bg-[#0a0514]">{children}</body>
+      <body className="min-h-full flex flex-col bg-[#0a0514]">
+        <noscript>
+          <style>{`.reveal,.reveal-stagger>*{opacity:1!important;transform:none!important}`}</style>
+        </noscript>
+        {children}
+      </body>
     </html>
   );
 }

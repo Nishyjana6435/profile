@@ -1,6 +1,8 @@
 import Image from "next/image";
 import type { ProjectEntry } from "@/lib/contentful";
 import { RichText } from "@/lib/richtext";
+import type { CSSProperties } from "react";
+import Reveal from "./Reveal";
 
 function ProjectPreview({
   coverImage,
@@ -14,12 +16,12 @@ function ProjectPreview({
 
   if (file?.url) {
     return (
-      <div className="relative h-64 w-full overflow-hidden rounded-xl bg-white/95 p-8 sm:h-72">
+      <div className="group relative h-64 w-full overflow-hidden rounded-xl bg-white/95 p-8 transition-all duration-500 hover:-rotate-1 hover:shadow-[0_30px_80px_-30px_rgba(139,92,246,0.55)] sm:h-72">
         <Image
           src={`https:${file.url}`}
           alt={asset?.fields.title || title}
           fill
-          className="object-contain"
+          className="object-contain transition-transform duration-700 ease-out group-hover:scale-[1.05]"
           sizes="(min-width: 640px) 50vw, 100vw"
         />
       </div>
@@ -64,14 +66,14 @@ export default function FeaturedProjects({
                 reversed ? "sm:flex-row-reverse" : ""
               }`}
             >
-              <div className="w-full sm:w-1/2">
+              <Reveal variant={reversed ? "right" : "left"} className="w-full sm:w-1/2">
                 <ProjectPreview
                   coverImage={project.fields.coverImage}
                   title={project.fields.title}
                 />
-              </div>
-              <div className="w-full sm:w-1/2">
-                <p className="text-xs uppercase tracking-wide text-violet-400">
+              </Reveal>
+              <Reveal variant={reversed ? "left" : "right"} delay={150} className="w-full sm:w-1/2">
+                <p className="text-shimmer inline-block text-xs uppercase tracking-wide">
                   Featured Project
                 </p>
                 <h3 className="mt-1 text-xl font-semibold text-white">
@@ -81,18 +83,19 @@ export default function FeaturedProjects({
                   <RichText document={project.fields.description} />
                 </div>
                 {project.fields.tags && project.fields.tags.length > 0 && (
-                  <div className="mt-4 flex flex-wrap gap-2">
-                    {project.fields.tags.map((tag) => (
+                  <Reveal variant="fade" stagger delay={300} className="mt-4 flex flex-wrap gap-2">
+                    {project.fields.tags.map((tag, i) => (
                       <span
                         key={tag}
-                        className="rounded-full border border-white/15 px-3 py-1 text-xs text-white/60"
+                        style={{ "--i": i } as CSSProperties}
+                        className="rounded-full border border-white/15 px-3 py-1 text-xs text-white/60 transition-colors duration-300 hover:border-violet-400/50 hover:text-white"
                       >
                         {tag}
                       </span>
                     ))}
-                  </div>
+                  </Reveal>
                 )}
-              </div>
+              </Reveal>
             </div>
           );
         })}

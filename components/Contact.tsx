@@ -1,4 +1,6 @@
 import type { SiteSettingsEntry } from "@/lib/contentful";
+import type { CSSProperties } from "react";
+import Reveal from "./Reveal";
 
 export const WHATSAPP_URL =
   "https://wa.me/94777125043?text=Hi%2C%20I%27d%20like%20to%20get%20in%20touch";
@@ -45,42 +47,49 @@ export default function Contact({
   return (
     <footer className="border-t border-white/5 px-6 py-16">
       <div className="mx-auto max-w-6xl">
-        <h2 className="text-2xl font-semibold text-white">Contact</h2>
+        <Reveal as="h2" className="text-2xl font-semibold text-white">
+          Contact
+        </Reveal>
         {fields?.siteDescription && (
-          <p className="mt-4 max-w-xl text-sm leading-6 text-white/60">
+          <Reveal as="p" delay={100} className="mt-4 max-w-xl text-sm leading-6 text-white/60">
             {fields.siteDescription}
-          </p>
+          </Reveal>
         )}
         {fields?.contactEmail && (
-          <p className="mt-6 text-sm text-white/80">{fields.contactEmail}</p>
+          <Reveal as="p" delay={200} className="mt-6 text-sm text-white/80">
+            {fields.contactEmail}
+          </Reveal>
         )}
 
+        <Reveal variant="scale" delay={300} className="mt-6 inline-block">
         <a
           href={WHATSAPP_URL}
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Chat on WhatsApp"
-          className="mt-6 inline-flex items-center gap-2 rounded-full bg-[#25D366] px-5 py-3 text-sm font-semibold text-[#0a0514] shadow-lg shadow-[#25D366]/20 transition-transform hover:scale-[1.03] hover:shadow-[#25D366]/40"
+          className="btn-shine inline-flex items-center gap-2 rounded-full bg-[#25D366] px-5 py-3 text-sm font-semibold text-[#0a0514] shadow-lg shadow-[#25D366]/20 transition-all duration-300 hover:scale-[1.03] hover:shadow-xl hover:shadow-[#25D366]/40"
         >
           <WhatsAppIcon />
           Chat on WhatsApp
         </a>
+        </Reveal>
 
         {socialLinks.length > 0 && (
-          <div className="mt-6 flex gap-4">
-            {socialLinks.map((link) => (
+          <Reveal variant="fade" stagger delay={400} className="mt-6 flex gap-4">
+            {socialLinks.map((link, i) => (
               <a
                 key={link.platform}
                 href={link.url}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={link.platform}
-                className="flex h-9 w-9 items-center justify-center rounded-full border border-white/15 text-white/70 transition-colors hover:border-violet-400/60 hover:text-white"
+                style={{ "--i": i } as CSSProperties}
+                className="flex h-9 w-9 items-center justify-center rounded-full border border-white/15 text-white/70 transition-all duration-300 hover:-translate-y-1 hover:border-violet-400/60 hover:bg-violet-500/10 hover:text-white"
               >
                 <SocialIcon platform={link.platform} />
               </a>
             ))}
-          </div>
+          </Reveal>
         )}
       </div>
     </footer>

@@ -75,15 +75,16 @@ export default function Hero({ profile }: { profile: ProfileEntry | null }) {
     <section className="relative overflow-hidden px-6 pt-20 pb-24">
       <div
         aria-hidden="true"
-        className="absolute left-1/2 top-24 h-[420px] w-[420px] -translate-x-1/2 rounded-full bg-violet-600/25 blur-3xl"
+        className="hero-blob absolute left-1/2 top-24 h-[420px] w-[420px] -translate-x-1/2 rounded-full bg-violet-600/25 blur-3xl"
       />
 
       <div className="relative mx-auto max-w-6xl">
         <div className="flex flex-col items-start gap-10 sm:flex-row sm:items-center">
-          <div className="relative shrink-0">
-            <div className="absolute -top-10 left-4 whitespace-nowrap text-xs text-white/60 sm:-top-8">
+          <div className="hero-float relative shrink-0">
+            <div className="hero-hello absolute -top-10 left-4 whitespace-nowrap text-xs text-white/60 sm:-top-8">
               Hello! I Am <span className="text-violet-400">{fields?.name}</span>
             </div>
+            <div aria-hidden="true" className="hero-ring absolute -inset-1 rounded-full" />
             <div className="relative flex h-40 w-40 items-center justify-center overflow-hidden rounded-full bg-gradient-to-br from-violet-700/40 to-fuchsia-500/20 ring-1 ring-white/10">
               {avatarFile?.url ? (
                 <Image
@@ -142,13 +143,13 @@ export default function Hero({ profile }: { profile: ProfileEntry | null }) {
             <TypedText text={`I'm an ${fields?.title ?? ""}.`} />
           </h2>
           {fields?.currentCompany && (
-            <p className="mt-2 text-sm text-white/70">
+            <p className="hero-rise mt-2 text-sm text-white/70" style={{ "--d": "1.6s" } as CSSProperties}>
               Currently, I&apos;m a {fields.title} at{" "}
               <span className="text-violet-400">{fields.currentCompany}</span>.
             </p>
           )}
 
-          <div className="mt-8 text-sm leading-7 text-white/60">
+          <div className="hero-rise mt-8 text-sm leading-7 text-white/60" style={{ "--d": "1.9s" } as CSSProperties}>
             <RichText document={fields?.bio} />
           </div>
         </div>
