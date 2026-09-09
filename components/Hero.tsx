@@ -1,6 +1,7 @@
 import Image from "next/image";
 import type { ProfileEntry } from "@/lib/contentful";
 import { RichText } from "@/lib/richtext";
+import TypedText from "./TypedText";
 
 function withHighlight(text: string, highlight?: string) {
   if (!highlight) return text;
@@ -76,11 +77,8 @@ export default function Hero({ profile }: { profile: ProfileEntry | null }) {
         </div>
 
         <div className="mt-20 max-w-2xl">
-          <h2 className="text-2xl font-medium text-white sm:text-3xl">
-            I&apos;m a {fields?.title}.
-            <span className="animate-[blink-caret_1s_step-end_infinite] text-violet-400">
-              |
-            </span>
+          <h2 className="min-h-[1.25em] text-2xl font-medium text-white sm:text-3xl">
+            <TypedText text={`I'm a ${fields?.title ?? ""}.`} />
           </h2>
           {fields?.currentCompany && (
             <p className="mt-2 text-sm text-white/70">
