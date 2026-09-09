@@ -18,14 +18,17 @@ export default function TypedText({
       "(prefers-reduced-motion: reduce)"
     ).matches;
 
+    let timer: ReturnType<typeof setTimeout> | undefined;
     let i = 0;
     const tick = () => {
       i = reduceMotion ? text.length : i + 1;
       setCount(i);
       if (i < text.length) timer = setTimeout(tick, speed);
     };
-    let timer = setTimeout(tick, reduceMotion ? 0 : startDelay);
-    return () => clearTimeout(timer);
+    timer = setTimeout(tick, reduceMotion ? 0 : startDelay);
+    return () => {
+      if (timer !== undefined) clearTimeout(timer);
+    };
   }, [text, speed, startDelay]);
 
   return (
