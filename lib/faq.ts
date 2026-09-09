@@ -7,7 +7,7 @@ export const faqItems: FaqItem[] = [
   {
     question: "Who is Nishanthan Janarthanarajah?",
     answer:
-      "Nishanthan Janarthanarajah is a Full Stack Developer and Associate Technical Lead based in Colombo, Sri Lanka, with 5+ years of experience architecting and delivering scalable, high-performance web platforms. He currently leads engineering at Eight25media, bridging technical execution with business strategy for enterprise clients.",
+      "Nishanthan Janarthanarajah is a Full Stack Developer, AI Engineer and Associate Technical Lead based in Colombo, Sri Lanka, with 7+ years of experience architecting and delivering scalable, high-performance web platforms and production Generative AI solutions. He currently leads engineering at Eight25Media for PandaDoc's B2B marketing platform, bridging technical execution with business strategy for enterprise clients.",
   },
   {
     question: "What technologies and tech stack does he specialize in?",
@@ -18,6 +18,11 @@ export const faqItems: FaqItem[] = [
     question: "What is his experience with Next.js, Contentful, and Vercel?",
     answer:
       "As Associate Technical Lead at Eight25media, he architected and led delivery of PandaDoc's B2B marketing website on Next.js and Contentful, deployed on Vercel. That work included driving the site's SEO strategy, engineering a multi-tier Contentful–Smartling localization pipeline for global B2B audiences, and building a dual-layer caching system that cut cache misses and improved sitewide performance.",
+  },
+  {
+    question: "Does he have experience with Generative AI, RAG, or LLM applications?",
+    answer:
+      "Yes. He designs and builds production LLM applications on Azure AI Foundry and Azure OpenAI, including an enterprise Retrieval-Augmented Generation (RAG) HR assistant with Pinecone vector search, re-ranking, and role-based prompt guardrails, and an AI interview and candidate screening platform using LLM-as-a-judge scoring. He also builds Model Context Protocol (MCP) servers that let AI agents generate Next.js code from Figma designs and automate headless CMS content modelling and publishing.",
   },
   {
     question: "Does he have experience leading engineering teams?",
