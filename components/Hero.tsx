@@ -78,7 +78,7 @@ export default function Hero({ profile }: { profile: ProfileEntry | null }) {
 
         <div className="mt-20 max-w-2xl">
           <h2 className="min-h-[1.25em] text-2xl font-medium text-white sm:text-3xl">
-            <TypedText text={`I'm a ${fields?.title ?? ""}.`} />
+            <TypedText text={`I'm an ${fields?.title ?? ""}.`} />
           </h2>
           {fields?.currentCompany && (
             <p className="mt-2 text-sm text-white/70">
