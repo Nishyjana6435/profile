@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import WorkExperience from "@/components/WorkExperience";
+import ScrollBreak from "@/components/ScrollBreak";
 import SkillsOrbit from "@/components/SkillsOrbit";
 import FeaturedProjects from "@/components/FeaturedProjects";
 import ProjectCarousel from "@/components/ProjectCarousel";
@@ -87,6 +88,7 @@ export default async function Home() {
           <ProjectCarousel key={carousel.sys.id} carousel={carousel} />
         ))}
         <WorkExperience items={experienceItems} />
+        <ScrollBreak />
 
         <SkillsOrbit
           lookingForText={profile?.fields.lookingForText}
