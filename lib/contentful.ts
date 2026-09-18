@@ -47,6 +47,12 @@ export interface ExperienceItemFields {
   description: EntryFieldTypes.Text;
   learnMoreUrl?: EntryFieldTypes.Symbol;
   order?: EntryFieldTypes.Integer;
+  company?: EntryFieldTypes.Symbol;
+  role?: EntryFieldTypes.Symbol;
+  period?: EntryFieldTypes.Symbol;
+  logo?: EntryFieldTypes.AssetLink;
+  stack?: EntryFieldTypes.Array<EntryFieldTypes.Symbol>;
+  highlights?: EntryFieldTypes.Array<EntryFieldTypes.Symbol>;
 }
 
 export interface ProjectFields {
