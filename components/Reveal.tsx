@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
 
-type Variant = "up" | "left" | "right" | "scale" | "fade";
+type Variant = "up" | "left" | "right" | "scale" | "fade" | "tilt-left" | "tilt-right";
 type Tag = "div" | "section" | "p" | "h2" | "h3" | "span" | "ul" | "li";
 
 export default function Reveal({
