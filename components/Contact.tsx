@@ -78,7 +78,7 @@ export default function Contact({
           <Reveal variant="fade" stagger delay={400} className="mt-6 flex gap-4">
             {socialLinks.map((link, i) => (
               <a
-                key={link.platform}
+                key={link.url}
                 href={link.url}
                 target="_blank"
                 rel="noopener noreferrer"
