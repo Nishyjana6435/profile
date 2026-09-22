@@ -4,6 +4,7 @@ import {
   getProfile,
 } from "@/lib/contentful";
 import { faqItems } from "@/lib/faq";
+import { FLOWS } from "@/lib/flows";
 import { richTextToPlainText } from "@/lib/richtext";
 import { SITE_NAME, SITE_URL } from "@/lib/seo";
 
@@ -49,6 +50,11 @@ export async function GET() {
     }
     lines.push("");
   }
+
+  lines.push("## Products");
+  lines.push("");
+  lines.push(`- **${FLOWS.name}** (${FLOWS.url}): ${FLOWS.description} Designed and built end to end by ${name}.`);
+  lines.push("");
 
   if (projects.length > 0) {
     lines.push("## Projects");

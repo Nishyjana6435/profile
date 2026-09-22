@@ -5,6 +5,7 @@ import { WHATSAPP_URL, WhatsAppIcon } from "./Contact";
 // Dummy nav — links point at placeholder routes for now.
 const NAV_LINKS = [
   { label: "", href: "/" },
+  { label: "Flows", href: "/#flows" },
   { label: "Hire Me", href: "/hire" },
   { label: "Blog", href: "/blog" },
   // { label: "About", href: "/about" },

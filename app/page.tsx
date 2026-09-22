@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
+import FlowsShowcase from "@/components/FlowsShowcase";
 import WorkExperience from "@/components/WorkExperience";
 import ScrollBreak from "@/components/ScrollBreak";
 import SkillsOrbit from "@/components/SkillsOrbit";
@@ -84,6 +85,7 @@ export default async function Home() {
       <Header />
       <main className="flex-1">
         <Hero profile={profile} />
+        <FlowsShowcase />
         {projectCarousels.map((carousel) => (
           <ProjectCarousel key={carousel.sys.id} carousel={carousel} />
         ))}
