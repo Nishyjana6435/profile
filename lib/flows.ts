@@ -6,5 +6,7 @@ export const FLOWS = {
   tagline: "Describe the process. We run it.",
   description:
     "Describe a business process in plain English. Flows connects your apps, builds the workflow, and runs it for you.",
-  stack: ["Next.js", "Clerk", "Claude API", "Tailwind CSS"],
+  backend:
+    "Every flow, run and log is stored in Neon serverless Postgres, so runs survive restarts and history is queryable.",
+  stack: ["Next.js", "Clerk", "Claude API", "Neon Postgres", "Tailwind CSS"],
 } as const;

@@ -1,6 +1,7 @@
 import type { ProfileEntry, ProjectEntry, SiteSettingsEntry } from "@/lib/contentful";
 import type { FaqItem } from "@/lib/faq";
 import { richTextToPlainText } from "@/lib/richtext";
+import { FLOWS } from "@/lib/flows";
 import { EXTRA_KEYWORDS, SITE_NAME, SITE_URL } from "@/lib/seo";
 
 export default function StructuredData({
@@ -17,9 +18,14 @@ export default function StructuredData({
   const fields = profile?.fields;
   const avatar = fields?.avatar && "fields" in fields.avatar ? fields.avatar : undefined;
   const avatarUrl = avatar?.fields.file?.url ? `https:${avatar.fields.file.url}` : undefined;
-  const sameAs = (fields?.socialLinks ?? siteSettings?.fields.socialLinks ?? [])
-    .map((link) => link.url)
-    .filter(Boolean);
+  const sameAs = Array.from(
+    new Set([
+      ...(fields?.socialLinks ?? siteSettings?.fields.socialLinks ?? [])
+        .map((link) => link.url)
+        .filter(Boolean),
+      FLOWS.url,
+    ]),
+  );
   const knowsAbout = Array.from(new Set([...(fields?.skills ?? []), ...EXTRA_KEYWORDS]));
 
   const person = {
@@ -39,6 +45,22 @@ export default function StructuredData({
       : undefined,
     knowsAbout,
     sameAs: sameAs.length > 0 ? sameAs : undefined,
+    owns: { "@id": `${FLOWS.url}#software` },
+  };
+
+  const flows = {
+    "@type": "SoftwareApplication",
+    "@id": `${FLOWS.url}#software`,
+    name: FLOWS.name,
+    url: FLOWS.url,
+    description: `${FLOWS.description} ${FLOWS.backend}`,
+    applicationCategory: "BusinessApplication",
+    operatingSystem: "Web",
+    slogan: FLOWS.tagline,
+    author: { "@id": `${SITE_URL}/#person` },
+    creator: { "@id": `${SITE_URL}/#person` },
+    keywords: [...FLOWS.stack, "Agentic automation", "AI workflow automation"].join(", "),
+    offers: { "@type": "Offer", price: "0", priceCurrency: "USD", description: "10 runs a month free" },
   };
 
   const website = {
@@ -97,7 +119,7 @@ export default function StructuredData({
         }
       : null;
 
-  const graph = [person, website, profilePage, itemList, faqPage].filter(Boolean);
+  const graph = [person, website, profilePage, flows, itemList, faqPage].filter(Boolean);
 
   return (
     <script

@@ -53,7 +53,7 @@ export async function GET() {
 
   lines.push("## Products");
   lines.push("");
-  lines.push(`- **${FLOWS.name}** (${FLOWS.url}): ${FLOWS.description} Designed and built end to end by ${name}.`);
+  lines.push(`- **${FLOWS.name}** (${FLOWS.url}): ${FLOWS.description} ${FLOWS.backend} Designed and built end to end by ${name}.`);
   lines.push("");
 
   if (projects.length > 0) {

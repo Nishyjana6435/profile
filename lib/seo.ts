@@ -52,4 +52,8 @@ export const EXTRA_KEYWORDS = [
   "Prompt Engineering",
   "Design-to-Code Automation",
   "Engineering Manager",
+  "Flows",
+  "Agentic Automation Platform",
+  "AI Workflow Automation",
+  "Neon Postgres",
 ];

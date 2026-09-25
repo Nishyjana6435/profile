@@ -68,7 +68,9 @@ export default function FlowsShowcase() {
           <Reveal as="p" delay={200} className="mt-5 max-w-xl text-sm leading-7 text-white/60">
             {FLOWS.name} is my own product: an agentic automation platform for small businesses and agencies.
             You describe a process in plain English, and Claude drafts the workflow, wires up your apps,
-            runs it around the clock, and tells you in one sentence when something needs you.
+            runs it around the clock, and tells you in one sentence when something needs you. Under the hood
+            it runs on Next.js with Neon serverless Postgres as the backend, so every run and its history is
+            durable and queryable.
           </Reveal>
 
           <Reveal as="ul" variant="fade" stagger delay={280} className="mt-8 flex flex-col gap-4">
