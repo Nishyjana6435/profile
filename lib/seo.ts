@@ -56,4 +56,11 @@ export const EXTRA_KEYWORDS = [
   "Agentic Automation Platform",
   "AI Workflow Automation",
   "Neon Postgres",
+  "Agent Studio",
+  "AI Agent Builder",
+  "No-code AI Agent Platform",
+  "Multi-agent Orchestration",
+  "LLM Guardrails",
+  "Prompt Injection Shield",
+  "Groq",
 ];

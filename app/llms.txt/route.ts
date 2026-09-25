@@ -4,6 +4,7 @@ import {
   getProfile,
 } from "@/lib/contentful";
 import { faqItems } from "@/lib/faq";
+import { AGENT_STUDIO } from "@/lib/agent";
 import { FLOWS } from "@/lib/flows";
 import { richTextToPlainText } from "@/lib/richtext";
 import { SITE_NAME, SITE_URL } from "@/lib/seo";
@@ -54,6 +55,7 @@ export async function GET() {
   lines.push("## Products");
   lines.push("");
   lines.push(`- **${FLOWS.name}** (${FLOWS.url}): ${FLOWS.description} ${FLOWS.backend} Designed and built end to end by ${name}.`);
+  lines.push(`- **${AGENT_STUDIO.name}** (${AGENT_STUDIO.url}): ${AGENT_STUDIO.description} ${AGENT_STUDIO.backend} Designed and built end to end by ${name}.`);
   lines.push("");
 
   if (projects.length > 0) {

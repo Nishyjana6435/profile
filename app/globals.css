@@ -1027,3 +1027,197 @@ body {
     display: none;
   }
 }
+
+/* ---------- Tools pool (3D ring) ---------- */
+@keyframes tp-card-in {
+  from {
+    opacity: 0;
+    translate: 0 14px;
+    scale: 0.98;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+    scale: 1;
+  }
+}
+@keyframes tp-floor {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 0.9;
+  }
+}
+@keyframes tp-icon-pulse {
+  0%,
+  100% {
+    transform: scale(1.1) rotate(-6deg);
+  }
+  50% {
+    transform: scale(1.22) rotate(-6deg);
+  }
+}
+
+.tp-scene {
+  --tp-r: 390px;
+  --tp-tile: 92px;
+  --tp-scale: 1;
+}
+.tp-stage {
+  position: relative;
+  height: 340px;
+  perspective: 1500px;
+  perspective-origin: 50% 40%;
+}
+.tp-floor {
+  position: absolute;
+  left: 50%;
+  top: 58%;
+  width: min(100%, 980px);
+  height: 220px;
+  translate: -50% -50%;
+  border-radius: 9999px;
+  background: radial-gradient(ellipse at center, rgba(139, 92, 246, 0.28), rgba(139, 92, 246, 0.06) 45%, transparent 70%);
+  filter: blur(6px);
+  animation: tp-floor 7s ease-in-out infinite;
+  pointer-events: none;
+}
+.tp-ring {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: var(--tp-tile);
+  height: var(--tp-tile);
+  margin: calc(var(--tp-tile) / -2) 0 0 calc(var(--tp-tile) / -2);
+  transform-style: preserve-3d;
+  scale: var(--tp-scale);
+  will-change: transform;
+}
+.tp-tile {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  transform: rotateY(var(--a)) translateZ(var(--tp-r));
+  transform-style: preserve-3d;
+  cursor: pointer;
+  border: 0;
+  background: none;
+  padding: 0;
+  color: rgba(255, 255, 255, 0.7);
+  -webkit-tap-highlight-color: transparent;
+}
+.tp-tile:focus-visible {
+  outline: none;
+}
+.tp-tile-face {
+  display: grid;
+  place-items: center;
+  width: var(--tp-tile);
+  height: var(--tp-tile);
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background:
+    radial-gradient(120% 90% at 30% 15%, color-mix(in srgb, var(--c) 32%, transparent), transparent 65%),
+    linear-gradient(160deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.01)),
+    #130a26;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    0 20px 40px -20px rgba(0, 0, 0, 0.9);
+  transition:
+    transform 0.45s cubic-bezier(0.2, 0.7, 0.2, 1),
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+  backface-visibility: hidden;
+}
+.tp-tile-icon {
+  display: block;
+  width: 44%;
+  height: 44%;
+  filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.5));
+  transition: transform 0.45s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.tp-tile-name {
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  opacity: 0;
+  translate: 0 -4px;
+  transition:
+    opacity 0.3s ease,
+    translate 0.3s ease;
+}
+.tp-tile:hover .tp-tile-face,
+.tp-tile:focus-visible .tp-tile-face {
+  transform: translateZ(28px) scale(1.06);
+  border-color: color-mix(in srgb, var(--c) 60%, white 10%);
+}
+.tp-tile:hover .tp-tile-name,
+.tp-tile:focus-visible .tp-tile-name,
+.tp-tile.is-selected .tp-tile-name {
+  opacity: 1;
+  translate: 0 0;
+  color: #fff;
+}
+.tp-tile.is-selected .tp-tile-face {
+  transform: translateZ(56px) scale(1.18);
+  border-color: var(--c);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.18),
+    0 0 0 2px color-mix(in srgb, var(--c) 75%, white 10%),
+    0 20px 40px -20px rgba(0, 0, 0, 0.9);
+}
+.tp-tile.is-selected .tp-tile-icon {
+  animation: tp-icon-pulse 2.4s ease-in-out infinite;
+}
+
+.tp-card {
+  animation: tp-card-in 0.5s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  box-shadow: 0 30px 80px -40px color-mix(in srgb, var(--c) 60%, transparent);
+}
+.tp-card-icon {
+  background:
+    radial-gradient(120% 90% at 30% 15%, color-mix(in srgb, var(--c) 40%, transparent), transparent 65%),
+    #130a26;
+  border: 1px solid color-mix(in srgb, var(--c) 45%, transparent);
+  box-shadow: 0 16px 40px -18px var(--c);
+}
+
+@media (max-width: 1023px) {
+  .tp-scene {
+    --tp-r: 330px;
+    --tp-scale: 0.82;
+  }
+  .tp-stage {
+    height: 300px;
+  }
+}
+@media (max-width: 640px) {
+  .tp-scene {
+    --tp-r: 290px;
+    --tp-scale: 0.62;
+  }
+  .tp-stage {
+    height: 240px;
+  }
+  .tp-tile-name {
+    font-size: 13px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tp-floor,
+  .tp-tile.is-selected .tp-tile-icon,
+  .tp-card {
+    animation: none;
+  }
+  .tp-tile-face,
+  .tp-tile-icon,
+  .tp-tile-name {
+    transition: none;
+  }
+}

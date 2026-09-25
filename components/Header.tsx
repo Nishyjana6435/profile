@@ -3,9 +3,10 @@ import Logo from "./Logo";
 import { WHATSAPP_URL, WhatsAppIcon } from "./Contact";
 
 // Dummy nav — links point at placeholder routes for now.
-const NAV_LINKS = [
+const NAV_LINKS: { label: string; href: string; hideOnMobile?: boolean }[] = [
   { label: "", href: "/" },
   { label: "Flows", href: "/#flows" },
+  { label: "Agent Studio", href: "/#agent-studio", hideOnMobile: true },
   { label: "Hire Me", href: "/hire" },
   { label: "Blog", href: "/blog" },
   // { label: "About", href: "/about" },
@@ -19,12 +20,12 @@ export default function Header() {
         <Link href="/" className="text-white/90 transition-all duration-300 hover:rotate-12 hover:text-white">
           <Logo />
         </Link>
-        <nav className="flex items-center gap-8 text-sm text-white/80">
+        <nav className="flex items-center gap-4 text-xs text-white/80 sm:gap-8 sm:text-sm">
           {NAV_LINKS.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className="nav-link transition-colors hover:text-white"
+              className={`nav-link whitespace-nowrap transition-colors hover:text-white ${link.hideOnMobile ? "hidden sm:inline" : ""}`}
             >
               {link.label}
             </Link>

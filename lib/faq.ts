@@ -25,6 +25,11 @@ export const faqItems: FaqItem[] = [
       "Yes. He designs and builds production LLM applications on Azure AI Foundry and Azure OpenAI, including an enterprise Retrieval-Augmented Generation (RAG) HR assistant with Pinecone vector search, re-ranking, and role-based prompt guardrails, and an AI interview and candidate screening platform using LLM-as-a-judge scoring. He also builds Model Context Protocol (MCP) servers that let AI agents generate Next.js code from Figma designs and automate headless CMS content modelling and publishing.",
   },
   {
+    question: "What products has he built himself?",
+    answer:
+      "Two, both live. Flows (create-your-flows.nishy.space) is an agentic automation platform for small businesses: describe a process in plain English and Claude drafts the workflow, connects Slack, Google Sheets, Gmail, SMS or any REST API, and runs it around the clock. Agent Studio (create-your-agent.nishy.space) is a no-code builder for production AI agents: design an orchestrator and sub-agents on a canvas, add guardrails and a prompt-injection shield, and deploy it as a versioned API. Both run on Next.js and Vercel with Neon serverless Postgres as the backend.",
+  },
+  {
     question: "Does he have experience leading engineering teams?",
     answer:
       "Yes. He leads cross-functional teams through agile delivery, aligning technical decisions with business and marketing goals. At Verdentra, he was promoted from Senior Software Engineer to Associate Technical Lead, directed staff augmentation for Paycor's HR portfolio, and scaled the engineering team from 6 to 31 people. At Eight25media, he directs a team through the full lifecycle from architecture to production.",

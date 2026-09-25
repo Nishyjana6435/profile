@@ -1,6 +1,7 @@
 import type { ProfileEntry, ProjectEntry, SiteSettingsEntry } from "@/lib/contentful";
 import type { FaqItem } from "@/lib/faq";
 import { richTextToPlainText } from "@/lib/richtext";
+import { AGENT_STUDIO } from "@/lib/agent";
 import { FLOWS } from "@/lib/flows";
 import { EXTRA_KEYWORDS, SITE_NAME, SITE_URL } from "@/lib/seo";
 
@@ -24,6 +25,7 @@ export default function StructuredData({
         .map((link) => link.url)
         .filter(Boolean),
       FLOWS.url,
+      AGENT_STUDIO.url,
     ]),
   );
   const knowsAbout = Array.from(new Set([...(fields?.skills ?? []), ...EXTRA_KEYWORDS]));
@@ -45,7 +47,7 @@ export default function StructuredData({
       : undefined,
     knowsAbout,
     sameAs: sameAs.length > 0 ? sameAs : undefined,
-    owns: { "@id": `${FLOWS.url}#software` },
+    owns: [{ "@id": `${FLOWS.url}#software` }, { "@id": `${AGENT_STUDIO.url}#software` }],
   };
 
   const flows = {
@@ -61,6 +63,21 @@ export default function StructuredData({
     creator: { "@id": `${SITE_URL}/#person` },
     keywords: [...FLOWS.stack, "Agentic automation", "AI workflow automation"].join(", "),
     offers: { "@type": "Offer", price: "0", priceCurrency: "USD", description: "10 runs a month free" },
+  };
+
+  const agentStudio = {
+    "@type": "SoftwareApplication",
+    "@id": `${AGENT_STUDIO.url}#software`,
+    name: AGENT_STUDIO.name,
+    url: AGENT_STUDIO.url,
+    description: `${AGENT_STUDIO.description} ${AGENT_STUDIO.backend}`,
+    applicationCategory: "DeveloperApplication",
+    operatingSystem: "Web",
+    slogan: AGENT_STUDIO.tagline,
+    author: { "@id": `${SITE_URL}/#person` },
+    creator: { "@id": `${SITE_URL}/#person` },
+    keywords: [...AGENT_STUDIO.stack, "AI agent builder", "LLM guardrails", "Prompt injection shield"].join(", "),
+    offers: { "@type": "Offer", price: "0", priceCurrency: "USD", description: "7-day free trial, one agent, no card required" },
   };
 
   const website = {
@@ -119,7 +136,7 @@ export default function StructuredData({
         }
       : null;
 
-  const graph = [person, website, profilePage, flows, itemList, faqPage].filter(Boolean);
+  const graph = [person, website, profilePage, flows, agentStudio, itemList, faqPage].filter(Boolean);
 
   return (
     <script
