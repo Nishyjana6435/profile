@@ -128,12 +128,10 @@ export default function FlowsShowcase() {
               </span>
             </a>
             <a
-              href={`${FLOWS.url}#how`}
-              target="_blank"
-              rel="noopener noreferrer"
+              href="/flows"
               className="inline-flex items-center gap-2 rounded-full border border-white/15 px-6 py-2.5 text-xs uppercase tracking-wide text-white/80 transition-all duration-300 hover:border-violet-400/60 hover:bg-violet-500/10 hover:text-white"
             >
-              See how it works
+              Use cases &amp; comparison
             </a>
             <span className="basis-full text-xs text-white/40">10 runs a month free · No card required</span>
           </Reveal>

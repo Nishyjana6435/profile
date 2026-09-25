@@ -210,7 +210,7 @@ export default function ToolsPool() {
                   href={tool.app.anchor}
                   className="inline-flex items-center gap-2 rounded-full border border-white/15 px-5 py-2 text-xs uppercase tracking-wide text-white/80 transition-all duration-300 hover:border-violet-400/60 hover:bg-violet-500/10 hover:text-white"
                 >
-                  See the showcase
+                  Use cases &amp; comparison
                 </a>
               </div>
             ) : (

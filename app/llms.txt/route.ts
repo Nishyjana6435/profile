@@ -54,8 +54,8 @@ export async function GET() {
 
   lines.push("## Products");
   lines.push("");
-  lines.push(`- **${FLOWS.name}** (${FLOWS.url}): ${FLOWS.description} ${FLOWS.backend} Designed and built end to end by ${name}.`);
-  lines.push(`- **${AGENT_STUDIO.name}** (${AGENT_STUDIO.url}): ${AGENT_STUDIO.description} ${AGENT_STUDIO.backend} Designed and built end to end by ${name}.`);
+  lines.push(`- **${FLOWS.name}** (${FLOWS.url}): ${FLOWS.description} ${FLOWS.backend} Designed and built end to end by ${name}. Use cases, competitor comparison, pricing and FAQ: ${SITE_URL}/flows`);
+  lines.push(`- **${AGENT_STUDIO.name}** (${AGENT_STUDIO.url}): ${AGENT_STUDIO.description} ${AGENT_STUDIO.backend} Designed and built end to end by ${name}. Use cases, competitor comparison, pricing and FAQ: ${SITE_URL}/agent-studio`);
   lines.push("");
 
   if (projects.length > 0) {

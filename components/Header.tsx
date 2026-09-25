@@ -5,8 +5,8 @@ import { WHATSAPP_URL, WhatsAppIcon } from "./Contact";
 // Dummy nav — links point at placeholder routes for now.
 const NAV_LINKS: { label: string; href: string; hideOnMobile?: boolean }[] = [
   { label: "", href: "/" },
-  { label: "Flows", href: "/#flows" },
-  { label: "Agent Studio", href: "/#agent-studio", hideOnMobile: true },
+  { label: "Flows", href: "/flows" },
+  { label: "Agent Studio", href: "/agent-studio", hideOnMobile: true },
   { label: "Hire Me", href: "/hire" },
   { label: "Blog", href: "/blog" },
   // { label: "About", href: "/about" },

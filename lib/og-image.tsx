@@ -71,3 +71,53 @@ export function renderProfileOgImage({
     { ...OG_IMAGE_SIZE }
   );
 }
+
+export function renderProductOgImage({
+  name,
+  tagline,
+  description,
+  accent,
+}: {
+  name: string;
+  tagline: string;
+  description: string;
+  accent: "fuchsia" | "sky";
+}) {
+  const to = accent === "sky" ? "#38bdf8" : "#d946ef";
+  return new ImageResponse(
+    (
+      <div
+        style={{
+          width: "100%",
+          height: "100%",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          padding: "80px",
+          background: `radial-gradient(circle at 75% 25%, ${to}33 0%, transparent 45%), radial-gradient(circle at 20% 60%, #3b1a6b 0%, #0a0514 70%)`,
+          color: "white",
+          fontFamily: "sans-serif",
+        }}
+      >
+        <div style={{ display: "flex", alignItems: "center", gap: 16, marginBottom: 36 }}>
+          <div
+            style={{
+              display: "flex",
+              width: 56,
+              height: 56,
+              borderRadius: 16,
+              background: `linear-gradient(135deg, #7c3aed, ${to})`,
+            }}
+          />
+          <div style={{ fontSize: 30, fontWeight: 600 }}>{name}</div>
+          <div style={{ fontSize: 22, color: "#a78bfa", marginLeft: 8 }}>by Nishy</div>
+        </div>
+        <div style={{ fontSize: 66, fontWeight: 700, lineHeight: 1.1, maxWidth: 1000 }}>{tagline}</div>
+        <div style={{ fontSize: 28, color: "rgba(255,255,255,0.7)", marginTop: 28, maxWidth: 980, lineHeight: 1.4 }}>
+          {description}
+        </div>
+      </div>
+    ),
+    { ...OG_IMAGE_SIZE }
+  );
+}

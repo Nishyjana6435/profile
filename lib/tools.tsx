@@ -110,7 +110,7 @@ export const TOOLS: Tool[] = [
     icon: <FlowsLogo className="h-full w-full" />,
     blurb: FLOWS.description,
     used: ["Flows"],
-    app: { href: FLOWS.url, anchor: "#flows", tagline: FLOWS.tagline },
+    app: { href: FLOWS.url, anchor: "/flows", tagline: FLOWS.tagline },
   },
   {
     id: "agent-studio",
@@ -120,7 +120,7 @@ export const TOOLS: Tool[] = [
     icon: <AgentLogo className="h-full w-full" />,
     blurb: AGENT_STUDIO.description,
     used: ["Agent Studio"],
-    app: { href: AGENT_STUDIO.url, anchor: "#agent-studio", tagline: AGENT_STUDIO.tagline },
+    app: { href: AGENT_STUDIO.url, anchor: "/agent-studio", tagline: AGENT_STUDIO.tagline },
   },
   // Messaging
   { id: "slack", name: "Slack", category: "Messaging", color: "#E01E5A", icon: slackIcon, blurb: "Alerts, approvals and run summaries land in the channel where the team already talks.", used: ["Flows"] },
