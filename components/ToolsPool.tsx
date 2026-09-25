@@ -19,7 +19,8 @@ export default function ToolsPool() {
   const tileRefs = useRef<(HTMLButtonElement | null)[]>([]);
   const angle = useRef(0);
   const target = useRef<number | null>(-0);
-  const paused = useRef(false);
+  const hovered = useRef(false);
+  const holdUntil = useRef(0);
   const dimmed = useRef<Set<string>>(new Set());
   const reduced = useRef(false);
 
@@ -34,7 +35,6 @@ export default function ToolsPool() {
   const select = (i: number) => {
     setSelected(i);
     target.current = -i * STEP;
-    paused.current = true;
   };
 
   const pick = (c: ToolCategory | "All") => {
@@ -49,7 +49,7 @@ export default function ToolsPool() {
   useEffect(() => {
     reduced.current = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     let raf = 0;
-    let resume = 0;
+    holdUntil.current = performance.now() + 4000;
     const tick = () => {
       const ring = ringRef.current;
       if (!ring) return;
@@ -59,12 +59,12 @@ export default function ToolsPool() {
         if (reduced.current || Math.abs(d) < 0.05) {
           angle.current = t;
           target.current = null;
-          resume = performance.now() + 4500;
+          holdUntil.current = performance.now() + 5000;
         } else {
           angle.current += d * 0.085;
         }
-      } else if (!paused.current || performance.now() > resume) {
-        if (!reduced.current) angle.current += IDLE_SPEED;
+      } else if (!hovered.current && !reduced.current && performance.now() > holdUntil.current) {
+        angle.current += IDLE_SPEED;
       }
       ring.style.transform = `rotateX(-9deg) rotateY(${angle.current}deg)`;
 
@@ -101,14 +101,14 @@ export default function ToolsPool() {
       <div className="relative mx-auto max-w-6xl">
         <div className="mx-auto max-w-2xl text-center">
           <Reveal as="p" variant="fade" className="text-xs uppercase tracking-[0.3em] text-violet-300/70">
-            Tools pool
+            Two apps · one pool of tools
           </Reveal>
           <Reveal as="h2" delay={80} className="mt-4 text-3xl font-semibold leading-tight text-white sm:text-5xl">
-            One pool of tools, <span className="text-shimmer">every agent</span> can reach
+            Nishy <span className="text-shimmer">tool kits</span>
           </Reveal>
           <Reveal as="p" delay={160} className="mt-4 text-sm leading-7 text-white/60">
-            The services, models and infrastructure I wire agents to. Spin the pool, pick a tool, and see where it
-            runs across Flows, Agent Studio and client work.
+            My two live apps, Flows and Agent Studio, and the services, models and infrastructure behind them.
+            Spin the ring, pick anything, and read what it does and where it runs.
           </Reveal>
         </div>
 
@@ -135,11 +135,11 @@ export default function ToolsPool() {
         <Reveal variant="scale" threshold={0.2} className="tp-scene relative mt-10">
           <div
             className="tp-stage"
-            onMouseEnter={() => (paused.current = true)}
-            onMouseLeave={() => (paused.current = false)}
+            onMouseEnter={() => (hovered.current = true)}
+            onMouseLeave={() => (hovered.current = false)}
           >
             <div aria-hidden="true" className="tp-floor" />
-            <div ref={ringRef} className="tp-ring" role="listbox" aria-label="Tools pool" aria-activedescendant={`tool-${tool.id}`}>
+            <div ref={ringRef} className="tp-ring" role="listbox" aria-label="Nishy tool kits" aria-activedescendant={`tool-${tool.id}`}>
               {TOOLS.map((t, i) => (
                 <button
                   key={t.id}
@@ -154,7 +154,7 @@ export default function ToolsPool() {
                   title={t.name}
                   onClick={() => select(i)}
                   onFocus={() => select(i)}
-                  className={`tp-tile ${i === selected ? "is-selected" : ""}`}
+                  className={`tp-tile ${t.app ? "is-app" : ""} ${i === selected ? "is-selected" : ""}`}
                   style={
                     {
                       "--a": `${i * STEP}deg`,
@@ -164,6 +164,7 @@ export default function ToolsPool() {
                 >
                   <span className="tp-tile-face">
                     <span className="tp-tile-icon">{t.icon}</span>
+                    {t.app && <span className="tp-tile-badge">App</span>}
                   </span>
                   <span className="tp-tile-name">{t.name}</span>
                 </button>
@@ -183,9 +184,36 @@ export default function ToolsPool() {
             {tool.icon}
           </span>
           <div className="min-w-0 flex-1">
-            <p className="text-[11px] uppercase tracking-[0.2em] text-white/40">{tool.category}</p>
+            <p className="flex items-center justify-center gap-2 text-[11px] uppercase tracking-[0.2em] text-white/40 sm:justify-start">
+              {tool.app ? "My app · live now" : tool.category}
+              {tool.app && (
+                <span className="relative flex h-1.5 w-1.5">
+                  <span className="fx-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400" />
+                  <span className="relative h-1.5 w-1.5 rounded-full bg-emerald-400" />
+                </span>
+              )}
+            </p>
             <h3 className="mt-1 text-lg font-semibold text-white">{tool.name}</h3>
+            {tool.app && <p className="mt-0.5 text-sm italic text-white/70">“{tool.app.tagline}”</p>}
             <p className="mt-1.5 text-sm leading-6 text-white/60">{tool.blurb}</p>
+            {tool.app ? (
+              <div className="mt-4 flex flex-wrap items-center justify-center gap-2 sm:justify-start">
+                <a
+                  href={tool.app.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-shine inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-violet-500 to-fuchsia-500 px-5 py-2 text-xs font-medium uppercase tracking-wide text-white shadow-[0_12px_40px_-12px_rgba(217,70,239,0.8)] transition-transform duration-300 hover:-translate-y-0.5"
+                >
+                  Open {tool.name} ↗
+                </a>
+                <a
+                  href={tool.app.anchor}
+                  className="inline-flex items-center gap-2 rounded-full border border-white/15 px-5 py-2 text-xs uppercase tracking-wide text-white/80 transition-all duration-300 hover:border-violet-400/60 hover:bg-violet-500/10 hover:text-white"
+                >
+                  See the showcase
+                </a>
+              </div>
+            ) : (
             <div className="mt-3 flex flex-wrap items-center justify-center gap-2 sm:justify-start">
               <span className="text-[11px] uppercase tracking-[0.2em] text-white/40">Used in</span>
               {links.map(({ label, href }) =>
@@ -206,6 +234,7 @@ export default function ToolsPool() {
                 ),
               )}
             </div>
+            )}
           </div>
         </div>
       </div>

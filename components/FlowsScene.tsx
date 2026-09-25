@@ -49,7 +49,7 @@ const CHIPS: Chip[] = [
   },
 ];
 
-function FlowsLogo({ className = "" }: { className?: string }) {
+export function FlowsLogo({ className = "" }: { className?: string }) {
   return (
     <svg viewBox="0 0 32 32" fill="none" aria-hidden="true" className={className}>
       <rect width="32" height="32" rx="9" fill="#f5f5f7" />

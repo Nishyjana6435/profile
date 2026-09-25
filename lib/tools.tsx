@@ -21,10 +21,12 @@ import {
   siVercel,
   type SimpleIcon,
 } from "simple-icons";
+import { AgentLogo } from "@/components/AgentScene";
+import { FlowsLogo } from "@/components/FlowsScene";
 import { AGENT_STUDIO } from "./agent";
 import { FLOWS } from "./flows";
 
-export type ToolCategory = "Messaging" | "Data" | "Models" | "Platform" | "Stack";
+export type ToolCategory = "Apps" | "Messaging" | "Data" | "Models" | "Platform" | "Stack";
 
 export type ToolUse = "Flows" | "Agent Studio" | "Client work";
 
@@ -37,9 +39,11 @@ export interface Tool {
   icon: ReactNode;
   blurb: string;
   used: ToolUse[];
+  /** Live products get a direct link and a section anchor on this page. */
+  app?: { href: string; anchor: string; tagline: string };
 }
 
-export const TOOL_CATEGORIES: ToolCategory[] = ["Messaging", "Data", "Models", "Platform", "Stack"];
+export const TOOL_CATEGORIES: ToolCategory[] = ["Apps", "Messaging", "Data", "Models", "Platform", "Stack"];
 
 export const TOOL_USE_LINKS: Record<ToolUse, string | null> = {
   Flows: FLOWS.url,
@@ -97,6 +101,27 @@ const polarIcon = (
 );
 
 export const TOOLS: Tool[] = [
+  // Apps (my own live products)
+  {
+    id: "flows",
+    name: FLOWS.name,
+    category: "Apps",
+    color: "#e879f9",
+    icon: <FlowsLogo className="h-full w-full" />,
+    blurb: FLOWS.description,
+    used: ["Flows"],
+    app: { href: FLOWS.url, anchor: "#flows", tagline: FLOWS.tagline },
+  },
+  {
+    id: "agent-studio",
+    name: AGENT_STUDIO.name,
+    category: "Apps",
+    color: "#7c3aed",
+    icon: <AgentLogo className="h-full w-full" />,
+    blurb: AGENT_STUDIO.description,
+    used: ["Agent Studio"],
+    app: { href: AGENT_STUDIO.url, anchor: "#agent-studio", tagline: AGENT_STUDIO.tagline },
+  },
   // Messaging
   { id: "slack", name: "Slack", category: "Messaging", color: "#E01E5A", icon: slackIcon, blurb: "Alerts, approvals and run summaries land in the channel where the team already talks.", used: ["Flows"] },
   { id: "gmail", name: "Gmail", category: "Messaging", color: "#EA4335", icon: brand(siGmail), blurb: "Send and read mail as a step in a flow, from confirmations to follow-ups.", used: ["Flows"] },
