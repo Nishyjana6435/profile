@@ -44,6 +44,7 @@ const FOOTER_LINKS = [
   { label: "AI engineer in Sri Lanka", href: "/ai-engineer-sri-lanka" },
   { label: "Hire me", href: "/hire" },
   { label: "Blog", href: "/blog" },
+  { label: "For AI agents & crawlers", href: "/for-agents" },
 ];
 
 export default function Contact({

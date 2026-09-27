@@ -48,7 +48,10 @@ export async function generateMetadata(): Promise<Metadata> {
     description,
     keywords,
     authors: fields?.name ? [{ name: fields.name, url: SITE_URL }] : undefined,
-    alternates: { canonical: SITE_URL },
+    alternates: {
+      canonical: SITE_URL,
+      types: { "text/markdown": `${SITE_URL}/md/home`, "application/json": `${SITE_URL}/agent.json` },
+    },
     openGraph: {
       type: "profile",
       title,

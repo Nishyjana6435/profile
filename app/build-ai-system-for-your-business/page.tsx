@@ -13,7 +13,10 @@ export const metadata: Metadata = {
   description: P.seo.description,
   keywords: P.seo.keywords,
   authors: [{ name: SITE_NAME, url: SITE_URL }],
-  alternates: { canonical: url },
+  alternates: {
+    canonical: url,
+    types: { "text/markdown": `${SITE_URL}/md/${P.slug}`, "application/json": `${SITE_URL}/agent.json` },
+  },
   openGraph: {
     type: "website",
     title: P.seo.title,

@@ -24,6 +24,10 @@ export async function GET() {
   const lines: string[] = [];
   lines.push(`# ${name}`);
   lines.push("");
+  lines.push(`> Independent AI engineer in Colombo, Sri Lanka, available for client projects worldwide. Creator of Flows and Agent Studio.`);
+  lines.push("");
+  lines.push(`Full content: ${SITE_URL}/llms-full.txt · JSON: ${SITE_URL}/agent.json · Agent view: ${SITE_URL}/for-agents · Markdown twins: ${SITE_URL}/md/{home|flows|agent-studio|build-ai-system-for-your-business|ai-engineer-sri-lanka}`);
+  lines.push("");
   if (fields?.title) {
     const role = fields.currentCompany
       ? `${fields.title} at ${fields.currentCompany}`

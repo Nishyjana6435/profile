@@ -9,7 +9,10 @@ export function productMetadata(config: ProductPageConfig): Metadata {
     description: config.seo.description,
     keywords: config.seo.keywords,
     authors: [{ name: SITE_NAME, url: SITE_URL }],
-    alternates: { canonical: url },
+    alternates: {
+      canonical: url,
+      types: { "text/markdown": `${SITE_URL}/md/${config.slug}`, "application/json": `${SITE_URL}/agent.json` },
+    },
     openGraph: {
       type: "website",
       title: config.seo.title,
