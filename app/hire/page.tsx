@@ -10,6 +10,7 @@ import {
   type FaqItemEntry,
   type ServiceEntry,
 } from "@/lib/contentful";
+import Link from "next/link";
 import { SITE_NAME, SITE_URL } from "@/lib/seo";
 
 export const revalidate = 60000;
@@ -92,6 +93,21 @@ export default async function HirePage() {
                 {fields.intro}
               </p>
             )}
+
+            <p className="mt-6 text-sm text-white/60">
+              Want someone to{" "}
+              <Link href="/build-ai-system-for-your-business" className="text-violet-300 underline-offset-4 hover:text-white hover:underline">
+                build an AI system for your business
+              </Link>
+              ? Based in Sri Lanka?{" "}
+              <Link href="/ai-engineer-sri-lanka" className="text-violet-300 underline-offset-4 hover:text-white hover:underline">
+                Read how I work with local businesses
+              </Link>
+              , or start with my products{" "}
+              <Link href="/flows" className="text-violet-300 underline-offset-4 hover:text-white hover:underline">Flows</Link>
+              {" "}and{" "}
+              <Link href="/agent-studio" className="text-violet-300 underline-offset-4 hover:text-white hover:underline">Agent Studio</Link>.
+            </p>
 
             {fields?.engagementTypes && fields.engagementTypes.length > 0 && (
               <ul className="mt-8 flex flex-wrap gap-3">

@@ -1,3 +1,4 @@
+import Link from "next/link";
 import type { SiteSettingsEntry } from "@/lib/contentful";
 import type { CSSProperties } from "react";
 import Reveal from "./Reveal";
@@ -36,6 +37,15 @@ function SocialIcon({ platform }: { platform: string }) {
   return <span className="text-xs">{platform.slice(0, 1)}</span>;
 }
 
+const FOOTER_LINKS = [
+  { label: "Flows: AI workflow automation", href: "/flows" },
+  { label: "Agent Studio: visual AI agent builder", href: "/agent-studio" },
+  { label: "Build an AI system for your business", href: "/build-ai-system-for-your-business" },
+  { label: "AI engineer in Sri Lanka", href: "/ai-engineer-sri-lanka" },
+  { label: "Hire me", href: "/hire" },
+  { label: "Blog", href: "/blog" },
+];
+
 export default function Contact({
   siteSettings,
 }: {
@@ -73,6 +83,14 @@ export default function Contact({
           Chat on WhatsApp
         </a>
         </Reveal>
+
+        <nav aria-label="Site" className="mt-10 flex flex-wrap gap-x-6 gap-y-2 text-xs text-white/50">
+          {FOOTER_LINKS.map((link) => (
+            <Link key={link.href} href={link.href} className="transition-colors hover:text-white">
+              {link.label}
+            </Link>
+          ))}
+        </nav>
 
         {socialLinks.length > 0 && (
           <Reveal variant="fade" stagger delay={400} className="mt-6 flex gap-4">

@@ -77,11 +77,13 @@ export function renderProductOgImage({
   tagline,
   description,
   accent,
+  byline = "by Nishy",
 }: {
   name: string;
   tagline: string;
   description: string;
   accent: "fuchsia" | "sky";
+  byline?: string;
 }) {
   const to = accent === "sky" ? "#38bdf8" : "#d946ef";
   return new ImageResponse(
@@ -110,7 +112,7 @@ export function renderProductOgImage({
             }}
           />
           <div style={{ fontSize: 30, fontWeight: 600 }}>{name}</div>
-          <div style={{ fontSize: 22, color: "#a78bfa", marginLeft: 8 }}>by Nishy</div>
+          <div style={{ fontSize: 22, color: "#a78bfa", marginLeft: 8 }}>{byline}</div>
         </div>
         <div style={{ fontSize: 66, fontWeight: 700, lineHeight: 1.1, maxWidth: 1000 }}>{tagline}</div>
         <div style={{ fontSize: 28, color: "rgba(255,255,255,0.7)", marginTop: 28, maxWidth: 980, lineHeight: 1.4 }}>

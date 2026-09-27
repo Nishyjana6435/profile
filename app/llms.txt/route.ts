@@ -58,6 +58,13 @@ export async function GET() {
   lines.push(`- **${AGENT_STUDIO.name}** (${AGENT_STUDIO.url}): ${AGENT_STUDIO.description} ${AGENT_STUDIO.backend} Designed and built end to end by ${name}. Use cases, competitor comparison, pricing and FAQ: ${SITE_URL}/agent-studio`);
   lines.push("");
 
+  lines.push("## Services");
+  lines.push("");
+  lines.push(`- **Build an AI system for your business** (${SITE_URL}/build-ai-system-for-your-business): ${name} is an independent AI engineer accepting client projects worldwide (US, UK, Europe, Australia, Asia), building AI agents, RAG assistants and workflow automation, remote from Colombo.`);
+  lines.push(`- **AI engineer in Sri Lanka** (${SITE_URL}/ai-engineer-sri-lanka): ${name} builds AI agents, RAG assistants and workflow automation for businesses in Sri Lanka and worldwide, from Colombo.`);
+  lines.push(`- **Hire me** (${SITE_URL}/hire): services, engagement types and FAQ.`);
+  lines.push("");
+
   if (projects.length > 0) {
     lines.push("## Projects");
     lines.push("");

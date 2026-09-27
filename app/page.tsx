@@ -4,6 +4,7 @@ import Hero from "@/components/Hero";
 import FlowsShowcase from "@/components/FlowsShowcase";
 import AgentShowcase from "@/components/AgentShowcase";
 import ToolsPool from "@/components/ToolsPool";
+import CustomBuildBand from "@/components/CustomBuildBand";
 import WorkExperience from "@/components/WorkExperience";
 import ScrollBreak from "@/components/ScrollBreak";
 import SkillsOrbit from "@/components/SkillsOrbit";
@@ -32,10 +33,9 @@ export async function generateMetadata(): Promise<Metadata> {
   ]);
   const fields = profile?.fields;
 
-  const titleParts = [fields?.name ?? SITE_NAME, fields?.title].filter(Boolean);
-  const title = titleParts.join(" — ");
+  const title = `${fields?.name ?? SITE_NAME} — AI Engineer & ${fields?.title ?? "Full Stack Developer"} | Builds AI Systems for Businesses`;
   const description =
-    richTextToPlainText(fields?.bio) ||
+    `Independent AI engineer in Colombo, Sri Lanka, available for client projects worldwide, and creator of Flows and Agent Studio. ${richTextToPlainText(fields?.bio)}`.trim() ||
     siteSettings?.fields.siteDescription ||
     "Full stack developer and self-taught UI/UX designer leading cross-functional teams to ship accessible, high-impact products.";
   const avatar = fields?.avatar && "fields" in fields.avatar ? fields.avatar : undefined;
@@ -90,6 +90,7 @@ export default async function Home() {
         <FlowsShowcase />
         <AgentShowcase />
         <ToolsPool />
+        <CustomBuildBand />
         {projectCarousels.map((carousel) => (
           <ProjectCarousel key={carousel.sys.id} carousel={carousel} />
         ))}

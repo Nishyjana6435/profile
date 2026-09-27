@@ -50,6 +50,11 @@ export const faqItems: FaqItem[] = [
       "Yes. He led a team of engineers migrating Paycor's on-premises client data to Snowflake, using Python and SQL to design and execute the migration for Verdentra's HR portfolio delivery.",
   },
   {
+    question: "I want to build an AI system for my business in Sri Lanka. Can he help?",
+    answer:
+      "Yes. Nishanthan is an AI engineer based in Colombo who builds AI agents, RAG assistants over company data and workflow automation for businesses across Sri Lanka and remote clients worldwide. He also runs two live AI products, Flows for plain-English workflow automation and Agent Studio for visual AI agents deployed as an API, which are often the fastest and cheapest place to start. Details at nishy.space/ai-engineer-sri-lanka.",
+  },
+  {
     question: "Is Nishanthan available for freelance or full-time roles?",
     answer:
       "He's open to full-time technical leadership and full stack engineering roles, contract work, and freelance projects — remote or based out of Colombo, Sri Lanka. He's especially interested in roles leading cross-functional teams that align technology with business goals to ship accessible, high-impact products.",

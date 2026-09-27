@@ -318,7 +318,7 @@ export default function ProductLanding({
 
         {/* Related product + CTA */}
         <section className="px-6 py-20 sm:py-24">
-          <div className="mx-auto grid max-w-6xl gap-6 lg:grid-cols-[1.4fr_1fr]">
+          <div className="mx-auto grid max-w-6xl gap-6 lg:grid-cols-[1.4fr_1fr_1fr]">
             <Reveal className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-violet-900/50 to-[#1a0f38] p-8 sm:p-12">
               <div aria-hidden="true" className={`pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full ${a.blob} blur-3xl`} />
               <h2 className="text-3xl font-semibold leading-tight text-white sm:text-4xl">{config.cta.title}</h2>
@@ -338,6 +338,19 @@ export default function ProductLanding({
               </div>
               <Link href={config.related.href} className="group mt-8 inline-flex items-center gap-2 text-sm font-medium text-white">
                 Explore {config.related.name}
+                <span aria-hidden="true" className="transition-transform duration-300 group-hover:translate-x-1">→</span>
+              </Link>
+            </Reveal>
+            <Reveal variant="right" delay={200} className="flex flex-col justify-between rounded-3xl border border-violet-400/30 bg-violet-500/10 p-8">
+              <div>
+                <p className="text-xs uppercase tracking-[0.25em] text-violet-300/70">Need something custom?</p>
+                <h3 className="mt-3 text-2xl font-semibold text-white">I build AI agents and workflows for clients</h3>
+                <p className="mt-3 text-sm leading-7 text-white/60">
+                  If {config.name} does not cover your process, I design and build custom agents, automations, RAG assistants and integrations on your data and tools, delivered in weeks.
+                </p>
+              </div>
+              <Link href="/build-ai-system-for-your-business" className="group mt-8 inline-flex items-center gap-2 text-sm font-medium text-white">
+                Build an AI system for your business
                 <span aria-hidden="true" className="transition-transform duration-300 group-hover:translate-x-1">→</span>
               </Link>
             </Reveal>

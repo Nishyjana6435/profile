@@ -46,6 +46,16 @@ export default function StructuredData({
       ? { "@type": "Organization", name: fields.currentCompany }
       : undefined,
     knowsAbout,
+    hasOccupation: {
+      "@type": "Occupation",
+      name: "AI Engineer",
+      description: "Builds AI agents, RAG assistants and workflow automation for businesses worldwide.",
+      occupationLocation: { "@type": "City", name: "Colombo, Sri Lanka" },
+    },
+    makesOffer: {
+      "@type": "Offer",
+      itemOffered: { "@type": "Service", name: "AI system design and build", url: `${SITE_URL}/build-ai-system-for-your-business` },
+    },
     sameAs: sameAs.length > 0 ? sameAs : undefined,
     owns: [{ "@id": `${FLOWS.url}#software` }, { "@id": `${AGENT_STUDIO.url}#software` }],
   };
