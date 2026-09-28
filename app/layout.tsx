@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { SITE_NAME, SITE_URL } from "@/lib/seo";
 import "./globals.css";
+import AssistantWidget from "@/components/AssistantWidget";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -54,6 +55,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           <style>{`.reveal,.reveal-stagger>*{opacity:1!important;transform:none!important}`}</style>
         </noscript>
         {children}
+        <AssistantWidget />
       </body>
     </html>
   );
