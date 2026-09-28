@@ -38,6 +38,7 @@ function SocialIcon({ platform }: { platform: string }) {
 }
 
 const FOOTER_LINKS = [
+  { label: "About Nishy", href: "/about" },
   { label: "Flows: AI workflow automation", href: "/flows" },
   { label: "Agent Studio: visual AI agent builder", href: "/agent-studio" },
   { label: "Build an AI system for your business", href: "/build-ai-system-for-your-business" },
@@ -85,7 +86,12 @@ export default function Contact({
         </a>
         </Reveal>
 
-        <nav aria-label="Site" className="mt-10 flex flex-wrap gap-x-6 gap-y-2 text-xs text-white/50">
+        <p className="mt-10 text-xs text-white/50">
+          <Link href="/about" className="text-white/70 hover:text-white">Nishanthan Janarthanarajah (Nishy)</Link>, founder of{" "}
+          <Link href="/agent-studio" className="text-white/70 hover:text-white">Agent Studio</Link> and{" "}
+          <Link href="/flows" className="text-white/70 hover:text-white">Flows</Link>.
+        </p>
+        <nav aria-label="Site" className="mt-4 flex flex-wrap gap-x-6 gap-y-2 text-xs text-white/50">
           {FOOTER_LINKS.map((link) => (
             <Link key={link.href} href={link.href} className="transition-colors hover:text-white">
               {link.label}

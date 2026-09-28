@@ -1,11 +1,21 @@
 export const SITE_URL = "https://www.nishy.space";
 export const SITE_NAME = "Nishanthan Janarthanarajah";
+export const SITE_ALT_NAME = "Nishy";
+export const FOUNDER_LINE = "Nishanthan Janarthanarajah (Nishy), founder of Agent Studio and Flows";
 
 // Long-tail keywords derived from real experience (Eight25media/PandaDoc,
 // Verdentra/Paycor/Snowflake, Concept Vines/Modjoul IoT, Rootcode Labs) to
 // complement the raw skills list from Contentful for SEO + AEO.
 export const EXTRA_KEYWORDS = [
   "Nishanthan Janarthanarajah",
+  "Nishy",
+  "Nishy founder",
+  "Nishanthan Janarthanarajah founder",
+  "Founder of Agent Studio",
+  "Founder of Flows",
+  "Agent Studio founder",
+  "Flows founder",
+  "nishy.space",
   "Full Stack Developer",
   "Associate Technical Lead",
   "Technical Lead",

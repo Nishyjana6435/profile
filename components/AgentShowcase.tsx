@@ -77,7 +77,7 @@ export default function AgentShowcase() {
           </Reveal>
 
           <Reveal as="p" delay={200} className="mt-5 max-w-xl text-sm leading-7 text-white/60">
-            {AGENT_STUDIO.name} is my second product: a no-code builder for production AI agents. You design an
+            {AGENT_STUDIO.name} is the second product I founded: a no-code builder for production AI agents. You design an
             orchestrator and its sub-agents on a canvas, wrap them in guardrails and a prompt-injection shield,
             test in a playground with a full trace, and hit Deploy. Models run on Groq, and every call, version
             and trace is stored in Neon serverless Postgres, so ten minutes in you have a live endpoint you can

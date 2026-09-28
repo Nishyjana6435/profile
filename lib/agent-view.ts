@@ -112,6 +112,7 @@ export async function getAgentView(): Promise<AgentView> {
       markdown: MARKDOWN_TWINS[`/${p.slug}`],
     })),
     { path: "/news/agent-studio-flows", title: "News (2026-09-28): Agent Studio agents now run inside Flows automatically", description: "One switch in the Deploy dialog adds an agent to Flows as a workflow step.", markdown: "" },
+    { path: "/about", title: "About Nishanthan Janarthanarajah (Nishy), founder of Agent Studio and Flows", description: "Founder bio, products, experience and links.", markdown: "" },
     { path: "/hire", title: "Hire me: services, engagement types and FAQ", description: "All services with engagement types.", markdown: "" },
     { path: "/blog", title: "Blog", description: "Engineering articles.", markdown: "" },
     { path: "/for-agents", title: "Agent view", description: "Every key fact on one page for crawlers and AI agents.", markdown: MARKDOWN_TWINS["/for-agents"] },
@@ -258,7 +259,7 @@ export function hirePageMarkdown(p: HireLandingConfig): string {
 export function agentViewMarkdown(view: AgentView, opts: { full: boolean }): string {
   const v = view;
   const out: string[] = [];
-  out.push(h(1, v.person.name));
+  out.push(h(1, `${v.person.name} (Nishy): founder of Agent Studio and Flows`));
   out.push(`> ${v.person.title ?? "AI engineer and full stack developer"}${v.person.company ? ` at ${v.person.company}` : ""} · ${v.person.location}\n`);
   out.push(`Independent AI engineer building AI agents, RAG assistants and workflow automation for businesses in Sri Lanka and worldwide, and creator of two live AI products, ${FLOWS.name} and ${AGENT_STUDIO.name}.\n`);
   out.push(`**Availability:** ${v.person.availability}\n`);

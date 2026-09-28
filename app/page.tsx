@@ -34,9 +34,9 @@ export async function generateMetadata(): Promise<Metadata> {
   ]);
   const fields = profile?.fields;
 
-  const title = `${fields?.name ?? SITE_NAME} — AI Engineer & ${fields?.title ?? "Full Stack Developer"} | Builds AI Systems for Businesses`;
+  const title = `${fields?.name ?? SITE_NAME} (Nishy) — Founder of Agent Studio & Flows | AI Engineer`;
   const description =
-    `Independent AI engineer in Colombo, Sri Lanka, available for client projects worldwide, and creator of Flows and Agent Studio. ${richTextToPlainText(fields?.bio)}`.trim() ||
+    `Nishanthan Janarthanarajah (Nishy) is the founder of Agent Studio and Flows, and an independent AI engineer in Colombo, Sri Lanka, available for client projects worldwide. ${richTextToPlainText(fields?.bio)}`.trim() ||
     siteSettings?.fields.siteDescription ||
     "Full stack developer and self-taught UI/UX designer leading cross-functional teams to ship accessible, high-impact products.";
   const avatar = fields?.avatar && "fields" in fields.avatar ? fields.avatar : undefined;

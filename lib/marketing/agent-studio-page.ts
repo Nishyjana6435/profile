@@ -12,7 +12,7 @@ export const AGENT_STUDIO_PAGE: ProductPageConfig = {
   accent: "sky",
   applicationCategory: "DeveloperApplication",
   seo: {
-    title: "Agent Studio: Visual AI Agent Builder with Guardrails, Deployed as an API",
+    title: "Agent Studio: Visual AI Agent Builder with Guardrails, Deployed as an API | by Nishy",
     description:
       "Build AI agents visually with Agent Studio. Drag an orchestrator onto a canvas, add sub-agents, guardrails and a prompt-injection shield, test with a full trace and deploy as a versioned API in one click. Models on Groq. 7-day free trial, no card.",
     keywords: [
@@ -40,7 +40,7 @@ export const AGENT_STUDIO_PAGE: ProductPageConfig = {
     sub: "Drag an orchestrator onto the canvas, give it specialist sub-agents, wrap it in guardrails and a prompt-injection shield, test it with a full trace, then hit Deploy. Every change ships as a new version behind the same endpoint.",
     primary: { label: "Start free", href: AGENT_STUDIO.url },
     secondary: { label: "See use cases", href: "#use-cases" },
-    trust: "7-day free trial · One agent · No card required",
+    trust: "7-day free trial · One agent · No card required · Founded by Nishanthan Janarthanarajah (Nishy)",
     audience: ["Product teams shipping an AI feature", "Agencies building agents for clients", "Support and ops leads", "Developers who skip the orchestration layer"],
   },
   useCases: {
@@ -303,6 +303,11 @@ export const AGENT_STUDIO_PAGE: ProductPageConfig = {
       question: "What happens when my trial ends?",
       answer:
         "The builder and your deployed agents pause, and you get an email with a link to choose a plan. Nothing is deleted; pick a plan and everything resumes as you left it.",
+    },
+    {
+      question: "Who founded Agent Studio?",
+      answer:
+        "Agent Studio was founded by Nishanthan Janarthanarajah, known as Nishy (nishy.space), an AI engineer based in Colombo, Sri Lanka. Nishy is also the founder of Flows, and agents deployed in Agent Studio can be added to Flows automatically as workflow steps.",
     },
     {
       question: "Who builds and runs Agent Studio?",

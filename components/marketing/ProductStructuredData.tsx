@@ -16,6 +16,7 @@ export default function ProductStructuredData({ config }: { config: ProductPageC
     slogan: config.tagline,
     author: { "@id": `${SITE_URL}/#person` },
     creator: { "@id": `${SITE_URL}/#person` },
+    publisher: { "@id": `${config.url}#organization` },
     keywords: config.seo.keywords.join(", "),
     featureList: config.features.items.map((f) => f.title).join(", "),
     offers: config.pricing.plans.map((plan) => ({
@@ -72,11 +73,22 @@ export default function ProductStructuredData({ config }: { config: ProductPageC
     })),
   };
 
+  const organization = {
+    "@type": "Organization",
+    "@id": `${config.url}#organization`,
+    name: config.name,
+    url: config.url,
+    founder: { "@id": `${SITE_URL}/#person` },
+    foundingLocation: { "@type": "Place", name: "Colombo, Sri Lanka" },
+  };
+
   const person = {
     "@type": "Person",
     "@id": `${SITE_URL}/#person`,
     name: SITE_NAME,
+    alternateName: "Nishy",
     url: SITE_URL,
+    jobTitle: "Founder of Agent Studio and Flows",
   };
 
   const website = {
@@ -92,7 +104,7 @@ export default function ProductStructuredData({ config }: { config: ProductPageC
       dangerouslySetInnerHTML={{
         __html: JSON.stringify({
           "@context": "https://schema.org",
-          "@graph": [webPage, breadcrumb, software, howTo, faqPage, person, website],
+          "@graph": [webPage, breadcrumb, software, organization, howTo, faqPage, person, website],
         }),
       }}
     />

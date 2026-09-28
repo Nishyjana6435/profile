@@ -3,7 +3,7 @@ import type { FaqItem } from "@/lib/faq";
 import { richTextToPlainText } from "@/lib/richtext";
 import { AGENT_STUDIO } from "@/lib/agent";
 import { FLOWS } from "@/lib/flows";
-import { EXTRA_KEYWORDS, SITE_NAME, SITE_URL } from "@/lib/seo";
+import { EXTRA_KEYWORDS, SITE_ALT_NAME, SITE_NAME, SITE_URL } from "@/lib/seo";
 
 export default function StructuredData({
   profile,
@@ -34,8 +34,13 @@ export default function StructuredData({
     "@type": "Person",
     "@id": `${SITE_URL}/#person`,
     name: fields?.name ?? SITE_NAME,
+    alternateName: [SITE_ALT_NAME, "Nishy Jana"],
+    givenName: "Nishanthan",
+    familyName: "Janarthanarajah",
     url: SITE_URL,
-    jobTitle: fields?.title,
+    mainEntityOfPage: `${SITE_URL}/about`,
+    jobTitle: ["Founder of Agent Studio and Flows", "AI Engineer", fields?.title].filter(Boolean),
+    disambiguatingDescription: "Nishy is the founder of Agent Studio (create-your-agent.nishy.space) and Flows (create-your-flows.nishy.space), and an AI engineer based in Colombo, Sri Lanka.",
     description: richTextToPlainText(fields?.bio) || undefined,
     image: avatarUrl,
     email: fields?.email ? `mailto:${fields.email}` : undefined,
@@ -58,7 +63,22 @@ export default function StructuredData({
     },
     sameAs: sameAs.length > 0 ? sameAs : undefined,
     owns: [{ "@id": `${FLOWS.url}#software` }, { "@id": `${AGENT_STUDIO.url}#software` }],
+    memberOf: [{ "@id": `${FLOWS.url}#organization` }, { "@id": `${AGENT_STUDIO.url}#organization` }],
   };
+
+  const orgFor = (name: string, url: string, description: string) => ({
+    "@type": "Organization",
+    "@id": `${url}#organization`,
+    name,
+    url,
+    description,
+    founder: { "@id": `${SITE_URL}/#person` },
+    foundingDate: "2026",
+    foundingLocation: { "@type": "Place", name: "Colombo, Sri Lanka" },
+    sameAs: [url, `${SITE_URL}/${name === "Flows" ? "flows" : "agent-studio"}`],
+  });
+  const flowsOrg = orgFor(FLOWS.name, FLOWS.url, FLOWS.description);
+  const agentStudioOrg = orgFor(AGENT_STUDIO.name, AGENT_STUDIO.url, AGENT_STUDIO.description);
 
   const flows = {
     "@type": "SoftwareApplication",
@@ -71,6 +91,7 @@ export default function StructuredData({
     slogan: FLOWS.tagline,
     author: { "@id": `${SITE_URL}/#person` },
     creator: { "@id": `${SITE_URL}/#person` },
+    publisher: { "@id": `${FLOWS.url}#organization` },
     keywords: [...FLOWS.stack, "Agentic automation", "AI workflow automation"].join(", "),
     offers: { "@type": "Offer", price: "0", priceCurrency: "USD", description: "10 runs a month free" },
   };
@@ -86,6 +107,7 @@ export default function StructuredData({
     slogan: AGENT_STUDIO.tagline,
     author: { "@id": `${SITE_URL}/#person` },
     creator: { "@id": `${SITE_URL}/#person` },
+    publisher: { "@id": `${AGENT_STUDIO.url}#organization` },
     keywords: [...AGENT_STUDIO.stack, "AI agent builder", "LLM guardrails", "Prompt injection shield"].join(", "),
     offers: { "@type": "Offer", price: "0", priceCurrency: "USD", description: "7-day free trial, one agent, no card required" },
   };
@@ -95,6 +117,7 @@ export default function StructuredData({
     "@id": `${SITE_URL}/#website`,
     url: SITE_URL,
     name: siteSettings?.fields.siteTitle ?? SITE_NAME,
+    alternateName: ["Nishy", "nishy.space"],
     description: siteSettings?.fields.siteDescription,
     publisher: { "@id": `${SITE_URL}/#person` },
   };
@@ -146,7 +169,7 @@ export default function StructuredData({
         }
       : null;
 
-  const graph = [person, website, profilePage, flows, agentStudio, itemList, faqPage].filter(Boolean);
+  const graph = [person, website, profilePage, flows, agentStudio, flowsOrg, agentStudioOrg, itemList, faqPage].filter(Boolean);
 
   return (
     <script

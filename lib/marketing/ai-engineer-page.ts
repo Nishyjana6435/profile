@@ -122,7 +122,7 @@ export const AI_ENGINEER_PAGE: HireLandingConfig = {
     eyebrow: "AI engineer · Colombo, Sri Lanka · remote worldwide",
     h1: "An AI engineer in Sri Lanka who builds AI systems for your business",
     highlight: "builds AI systems for your business",
-    sub: "I am Nishanthan Janarthanarajah, a full stack and AI engineer with 7+ years shipping production software. I design and build AI agents, RAG assistants over your own data and workflow automation, and I run two live AI products, Flows and Agent Studio, that you can put to work today.",
+    sub: "I am Nishanthan Janarthanarajah (Nishy), founder of Agent Studio and Flows, and a full stack and AI engineer with 7+ years shipping production software. I design and build AI agents, RAG assistants over your own data and workflow automation, and I run two live AI products, Flows and Agent Studio, that you can put to work today.",
     trust: "Based in Colombo · Working with clients in Sri Lanka, the US and Europe · Replies within a day",
     stats: [
       { value: "7+", label: "years shipping production software" },
@@ -239,7 +239,7 @@ export const BUILD_AI_SYSTEM_PAGE: HireLandingConfig = {
     eyebrow: "Independent AI engineer · remote · overlapping US, UK, EU and Asia-Pacific hours",
     h1: "Need someone to build an AI system for your business? Hire the engineer, not the agency.",
     highlight: "Hire the engineer, not the agency.",
-    sub: "I am Nishanthan Janarthanarajah, an independent AI and full stack engineer with 7+ years shipping production software for US and international clients. I design and build AI agents, RAG assistants over your own data and workflow automation, and I run two live AI products, Flows and Agent Studio, so you can see finished work before you hire me.",
+    sub: "I am Nishanthan Janarthanarajah (Nishy), founder of Agent Studio and Flows, and an independent AI and full stack engineer with 7+ years shipping production software for US and international clients. I design and build AI agents, RAG assistants over your own data and workflow automation, and I run two live AI products, Flows and Agent Studio, so you can see finished work before you hire me.",
     trust: "Accepting new client projects · Remote-first from Colombo, Sri Lanka · Replies within a day",
     stats: STATS,
   },

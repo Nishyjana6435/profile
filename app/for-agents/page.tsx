@@ -140,7 +140,9 @@ export default async function ForAgentsPage() {
               rows={[
                 ["Name", v.person.name],
                 ["Role", `${v.person.title ?? "AI Engineer and Full Stack Developer"}${v.person.company ? ` at ${v.person.company}` : ""}`],
-                ["Also", "Independent AI engineer, creator of Flows and Agent Studio"],
+                ["Known as", "Nishy"],
+                ["Founder of", "Agent Studio and Flows"],
+                ["Also", "Independent AI engineer available for client projects"],
                 ["Location", v.person.location],
                 ["Availability", v.person.availability],
                 ["Email", v.person.email ? <a href={`mailto:${v.person.email}`} className="underline underline-offset-4">{v.person.email}</a> : "See contact"],

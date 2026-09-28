@@ -12,7 +12,7 @@ export const FLOWS_PAGE: ProductPageConfig = {
   accent: "fuchsia",
   applicationCategory: "BusinessApplication",
   seo: {
-    title: "Flows: Create Workflows Easily in Plain English | No-Code AI Workflow Automation",
+    title: "Flows: Create Workflows Easily in Plain English | AI Workflow Automation by Nishy",
     description:
       "Flows is AI workflow automation for small businesses and agencies. Describe a process in plain English and Flows builds the workflow, connects Slack, Google Sheets, Gmail, email, SMS and any REST API, runs it around the clock and fixes what breaks. 10 runs a month free, no card.",
     keywords: [
@@ -38,7 +38,7 @@ export const FLOWS_PAGE: ProductPageConfig = {
     sub: "Say “when a lead fills the form, alert sales in Slack, log it in a sheet, and text me if it looks hot.” Flows connects your apps, drafts every step, runs it around the clock and tells you in one sentence when something needs you.",
     primary: { label: "Start free", href: FLOWS.url },
     secondary: { label: "See use cases", href: "#use-cases" },
-    trust: "10 runs a month free · No card required · Built and run by an engineer, not a marketplace",
+    trust: "10 runs a month free · No card required · Founded and built by Nishanthan Janarthanarajah (Nishy)",
     audience: ["Small businesses", "Agencies running client playbooks", "Founders without an ops team", "Sales and support teams"],
   },
   useCases: {
@@ -275,6 +275,11 @@ export const FLOWS_PAGE: ProductPageConfig = {
       question: "Can agencies use Flows for multiple clients?",
       answer:
         "Yes. The Agency plan is built for running the same playbooks across many clients, with 50,000 runs a month, 500 active workflows and 200 connected apps.",
+    },
+    {
+      question: "Who founded Flows?",
+      answer:
+        "Flows was founded by Nishanthan Janarthanarajah, known as Nishy (nishy.space), an AI engineer based in Colombo, Sri Lanka. Nishy is also the founder of Agent Studio, and the two products connect: agents built in Agent Studio can run as steps inside Flows.",
     },
     {
       question: "Who builds and runs Flows?",

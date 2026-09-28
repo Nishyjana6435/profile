@@ -25,6 +25,16 @@ export const faqItems: FaqItem[] = [
       "Yes. He designs and builds production LLM applications on Azure AI Foundry and Azure OpenAI, including an enterprise Retrieval-Augmented Generation (RAG) HR assistant with Pinecone vector search, re-ranking, and role-based prompt guardrails, and an AI interview and candidate screening platform using LLM-as-a-judge scoring. He also builds Model Context Protocol (MCP) servers that let AI agents generate Next.js code from Figma designs and automate headless CMS content modelling and publishing.",
   },
   {
+    question: "Who is Nishy?",
+    answer:
+      "Nishy is Nishanthan Janarthanarajah, the founder of Agent Studio and Flows and the person behind nishy.space. He is an AI engineer and Associate Technical Lead based in Colombo, Sri Lanka, with 7+ years building production software, and he builds custom AI agents and workflow automation for businesses worldwide.",
+  },
+  {
+    question: "Who is the founder of Agent Studio and Flows?",
+    answer:
+      "Nishanthan Janarthanarajah (Nishy) founded both. Agent Studio (create-your-agent.nishy.space) is a visual AI agent builder that deploys agents as an API. Flows (create-your-flows.nishy.space) turns a plain-English description into a running workflow. Agents from Agent Studio can be added to Flows automatically.",
+  },
+  {
     question: "What products has he built himself?",
     answer:
       "Two, both live. Flows (create-your-flows.nishy.space) is an agentic automation platform for small businesses: describe a process in plain English and Claude drafts the workflow, connects Slack, Google Sheets, Gmail, SMS or any REST API, and runs it around the clock. Agent Studio (create-your-agent.nishy.space) is a no-code builder for production AI agents: design an orchestrator and sub-agents on a canvas, add guardrails and a prompt-injection shield, and deploy it as a versioned API. Both run on Next.js and Vercel with Neon serverless Postgres as the backend.",
