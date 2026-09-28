@@ -37,28 +37,70 @@ function save(v: Saved) {
   } catch {}
 }
 
-/** Plain text with clickable links and line breaks. */
-function Rich({ text }: { text: string }) {
-  const parts: ReactNode[] = [];
-  const re = /(https?:\/\/[^\s)]+|(?:[a-z0-9-]+\.)+nishy\.space[^\s)]*|\*\*[^*]+\*\*)/gi;
+const LINK_CLS = "text-violet-300 underline underline-offset-2 hover:text-white";
+
+/** Inline markdown: [text](url), **bold**, bare URLs and nishy.space hosts. */
+function inline(text: string, keyBase: string): ReactNode[] {
+  const out: ReactNode[] = [];
+  const re = /\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)|\*\*([^*]+)\*\*|(https?:\/\/[^\s)]+|(?:[a-z0-9-]+\.)+nishy\.space[^\s),]*)/gi;
   let last = 0;
   let m: RegExpExecArray | null;
   while ((m = re.exec(text))) {
-    if (m.index > last) parts.push(text.slice(last, m.index));
-    const t = m[0];
-    if (t.startsWith("**")) parts.push(<strong key={m.index}>{t.slice(2, -2)}</strong>);
-    else {
-      const href = t.startsWith("http") ? t : `https://${t}`;
-      parts.push(
-        <a key={m.index} href={href} target="_blank" rel="noopener noreferrer" className="text-violet-300 underline underline-offset-2 hover:text-white">
-          {t.replace(/^https?:\/\//, "")}
-        </a>,
-      );
+    if (m.index > last) out.push(text.slice(last, m.index));
+    const k = `${keyBase}-${m.index}`;
+    if (m[1] && m[2]) {
+      out.push(<a key={k} href={m[2]} target="_blank" rel="noopener noreferrer" className={LINK_CLS}>{m[1]}</a>);
+    } else if (m[3]) {
+      out.push(<strong key={k} className="font-semibold text-white">{m[3]}</strong>);
+    } else if (m[4]) {
+      const href = m[4].startsWith("http") ? m[4] : `https://${m[4]}`;
+      out.push(<a key={k} href={href} target="_blank" rel="noopener noreferrer" className={LINK_CLS}>{m[4].replace(/^https?:\/\//, "")}</a>);
     }
-    last = m.index + t.length;
+    last = m.index + m[0].length;
   }
-  if (last < text.length) parts.push(text.slice(last));
-  return <span className="whitespace-pre-wrap break-words">{parts}</span>;
+  if (last < text.length) out.push(text.slice(last));
+  return out;
+}
+
+/** Light markdown for agent replies: paragraphs, bullet and numbered lists, inline links and bold. */
+function Rich({ text }: { text: string }) {
+  const blocks: ReactNode[] = [];
+  const lines = text.replace(/\r/g, "").split("\n");
+  let list: { ordered: boolean; items: string[] } | null = null;
+  const flush = (i: number) => {
+    if (!list) return;
+    const Tag = list.ordered ? "ol" : "ul";
+    blocks.push(
+      <Tag key={`l${i}`} className={`my-1.5 space-y-1 pl-4 ${list.ordered ? "list-decimal" : "list-disc"} marker:text-violet-300/70`}>
+        {list.items.map((it, j) => <li key={j}>{inline(it, `l${i}-${j}`)}</li>)}
+      </Tag>,
+    );
+    list = null;
+  };
+  lines.forEach((raw, i) => {
+    const line = raw.trimEnd();
+    const bullet = line.match(/^\s*[-*•]\s+(.*)$/);
+    const num = line.match(/^\s*\d+[.)]\s+(.*)$/);
+    if (bullet || num) {
+      const ordered = Boolean(num);
+      if (!list || list.ordered !== ordered) {
+        flush(i);
+        list = { ordered, items: [] };
+      }
+      list.items.push((bullet ?? num)![1]);
+      return;
+    }
+    flush(i);
+    if (!line.trim()) return;
+    const heading = line.match(/^#{1,4}\s+(.*)$/);
+    blocks.push(
+      <p key={`p${i}`} className={`break-words ${heading ? "font-semibold text-white" : ""} [&:not(:first-child)]:mt-1.5`}>
+        {inline(heading ? heading[1] : line, `p${i}`)}
+      </p>,
+    );
+  });
+  flush(lines.length);
+  return <div>{blocks}</div>;
 }
 
 export default function AssistantWidget() {
