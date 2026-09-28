@@ -4,16 +4,43 @@ import { addTokens, checkRate } from "@/lib/assistant/rate-limit";
 
 const AGENT_BASE = "https://create-your-agent.nishy.space/v1/agents";
 
-/** Accepts a full invoke URL, a base URL or just the agent slug. */
+const NAME_HINT = /AGENT|ASSIST|CHAT|NISHY_AI/i;
+
+/** Env var names (never values) that look agent-related, for diagnostics. */
+function candidateNames(): string[] {
+  return Object.keys(process.env).filter((k) => NAME_HINT.test(k) && !/^VERCEL_|^NEXT_|USER_AGENT/i.test(k)).sort();
+}
+
+/** The secret: a known name, otherwise any agent-ish var holding an Agent Studio key. */
+function agentSecret(): string | undefined {
+  const known = process.env.AGENT_SECRET ?? process.env.AGENT_API_KEY ?? process.env.AGENT_KEY ?? process.env.ASSISTANT_AGENT_SECRET;
+  if (known) return known.trim();
+  for (const k of candidateNames()) {
+    const v = process.env[k]?.trim();
+    if (v && (/^ak_/.test(v) || /SECRET|KEY|TOKEN/i.test(k)) && !/^https?:\/\//.test(v)) return v;
+  }
+  return undefined;
+}
+
+/** Accepts a full invoke URL, a base URL or just the agent slug, under a known or agent-ish name. */
 function agentEndpoint(): string | null {
-  const raw = process.env.AGENT_URL ?? process.env.AGENT_ENDPOINT ?? process.env.AGENT ?? process.env.AGENT_SLUG ?? process.env.ASSISTANT_AGENT;
+  let raw = process.env.AGENT_URL ?? process.env.AGENT_ENDPOINT ?? process.env.AGENT ?? process.env.AGENT_SLUG ?? process.env.ASSISTANT_AGENT;
+  if (!raw) {
+    const secret = agentSecret();
+    for (const k of candidateNames()) {
+      const v = process.env[k]?.trim();
+      if (!v || v === secret || /SECRET|KEY|TOKEN/i.test(k)) continue;
+      if (/^https?:\/\//.test(v) || /^[a-z0-9][a-z0-9-]{1,80}$/i.test(v)) {
+        raw = v;
+        break;
+      }
+    }
+  }
   if (!raw) return null;
   const v = raw.trim();
   if (/^https?:\/\//.test(v)) return v.endsWith("/invoke") ? v : `${v.replace(/\/$/, "")}/invoke`;
   return `${AGENT_BASE}/${v.replace(/^\/+|\/+$/g, "")}/invoke`;
 }
-const agentSecret = () =>
-  process.env.AGENT_SECRET ?? process.env.AGENT_API_KEY ?? process.env.AGENT_KEY ?? process.env.ASSISTANT_AGENT_SECRET;
 
 function clientKey(req: Request, sessionId: string) {
   const ip = (req.headers.get("x-forwarded-for") ?? "").split(",")[0].trim() || req.headers.get("x-real-ip") || "local";
@@ -26,7 +53,18 @@ function isMessage(m: unknown): m is ChatMessage {
 
 /** Lets the widget hide itself when the agent isn't configured. */
 export function GET() {
-  return NextResponse.json({ configured: Boolean(agentEndpoint() && agentSecret()) }, { headers: { "Cache-Control": "no-store" } });
+  const endpoint = agentEndpoint();
+  const secret = agentSecret();
+  return NextResponse.json(
+    {
+      configured: Boolean(endpoint && secret),
+      endpointFound: Boolean(endpoint),
+      secretFound: Boolean(secret),
+      agentHost: endpoint ? new URL(endpoint).host : null,
+      envNamesSeen: candidateNames(), // names only, never values
+    },
+    { headers: { "Cache-Control": "no-store" } },
+  );
 }
 
 export async function POST(req: Request) {
