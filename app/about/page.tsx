@@ -7,6 +7,7 @@ import { AGENT_STUDIO } from "@/lib/agent";
 import { getExperienceItems, getProfile, getSiteSettings } from "@/lib/contentful";
 import { FLOWS } from "@/lib/flows";
 import { richTextToPlainText } from "@/lib/richtext";
+import { FOUNDER_ROLES } from "@/lib/agent-view";
 import { SITE_NAME, SITE_URL } from "@/lib/seo";
 
 export const revalidate = 60000;
@@ -130,10 +131,16 @@ export default async function AboutPage() {
             </div>
           </section>
 
-          {experience.length > 0 && (
+          {(
             <section className="mt-14" aria-labelledby="exp-h">
-              <h2 id="exp-h" className="text-2xl font-semibold">Experience</h2>
+              <h2 id="exp-h" className="text-2xl font-semibold">Career</h2>
               <ul className="mt-6 flex flex-col gap-3">
+                {FOUNDER_ROLES.map((r) => (
+                  <li key={r.title} className="rounded-2xl border border-violet-400/30 bg-violet-500/10 p-5">
+                    <p className="text-sm font-semibold">{r.title}<span className="font-normal text-white/50"> · {r.period}</span></p>
+                    <p className="mt-1.5 text-sm leading-6 text-white/65">{r.description}</p>
+                  </li>
+                ))}
                 {experience.map((e) => (
                   <li key={e.sys.id} className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
                     <p className="text-sm font-semibold">{e.fields.title}{e.fields.period ? <span className="font-normal text-white/50"> · {e.fields.period}</span> : null}</p>

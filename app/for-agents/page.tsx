@@ -63,7 +63,8 @@ export default async function ForAgentsPage() {
       "@id": `${SITE_URL}/#person`,
       name: v.person.name,
       url: SITE_URL,
-      jobTitle: "AI Engineer and Full Stack Developer",
+      jobTitle: ["Founder of Agent Studio and Flows", "AI Engineer", v.person.title].filter(Boolean),
+      alternateName: "Nishy",
       description: v.person.bio || undefined,
       email: v.person.email ? `mailto:${v.person.email}` : undefined,
       address: { "@type": "PostalAddress", addressLocality: "Colombo", addressCountry: "LK" },
@@ -120,7 +121,7 @@ export default async function ForAgentsPage() {
       <main className="flex-1 px-6 py-16">
         <article className="mx-auto max-w-4xl">
           <p className="text-xs uppercase tracking-[0.3em] text-violet-300/70">Agent view · same facts as the human pages</p>
-          <h1 className="mt-3 text-3xl font-semibold text-white sm:text-4xl">{v.person.name}: AI engineer, Flows and Agent Studio</h1>
+          <h1 className="mt-3 text-3xl font-semibold text-white sm:text-4xl">{v.person.name} (Nishy): founder of Agent Studio and Flows</h1>
           <p className="mt-4 text-sm leading-7 text-white/70">
             This page collects every key fact from nishy.space in plain HTML for crawlers, search engines and AI agents.
             It is public, linked from every page, and identical in substance to what people see. Machine formats:
@@ -139,7 +140,7 @@ export default async function ForAgentsPage() {
             <Dl
               rows={[
                 ["Name", v.person.name],
-                ["Role", `${v.person.title ?? "AI Engineer and Full Stack Developer"}${v.person.company ? ` at ${v.person.company}` : ""}`],
+                ["Role", `Founder of Agent Studio and Flows · ${v.person.title ?? "AI Engineer"}${v.person.company ? ` at ${v.person.company}` : ""}`],
                 ["Known as", "Nishy"],
                 ["Founder of", "Agent Studio and Flows"],
                 ["Also", "Independent AI engineer available for client projects"],
@@ -198,7 +199,7 @@ export default async function ForAgentsPage() {
           </Section>
 
           {v.experience.length > 0 && (
-            <Section id="experience" title="Experience">
+            <Section id="experience" title="Career">
               <ul className="list-disc pl-5">
                 {v.experience.map((e) => <li key={e.title}><strong className="text-white/85">{e.title}{e.period ? ` (${e.period})` : ""}.</strong> {e.description}</li>)}
               </ul>

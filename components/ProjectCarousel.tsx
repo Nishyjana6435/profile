@@ -1,5 +1,6 @@
 import type { ProjectCarouselEntry, ProjectEntry } from "@/lib/contentful";
-import ProjectMarquee, { type MarqueeProject } from "./ProjectMarquee";
+import ProjectDeck from "./ProjectDeck";
+import type { MarqueeProject } from "./ProjectMarquee";
 import Reveal from "./Reveal";
 
 function toMarqueeProject(project: ProjectEntry): MarqueeProject {
@@ -36,7 +37,7 @@ export default function ProjectCarousel({
         aria-hidden="true"
         className="pointer-events-none absolute left-1/2 top-1/2 h-[28rem] w-[80rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-violet-700/15 blur-[120px]"
       />
-      <div className="relative mx-auto max-w-7xl">
+      <div className="relative mx-auto max-w-6xl">
         <div className="px-6 text-center">
           {carousel.fields.title && (
             <Reveal as="p" variant="fade" className="text-xs uppercase tracking-[0.3em] text-violet-300/70">
@@ -47,12 +48,12 @@ export default function ProjectCarousel({
             Work that shipped, <span className="text-shimmer">at scale</span>
           </Reveal>
           <Reveal as="p" delay={160} className="mx-auto mt-3 max-w-xl text-sm leading-6 text-white/50">
-            {projects.length} projects across AI agents, B2B platforms, IoT and enterprise data. Hover a card to
-            explore.
+            {projects.length} projects across AI agents, B2B platforms, IoT and enterprise data. Pick one, or let
+            the deck play.
           </Reveal>
         </div>
-        <Reveal variant="fade" delay={240} className="mt-12">
-          <ProjectMarquee projects={projects} />
+        <Reveal variant="fade" delay={240} className="mt-14">
+          <ProjectDeck projects={projects} />
         </Reveal>
       </div>
     </section>

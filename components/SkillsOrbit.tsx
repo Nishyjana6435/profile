@@ -27,7 +27,7 @@ export default function SkillsOrbit({
   skills: string[];
 }) {
   return (
-    <section className="px-6 py-20 text-center">
+    <section className="overflow-x-clip px-6 py-20 text-center">
       <div className="mx-auto max-w-2xl">
         {lookingForText && (
           <Reveal as="p" className="text-lg text-white/80">

@@ -40,6 +40,28 @@ export const MARKDOWN_TWINS: Record<string, string> = {
   "/for-agents": "/md/for-agents",
 };
 
+/** Founder roles lead every career listing, ahead of Contentful experience. */
+export const FOUNDER_ROLES = [
+  {
+    title: "Founder, Agent Studio",
+    company: "Agent Studio",
+    role: "Founder",
+    period: "2026 – present",
+    description:
+      "Founded, designed, built and operate Agent Studio (create-your-agent.nishy.space), a visual AI agent builder: orchestrator and sub-agents on a canvas, guardrails, a three-layer prompt-injection shield, one-click versioned API deployment and full tracing. Models on Groq, Neon Postgres, Vercel, Polar billing.",
+    stack: ["Next.js", "Groq", "Llama Prompt Guard 2", "Neon Postgres", "Vercel", "Polar"],
+  },
+  {
+    title: "Founder, Flows",
+    company: "Flows",
+    role: "Founder",
+    period: "2026 – present",
+    description:
+      "Founded, designed, built and operate Flows (create-your-flows.nishy.space), AI workflow automation for small businesses and agencies: describe a process in plain English and Claude drafts, runs and repairs the workflow across Slack, Google Sheets, Gmail, SMS and any REST API. Agent Studio agents plug in as workflow steps.",
+    stack: ["Next.js", "Claude API", "Clerk", "Neon Postgres", "Vercel"],
+  },
+];
+
 export interface AgentView {
   generatedAt: string;
   site: { name: string; url: string; description?: string };
@@ -161,14 +183,14 @@ export async function getAgentView(): Promise<AgentView> {
     services: BUILD_AI_SYSTEM_PAGE.services.items,
     proof: BUILD_AI_SYSTEM_PAGE.proof.items,
     process: BUILD_AI_SYSTEM_PAGE.process.items,
-    experience: experience.map((e) => ({
+    experience: [...FOUNDER_ROLES, ...experience.map((e) => ({
       title: e.fields.title,
       company: e.fields.company,
       role: e.fields.role,
       period: e.fields.period,
       description: e.fields.description,
       stack: e.fields.stack,
-    })),
+    }))],
     projects: projects.map((p) => ({
       title: p.fields.title,
       summary: p.fields.summary || richTextToPlainText(p.fields.description) || undefined,
@@ -260,7 +282,7 @@ export function agentViewMarkdown(view: AgentView, opts: { full: boolean }): str
   const v = view;
   const out: string[] = [];
   out.push(h(1, `${v.person.name} (Nishy): founder of Agent Studio and Flows`));
-  out.push(`> ${v.person.title ?? "AI engineer and full stack developer"}${v.person.company ? ` at ${v.person.company}` : ""} · ${v.person.location}\n`);
+  out.push(`> Founder of Agent Studio and Flows · ${v.person.title ?? "AI engineer"}${v.person.company ? ` at ${v.person.company}` : ""} · ${v.person.location}\n`);
   out.push(`Independent AI engineer building AI agents, RAG assistants and workflow automation for businesses in Sri Lanka and worldwide, and creator of two live AI products, ${FLOWS.name} and ${AGENT_STUDIO.name}.\n`);
   out.push(`**Availability:** ${v.person.availability}\n`);
   if (v.person.bio) out.push(v.person.bio + "\n");
@@ -285,7 +307,7 @@ export function agentViewMarkdown(view: AgentView, opts: { full: boolean }): str
     out.push(v.person.skills.join(", ") + "\n");
   }
   if (v.experience.length) {
-    out.push(h(2, "Experience"));
+    out.push(h(2, "Career"));
     out.push(li(v.experience.map((e) => `**${e.title}**${e.period ? ` (${e.period})` : ""}: ${e.description}`)));
   }
   if (opts.full && v.projects.length) {
