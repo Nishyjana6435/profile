@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Image from "next/image";
 import { Fragment, type CSSProperties, type ReactNode } from "react";
 import type { ProfileEntry } from "@/lib/contentful";
@@ -139,15 +140,19 @@ export default function Hero({ profile }: { profile: ProfileEntry | null }) {
         </div>
 
         <div className="mt-20 max-w-2xl">
-          <h2 className="min-h-[1.25em] text-2xl font-medium text-white sm:text-3xl">
-            <TypedText text={`I'm an ${fields?.title ?? ""}.`} />
+          <h2 className="min-h-[3.75em] text-2xl font-medium text-white sm:min-h-[2.5em] sm:text-3xl">
+            <TypedText text={`I'm an ${fields?.title ?? "AI Engineer"} and the founder of Flows & Agent Studio.`} />
           </h2>
-          {fields?.currentCompany && (
-            <p className="hero-rise mt-2 text-sm text-white/70" style={{ "--d": "1.6s" } as CSSProperties}>
-              Currently, I&apos;m a {fields.title} at{" "}
-              <span className="text-violet-400">{fields.currentCompany}</span>.
-            </p>
-          )}
+          <p className="hero-rise mt-2 text-sm leading-6 text-white/70" style={{ "--d": "1.6s" } as CSSProperties}>
+            {fields?.currentCompany && (
+              <>
+                Currently, I&apos;m a {fields.title} at <span className="text-violet-400">{fields.currentCompany}</span>, and{" "}
+              </>
+            )}
+            {fields?.currentCompany ? "the " : "I'm the "}founder of{" "}
+            <Link href="/flows" className="text-violet-400 underline-offset-4 hover:underline">Flows</Link> and{" "}
+            <Link href="/agent-studio" className="text-violet-400 underline-offset-4 hover:underline">Agent Studio</Link>.
+          </p>
 
           <div className="hero-rise mt-8 text-sm leading-7 text-white/60" style={{ "--d": "1.9s" } as CSSProperties}>
             <RichText document={fields?.bio} />
