@@ -111,6 +111,7 @@ export async function getAgentView(): Promise<AgentView> {
       description: p.seo.description,
       markdown: MARKDOWN_TWINS[`/${p.slug}`],
     })),
+    { path: "/news/agent-studio-flows", title: "News (2026-09-28): Agent Studio agents now run inside Flows automatically", description: "One switch in the Deploy dialog adds an agent to Flows as a workflow step.", markdown: "" },
     { path: "/hire", title: "Hire me: services, engagement types and FAQ", description: "All services with engagement types.", markdown: "" },
     { path: "/blog", title: "Blog", description: "Engineering articles.", markdown: "" },
     { path: "/for-agents", title: "Agent view", description: "Every key fact on one page for crawlers and AI agents.", markdown: MARKDOWN_TWINS["/for-agents"] },

@@ -113,6 +113,7 @@ export const FLOWS_PAGE: ProductPageConfig = {
       { title: "The tools small teams already use", body: "Slack, Google Sheets, Gmail, built-in email and SMS, HTTP requests and any REST API with an API key." },
       { title: "Your tokens, encrypted", body: "Every app credential is AES-256 encrypted at rest, never shown again after connection, and revocable from the vendor's side in one click." },
       { title: "Templates that already work", body: "Lead capture, AI lead scoring, daily digests and failed-payment recovery ship as playbooks. Pick one, adjust two details, turn it on." },
+      { title: "Run Agent Studio agents as steps", body: "Agents deployed in Agent Studio with “Add to Flows” switched on show up here as “Ask <agent>” steps, guardrails and shield included." },
       { title: "Durable history", body: "Every flow, run and log is stored in Neon serverless Postgres, so history survives restarts and is always queryable." },
     ],
   },

@@ -115,6 +115,7 @@ export const AGENT_STUDIO_PAGE: ProductPageConfig = {
       { title: "Polish", body: "Turn a one-line idea into a structured system prompt or policy. Preview, then accept or discard." },
       { title: "Deploy and trace", body: "Versioned, immutable deployments, per-agent API keys with rotation, and a stage-by-stage trace on every run with latency and token usage." },
       { title: "Open models on Groq", body: "GPT-OSS 120B and 20B, Llama 3.3 70B, Llama 4 Maverick and Kimi K2, all served by Groq for low latency. Choose a model per node." },
+      { title: "Add to Flows automatically", body: "Flip one switch in the Deploy dialog and the agent appears in Flows as an “Ask <agent>” step, re-synced on every deploy. No keys to copy." },
       { title: "One stable endpoint", body: "Send a message or a whole conversation. Get back the answer, whether a guardrail or the shield blocked it, and the trace that explains why." },
     ],
   },

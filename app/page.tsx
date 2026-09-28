@@ -5,6 +5,7 @@ import FlowsShowcase from "@/components/FlowsShowcase";
 import AgentShowcase from "@/components/AgentShowcase";
 import ToolsPool from "@/components/ToolsPool";
 import CustomBuildBand from "@/components/CustomBuildBand";
+import NewsBanner from "@/components/NewsBanner";
 import WorkExperience from "@/components/WorkExperience";
 import ScrollBreak from "@/components/ScrollBreak";
 import SkillsOrbit from "@/components/SkillsOrbit";
@@ -90,6 +91,7 @@ export default async function Home() {
       <Header />
       <main className="flex-1">
         <Hero profile={profile} />
+        <NewsBanner />
         <FlowsShowcase />
         <AgentShowcase />
         <ToolsPool />
