@@ -40,7 +40,7 @@ const Dot = ({ c }: { c: string }) => <span className={`inline-block h-1.5 w-1.5
 const CARDS: Card[] = [
   {
     key: "as",
-    pos: "left-[-3.25rem] top-[-1.75rem] sm:left-[-12.5rem] sm:top-[8%]",
+    pos: "left-[-6.5rem] top-[-4.5rem] sm:left-[-19rem] sm:top-[2%]",
     depth: 1.6, d: "0.5s", dur: "6.5s", amp: "-9px", fx: "-20px", href: "/agent-studio",
     body: (
       <div className="flex items-center gap-2.5">
@@ -55,7 +55,7 @@ const CARDS: Card[] = [
   },
   {
     key: "fl",
-    pos: "right-[-3.25rem] bottom-[-1.25rem] sm:bottom-auto sm:right-[-13rem] sm:top-[34%]",
+    pos: "right-[-6.5rem] bottom-[-6.5rem] sm:bottom-auto sm:right-[-19.5rem] sm:top-[30%]",
     depth: 2, d: "0.85s", dur: "7s", amp: "-11px", fx: "20px", href: "/flows",
     body: (
       <div>
@@ -76,7 +76,7 @@ const CARDS: Card[] = [
   },
   {
     key: "rag",
-    pos: "left-[-13rem] bottom-[14%]",
+    pos: "left-[-18rem] bottom-[6%]",
     depth: 1.2, d: "1.2s", dur: "7.5s", amp: "-7px", fx: "-16px", hideMobile: true,
     body: (
       <div className="leading-tight">
@@ -92,7 +92,7 @@ const CARDS: Card[] = [
   },
   {
     key: "lead",
-    pos: "right-[-12rem] bottom-[-6%]",
+    pos: "right-[-17rem] bottom-[-10%]",
     depth: 1.4, d: "1.5s", dur: "6s", amp: "-8px", fx: "16px", hideMobile: true,
     body: (
       <div className="flex items-center gap-3">
@@ -132,26 +132,25 @@ export default function HeroPortrait({ src, alt }: { src?: string; alt: string }
   };
 
   return (
-    <div ref={ref} onMouseMove={onMove} onMouseLeave={onLeave} className="hx-stage relative mx-auto w-[12.5rem] pb-8 pt-10 sm:w-[17rem] sm:py-10">
+    <div ref={ref} onMouseMove={onMove} onMouseLeave={onLeave} className="hx-stage relative mx-auto w-[11rem] pb-28 pt-20 sm:w-[16rem] sm:pb-14 sm:pt-12">
       <div className="hx-tilt relative">
         <div aria-hidden="true" className="hx-core-glow absolute -inset-16 rounded-full" />
         <div className="hx-frame">
-          <div className="hx-frame-inner aspect-[4/5]">
+          <div className="hx-frame-inner aspect-square">
             {src ? (
-              <Image src={src} alt={alt} fill priority sizes="272px" className="object-cover" />
+              <Image src={src} alt={alt} fill priority sizes="256px" className="object-cover" />
             ) : (
               <span className="grid h-full w-full place-items-center text-5xl font-semibold text-white/70">N</span>
             )}
             <span aria-hidden="true" className="hx-scan pointer-events-none" />
-            <span aria-hidden="true" className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-[#0a0514]/85 to-transparent" />
-            <span className="absolute bottom-3 left-1/2 inline-flex -translate-x-1/2 items-center gap-1.5 whitespace-nowrap rounded-full border border-emerald-300/40 bg-[#0a0514]/80 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-emerald-200 backdrop-blur">
-              <span className="relative flex h-1.5 w-1.5">
-                <span className="fx-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400" />
-                <span className="relative h-1.5 w-1.5 rounded-full bg-emerald-400" />
-              </span>
-              Founder · Engineer
+                      </div>
+          <span className="absolute bottom-[-0.9rem] left-1/2 z-10 inline-flex -translate-x-1/2 items-center gap-1.5 whitespace-nowrap rounded-full border border-emerald-300/40 bg-[#0a0514]/80 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-emerald-200 backdrop-blur">
+            <span className="relative flex h-1.5 w-1.5">
+              <span className="fx-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400" />
+              <span className="relative h-1.5 w-1.5 rounded-full bg-emerald-400" />
             </span>
-          </div>
+            Founder · Engineer
+          </span>
         </div>
 
         {CARDS.map((c) => {
