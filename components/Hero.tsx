@@ -1,7 +1,8 @@
-import Image from "next/image";
 import Link from "next/link";
 import { Fragment, type CSSProperties, type ReactNode } from "react";
 import type { ProfileEntry } from "@/lib/contentful";
+import HeroNetwork from "./HeroNetwork";
+import HeroPortrait from "./HeroPortrait";
 import Reveal from "./Reveal";
 
 type Seg = { text: string; className?: string };
@@ -31,16 +32,6 @@ const STATS = [
   { value: "US", label: "enterprise clients" },
 ];
 
-/* Orbiting planets around the photo */
-const OUTER: { label: string; href?: string; kind: "as" | "fl" | "tag" }[] = [
-  { label: "Agent Studio", href: "/agent-studio", kind: "as" },
-  { label: "RAG", kind: "tag" },
-  { label: "Flows", href: "/flows", kind: "fl" },
-  { label: "AI agents", kind: "tag" },
-  { label: "MCP", kind: "tag" },
-];
-const INNER = ["Next.js", "Node.js", "Azure AI", "TypeScript"];
-
 const countWords = (segs: Seg[]) => segs.reduce((n, s) => n + s.text.split(/\s+/).filter(Boolean).length, 0);
 const HEAD_COUNT = countWords(HEADLINE);
 const TOTAL_WORDS = HEAD_COUNT + countWords(SUMMARY);
@@ -64,30 +55,6 @@ function typeWords(segs: Seg[], start: number): ReactNode[] {
   return out;
 }
 
-function PlanetIcon({ kind }: { kind: "as" | "fl" | "tag" }) {
-  if (kind === "as")
-    return (
-      <svg viewBox="0 0 32 32" className="h-6 w-6 shrink-0 rounded-lg" aria-hidden="true">
-        <rect width="32" height="32" rx="9" fill="#f5f5f7" />
-        <circle cx="16" cy="10" r="3.4" fill="#7c3aed" />
-        <circle cx="9" cy="22" r="2.8" fill="#121317" />
-        <circle cx="23" cy="22" r="2.8" fill="#121317" />
-        <path d="M16 13.6v3.2M14 18.8l-3.2 1.4M18 18.8l3.2 1.4" stroke="#121317" strokeWidth="2" strokeLinecap="round" />
-      </svg>
-    );
-  if (kind === "fl")
-    return (
-      <svg viewBox="0 0 32 32" className="h-6 w-6 shrink-0 rounded-lg" aria-hidden="true">
-        <rect width="32" height="32" rx="9" fill="#f5f5f7" />
-        <circle cx="9" cy="16" r="3" fill="#2ee6a6" />
-        <circle cx="23" cy="9" r="3" fill="#121317" />
-        <circle cx="23" cy="23" r="3" fill="#121317" />
-        <path d="M11.5 14.5 20.5 10.2M11.5 17.5l9 4.3" stroke="#121317" strokeWidth="2" strokeLinecap="round" />
-      </svg>
-    );
-  return <span className="h-2 w-2 shrink-0 rounded-full bg-gradient-to-r from-violet-300 to-fuchsia-300 shadow-[0_0_10px_rgba(240,171,252,0.9)]" />;
-}
-
 export default function Hero({ profile }: { profile: ProfileEntry | null }) {
   const fields = profile?.fields;
   const avatar = fields?.avatar && "fields" in fields.avatar ? fields.avatar : undefined;
@@ -99,83 +66,13 @@ export default function Hero({ profile }: { profile: ProfileEntry | null }) {
       {/* backdrop */}
       <div aria-hidden="true" className="hx-grid pointer-events-none absolute inset-0" />
       <div aria-hidden="true" className="hx-aurora pointer-events-none absolute left-1/2 top-[-10%] h-[46rem] w-[70rem] -translate-x-1/2" />
-      <span aria-hidden="true" className="hx-watermark pointer-events-none absolute left-1/2 top-[7rem] -translate-x-1/2 select-none sm:top-[8rem]">
-        FOUNDER
-      </span>
+      <HeroNetwork />
 
       <Reveal variant="fade" threshold={0.05} className="tw relative mx-auto max-w-6xl text-center">
-        {/* orbit system around the photo */}
-        <div className="hx-system relative mx-auto" aria-label="Nishy and what he builds">
-          <div className="hx-orbit hx-orbit--outer" aria-hidden="true">
-            <div className="hx-ring" />
-          </div>
-          <div className="hx-orbit hx-orbit--inner" aria-hidden="true">
-            <div className="hx-ring hx-ring--dashed" />
-          </div>
-
-          {/* inner orbit: stack */}
-          <div className="hx-plane hx-plane--inner">
-            <div className="hx-spin hx-spin--inner">
-              {INNER.map((t, i) => (
-                <div key={t} className="hx-slot" style={{ "--a": `${(360 / INNER.length) * i}deg` } as CSSProperties}>
-                  <span className="hx-planet hx-planet--small">{t}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* photo core */}
-          <div className="hx-core absolute left-1/2 top-1/2 z-20 -translate-x-1/2 -translate-y-1/2">
-            <div aria-hidden="true" className="hx-core-ring absolute -inset-2 rounded-full" />
-            <div aria-hidden="true" className="hx-core-glow absolute -inset-10 rounded-full" />
-            <div className="relative h-32 w-32 overflow-hidden rounded-full ring-2 ring-white/15 sm:h-48 sm:w-48">
-              {avatarFile?.url ? (
-                <Image
-                  src={`https:${avatarFile.url}`}
-                  alt={`${name} (Nishy), founder of Agent Studio and Flows`}
-                  fill
-                  priority
-                  sizes="192px"
-                  className="object-cover"
-                />
-              ) : (
-                <span className="grid h-full w-full place-items-center bg-violet-900/60 text-4xl font-semibold">N</span>
-              )}
-            </div>
-            <span className="hx-badge absolute -bottom-3 left-1/2 inline-flex -translate-x-1/2 items-center gap-1.5 whitespace-nowrap rounded-full border border-emerald-300/40 bg-[#0a0514]/90 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-emerald-200 backdrop-blur">
-              <span className="relative flex h-1.5 w-1.5">
-                <span className="fx-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400" />
-                <span className="relative h-1.5 w-1.5 rounded-full bg-emerald-400" />
-              </span>
-              Founder · Engineer
-            </span>
-          </div>
-
-          {/* outer orbit: products + skills */}
-          <div className="hx-plane hx-plane--outer">
-            <div className="hx-spin hx-spin--outer">
-              {OUTER.map((p, i) => {
-                const inner = (
-                  <span className={`hx-planet ${p.kind !== "tag" ? "hx-planet--product" : ""}`}>
-                    <PlanetIcon kind={p.kind} />
-                    {p.label}
-                  </span>
-                );
-                return (
-                  <div key={p.label} className="hx-slot" style={{ "--a": `${(360 / OUTER.length) * i}deg` } as CSSProperties}>
-                    {p.href ? (
-                      <Link href={p.href} className="hx-planet-link" aria-label={`${p.label}, founded by Nishy`}>
-                        {inner}
-                      </Link>
-                    ) : (
-                      inner
-                    )}
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        </div>
+        <HeroPortrait
+          src={avatarFile?.url ? `https:${avatarFile.url}` : undefined}
+          alt={`${name} (Nishy), founder of Agent Studio and Flows`}
+        />
 
         {/* copy */}
         <p className="tw-eyebrow mt-4 text-xs uppercase tracking-[0.3em] text-white/55 sm:text-sm">
