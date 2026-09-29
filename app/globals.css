@@ -1439,3 +1439,37 @@ body {
   .as-panel { background: linear-gradient(170deg, #22113f, #0b0718) !important; backdrop-filter: none; -webkit-backdrop-filter: none; }
 }
 html, body { overflow-x: clip; }
+
+/* ---------- Hero statement: word-by-word typing ---------- */
+@keyframes tw-in {
+  from { opacity: 0; filter: blur(6px); transform: translateY(0.35em); }
+  to { opacity: 1; filter: blur(0); transform: none; }
+}
+@keyframes tw-caret { 0%, 49% { opacity: 1; } 50%, 100% { opacity: 0; } }
+.tw { --tw-step: 55ms; --tw-base: 250ms; }
+.tw-word { display: inline-block; opacity: 0; will-change: opacity, transform; }
+.tw-eyebrow, .tw-chip { opacity: 0; }
+.tw.is-visible .tw-eyebrow { animation: tw-in 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+.tw.is-visible .tw-word {
+  animation: tw-in 0.45s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  animation-delay: calc(var(--tw-base) + var(--w) * var(--tw-step));
+}
+.tw.is-visible .tw-chip {
+  animation: tw-in 0.5s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  animation-delay: calc(var(--tw-base) + var(--tw-end) * var(--tw-step) + 150ms + var(--c) * 90ms);
+}
+.tw p .tw-word:last-of-type::after {
+  content: "|";
+  margin-left: 0.15em;
+  color: #c084fc;
+  opacity: 0;
+}
+.tw.is-visible p .tw-word:last-of-type::after {
+  animation: tw-caret 1s step-end infinite;
+  animation-delay: calc(var(--tw-base) + var(--w) * var(--tw-step) + 400ms);
+}
+/* the gradient shimmer spans words, so each word carries it */
+.tw .tw-word.text-shimmer { background-size: 400% auto; }
+@media (prefers-reduced-motion: reduce) {
+  .tw-word, .tw-eyebrow, .tw-chip { opacity: 1 !important; animation: none !important; filter: none; transform: none; }
+}

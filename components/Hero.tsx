@@ -2,8 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Fragment, type CSSProperties, type ReactNode } from "react";
 import type { ProfileEntry } from "@/lib/contentful";
-import { RichText } from "@/lib/richtext";
-import TypedText from "./TypedText";
+import Reveal from "./Reveal";
 
 function AnimatedHeadline({
   text,
@@ -67,6 +66,50 @@ function AnimatedHeadline({
   });
 }
 
+
+type Seg = { text: string; className?: string };
+
+const ROLE_LINE = (title?: string): Seg[] => [
+  { text: `I'm an ${title ?? "AI Engineer"} and the` },
+  { text: "founder of Flows & Agent Studio.", className: "text-shimmer" },
+];
+const SUMMARY: Seg[] = [
+  { text: "I build AI that does real work:" },
+  { text: "agents that plan and act, RAG assistants over your own data,", className: "text-white" },
+  { text: "and MCP servers that let AI drive real tools. Behind that sit" },
+  { text: "7+ years of full stack engineering", className: "text-white" },
+  { text: "across Next.js, Node.js and the cloud, leading teams from 6 to 31 engineers and shipping enterprise platforms for US clients. Tell me what you're building, and I'll put AI to work on it." },
+];
+const countWords = (segs: Seg[]) => segs.reduce((n, s) => n + s.text.split(/\s+/).filter(Boolean).length, 0);
+const ROLE_COUNT = countWords(ROLE_LINE());
+const TOTAL_WORDS = ROLE_COUNT + countWords(SUMMARY);
+const CHIPS: { label: string; value?: string; href?: string }[] = [
+  { value: "7+", label: "years in production software" },
+  { value: "2", label: "live AI products" },
+  { value: "6→31", label: "engineers led" },
+  { label: "Agent Studio", href: "/agent-studio" },
+  { label: "Flows", href: "/flows" },
+];
+
+/** Words stay in the HTML for crawlers; CSS types them in one by one. */
+function typeWords(segs: Seg[], start: number): ReactNode[] {
+  let i = start;
+  const out: ReactNode[] = [];
+  segs.forEach((seg, si) => {
+    seg.text.split(/\s+/).filter(Boolean).forEach((w, wi) => {
+      out.push(
+        <Fragment key={`${si}-${wi}`}>
+          <span className={`tw-word ${seg.className ?? ""}`} style={{ "--w": i } as CSSProperties}>
+            {w}
+          </span>{" "}
+        </Fragment>,
+      );
+      i += 1;
+    });
+  });
+  return out;
+}
+
 export default function Hero({ profile }: { profile: ProfileEntry | null }) {
   const fields = profile?.fields;
   const avatar = fields?.avatar && "fields" in fields.avatar ? fields.avatar : undefined;
@@ -118,7 +161,7 @@ export default function Hero({ profile }: { profile: ProfileEntry | null }) {
                 {fields.heroTagline}
               </p>
             )}
-            <h1 className="mt-2 text-3xl font-semibold leading-tight text-white sm:text-4xl">
+            <p className="mt-2 text-3xl font-semibold leading-tight text-white sm:text-4xl">
               {fields?.heroHeadline && (
                 <>
                   <span className="sr-only">{fields.heroHeadline}</span>
@@ -130,7 +173,7 @@ export default function Hero({ profile }: { profile: ProfileEntry | null }) {
                   </span>
                 </>
               )}
-            </h1>
+            </p>
             {fields?.heroSubheadline && (
               <p className="hero-sub mt-3 max-w-md text-sm italic text-white/50">
                 {fields.heroSubheadline}
@@ -139,25 +182,34 @@ export default function Hero({ profile }: { profile: ProfileEntry | null }) {
           </div>
         </div>
 
-        <div className="mt-20 max-w-2xl">
-          <h2 className="min-h-[3.75em] text-2xl font-medium text-white sm:min-h-[2.5em] sm:text-3xl">
-            <TypedText text={`I'm an ${fields?.title ?? "AI Engineer"} and the founder of Flows & Agent Studio.`} />
-          </h2>
-          <p className="hero-rise mt-2 text-sm leading-6 text-white/70" style={{ "--d": "1.6s" } as CSSProperties}>
-            {fields?.currentCompany && (
-              <>
-                Currently, I&apos;m a {fields.title} at <span className="text-violet-400">{fields.currentCompany}</span>, and{" "}
-              </>
-            )}
-            {fields?.currentCompany ? "the " : "I'm the "}founder of{" "}
-            <Link href="/flows" className="text-violet-400 underline-offset-4 hover:underline">Flows</Link> and{" "}
-            <Link href="/agent-studio" className="text-violet-400 underline-offset-4 hover:underline">Agent Studio</Link>.
+        <Reveal variant="fade" threshold={0.25} className="tw mx-auto mt-24 max-w-5xl text-center">
+          <p className="tw-eyebrow text-xs uppercase tracking-[0.35em] text-violet-300/70">
+            AI engineer · Founder · 7+ years shipping software
           </p>
-
-          <div className="hero-rise mt-8 text-sm leading-7 text-white/60" style={{ "--d": "1.9s" } as CSSProperties}>
-            <RichText document={fields?.bio} />
-          </div>
-        </div>
+          <h1 className="mt-6 text-4xl font-semibold leading-[1.08] tracking-tight text-white sm:text-6xl lg:text-7xl">
+            {typeWords(ROLE_LINE(fields?.title), 0)}
+          </h1>
+          <p className="mx-auto mt-8 max-w-3xl text-base leading-8 text-white/65 sm:text-lg sm:leading-9">
+            {typeWords(SUMMARY, ROLE_COUNT)}
+          </p>
+          <ul className="tw-chips mt-10 flex flex-wrap items-center justify-center gap-3" style={{ "--tw-end": TOTAL_WORDS } as CSSProperties}>
+            {CHIPS.map((c, i) => (
+              <li key={c.label} style={{ "--c": i } as CSSProperties} className="tw-chip">
+                {c.href ? (
+                  <Link href={c.href} className="inline-flex items-center gap-2 rounded-full border border-violet-400/40 bg-violet-500/10 px-4 py-2 text-xs text-white/85 transition-all duration-300 hover:-translate-y-0.5 hover:border-violet-300/70 hover:bg-violet-500/20 hover:text-white">
+                    {c.label}
+                    <span aria-hidden="true">→</span>
+                  </Link>
+                ) : (
+                  <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.04] px-4 py-2 text-xs text-white/75">
+                    <span className="font-semibold text-white">{c.value}</span>
+                    {c.label}
+                  </span>
+                )}
+              </li>
+            ))}
+          </ul>
+        </Reveal>
       </div>
     </section>
   );
