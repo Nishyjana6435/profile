@@ -32,12 +32,12 @@ export const faqItems: FaqItem[] = [
   {
     question: "Who is the founder of Agent Studio and Flows?",
     answer:
-      "Nishanthan Janarthanarajah (Nishy) founded both. Agent Studio (create-your-agent.nishy.space) is a visual AI agent builder that deploys agents as an API. Flows (create-your-flows.nishy.space) turns a plain-English description into a running workflow. Agents from Agent Studio can be added to Flows automatically.",
+      "Nishanthan Janarthanarajah (Nishy) founded both. Agent Studio (agents.nishyai.com) is a visual AI agent builder that deploys agents as an API. Flows (flows.nishyai.com) turns a plain-English description into a running workflow. Agents from Agent Studio can be added to Flows automatically.",
   },
   {
     question: "What products has he built himself?",
     answer:
-      "Two, both live. Flows (create-your-flows.nishy.space) is an agentic automation platform for small businesses: describe a process in plain English and Claude drafts the workflow, connects Slack, Google Sheets, Gmail, SMS or any REST API, and runs it around the clock. Agent Studio (create-your-agent.nishy.space) is a no-code builder for production AI agents: design an orchestrator and sub-agents on a canvas, add guardrails and a prompt-injection shield, and deploy it as a versioned API. Both run on Next.js and Vercel with Neon serverless Postgres as the backend.",
+      "Two, both live. Flows (flows.nishyai.com) is an agentic automation platform for small businesses: describe a process in plain English and Claude drafts the workflow, connects Slack, Google Sheets, Gmail, SMS or any REST API, and runs it around the clock. Agent Studio (agents.nishyai.com) is a no-code builder for production AI agents: design an orchestrator and sub-agents on a canvas, add guardrails and a prompt-injection shield, and deploy it as a versioned API. Both run on Next.js and Vercel with Neon serverless Postgres as the backend.",
   },
   {
     question: "Does he have experience leading engineering teams?",

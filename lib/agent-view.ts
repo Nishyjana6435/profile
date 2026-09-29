@@ -48,7 +48,7 @@ export const FOUNDER_ROLES = [
     role: "Founder",
     period: "2026 – present",
     description:
-      "Founded, designed, built and operate Agent Studio (create-your-agent.nishy.space), a visual AI agent builder: orchestrator and sub-agents on a canvas, guardrails, a three-layer prompt-injection shield, one-click versioned API deployment and full tracing. Models on Groq, Neon Postgres, Vercel, Polar billing.",
+      "Founded, designed, built and operate Agent Studio (agents.nishyai.com), a visual AI agent builder: orchestrator and sub-agents on a canvas, guardrails, a three-layer prompt-injection shield, one-click versioned API deployment and full tracing. Models on Groq, Neon Postgres, Vercel, Polar billing.",
     stack: ["Next.js", "Groq", "Llama Prompt Guard 2", "Neon Postgres", "Vercel", "Polar"],
   },
   {
@@ -57,7 +57,7 @@ export const FOUNDER_ROLES = [
     role: "Founder",
     period: "2026 – present",
     description:
-      "Founded, designed, built and operate Flows (create-your-flows.nishy.space), AI workflow automation for small businesses and agencies: describe a process in plain English and Claude drafts, runs and repairs the workflow across Slack, Google Sheets, Gmail, SMS and any REST API. Agent Studio agents plug in as workflow steps.",
+      "Founded, designed, built and operate Flows (flows.nishyai.com), AI workflow automation for small businesses and agencies: describe a process in plain English and Claude drafts, runs and repairs the workflow across Slack, Google Sheets, Gmail, SMS and any REST API. Agent Studio agents plug in as workflow steps.",
     stack: ["Next.js", "Claude API", "Clerk", "Neon Postgres", "Vercel"],
   },
 ];

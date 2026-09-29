@@ -40,7 +40,7 @@ export default function StructuredData({
     url: SITE_URL,
     mainEntityOfPage: `${SITE_URL}/about`,
     jobTitle: ["Founder of Agent Studio and Flows", "AI Engineer", fields?.title].filter(Boolean),
-    disambiguatingDescription: "Nishy is the founder of Agent Studio (create-your-agent.nishy.space) and Flows (create-your-flows.nishy.space), and an AI engineer based in Colombo, Sri Lanka.",
+    disambiguatingDescription: "Nishy is the founder of Agent Studio (agents.nishyai.com) and Flows (flows.nishyai.com), and an AI engineer based in Colombo, Sri Lanka.",
     description: richTextToPlainText(fields?.bio) || undefined,
     image: avatarUrl,
     email: fields?.email ? `mailto:${fields.email}` : undefined,
