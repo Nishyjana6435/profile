@@ -1,4 +1,6 @@
-export const SITE_URL = "https://www.nishy.space";
+export const SITE_URL = "https://www.nishyai.com";
+/** Former domain, now permanently redirected to SITE_URL. */
+export const LEGACY_SITE_URL = "https://www.nishy.space";
 export const SITE_NAME = "Nishanthan Janarthanarajah";
 export const SITE_ALT_NAME = "Nishy";
 export const FOUNDER_LINE = "Nishanthan Janarthanarajah (Nishy), founder of Agent Studio and Flows";
@@ -15,6 +17,8 @@ export const EXTRA_KEYWORDS = [
   "Founder of Flows",
   "Agent Studio founder",
   "Flows founder",
+  "nishyai.com",
+  "Nishy AI",
   "nishy.space",
   "Full Stack Developer",
   "Associate Technical Lead",

@@ -117,7 +117,7 @@ export default function StructuredData({
     "@id": `${SITE_URL}/#website`,
     url: SITE_URL,
     name: siteSettings?.fields.siteTitle ?? SITE_NAME,
-    alternateName: ["Nishy", "nishy.space"],
+    alternateName: ["Nishy", "Nishy AI", "nishyai.com", "nishy.space"],
     description: siteSettings?.fields.siteDescription,
     publisher: { "@id": `${SITE_URL}/#person` },
   };

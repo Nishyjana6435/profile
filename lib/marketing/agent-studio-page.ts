@@ -307,7 +307,7 @@ export const AGENT_STUDIO_PAGE: ProductPageConfig = {
     {
       question: "Who founded Agent Studio?",
       answer:
-        "Agent Studio was founded by Nishanthan Janarthanarajah, known as Nishy (nishy.space), an AI engineer based in Colombo, Sri Lanka. Nishy is also the founder of Flows, and agents deployed in Agent Studio can be added to Flows automatically as workflow steps.",
+        "Agent Studio was founded by Nishanthan Janarthanarajah, known as Nishy (nishyai.com), an AI engineer based in Colombo, Sri Lanka. Nishy is also the founder of Flows, and agents deployed in Agent Studio can be added to Flows automatically as workflow steps.",
     },
     {
       question: "Who builds and runs Agent Studio?",

@@ -279,7 +279,7 @@ export const FLOWS_PAGE: ProductPageConfig = {
     {
       question: "Who founded Flows?",
       answer:
-        "Flows was founded by Nishanthan Janarthanarajah, known as Nishy (nishy.space), an AI engineer based in Colombo, Sri Lanka. Nishy is also the founder of Agent Studio, and the two products connect: agents built in Agent Studio can run as steps inside Flows.",
+        "Flows was founded by Nishanthan Janarthanarajah, known as Nishy (nishyai.com), an AI engineer based in Colombo, Sri Lanka. Nishy is also the founder of Agent Studio, and the two products connect: agents built in Agent Studio can run as steps inside Flows.",
     },
     {
       question: "Who builds and runs Flows?",

@@ -39,10 +39,10 @@ function save(v: Saved) {
 
 const LINK_CLS = "text-violet-300 underline underline-offset-2 hover:text-white";
 
-/** Inline markdown: [text](url), **bold**, bare URLs and nishy.space hosts. */
+/** Inline markdown: [text](url), **bold**, bare URLs and nishyai.com / nishy.space hosts. */
 function inline(text: string, keyBase: string): ReactNode[] {
   const out: ReactNode[] = [];
-  const re = /\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)|\*\*([^*]+)\*\*|(https?:\/\/[^\s)]+|(?:[a-z0-9-]+\.)+nishy\.space[^\s),]*)/gi;
+  const re = /\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)|\*\*([^*]+)\*\*|(https?:\/\/[^\s)]+|(?:[a-z0-9-]+\.)*(?:nishyai\.com|nishy\.space)[^\s),]*)/gi;
   let last = 0;
   let m: RegExpExecArray | null;
   while ((m = re.exec(text))) {

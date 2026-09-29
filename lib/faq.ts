@@ -27,7 +27,7 @@ export const faqItems: FaqItem[] = [
   {
     question: "Who is Nishy?",
     answer:
-      "Nishy is Nishanthan Janarthanarajah, the founder of Agent Studio and Flows and the person behind nishy.space. He is an AI engineer and Associate Technical Lead based in Colombo, Sri Lanka, with 7+ years building production software, and he builds custom AI agents and workflow automation for businesses worldwide.",
+      "Nishy is Nishanthan Janarthanarajah, the founder of Agent Studio and Flows and the person behind nishyai.com. He is an AI engineer and Associate Technical Lead based in Colombo, Sri Lanka, with 7+ years building production software, and he builds custom AI agents and workflow automation for businesses worldwide.",
   },
   {
     question: "Who is the founder of Agent Studio and Flows?",
@@ -62,7 +62,7 @@ export const faqItems: FaqItem[] = [
   {
     question: "I want to build an AI system for my business in Sri Lanka. Can he help?",
     answer:
-      "Yes. Nishanthan is an AI engineer based in Colombo who builds AI agents, RAG assistants over company data and workflow automation for businesses across Sri Lanka and remote clients worldwide. He also runs two live AI products, Flows for plain-English workflow automation and Agent Studio for visual AI agents deployed as an API, which are often the fastest and cheapest place to start. Details at nishy.space/ai-engineer-sri-lanka.",
+      "Yes. Nishanthan is an AI engineer based in Colombo who builds AI agents, RAG assistants over company data and workflow automation for businesses across Sri Lanka and remote clients worldwide. He also runs two live AI products, Flows for plain-English workflow automation and Agent Studio for visual AI agents deployed as an API, which are often the fastest and cheapest place to start. Details at nishyai.com/ai-engineer-sri-lanka.",
   },
   {
     question: "Is Nishanthan available for freelance or full-time roles?",

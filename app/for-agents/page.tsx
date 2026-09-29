@@ -123,7 +123,7 @@ export default async function ForAgentsPage() {
           <p className="text-xs uppercase tracking-[0.3em] text-violet-300/70">Agent view · same facts as the human pages</p>
           <h1 className="mt-3 text-3xl font-semibold text-white sm:text-4xl">{v.person.name} (Nishy): founder of Agent Studio and Flows</h1>
           <p className="mt-4 text-sm leading-7 text-white/70">
-            This page collects every key fact from nishy.space in plain HTML for crawlers, search engines and AI agents.
+            This page collects every key fact from nishyai.com in plain HTML for crawlers, search engines and AI agents.
             It is public, linked from every page, and identical in substance to what people see. Machine formats:
           </p>
           <ul className="mt-3 flex flex-wrap gap-2 text-xs">
