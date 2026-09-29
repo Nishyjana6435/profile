@@ -1,95 +1,49 @@
-import Link from "next/link";
 import Image from "next/image";
+import Link from "next/link";
 import { Fragment, type CSSProperties, type ReactNode } from "react";
 import type { ProfileEntry } from "@/lib/contentful";
 import Reveal from "./Reveal";
 
-function AnimatedHeadline({
-  text,
-  highlight,
-}: {
-  text: string;
-  highlight?: string;
-}) {
-  const words = text.split(/\s+/).filter(Boolean);
-  const hl = highlight?.toLowerCase();
-
-  return words.map((word, wi) => {
-    const idx = hl ? word.toLowerCase().indexOf(hl) : -1;
-    const wordDelay = Math.round((0.35 + wi * 0.09) * 100) / 100;
-    let inner: ReactNode = word;
-    let open = false;
-
-    if (idx !== -1 && hl) {
-      open = true;
-      const before = word.slice(0, idx);
-      const match = word.slice(idx, idx + hl.length);
-      const after = word.slice(idx + hl.length);
-      const dots = /^\.+$/.test(after) ? after.split("") : null;
-      inner = (
-        <>
-          {before}
-          <span
-            className="hero-pill rounded-full border border-violet-400/60 px-2 py-0.5 text-violet-300"
-            style={{ "--d": `${wordDelay}s` } as CSSProperties}
-          >
-            {match}
-          </span>
-          {dots
-            ? dots.map((dot, di) => (
-                <span
-                  key={di}
-                  className="hero-dot"
-                  style={
-                    { "--d": `${(wordDelay + 0.45 + di * 0.16).toFixed(2)}s` } as CSSProperties
-                  }
-                >
-                  {dot}
-                </span>
-              ))
-            : after}
-        </>
-      );
-    }
-
-    return (
-      <Fragment key={wi}>
-        {wi > 0 && " "}
-        <span
-          className={`hero-word${open ? " hero-word--open" : ""}`}
-          style={{ "--d": `${wordDelay}s` } as CSSProperties}
-        >
-          <span>{inner}</span>
-        </span>
-      </Fragment>
-    );
-  });
-}
-
-
 type Seg = { text: string; className?: string };
 
-const ROLE_LINE = (title?: string): Seg[] => [
-  { text: `I'm an ${title ?? "AI Engineer"} and the` },
-  { text: "founder of Flows & Agent Studio.", className: "text-shimmer" },
+/* ---------- Wording ---------- */
+const HEADLINE: Seg[] = [
+  { text: "Founder of" },
+  { text: "Agent Studio & Flows.", className: "text-shimmer" },
+  { text: "I build AI that runs the business." },
 ];
 const SUMMARY: Seg[] = [
-  { text: "I build AI that does real work:" },
-  { text: "agents that plan and act, RAG assistants over your own data,", className: "text-white" },
-  { text: "and MCP servers that let AI drive real tools. Behind that sit" },
-  { text: "7+ years of full stack engineering", className: "text-white" },
-  { text: "across Next.js, Node.js and the cloud, leading teams from 6 to 31 engineers and shipping enterprise platforms for US clients. Tell me what you're building, and I'll put AI to work on it." },
+  { text: "I started Agent Studio and Flows to get AI out of the demo and into daily work. I bring that" },
+  { text: "founder's ownership", className: "text-white" },
+  { text: "to every client build and every team I lead:" },
+  { text: "7+ years of full stack engineering,", className: "text-white" },
+  { text: "production RAG and agent systems, and engineering leadership as" },
+  { text: "Associate Technical Lead at Eight25Media.", className: "text-white" },
 ];
-const countWords = (segs: Seg[]) => segs.reduce((n, s) => n + s.text.split(/\s+/).filter(Boolean).length, 0);
-const ROLE_COUNT = countWords(ROLE_LINE());
-const TOTAL_WORDS = ROLE_COUNT + countWords(SUMMARY);
-const CHIPS: { label: string; value?: string; href?: string }[] = [
-  { value: "7+", label: "years in production software" },
-  { value: "2", label: "live AI products" },
+const DOORS = [
+  { who: "For businesses", label: "Build an AI system with me", href: "/build-ai-system-for-your-business", primary: true },
+  { who: "For recruiters", label: "See my career & leadership", href: "/about", primary: false },
+];
+const STATS = [
+  { value: "7+", label: "years shipping software" },
+  { value: "2", label: "AI products founded" },
   { value: "6→31", label: "engineers led" },
-  { label: "Agent Studio", href: "/agent-studio" },
-  { label: "Flows", href: "/flows" },
+  { value: "US", label: "enterprise clients" },
 ];
+
+/* Orbiting planets around the photo */
+const OUTER: { label: string; href?: string; kind: "as" | "fl" | "tag" }[] = [
+  { label: "Agent Studio", href: "/agent-studio", kind: "as" },
+  { label: "RAG", kind: "tag" },
+  { label: "Flows", href: "/flows", kind: "fl" },
+  { label: "AI agents", kind: "tag" },
+  { label: "MCP", kind: "tag" },
+];
+const INNER = ["Next.js", "Node.js", "Azure AI", "TypeScript"];
+
+const countWords = (segs: Seg[]) => segs.reduce((n, s) => n + s.text.split(/\s+/).filter(Boolean).length, 0);
+const HEAD_COUNT = countWords(HEADLINE);
+const TOTAL_WORDS = HEAD_COUNT + countWords(SUMMARY);
 
 /** Words stay in the HTML for crawlers; CSS types them in one by one. */
 function typeWords(segs: Seg[], start: number): ReactNode[] {
@@ -110,107 +64,160 @@ function typeWords(segs: Seg[], start: number): ReactNode[] {
   return out;
 }
 
+function PlanetIcon({ kind }: { kind: "as" | "fl" | "tag" }) {
+  if (kind === "as")
+    return (
+      <svg viewBox="0 0 32 32" className="h-6 w-6 shrink-0 rounded-lg" aria-hidden="true">
+        <rect width="32" height="32" rx="9" fill="#f5f5f7" />
+        <circle cx="16" cy="10" r="3.4" fill="#7c3aed" />
+        <circle cx="9" cy="22" r="2.8" fill="#121317" />
+        <circle cx="23" cy="22" r="2.8" fill="#121317" />
+        <path d="M16 13.6v3.2M14 18.8l-3.2 1.4M18 18.8l3.2 1.4" stroke="#121317" strokeWidth="2" strokeLinecap="round" />
+      </svg>
+    );
+  if (kind === "fl")
+    return (
+      <svg viewBox="0 0 32 32" className="h-6 w-6 shrink-0 rounded-lg" aria-hidden="true">
+        <rect width="32" height="32" rx="9" fill="#f5f5f7" />
+        <circle cx="9" cy="16" r="3" fill="#2ee6a6" />
+        <circle cx="23" cy="9" r="3" fill="#121317" />
+        <circle cx="23" cy="23" r="3" fill="#121317" />
+        <path d="M11.5 14.5 20.5 10.2M11.5 17.5l9 4.3" stroke="#121317" strokeWidth="2" strokeLinecap="round" />
+      </svg>
+    );
+  return <span className="h-2 w-2 shrink-0 rounded-full bg-gradient-to-r from-violet-300 to-fuchsia-300 shadow-[0_0_10px_rgba(240,171,252,0.9)]" />;
+}
+
 export default function Hero({ profile }: { profile: ProfileEntry | null }) {
   const fields = profile?.fields;
   const avatar = fields?.avatar && "fields" in fields.avatar ? fields.avatar : undefined;
   const avatarFile = avatar?.fields.file;
+  const name = fields?.name ?? "Nishanthan Janarthanarajah";
 
   return (
-    <section className="relative overflow-hidden px-6 pt-20 pb-24">
-      <div
-        aria-hidden="true"
-        className="hero-blob absolute left-1/2 top-24 h-[420px] w-[420px] -translate-x-1/2 rounded-full bg-violet-600/25 blur-3xl"
-      />
+    <section className="hx relative overflow-hidden px-6 pb-16 pt-10 sm:pb-20 sm:pt-14">
+      {/* backdrop */}
+      <div aria-hidden="true" className="hx-grid pointer-events-none absolute inset-0" />
+      <div aria-hidden="true" className="hx-aurora pointer-events-none absolute left-1/2 top-[-10%] h-[46rem] w-[70rem] -translate-x-1/2" />
+      <span aria-hidden="true" className="hx-watermark pointer-events-none absolute left-1/2 top-[7rem] -translate-x-1/2 select-none sm:top-[8rem]">
+        FOUNDER
+      </span>
 
-      <div className="relative mx-auto max-w-6xl">
-        <div className="flex flex-col items-start gap-10 sm:flex-row sm:items-center">
-          <div className="hero-float relative shrink-0">
-            <div className="hero-hello absolute -top-10 left-4 whitespace-nowrap text-xs text-white/60 sm:-top-8">
-              Hello! I Am <span className="text-violet-400">{fields?.name}</span>
+      <Reveal variant="fade" threshold={0.05} className="tw relative mx-auto max-w-6xl text-center">
+        {/* orbit system around the photo */}
+        <div className="hx-system relative mx-auto" aria-label="Nishy and what he builds">
+          <div className="hx-orbit hx-orbit--outer" aria-hidden="true">
+            <div className="hx-ring" />
+          </div>
+          <div className="hx-orbit hx-orbit--inner" aria-hidden="true">
+            <div className="hx-ring hx-ring--dashed" />
+          </div>
+
+          {/* inner orbit: stack */}
+          <div className="hx-plane hx-plane--inner">
+            <div className="hx-spin hx-spin--inner">
+              {INNER.map((t, i) => (
+                <div key={t} className="hx-slot" style={{ "--a": `${(360 / INNER.length) * i}deg` } as CSSProperties}>
+                  <span className="hx-planet hx-planet--small">{t}</span>
+                </div>
+              ))}
             </div>
-            <div aria-hidden="true" className="hero-ring absolute -inset-1 rounded-full" />
-            <div className="relative flex h-40 w-40 items-center justify-center overflow-hidden rounded-full bg-gradient-to-br from-violet-700/40 to-fuchsia-500/20 ring-1 ring-white/10">
+          </div>
+
+          {/* photo core */}
+          <div className="hx-core absolute left-1/2 top-1/2 z-20 -translate-x-1/2 -translate-y-1/2">
+            <div aria-hidden="true" className="hx-core-ring absolute -inset-2 rounded-full" />
+            <div aria-hidden="true" className="hx-core-glow absolute -inset-10 rounded-full" />
+            <div className="relative h-32 w-32 overflow-hidden rounded-full ring-2 ring-white/15 sm:h-48 sm:w-48">
               {avatarFile?.url ? (
                 <Image
                   src={`https:${avatarFile.url}`}
-                  alt={avatar?.fields.title || fields?.name || "Avatar"}
+                  alt={`${name} (Nishy), founder of Agent Studio and Flows`}
                   fill
+                  priority
+                  sizes="192px"
                   className="object-cover"
-                  sizes="160px"
                 />
               ) : (
-                <svg
-                  viewBox="0 0 100 100"
-                  className="h-24 w-24 text-white/70"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth={2}
-                  aria-hidden="true"
-                >
-                  <circle cx="50" cy="32" r="16" />
-                  <rect x="22" y="58" width="56" height="30" rx="4" />
-                  <rect x="30" y="66" width="40" height="18" rx="2" />
-                </svg>
+                <span className="grid h-full w-full place-items-center bg-violet-900/60 text-4xl font-semibold">N</span>
               )}
             </div>
+            <span className="hx-badge absolute -bottom-3 left-1/2 inline-flex -translate-x-1/2 items-center gap-1.5 whitespace-nowrap rounded-full border border-emerald-300/40 bg-[#0a0514]/90 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-emerald-200 backdrop-blur">
+              <span className="relative flex h-1.5 w-1.5">
+                <span className="fx-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400" />
+                <span className="relative h-1.5 w-1.5 rounded-full bg-emerald-400" />
+              </span>
+              Founder · Engineer
+            </span>
           </div>
 
-          <div>
-            {fields?.heroTagline && (
-              <p className="hero-tagline text-sm uppercase tracking-wide text-white/50">
-                {fields.heroTagline}
-              </p>
-            )}
-            <p className="mt-2 text-3xl font-semibold leading-tight text-white sm:text-4xl">
-              {fields?.heroHeadline && (
-                <>
-                  <span className="sr-only">{fields.heroHeadline}</span>
-                  <span aria-hidden="true">
-                    <AnimatedHeadline
-                      text={fields.heroHeadline}
-                      highlight={fields.heroHighlightWord}
-                    />
+          {/* outer orbit: products + skills */}
+          <div className="hx-plane hx-plane--outer">
+            <div className="hx-spin hx-spin--outer">
+              {OUTER.map((p, i) => {
+                const inner = (
+                  <span className={`hx-planet ${p.kind !== "tag" ? "hx-planet--product" : ""}`}>
+                    <PlanetIcon kind={p.kind} />
+                    {p.label}
                   </span>
-                </>
-              )}
-            </p>
-            {fields?.heroSubheadline && (
-              <p className="hero-sub mt-3 max-w-md text-sm italic text-white/50">
-                {fields.heroSubheadline}
-              </p>
-            )}
+                );
+                return (
+                  <div key={p.label} className="hx-slot" style={{ "--a": `${(360 / OUTER.length) * i}deg` } as CSSProperties}>
+                    {p.href ? (
+                      <Link href={p.href} className="hx-planet-link" aria-label={`${p.label}, founded by Nishy`}>
+                        {inner}
+                      </Link>
+                    ) : (
+                      inner
+                    )}
+                  </div>
+                );
+              })}
+            </div>
           </div>
         </div>
 
-        <Reveal variant="fade" threshold={0.25} className="tw mx-auto mt-24 max-w-5xl text-center">
-          <p className="tw-eyebrow text-xs uppercase tracking-[0.35em] text-violet-300/70">
-            AI engineer · Founder · 7+ years shipping software
-          </p>
-          <h1 className="mt-6 text-4xl font-semibold leading-[1.08] tracking-tight text-white sm:text-6xl lg:text-7xl">
-            {typeWords(ROLE_LINE(fields?.title), 0)}
-          </h1>
-          <p className="mx-auto mt-8 max-w-3xl text-base leading-8 text-white/65 sm:text-lg sm:leading-9">
-            {typeWords(SUMMARY, ROLE_COUNT)}
-          </p>
-          <ul className="tw-chips mt-10 flex flex-wrap items-center justify-center gap-3" style={{ "--tw-end": TOTAL_WORDS } as CSSProperties}>
-            {CHIPS.map((c, i) => (
-              <li key={c.label} style={{ "--c": i } as CSSProperties} className="tw-chip">
-                {c.href ? (
-                  <Link href={c.href} className="inline-flex items-center gap-2 rounded-full border border-violet-400/40 bg-violet-500/10 px-4 py-2 text-xs text-white/85 transition-all duration-300 hover:-translate-y-0.5 hover:border-violet-300/70 hover:bg-violet-500/20 hover:text-white">
-                    {c.label}
-                    <span aria-hidden="true">→</span>
-                  </Link>
-                ) : (
-                  <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.04] px-4 py-2 text-xs text-white/75">
-                    <span className="font-semibold text-white">{c.value}</span>
-                    {c.label}
-                  </span>
-                )}
-              </li>
-            ))}
-          </ul>
-        </Reveal>
-      </div>
+        {/* copy */}
+        <p className="tw-eyebrow mt-4 text-xs uppercase tracking-[0.3em] text-white/55 sm:text-sm">
+          Hi, I&apos;m <span className="text-violet-300">{name}</span> · Nishy
+        </p>
+        <h1 className="mx-auto mt-5 max-w-5xl text-4xl font-semibold leading-[1.06] tracking-tight text-white sm:text-6xl lg:text-7xl">
+          {typeWords(HEADLINE, 0)}
+        </h1>
+        <p className="mx-auto mt-7 max-w-3xl text-base leading-8 text-white/65 sm:text-lg sm:leading-9">{typeWords(SUMMARY, HEAD_COUNT)}</p>
+
+        {/* two doors */}
+        <div className="tw-chip mx-auto mt-10 grid max-w-2xl gap-3 sm:grid-cols-2" style={{ "--tw-end": TOTAL_WORDS, "--c": 0 } as CSSProperties}>
+          {DOORS.map((d) => (
+            <Link
+              key={d.href}
+              href={d.href}
+              className={`hx-door group relative flex items-center justify-between gap-3 overflow-hidden rounded-2xl px-5 py-4 text-left transition-all duration-300 hover:-translate-y-1 ${
+                d.primary
+                  ? "bg-gradient-to-r from-violet-600 to-fuchsia-600 shadow-[0_20px_50px_-20px_rgba(217,70,239,0.9)]"
+                  : "border border-white/15 bg-white/[0.04] hover:border-violet-400/60 hover:bg-violet-500/10"
+              }`}
+            >
+              <span>
+                <span className={`block text-[10px] uppercase tracking-[0.22em] ${d.primary ? "text-white/75" : "text-violet-300/80"}`}>{d.who}</span>
+                <span className="mt-0.5 block text-sm font-semibold text-white">{d.label}</span>
+              </span>
+              <span aria-hidden="true" className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-white/15 text-white transition-transform duration-300 group-hover:translate-x-1">
+                →
+              </span>
+            </Link>
+          ))}
+        </div>
+
+        <ul className="mt-8 flex flex-wrap items-center justify-center gap-x-8 gap-y-4" style={{ "--tw-end": TOTAL_WORDS } as CSSProperties}>
+          {STATS.map((s, i) => (
+            <li key={s.label} className="tw-chip text-center" style={{ "--c": i + 1 } as CSSProperties}>
+              <span className="block text-2xl font-semibold text-white sm:text-3xl">{s.value}</span>
+              <span className="block text-[11px] uppercase tracking-[0.16em] text-white/45">{s.label}</span>
+            </li>
+          ))}
+        </ul>
+      </Reveal>
     </section>
   );
 }
