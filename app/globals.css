@@ -501,104 +501,6 @@ body {
   }
 }
 
-/* ---------- Featured project 3D card ---------- */
-@keyframes fp-idle {
-  0%,
-  100% {
-    transform: translateY(0) rotateX(3deg) rotateY(-7deg);
-  }
-  50% {
-    transform: translateY(-12px) rotateX(-2deg) rotateY(6deg);
-  }
-}
-@keyframes fp-chip-idle {
-  0%,
-  100% {
-    translate: 0 0;
-  }
-  50% {
-    translate: 0 -8px;
-  }
-}
-.fp-scene {
-  --rx: 0deg;
-  --ry: 0deg;
-  --dx: 0px;
-  --dy: 0px;
-  --mx: 50%;
-  --my: 50%;
-}
-.fp-float {
-  transform-style: preserve-3d;
-  animation: fp-idle 8s ease-in-out infinite;
-}
-.fp-scene.is-active .fp-float {
-  animation-play-state: paused;
-}
-.fp-frame,
-.fp-glow,
-.fp-chip,
-.fp-badge {
-  transition: transform 0.4s cubic-bezier(0.2, 0.7, 0.2, 1);
-  will-change: transform;
-}
-.fp-frame {
-  transform: rotateX(var(--rx)) rotateY(var(--ry));
-  transform-style: preserve-3d;
-}
-.fp-glow {
-  transform: translate3d(calc(var(--dx) * -0.6), calc(var(--dy) * -0.6), -60px);
-}
-.fp-chip,
-.fp-badge {
-  transform: translate3d(calc(var(--dx) * var(--m, 1)), calc(var(--dy) * var(--m, 1)), var(--z, 60px));
-}
-.fp-chip {
-  animation: fp-chip-idle 4s ease-in-out infinite;
-  animation-delay: var(--d, 0s);
-}
-.fp-scene.is-active .fp-chip {
-  animation-play-state: paused;
-}
-.fp-media {
-  transition: transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
-}
-.fp-scene.is-active .fp-media {
-  transform: translate3d(calc(var(--dx) * 0.4), calc(var(--dy) * 0.4), 0) scale(1.04);
-}
-.fp-sheen {
-  background: radial-gradient(
-    420px circle at var(--mx) var(--my),
-    rgba(255, 255, 255, 0.55),
-    rgba(255, 255, 255, 0) 60%
-  );
-  opacity: 0;
-  mix-blend-mode: soft-light;
-  transition: opacity 0.35s ease;
-}
-.fp-scene.is-active .fp-sheen {
-  opacity: 1;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .reveal--tilt-left,
-  .reveal--tilt-right {
-    transform: none;
-  }
-  .fp-float,
-  .fp-chip {
-    animation: none;
-  }
-  .fp-frame,
-  .fp-glow,
-  .fp-chip,
-  .fp-badge,
-  .fp-media {
-    transform: none;
-    transition: none;
-  }
-}
-
 /* ---------- Flows product showcase (3D scene) ---------- */
 @keyframes fx-sway {
   0%,
@@ -1358,27 +1260,6 @@ html, body { overflow-x: clip; }
 }
 }
 
-/* ---------- Case studies: stacking cards that move away ---------- */
-@layer components {
-  .sc-stack { display: flex; flex-direction: column; gap: 2.5rem; }
-  .sc-card {
-    --p: 0;
-    position: sticky;
-    top: var(--top, 96px);
-    transform-origin: 50% 0;
-    transform: translate3d(0, calc(var(--p) * -56px), 0) scale(calc(1 - var(--p) * 0.09));
-    opacity: calc(1 - var(--p) * 0.7);
-    will-change: transform, opacity;
-  }
-  .sc-card:last-child { margin-bottom: 0; }
-  @media (max-width: 639px) {
-    .sc-card { position: relative; top: auto; transform: none; opacity: 1; }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .sc-card { position: relative; top: auto; transform: none; opacity: 1; }
-  }
-}
-
 /* ---------- Cursor bubble ---------- */
 @keyframes cur-pop {
   0% { opacity: 1; transform: translate(var(--x), var(--y)) translate(-50%, -50%) scale(0.2); }
@@ -1488,5 +1369,33 @@ html, body { overflow-x: clip; }
   @media (prefers-reduced-motion: reduce) {
     .game-blink, .game-glitch::before, .game-glitch::after { animation: none; }
     .game-glitch::before, .game-glitch::after { display: none; }
+  }
+}
+
+/* ---------- Case studies: index + spotlight ---------- */
+@keyframes cs-in { from { clip-path: inset(100% 0 0 0); transform: translateY(24px) scale(1.04); } to { clip-path: inset(0 0 0 0); transform: none; } }
+@keyframes cs-out { to { opacity: 0; transform: translateY(-14px) scale(0.97); filter: blur(4px); } }
+@keyframes cs-ghost { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: none; } }
+@keyframes cs-drift { from { transform: scale(1) translate(0, 0); } to { transform: scale(1.06) translate(-1.5%, 1%); } }
+@keyframes cs-tag { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+@layer components {
+  .cs-stage { --rx: 0deg; --ry: 0deg; --mx: 50%; --my: 50%; perspective: 1400px; }
+  .cs-tilt { transform: rotateX(var(--rx)) rotateY(var(--ry)); transform-style: preserve-3d; transition: transform 0.5s cubic-bezier(0.2, 0.7, 0.2, 1); }
+  .cs-slide.is-on { animation: cs-in 0.75s cubic-bezier(0.2, 0.8, 0.2, 1) both; z-index: 2; }
+  .cs-slide.is-out { animation: cs-out 0.6s ease both; z-index: 1; }
+  .cs-slide.is-on .cs-media { animation: cs-drift 14s ease-in-out infinite alternate; }
+  .cs-ghost { animation: cs-ghost 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+  .cs-tag { animation: cs-tag 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+  .cs-tag:nth-child(2) { animation-delay: 0.08s; }
+  .cs-tag:nth-child(3) { animation-delay: 0.16s; }
+  .cs-sheen {
+    background: radial-gradient(360px circle at var(--mx) var(--my), rgba(255, 255, 255, 0.1), transparent 60%);
+    opacity: 0; transition: opacity 0.35s ease;
+  }
+  .cs-stage:hover .cs-sheen { opacity: 1; }
+  @media (prefers-reduced-motion: reduce) {
+    .cs-slide.is-on, .cs-slide.is-out, .cs-ghost, .cs-tag, .cs-slide.is-on .cs-media { animation: none; }
+    .cs-slide.is-out { display: none; }
+    .cs-tilt { transform: none; transition: none; }
   }
 }
