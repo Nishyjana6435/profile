@@ -4,8 +4,8 @@ import type { ProfileEntry } from "@/lib/contentful";
 import { AGENT_STUDIO_FLOWS_NEWS as NEWS } from "@/lib/news";
 import { Arrow, Btn, Num } from "./ui";
 import Link from "next/link";
-import Parallax from "./Parallax";
 import LiveType from "./LiveType";
+import Parallax from "./Parallax";
 import Spotlight from "./Spotlight";
 
 /* ---------- Wording: the three answers every visitor needs first ---------- */
@@ -71,14 +71,28 @@ export default function Hero({ profile }: { profile: ProfileEntry | null }) {
             </span>
           </h1>
 
-          <div className="hero-portrait relative mx-auto mt-6 w-[62%] max-w-[18rem] sm:w-[40%] lg:absolute lg:mx-0 lg:right-[2%] lg:top-[22%] lg:mt-0 lg:w-[27%] lg:max-w-[21rem]">
+          <div className="hero-portrait relative mx-auto mt-6 w-[62%] max-w-[18rem] sm:w-[40%] lg:absolute lg:right-[9%] lg:top-[74%] lg:mx-0 lg:mt-0 lg:w-[27%] lg:max-w-[21rem]">
             <Parallax strength={10}>
-            <div className="hero-portrait-float relative aspect-[4/5] overflow-hidden border border-white/15 bg-ink-700 shadow-[0_60px_120px_-40px_rgba(0,0,0,0.9)]">
-              {src ? (
-                <Image src={src} alt={`${name} (Nishy), founder of Agent Studio and Flows`} fill priority sizes="(min-width: 1024px) 336px, 60vw" className="object-cover" />
-              ) : (
-                <span className="grid h-full w-full place-items-center text-6xl font-semibold text-white/60">N</span>
-              )}
+            <div className="hero-portrait-float group relative aspect-[4/5]">
+              <div className="hero-notch absolute inset-0 bg-white/20 p-px">
+                <div className="hero-notch hero-sheet relative h-full w-full overflow-hidden bg-ink-700">
+                  {src ? (
+                    <Image src={src} alt={`${name} (Nishy), founder of Agent Studio and Flows`} fill priority sizes="(min-width: 1024px) 336px, 60vw" className="object-cover" />
+                  ) : (
+                    <span className="grid h-full w-full place-items-center text-6xl font-semibold text-white/60">N</span>
+                  )}
+                  <span aria-hidden="true" className="hero-sheet-tint absolute inset-0" />
+                  <span aria-hidden="true" className="hero-scan pointer-events-none absolute inset-x-0 top-0 h-1/4" />
+                </div>
+              </div>
+              <div className="absolute left-0 top-0 flex h-[24%] w-[30%] flex-col justify-end pb-2 pr-2">
+                <span className="label text-brand-400">(01)</span>
+                <span className="label text-white">Founder</span>
+              </div>
+              <span className="label absolute right-3 top-3 text-right text-white/60">
+                Fig. 01
+                <span className="mt-1 block text-white/35">6.9°N 79.8°E</span>
+              </span>
               <span className="absolute bottom-3 left-3 inline-flex items-center gap-1.5 bg-[#121212]/85 px-2 py-1 font-mono text-[10px] uppercase tracking-[0.16em] text-white backdrop-blur">
                 <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
                 Available for projects
@@ -89,7 +103,7 @@ export default function Hero({ profile }: { profile: ProfileEntry | null }) {
         </div>
 
         {/* statement + doors */}
-        <div className="mx-auto mt-8 max-w-xl lg:mx-0 lg:mt-12 lg:min-h-[16rem]">
+        <div className="mx-auto mt-8 max-w-xl lg:mx-0 lg:mt-12 lg:min-h-[25rem]">
           <p className="display text-2xl text-white sm:text-4xl">
             {STATEMENT.map((line, i) => (
               <span key={line} className="hero-mask">

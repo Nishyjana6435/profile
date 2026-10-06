@@ -1181,7 +1181,7 @@ html, body { overflow-x: clip; }
 }
 @keyframes hero-portrait-in {
   from { opacity: 0; transform: translateY(40px) scale(0.96); clip-path: inset(100% 0 0 0); }
-  to { opacity: 1; transform: none; clip-path: inset(0 0 0 0); }
+  to { opacity: 1; transform: none; clip-path: inset(-40% -40% -40% -40%); }
 }
 @keyframes hero-drift {
   0%, 100% { transform: translateY(0); }
@@ -1443,5 +1443,34 @@ html, body { overflow-x: clip; }
   .sr.is-live .sr-word > span { transition: none; }
   @media (prefers-reduced-motion: reduce) {
     .lw { display: inline; transform: none !important; color: inherit; }
+  }
+}
+
+/* ---------- Hero portrait as a drafting sheet: mono + accent shadows, colour on hover ---------- */
+@keyframes hero-scan { from { transform: translateY(-100%); } to { transform: translateY(400%); } }
+@layer components {
+  .hero-sheet img { transition: transform 1.2s cubic-bezier(0.2, 0.7, 0.2, 1); }
+  .hero-sheet:hover img { transform: scale(1.04); }
+  .hero-sheet-tint {
+    background: linear-gradient(to top, rgba(18, 18, 18, 0.45), transparent 60%);
+    transition: opacity 0.9s ease;
+  }
+  .hero-sheet:hover .hero-sheet-tint { opacity: 0; }
+  .hero-scan {
+    background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.12) 50%, transparent);
+    mix-blend-mode: screen;
+    animation: hero-scan 7s linear 1.2s infinite;
+  }
+  .hero-tick { width: 14px; height: 14px; border-left: 2px solid var(--accent); border-top: 2px solid var(--accent); }
+  .hero-notch { clip-path: polygon(0 24%, 30% 24%, 30% 0, 100% 0, 100% 100%, 0 100%); }
+  .hero-plate {
+    transform: translate(var(--ox, -8px), var(--oy, 8px));
+    opacity: 0.9;
+    will-change: transform;
+  }
+  .hero-plate img { filter: grayscale(1) contrast(1.25) brightness(1.05); }
+  @media (prefers-reduced-motion: reduce) {
+    .hero-scan { display: none; }
+    .hero-sheet img, .hero-sheet-tint { transition: none; }
   }
 }
