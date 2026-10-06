@@ -6,9 +6,9 @@ export default function AssistantAvatar({ size = 56, talking = false }: { size?:
       <svg viewBox="0 0 64 64" className="relative h-full w-full">
         <defs>
           <radialGradient id="as-sphere" cx="35%" cy="28%" r="75%">
-            <stop offset="0" stopColor="#ffd0d4" />
-            <stop offset="0.35" stopColor="#ff5a6a" />
-            <stop offset="0.7" stopColor="#e51e31" />
+            <stop offset="0" stopColor="var(--accent-100)" />
+            <stop offset="0.35" stopColor="var(--accent-400)" />
+            <stop offset="0.7" stopColor="var(--accent-500)" />
             <stop offset="1" stopColor="#2a2a2a" />
           </radialGradient>
           <radialGradient id="as-shine" cx="30%" cy="22%" r="30%">

@@ -45,7 +45,7 @@ export default function NewsPoster() {
         {/* wire */}
         <div className="relative mx-auto h-16 w-px">
           <span className="np-wire absolute inset-0 border-l border-dashed border-white/25" />
-          <span className="np-pulse absolute left-1/2 top-0 h-2 w-2 -translate-x-1/2 rounded-full bg-brand-500 shadow-[0_0_12px_2px_rgba(229,30,49,0.7)]" />
+          <span className="np-pulse absolute left-1/2 top-0 h-2 w-2 -translate-x-1/2 rounded-full bg-brand-500 shadow-[0_0_12px_2px_rgb(var(--accent-500-rgb)/0.7)]" />
         </div>
 
         {/* Flows: the workflow with the new step */}

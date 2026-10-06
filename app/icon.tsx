@@ -1,4 +1,5 @@
 import { ImageResponse } from "next/og";
+import { ACCENT } from "@/lib/theme";
 
 export const size = { width: 32, height: 32 };
 export const contentType = "image/png";
@@ -13,7 +14,7 @@ export default function Icon() {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          background: "linear-gradient(135deg, #7c3aed, #d946ef)",
+          background: `linear-gradient(135deg, ${ACCENT[500]}, ${ACCENT[400]})`,
         }}
       >
         <svg

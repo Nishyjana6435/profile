@@ -1,4 +1,5 @@
 import { ImageResponse } from "next/og";
+import { ACCENT } from "./theme";
 
 export const OG_IMAGE_SIZE = { width: 1200, height: 630 };
 
@@ -35,7 +36,7 @@ export function renderProfileOgImage({
             width: 64,
             height: 64,
             borderRadius: "50%",
-            background: "linear-gradient(135deg, #e51e31, #ff5a6a)",
+            background: `linear-gradient(135deg, ${ACCENT[500]}, ${ACCENT[400]})`,
             marginBottom: 40,
           }}
         >
@@ -54,7 +55,7 @@ export function renderProfileOgImage({
           </svg>
         </div>
         {tagline && (
-          <div style={{ fontSize: 28, color: "#ff8a95", marginBottom: 12 }}>
+          <div style={{ fontSize: 28, color: ACCENT[300], marginBottom: 12 }}>
             {tagline}
           </div>
         )}
@@ -85,7 +86,7 @@ export function renderProductOgImage({
   accent: "fuchsia" | "sky";
   byline?: string;
 }) {
-  const to = accent === "sky" ? "#a5a5a5" : "#ff5a6a";
+  const to = accent === "sky" ? "#a5a5a5" : ACCENT[400];
   return new ImageResponse(
     (
       <div
@@ -108,11 +109,11 @@ export function renderProductOgImage({
               width: 56,
               height: 56,
               borderRadius: 16,
-              background: `linear-gradient(135deg, #e51e31, ${to})`,
+              background: `linear-gradient(135deg, ${ACCENT[500]}, ${to})`,
             }}
           />
           <div style={{ fontSize: 30, fontWeight: 600 }}>{name}</div>
-          <div style={{ fontSize: 22, color: "#ff5a6a", marginLeft: 8 }}>{byline}</div>
+          <div style={{ fontSize: 22, color: ACCENT[400], marginLeft: 8 }}>{byline}</div>
         </div>
         <div style={{ fontSize: 66, fontWeight: 700, lineHeight: 1.1, maxWidth: 1000 }}>{tagline}</div>
         <div style={{ fontSize: 28, color: "rgba(255,255,255,0.7)", marginTop: 28, maxWidth: 980, lineHeight: 1.4 }}>

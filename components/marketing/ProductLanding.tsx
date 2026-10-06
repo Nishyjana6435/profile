@@ -272,7 +272,7 @@ export default function ProductLanding({
                   style={{ "--i": i } as CSSProperties}
                   className={`relative flex flex-col rounded-3xl border p-6 ${
                     plan.highlight
-                      ? "border-brand-400/60 bg-brand-500/10 shadow-[0_30px_80px_-40px_rgba(229,30,49,0.9)]"
+                      ? "border-brand-400/60 bg-brand-500/10 shadow-[0_30px_80px_-40px_rgb(var(--accent-500-rgb)/0.9)]"
                       : "border-white/10 bg-white/[0.03]"
                   }`}
                 >

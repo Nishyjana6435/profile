@@ -45,7 +45,7 @@ const CHIPS: Chip[] = [
     pos: "left-[1%] top-[52%] sm:-left-[9%]",
     z: 160,
     delay: 1.05,
-    dot: "bg-[#ff5a6a]",
+    dot: "bg-brand-400",
   },
 ];
 
@@ -168,15 +168,15 @@ export default function FlowsScene() {
           >
             <defs>
               <linearGradient id="fx-wire-grad" x1="0" y1="0" x2="1" y2="0">
-                <stop offset="0" stopColor="#ff5a6a" />
-                <stop offset="1" stopColor="#ff8a95" />
+                <stop offset="0" stopColor="var(--accent-400)" />
+                <stop offset="1" stopColor="var(--accent-300)" />
               </linearGradient>
             </defs>
             <path id="fx-p1" d="M12 10 C 40 10, 55 -1, 82 -1" />
             <path id="fx-p2" d="M82 -1 C 96 6, 93 22, 88 34" />
             <path id="fx-p3" d="M12 10 C 3 24, 3 42, 11 56" />
             {["fx-p1", "fx-p2", "fx-p3"].map((id, i) => (
-              <circle key={id} r="0.8" fill="#ff8a95" className="fx-pulse">
+              <circle key={id} r="0.8" fill="var(--accent-300)" className="fx-pulse">
                 <animateMotion dur={`${2.2 + i * 0.5}s`} begin={`${i * 0.6}s`} repeatCount="indefinite">
                   <mpath href={`#${id}`} />
                 </animateMotion>

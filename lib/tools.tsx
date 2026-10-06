@@ -25,6 +25,7 @@ import { AgentLogo } from "@/components/AgentScene";
 import { FlowsLogo } from "@/components/FlowsScene";
 import { AGENT_STUDIO } from "./agent";
 import { FLOWS } from "./flows";
+import { ACCENT } from "./theme";
 
 export type ToolCategory = "Apps" | "Messaging" | "Data" | "Models" | "Platform" | "Stack";
 
@@ -79,7 +80,7 @@ const smsIcon = (
 );
 
 const apiIcon = (
-  <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="#ff8a95" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-full w-full">
+  <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="var(--accent-300)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-full w-full">
     <path d="M8 3H7a2 2 0 0 0-2 2v4a2 2 0 0 1-2 2 2 2 0 0 1 2 2v4a2 2 0 0 0 2 2h1" />
     <path d="M16 3h1a2 2 0 0 1 2 2v4a2 2 0 0 0 2 2 2 2 0 0 0-2 2v4a2 2 0 0 1-2 2h-1" />
     <path d="M10 12h4" />
@@ -106,7 +107,7 @@ export const TOOLS: Tool[] = [
     id: "flows",
     name: FLOWS.name,
     category: "Apps",
-    color: "#ff8a95",
+    color: ACCENT[300],
     icon: <FlowsLogo className="h-full w-full" />,
     blurb: FLOWS.description,
     used: ["Flows"],
@@ -116,7 +117,7 @@ export const TOOLS: Tool[] = [
     id: "agent-studio",
     name: AGENT_STUDIO.name,
     category: "Apps",
-    color: "#e51e31",
+    color: ACCENT[500],
     icon: <AgentLogo className="h-full w-full" />,
     blurb: AGENT_STUDIO.description,
     used: ["Agent Studio"],
@@ -139,14 +140,14 @@ export const TOOLS: Tool[] = [
   { id: "llama", name: "Meta Llama", category: "Models", color: "#0467DF", icon: brand(siMeta), blurb: "Llama 3.3 70B and Llama 4 Maverick as orchestrator or sub-agent models.", used: ["Agent Studio"] },
   { id: "huggingface", name: "Hugging Face", category: "Models", color: "#FFD21E", icon: brand(siHuggingface), blurb: "Llama Prompt Guard 2, the classifier layer inside the injection shield.", used: ["Agent Studio"] },
   // Platform
-  { id: "vercel", name: "Vercel", category: "Platform", color: "#ff5a6a", icon: brand(siVercel), blurb: "Where this site and both products deploy, with Fluid Compute for the long-running agent calls.", used: ["Flows", "Agent Studio", "Client work"] },
+  { id: "vercel", name: "Vercel", category: "Platform", color: ACCENT[400], icon: brand(siVercel), blurb: "Where this site and both products deploy, with Fluid Compute for the long-running agent calls.", used: ["Flows", "Agent Studio", "Client work"] },
   { id: "clerk", name: "Clerk", category: "Platform", color: "#6C47FF", icon: brand(siClerk), blurb: "Sign-in, organisations and sessions for Flows.", used: ["Flows"] },
   { id: "google", name: "Google sign-in", category: "Platform", color: "#4285F4", icon: brand(siGoogle), blurb: "One-click Google sign-in for Agent Studio.", used: ["Agent Studio"] },
   { id: "polar", name: "Polar", category: "Platform", color: "#e2e8f0", icon: polarIcon, blurb: "Trials, monthly plans and the customer portal for Agent Studio billing.", used: ["Agent Studio"] },
-  { id: "api", name: "REST API", category: "Platform", color: "#ff8a95", icon: apiIcon, blurb: "Any HTTP endpoint becomes a step in Flows, and every deployed agent is one endpoint you call with a bearer key.", used: ["Flows", "Agent Studio"] },
+  { id: "api", name: "REST API", category: "Platform", color: ACCENT[300], icon: apiIcon, blurb: "Any HTTP endpoint becomes a step in Flows, and every deployed agent is one endpoint you call with a bearer key.", used: ["Flows", "Agent Studio"] },
   { id: "figma", name: "Figma", category: "Platform", color: "#F24E1E", icon: brand(siFigma), blurb: "Design source for an MCP server that generates Next.js code straight from frames.", used: ["Client work"] },
   // Stack
-  { id: "nextjs", name: "Next.js", category: "Stack", color: "#ff8a95", icon: brand(siNextdotjs), blurb: "App Router front end and back end for this site and both products.", used: ["Flows", "Agent Studio", "Client work"] },
+  { id: "nextjs", name: "Next.js", category: "Stack", color: ACCENT[300], icon: brand(siNextdotjs), blurb: "App Router front end and back end for this site and both products.", used: ["Flows", "Agent Studio", "Client work"] },
   { id: "typescript", name: "TypeScript", category: "Stack", color: "#3178C6", icon: brand(siTypescript), blurb: "Everything here is typed end to end, from Postgres rows to React props.", used: ["Flows", "Agent Studio", "Client work"] },
   { id: "graphql", name: "GraphQL", category: "Stack", color: "#E10098", icon: brand(siGraphql), blurb: "API layer for NestJS services on client platforms.", used: ["Client work"] },
   { id: "nestjs", name: "NestJS", category: "Stack", color: "#E0234E", icon: brand(siNestjs), blurb: "Backend framework for GraphQL and REST services with clean module boundaries.", used: ["Client work"] },

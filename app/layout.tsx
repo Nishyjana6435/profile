@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono, Space_Grotesk } from "next/font/google";
 import { SITE_NAME, SITE_URL } from "@/lib/seo";
+import { accentCss } from "@/lib/theme";
 import "./globals.css";
 import AssistantWidget from "@/components/AssistantWidget";
 import Cursor from "@/components/Cursor";
@@ -57,6 +58,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} ${spaceGrotesk.variable} h-full scroll-smooth antialiased motion-reduce:scroll-auto`}
     >
+      <head>
+        {/* accent colour tokens: edit lib/theme.ts */}
+        <style dangerouslySetInnerHTML={{ __html: accentCss() }} />
+      </head>
       <body className="min-h-full flex flex-col bg-[#121212]">
         <noscript>
           <style>{`.reveal,.reveal-stagger>*{opacity:1!important;transform:none!important}`}</style>

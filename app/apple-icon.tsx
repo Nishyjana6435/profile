@@ -1,4 +1,5 @@
 import { ImageResponse } from "next/og";
+import { ACCENT } from "@/lib/theme";
 
 export const size = { width: 180, height: 180 };
 export const contentType = "image/png";
@@ -13,7 +14,7 @@ export default function AppleIcon() {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          background: "linear-gradient(135deg, #e51e31, #ff5a6a)",
+          background: `linear-gradient(135deg, ${ACCENT[500]}, ${ACCENT[400]})`,
         }}
       >
         <svg

@@ -53,7 +53,7 @@ export function AgentLogo({ className = "" }: { className?: string }) {
   return (
     <svg viewBox="0 0 32 32" fill="none" aria-hidden="true" className={className}>
       <rect width="32" height="32" rx="9" fill="#f5f5f7" />
-      <circle cx="16" cy="10" r="3.4" fill="#e51e31" />
+      <circle cx="16" cy="10" r="3.4" fill="var(--accent-500)" />
       <circle cx="9" cy="22" r="2.8" fill="#121317" />
       <circle cx="23" cy="22" r="2.8" fill="#121317" />
       <path
@@ -168,7 +168,7 @@ export default function AgentScene() {
           >
             <defs>
               <linearGradient id="ax-wire-grad" x1="0" y1="0" x2="1" y2="0">
-                <stop offset="0" stopColor="#ff5a6a" />
+                <stop offset="0" stopColor="var(--accent-400)" />
                 <stop offset="1" stopColor="#a5a5a5" />
               </linearGradient>
             </defs>
