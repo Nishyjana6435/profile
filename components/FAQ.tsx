@@ -16,7 +16,7 @@ export default function FAQ({ items }: { items: FaqItem[] }) {
               className="group rounded-2xl border border-white/5 bg-[#1a1a1a] p-6 open:pb-6"
             >
               <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-medium text-white marker:content-none">
-                {item.question}
+                <span>{item.question}</span>
                 <span
                   aria-hidden="true"
                   className="shrink-0 text-brand-400 transition-transform group-open:rotate-45"

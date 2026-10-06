@@ -33,7 +33,11 @@ export default function LiveText() {
     while (walker.nextNode()) nodes.push(walker.currentNode as Text);
     for (const t of nodes) {
       const parent = t.parentElement!;
-      const frag = document.createDocumentFragment();
+      // text that is a direct child of a flex or grid box must stay one item,
+      // otherwise the words would be laid out as separate flex children
+      const display = getComputedStyle(parent).display;
+      const holder = /flex|grid/.test(display) ? document.createElement("span") : null;
+      const frag = holder ?? document.createDocumentFragment();
       for (const part of t.nodeValue!.split(/(\s+)/)) {
         if (!part) continue;
         if (/^\s+$/.test(part)) frag.appendChild(document.createTextNode(part));
