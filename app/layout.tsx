@@ -1,8 +1,9 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Space_Grotesk } from "next/font/google";
 import { SITE_NAME, SITE_URL } from "@/lib/seo";
 import "./globals.css";
 import AssistantWidget from "@/components/AssistantWidget";
+import Cursor from "@/components/Cursor";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -14,6 +15,12 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const spaceGrotesk = Space_Grotesk({
+  variable: "--font-space-grotesk",
+  subsets: ["latin"],
+  weight: ["500", "600", "700"],
+});
+
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
@@ -21,7 +28,7 @@ export const metadata: Metadata = {
     template: `%s — ${SITE_NAME}`,
   },
   description:
-    "Full stack developer and self-taught UI/UX designer leading cross-functional teams to ship accessible, high-impact products.",
+    "Nishanthan Janarthanarajah (Nishy) builds AI agents, workflows and RAG assistants that run real business processes. Founder of Agent Studio and Flows.",
   robots: {
     index: true,
     follow: true,
@@ -40,7 +47,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#0a0514",
+  themeColor: "#121212",
   colorScheme: "dark",
 };
 
@@ -48,14 +55,15 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full scroll-smooth antialiased motion-reduce:scroll-auto`}
+      className={`${geistSans.variable} ${geistMono.variable} ${spaceGrotesk.variable} h-full scroll-smooth antialiased motion-reduce:scroll-auto`}
     >
-      <body className="min-h-full flex flex-col bg-[#0a0514]">
+      <body className="min-h-full flex flex-col bg-[#121212]">
         <noscript>
           <style>{`.reveal,.reveal-stagger>*{opacity:1!important;transform:none!important}`}</style>
         </noscript>
         {children}
         <AssistantWidget />
+        <Cursor />
       </body>
     </html>
   );

@@ -47,7 +47,7 @@ export default async function BlogPostPage(props: PageProps<"/blog/[slug]">) {
   if (!post) notFound();
 
   return (
-    <div className="flex min-h-full flex-1 flex-col bg-[#0a0514] text-white">
+    <div className="flex min-h-full flex-1 flex-col bg-[#121212] text-white">
       <Header />
       <main className="flex-1 px-6 py-20">
         <article className="mx-auto max-w-3xl">

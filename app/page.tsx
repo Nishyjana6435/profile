@@ -1,17 +1,16 @@
 import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
+import LogoStrip from "@/components/LogoStrip";
+import WhatIDo from "@/components/WhatIDo";
 import FlowsShowcase from "@/components/FlowsShowcase";
 import AgentShowcase from "@/components/AgentShowcase";
 import ToolsPool from "@/components/ToolsPool";
-import CustomBuildBand from "@/components/CustomBuildBand";
-import NewsBanner from "@/components/NewsBanner";
+import Process from "@/components/Process";
 import WorkExperience from "@/components/WorkExperience";
-import ScrollBreak from "@/components/ScrollBreak";
-import SkillsOrbit from "@/components/SkillsOrbit";
-import FeaturedProjects from "@/components/FeaturedProjects";
 import ProjectCarousel from "@/components/ProjectCarousel";
-import FAQ from "@/components/FAQ";
+import FeaturedProjects from "@/components/FeaturedProjects";
+import CtaBand from "@/components/CtaBand";
 import Contact from "@/components/Contact";
 import StructuredData from "@/components/StructuredData";
 import {
@@ -38,7 +37,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const description =
     `Nishanthan Janarthanarajah (Nishy) is the founder of Agent Studio and Flows, and an independent AI engineer in Colombo, Sri Lanka, available for client projects worldwide. ${richTextToPlainText(fields?.bio)}`.trim() ||
     siteSettings?.fields.siteDescription ||
-    "Full stack developer and self-taught UI/UX designer leading cross-functional teams to ship accessible, high-impact products.";
+    "AI engineer building agents, workflows and RAG assistants that run real business processes.";
   const avatar = fields?.avatar && "fields" in fields.avatar ? fields.avatar : undefined;
   const avatarUrl = avatar?.fields.file?.url ? `https:${avatar.fields.file.url}` : undefined;
 
@@ -71,45 +70,33 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function Home() {
-  const [profile, experienceItems, featuredProjects, projectCarousels, siteSettings] =
-    await Promise.all([
-      getProfile(),
-      getExperienceItems(),
-      getFeaturedProjects(),
-      getProjectCarousels(),
-      getSiteSettings(),
-    ]);
+  const [profile, experienceItems, featuredProjects, projectCarousels, siteSettings] = await Promise.all([
+    getProfile(),
+    getExperienceItems(),
+    getFeaturedProjects(),
+    getProjectCarousels(),
+    getSiteSettings(),
+  ]);
 
+  // The story: who (hero) -> what I do -> how I do it -> how long -> proof -> next step.
   return (
-    <div className="flex min-h-full flex-1 flex-col bg-[#0a0514] text-white">
-      <StructuredData
-        profile={profile}
-        siteSettings={siteSettings}
-        projects={featuredProjects}
-        faqItems={faqItems}
-      />
+    <div className="flex min-h-full flex-1 flex-col bg-[#121212] text-white">
+      <StructuredData profile={profile} siteSettings={siteSettings} projects={featuredProjects} faqItems={faqItems} />
       <Header />
       <main className="flex-1">
         <Hero profile={profile} />
-        <NewsBanner />
+        <LogoStrip items={experienceItems} />
+        <WhatIDo />
         <FlowsShowcase />
         <AgentShowcase />
         <ToolsPool />
-        <CustomBuildBand />
+        <Process />
+        <WorkExperience items={experienceItems} />
         {projectCarousels.map((carousel) => (
           <ProjectCarousel key={carousel.sys.id} carousel={carousel} />
         ))}
-        <WorkExperience items={experienceItems} />
-        <ScrollBreak />
-
-        <SkillsOrbit
-          lookingForText={profile?.fields.lookingForText}
-          lookingForHighlight={profile?.fields.lookingForHighlight}
-          skills={profile?.fields.skills ?? []}
-        />
         <FeaturedProjects projects={featuredProjects} />
-        
-        {/* <FAQ items={faqItems} /> */}
+        <CtaBand lookingFor={profile?.fields.lookingForText} />
       </main>
       <Contact siteSettings={siteSettings} />
     </div>

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import Contact, { WHATSAPP_URL } from "@/components/Contact";
+import Contact, { WHATSAPP_URL, WhatsAppIcon } from "@/components/Contact";
+import { Btn } from "@/components/ui";
 import Header from "@/components/Header";
 import Reveal from "@/components/Reveal";
 import { AGENT_STUDIO } from "@/lib/agent";
@@ -86,11 +87,11 @@ export default async function AboutPage() {
   };
 
   return (
-    <div className="flex min-h-full flex-1 flex-col bg-[#0a0514] text-white">
+    <div className="flex min-h-full flex-1 flex-col bg-[#121212] text-white">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <Header />
       <main className="relative flex-1 overflow-hidden px-6 pb-20 pt-16">
-        <div aria-hidden="true" className="pointer-events-none absolute left-[-10%] top-0 h-[32rem] w-[40rem] rounded-full bg-violet-700/20 blur-[140px]" />
+        <div aria-hidden="true" className="pointer-events-none absolute left-[-10%] top-0 h-[32rem] w-[40rem] rounded-full bg-brand-700/20 blur-[140px]" />
         <article className="relative mx-auto max-w-4xl">
           <nav aria-label="Breadcrumb" className="text-xs text-white/40">
             <ol className="flex items-center gap-2">
@@ -99,7 +100,7 @@ export default async function AboutPage() {
               <li className="text-white/70">About</li>
             </ol>
           </nav>
-          <Reveal as="p" variant="fade" className="mt-6 text-xs uppercase tracking-[0.3em] text-violet-300/70">Founder · AI engineer · Colombo, Sri Lanka</Reveal>
+          <Reveal as="p" variant="fade" className="mt-6 text-xs uppercase tracking-[0.3em] text-brand-300/70">Founder · AI engineer · Colombo, Sri Lanka</Reveal>
           <Reveal delay={80}>
             <h1 className="mt-4 text-4xl font-semibold leading-[1.1] sm:text-5xl">
               Nishanthan Janarthanarajah <span className="text-shimmer">(Nishy)</span>
@@ -108,8 +109,8 @@ export default async function AboutPage() {
           <Reveal as="p" delay={140} className="mt-3 text-xl text-white/80 sm:text-2xl">Founder of Agent Studio and Flows</Reveal>
           <Reveal as="p" delay={200} className="mt-6 text-base leading-8 text-white/70">
             I am Nishanthan Janarthanarajah, and most people call me Nishy. I founded{" "}
-            <Link href="/agent-studio" className="text-violet-300 underline-offset-4 hover:underline">Agent Studio</Link>, a visual builder that
-            deploys AI agents as an API, and <Link href="/flows" className="text-violet-300 underline-offset-4 hover:underline">Flows</Link>,
+            <Link href="/agent-studio" className="text-brand-300 underline-offset-4 hover:underline">Agent Studio</Link>, a visual builder that
+            deploys AI agents as an API, and <Link href="/flows" className="text-brand-300 underline-offset-4 hover:underline">Flows</Link>,
             which turns a plain-English description into a running workflow. I design, build and run both from Colombo, Sri Lanka.
           </Reveal>
           {bio && <Reveal as="p" delay={240} className="mt-4 text-sm leading-7 text-white/60">{bio}</Reveal>}
@@ -123,7 +124,7 @@ export default async function AboutPage() {
                   <p className="mt-1 text-sm italic text-white/70">“{p.tagline}”</p>
                   <p className="mt-3 text-sm leading-6 text-white/60">{p.body}</p>
                   <div className="mt-5 flex flex-wrap gap-3 text-xs">
-                    <a href={p.url} target="_blank" rel="noopener noreferrer" className="rounded-full bg-gradient-to-r from-violet-500 to-fuchsia-500 px-4 py-2 font-medium uppercase tracking-wide">Open {p.name} ↗</a>
+                    <a href={p.url} target="_blank" rel="noopener noreferrer" className="rounded-full bg-brand-500 px-4 py-2 font-medium uppercase tracking-wide">Open {p.name} ↗</a>
                     <Link href={p.page} className="rounded-full border border-white/15 px-4 py-2 uppercase tracking-wide text-white/80 hover:text-white">Use cases &amp; comparison</Link>
                   </div>
                 </div>
@@ -136,7 +137,7 @@ export default async function AboutPage() {
               <h2 id="exp-h" className="text-2xl font-semibold">Career</h2>
               <ul className="mt-6 flex flex-col gap-3">
                 {FOUNDER_ROLES.map((r) => (
-                  <li key={r.title} className="rounded-2xl border border-violet-400/30 bg-violet-500/10 p-5">
+                  <li key={r.title} className="rounded-2xl border border-brand-400/30 bg-brand-500/10 p-5">
                     <p className="text-sm font-semibold">{r.title}<span className="font-normal text-white/50"> · {r.period}</span></p>
                     <p className="mt-1.5 text-sm leading-6 text-white/65">{r.description}</p>
                   </li>
@@ -151,14 +152,14 @@ export default async function AboutPage() {
             </section>
           )}
 
-          <section className="mt-14 rounded-3xl border border-violet-400/30 bg-violet-500/10 p-8" aria-labelledby="work-h">
+          <section className="mt-14 rounded-3xl border border-brand-400/30 bg-brand-500/10 p-8" aria-labelledby="work-h">
             <h2 id="work-h" className="text-2xl font-semibold">Work with Nishy</h2>
             <p className="mt-3 text-sm leading-7 text-white/70">
               Besides the products, I build custom AI agents, RAG assistants and workflow automation for businesses in Sri Lanka and worldwide.
             </p>
             <div className="mt-6 flex flex-wrap gap-3 text-xs">
-              <Link href="/build-ai-system-for-your-business" className="rounded-full bg-gradient-to-r from-violet-500 to-fuchsia-500 px-5 py-2.5 font-medium uppercase tracking-wide">Build an AI system for your business</Link>
-              <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="rounded-full border border-white/15 px-5 py-2.5 uppercase tracking-wide text-white/80 hover:text-white">Chat on WhatsApp</a>
+              <Link href="/build-ai-system-for-your-business" className="rounded-full bg-brand-500 px-5 py-2.5 font-medium uppercase tracking-wide">Build an AI system for your business</Link>
+              <Btn href={WHATSAPP_URL} icon={<WhatsAppIcon />}>Chat on WhatsApp</Btn>
             </div>
           </section>
         </article>

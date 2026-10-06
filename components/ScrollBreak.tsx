@@ -189,10 +189,10 @@ function BugSquash() {
   const urgent = phase === "playing" && timeLeft <= 5;
 
   return (
-    <div className="bs-card relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-violet-900/30 via-[#130a2a] to-[#1a0f38] p-5 shadow-[0_40px_120px_-60px_rgba(139,92,246,0.7)] sm:p-6">
+    <div className="bs-card relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-brand-900/30 via-[#1a1a1a] to-[#1f1f1f] p-5 shadow-[0_40px_120px_-60px_rgba(0,0,0,0.7)] sm:p-6">
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute -left-20 -top-20 h-60 w-60 rounded-full bg-fuchsia-600/15 blur-3xl"
+        className="pointer-events-none absolute -left-20 -top-20 h-60 w-60 rounded-full bg-brand-600/15 blur-3xl"
       />
 
       {/* HUD */}
@@ -206,7 +206,7 @@ function BugSquash() {
           <div
             key={s.label}
             className={`rounded-xl bg-white/[0.04] px-2 py-2 ring-1 ring-white/5 ${
-              s.urgent ? "bs-urgent ring-fuchsia-400/50" : ""
+              s.urgent ? "bs-urgent ring-brand-400/50" : ""
             }`}
           >
             <p className="text-[10px] uppercase tracking-wider text-white/40">{s.label}</p>
@@ -229,7 +229,7 @@ function BugSquash() {
                 bug
                   ? bug.kind === "fire"
                     ? "hover:bg-red-500/15 hover:ring-red-400/50"
-                    : "hover:bg-violet-500/20 hover:ring-violet-400/60"
+                    : "hover:bg-brand-500/20 hover:ring-brand-400/60"
                   : ""
               } disabled:cursor-default`}
             >
@@ -250,7 +250,7 @@ function BugSquash() {
                     key={p.id}
                     aria-hidden="true"
                     className={`bs-pop pointer-events-none absolute font-mono text-sm font-bold ${
-                      p.bad ? "text-red-300" : "text-violet-200"
+                      p.bad ? "text-red-300" : "text-brand-200"
                     }`}
                   >
                     {p.text}
@@ -261,10 +261,10 @@ function BugSquash() {
         </div>
 
         {phase !== "playing" && (
-          <div className="bs-overlay absolute inset-0 flex flex-col items-center justify-center rounded-2xl bg-[#0a0514]/85 p-5 text-center backdrop-blur-sm">
+          <div className="bs-overlay absolute inset-0 flex flex-col items-center justify-center rounded-2xl bg-[#121212]/85 p-5 text-center backdrop-blur-sm">
             {phase === "idle" ? (
               <>
-                <p className="text-xs uppercase tracking-[0.3em] text-violet-300/70">Mini game</p>
+                <p className="text-xs uppercase tracking-[0.3em] text-brand-300/70">Mini game</p>
                 <h3 className="mt-2 text-2xl font-semibold text-white">Bug Squash</h3>
                 <p className="mt-2 max-w-xs text-sm leading-6 text-white/60">
                   You have {ROUND_SECONDS} seconds. Squash bugs before they escape. Every 5 in a row earns a
@@ -278,7 +278,7 @@ function BugSquash() {
               </>
             ) : (
               <>
-                <p className="text-xs uppercase tracking-[0.3em] text-violet-300/70">{result.title}</p>
+                <p className="text-xs uppercase tracking-[0.3em] text-brand-300/70">{result.title}</p>
                 <p className="mt-2 font-mono text-5xl font-bold text-white tabular-nums">{score}</p>
                 <p className="mt-2 text-sm text-white/60">{result.note}</p>
                 <p className="mt-3 text-xs text-white/45">
@@ -290,7 +290,7 @@ function BugSquash() {
             <button
               type="button"
               onClick={start}
-              className="btn-shine mt-6 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-violet-500 to-fuchsia-500 px-6 py-2.5 text-sm font-medium text-white shadow-[0_12px_40px_-12px_rgba(217,70,239,0.8)] transition-transform duration-300 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-300"
+              className="btn-shine mt-6 inline-flex items-center gap-2 rounded-full bg-brand-500 px-6 py-2.5 text-sm font-medium text-white shadow-[0_12px_40px_-12px_rgba(0,0,0,0.8)] transition-transform duration-300 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-300"
             >
               {phase === "idle" ? "Start squashing" : "Play again"}
               <span aria-hidden="true">→</span>
@@ -310,11 +310,11 @@ export default function ScrollBreak() {
     <section id="intermission" className="relative overflow-hidden px-6 py-24">
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute right-0 top-0 h-[26rem] w-[26rem] translate-x-1/3 -translate-y-1/3 rounded-full bg-violet-700/15 blur-[120px]"
+        className="pointer-events-none absolute right-0 top-0 h-[26rem] w-[26rem] translate-x-1/3 -translate-y-1/3 rounded-full bg-brand-700/15 blur-[120px]"
       />
       <div className="relative mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,30rem)]">
         <div>
-          <Reveal as="p" variant="fade" className="text-xs uppercase tracking-[0.3em] text-violet-300/70">
+          <Reveal as="p" variant="fade" className="text-xs uppercase tracking-[0.3em] text-brand-300/70">
             Intermission
           </Reveal>
           <Reveal as="h2" delay={80} className="mt-3 text-2xl font-semibold text-white sm:text-3xl">
@@ -336,7 +336,7 @@ export default function ScrollBreak() {
             </div>
             <div className="mt-3 h-2 overflow-hidden rounded-full bg-white/5 ring-1 ring-white/10">
               <div
-                className="h-full rounded-full bg-gradient-to-r from-violet-500 to-fuchsia-400 transition-[width] duration-300 ease-out"
+                className="h-full rounded-full bg-brand-500 transition-[width] duration-300 ease-out"
                 style={{ width: `${pct}%` }}
               />
             </div>

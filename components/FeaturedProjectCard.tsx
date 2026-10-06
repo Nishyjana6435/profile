@@ -67,11 +67,11 @@ export default function FeaturedProjectCard({ data }: { data: FeaturedCardData }
         {/* glow, pushed back */}
         <div
           aria-hidden="true"
-          className="fp-glow absolute inset-8 rounded-[2.5rem] bg-gradient-to-br from-violet-600/60 via-fuchsia-500/35 to-transparent blur-3xl"
+          className="fp-glow absolute inset-8 rounded-[2.5rem] bg-gradient-to-br from-white/15 via-white/5 to-transparent blur-3xl"
         />
 
         {/* browser window */}
-        <div className="fp-frame absolute inset-0 overflow-hidden rounded-2xl border border-white/20 bg-white shadow-[0_60px_140px_-50px_rgba(139,92,246,0.75)]">
+        <div className="fp-frame absolute inset-0 overflow-hidden rounded-2xl border border-white/20 bg-white shadow-[0_60px_140px_-50px_rgba(0,0,0,0.75)]">
           <div className="flex h-9 items-center gap-2 border-b border-black/[0.06] bg-[#f4f2f9] px-3.5">
             <span className="h-2.5 w-2.5 rounded-full bg-[#ff5f57]" />
             <span className="h-2.5 w-2.5 rounded-full bg-[#febc2e]" />
@@ -87,7 +87,7 @@ export default function FeaturedProjectCard({ data }: { data: FeaturedCardData }
                 alt={data.imageAlt}
                 fill
                 sizes="(min-width: 640px) 50vw, 100vw"
-                className="fp-media object-contain p-6 drop-shadow-[0_20px_40px_rgba(30,10,70,0.25)] sm:p-8"
+                className="fp-media object-contain p-6 drop-shadow-[0_20px_40px_rgba(0,0,0,0.25)] sm:p-8"
               />
             ) : (
               <div className="flex h-full flex-col gap-3 text-black/60">
@@ -105,17 +105,17 @@ export default function FeaturedProjectCard({ data }: { data: FeaturedCardData }
           <span
             key={tag}
             aria-hidden="true"
-            className={`fp-chip absolute ${CHIP_POSITIONS[i]} rounded-full border border-white/15 bg-[#160b2e]/90 px-3 py-1.5 text-xs font-medium text-white shadow-[0_18px_40px_-16px_rgba(139,92,246,0.9)] backdrop-blur`}
+            className={`fp-chip absolute ${CHIP_POSITIONS[i]} rounded-full border border-white/15 bg-[#1a1a1a]/90 px-3 py-1.5 text-xs font-medium text-white shadow-[0_18px_40px_-16px_rgba(0,0,0,0.9)] backdrop-blur`}
             style={{ "--z": `${70 + i * 35}px`, "--m": 1 + i * 0.6, "--d": `${i * 0.9}s` } as CSSProperties}
           >
-            <span className="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-gradient-to-r from-violet-400 to-fuchsia-400 align-middle" />
+            <span className="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-brand-400 align-middle" />
             {tag}
           </span>
         ))}
 
         <span
           aria-hidden="true"
-          className="fp-badge absolute -bottom-5 -right-2 grid h-14 w-14 place-items-center rounded-2xl bg-gradient-to-br from-violet-500 to-fuchsia-500 font-mono text-lg font-bold text-white shadow-[0_20px_50px_-15px_rgba(217,70,239,0.9)] sm:-right-6 sm:h-16 sm:w-16 sm:text-xl"
+          className="fp-badge absolute -bottom-5 -right-2 grid h-14 w-14 place-items-center rounded-2xl bg-brand-500 font-mono text-lg font-bold text-white shadow-[0_20px_50px_-15px_rgba(0,0,0,0.9)] sm:-right-6 sm:h-16 sm:w-16 sm:text-xl"
           style={{ "--z": "90px", "--m": 1.4 } as CSSProperties}
         >
           {String(data.index).padStart(2, "0")}

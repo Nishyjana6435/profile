@@ -115,12 +115,12 @@ export default async function ForAgentsPage() {
   ];
 
   return (
-    <div className="flex min-h-full flex-1 flex-col bg-[#0a0514] text-white">
+    <div className="flex min-h-full flex-1 flex-col bg-[#121212] text-white">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({ "@context": "https://schema.org", "@graph": graph }) }} />
       <Header />
       <main className="flex-1 px-6 py-16">
         <article className="mx-auto max-w-4xl">
-          <p className="text-xs uppercase tracking-[0.3em] text-violet-300/70">Agent view · same facts as the human pages</p>
+          <p className="text-xs uppercase tracking-[0.3em] text-brand-300/70">Agent view · same facts as the human pages</p>
           <h1 className="mt-3 text-3xl font-semibold text-white sm:text-4xl">{v.person.name} (Nishy): founder of Agent Studio and Flows</h1>
           <p className="mt-4 text-sm leading-7 text-white/70">
             This page collects every key fact from nishyai.com in plain HTML for crawlers, search engines and AI agents.
@@ -129,7 +129,7 @@ export default async function ForAgentsPage() {
           <ul className="mt-3 flex flex-wrap gap-2 text-xs">
             {MACHINE_SURFACES.map((s) => (
               <li key={s.path}>
-                <a href={s.path} className="rounded-full border border-white/15 px-3 py-1 text-white/70 hover:border-violet-400/60 hover:text-white">
+                <a href={s.path} className="rounded-full border border-white/15 px-3 py-1 text-white/70 hover:border-brand-400/60 hover:text-white">
                   {s.path} <span className="text-white/40">({s.type})</span>
                 </a>
               </li>

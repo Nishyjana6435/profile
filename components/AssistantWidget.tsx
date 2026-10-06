@@ -37,7 +37,7 @@ function save(v: Saved) {
   } catch {}
 }
 
-const LINK_CLS = "text-violet-300 underline underline-offset-2 hover:text-white";
+const LINK_CLS = "text-brand-300 underline underline-offset-2 hover:text-white";
 
 /** Inline markdown: [text](url), **bold**, bare URLs and nishyai.com / nishy.space hosts. */
 function inline(text: string, keyBase: string): ReactNode[] {
@@ -71,7 +71,7 @@ function Rich({ text }: { text: string }) {
     if (!list) return;
     const Tag = list.ordered ? "ol" : "ul";
     blocks.push(
-      <Tag key={`l${i}`} className={`my-1.5 space-y-1 pl-4 ${list.ordered ? "list-decimal" : "list-disc"} marker:text-violet-300/70`}>
+      <Tag key={`l${i}`} className={`my-1.5 space-y-1 pl-4 ${list.ordered ? "list-decimal" : "list-disc"} marker:text-brand-300/70`}>
         {list.items.map((it, j) => <li key={j}>{inline(it, `l${i}-${j}`)}</li>)}
       </Tag>,
     );
@@ -236,8 +236,8 @@ export default function AssistantWidget() {
         aria-label="Chat with Nishy's assistant"
         className={`as-panel fixed inset-x-3 bottom-24 top-20 flex flex-col overflow-hidden rounded-3xl border border-white/15 sm:absolute sm:inset-auto sm:bottom-20 sm:right-0 sm:h-[min(640px,calc(100vh-8rem))] sm:w-[400px] ${open ? "is-open" : ""}`}
       >
-        <div aria-hidden="true" className="pointer-events-none absolute -right-16 -top-20 h-56 w-56 rounded-full bg-fuchsia-500/25 blur-3xl" />
-        <div aria-hidden="true" className="pointer-events-none absolute -left-20 bottom-10 h-56 w-56 rounded-full bg-sky-500/15 blur-3xl" />
+        <div aria-hidden="true" className="pointer-events-none absolute -right-16 -top-20 h-56 w-56 rounded-full bg-brand-500/25 blur-3xl" />
+        <div aria-hidden="true" className="pointer-events-none absolute -left-20 bottom-10 h-56 w-56 rounded-full bg-brand-500/15 blur-3xl" />
 
         {/* header */}
         <div className="relative flex items-center gap-3 border-b border-white/10 px-4 py-3.5">
@@ -276,7 +276,7 @@ export default function AssistantWidget() {
                   type="button"
                   onClick={() => send(s)}
                   style={{ animationDelay: `${0.15 + i * 0.07}s` }}
-                  className="as-chip rounded-full border border-violet-400/35 bg-violet-500/10 px-3 py-1.5 text-left text-xs text-white/85 transition-all hover:-translate-y-0.5 hover:border-violet-300/70 hover:bg-violet-500/20 hover:text-white"
+                  className="as-chip rounded-full border border-brand-400/35 bg-brand-500/10 px-3 py-1.5 text-left text-xs text-white/85 transition-all hover:-translate-y-0.5 hover:border-brand-300/70 hover:bg-brand-500/20 hover:text-white"
                 >
                   {s}
                 </button>
@@ -321,7 +321,7 @@ export default function AssistantWidget() {
 
         {/* composer */}
         <form onSubmit={onSubmit} className="relative border-t border-white/10 p-3">
-          <div className="as-composer flex items-end gap-2 rounded-2xl border border-white/15 bg-white/[0.04] p-1.5 pl-3.5 transition-colors focus-within:border-violet-400/60">
+          <div className="as-composer flex items-end gap-2 rounded-2xl border border-white/15 bg-white/[0.04] p-1.5 pl-3.5 transition-colors focus-within:border-brand-400/60">
             <textarea
               ref={inputRef}
               value={input}
@@ -337,7 +337,7 @@ export default function AssistantWidget() {
               type="submit"
               disabled={!input.trim() || busy}
               aria-label="Send message"
-              className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-violet-500 to-fuchsia-500 text-white shadow-[0_8px_24px_-8px_rgba(217,70,239,0.9)] transition-all hover:scale-105 disabled:scale-100 disabled:opacity-40"
+              className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-brand-500 text-white shadow-[0_8px_24px_-8px_rgba(0,0,0,0.9)] transition-all hover:scale-105 disabled:scale-100 disabled:opacity-40"
             >
               <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
             </button>
@@ -357,7 +357,7 @@ export default function AssistantWidget() {
             dismissHint();
             setOpen(true);
           }}
-          className="as-hint absolute bottom-3 right-[4.75rem] w-max max-w-[15rem] rounded-2xl rounded-br-md border border-white/15 bg-[#160b2e]/95 px-4 py-2.5 text-left text-xs text-white/85 shadow-[0_18px_40px_-16px_rgba(139,92,246,0.9)] backdrop-blur"
+          className="as-hint absolute bottom-3 right-[4.75rem] w-max max-w-[15rem] rounded-2xl rounded-br-md border border-white/15 bg-[#1a1a1a]/95 px-4 py-2.5 text-left text-xs text-white/85 shadow-[0_18px_40px_-16px_rgba(0,0,0,0.9)] backdrop-blur"
         >
           <span className="block font-semibold text-white">Hi, I&apos;m Nishy&apos;s assistant</span>
           Ask me about Agent Studio, Flows or your AI project.
@@ -379,13 +379,13 @@ export default function AssistantWidget() {
         <span className="as-launch-face relative">
           <AssistantAvatar size={60} talking={busy} />
         </span>
-        <span aria-hidden="true" className="as-launch-close absolute inset-0 grid place-items-center rounded-full bg-gradient-to-br from-violet-600 to-fuchsia-600 text-white">
+        <span aria-hidden="true" className="as-launch-close absolute inset-0 grid place-items-center rounded-full bg-brand-600 text-white">
           <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round"><path d="M6 6l12 12M18 6 6 18" /></svg>
         </span>
         {!open && !messages.length && (
           <span aria-hidden="true" className="absolute right-0.5 top-0.5 flex h-3.5 w-3.5">
             <span className="fx-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400" />
-            <span className="relative h-3.5 w-3.5 rounded-full border-2 border-[#0a0514] bg-emerald-400" />
+            <span className="relative h-3.5 w-3.5 rounded-full border-2 border-[#121212] bg-emerald-400" />
           </span>
         )}
       </button>

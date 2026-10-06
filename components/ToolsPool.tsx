@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useRef, useState, type CSSProperties } from "react";
 import { TOOLS, TOOL_CATEGORIES, TOOL_USE_LINKS, type ToolCategory } from "@/lib/tools";
 import Reveal from "./Reveal";
+import { Btn, Chip, SectionHead } from "./ui";
 
 const STEP = 360 / TOOLS.length;
 const IDLE_SPEED = 0.07; // degrees per frame
@@ -95,22 +96,17 @@ export default function ToolsPool() {
     <section id="tools" className="relative overflow-hidden px-6 py-24 sm:py-32">
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute left-1/2 top-1/2 h-[40rem] w-[60rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-violet-700/10 blur-[160px]"
+        className="pointer-events-none absolute left-1/2 top-1/2 h-[40rem] w-[60rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-brand-700/10 blur-[160px]"
       />
 
       <div className="relative mx-auto max-w-6xl">
-        <div className="mx-auto max-w-2xl text-center">
-          <Reveal as="p" variant="fade" className="text-xs uppercase tracking-[0.3em] text-violet-300/70">
-            Two apps · one pool of tools
-          </Reveal>
-          <Reveal as="h2" delay={80} className="mt-4 text-3xl font-semibold leading-tight text-white sm:text-5xl">
-            Nishy <span className="text-shimmer">tool kits</span>
-          </Reveal>
-          <Reveal as="p" delay={160} className="mt-4 text-sm leading-7 text-white/60">
-            My two live apps, Flows and Agent Studio, and the services, models and infrastructure behind them.
-            Spin the ring, pick anything, and read what it does and where it runs.
-          </Reveal>
-        </div>
+        <SectionHead
+          n={2}
+          eyebrow="How I do it · The tool kit"
+          title={<>Two apps, <span className="text-neutral-500">one pool of tools.</span></>}
+          lead="Spin the ring. Everything behind Flows, Agent Studio and my client work, and what each piece does."
+          align="center"
+        />
 
         <Reveal variant="fade" stagger delay={240} className="mt-8 flex flex-wrap items-center justify-center gap-2">
           {(["All", ...TOOL_CATEGORIES] as const).map((c, i) => (
@@ -120,10 +116,8 @@ export default function ToolsPool() {
               onClick={() => pick(c)}
               aria-pressed={category === c}
               style={{ "--i": i } as CSSProperties}
-              className={`rounded-full border px-4 py-1.5 text-xs uppercase tracking-wide transition-all duration-300 hover:-translate-y-0.5 ${
-                category === c
-                  ? "border-violet-400/70 bg-violet-500/20 text-white shadow-[0_10px_30px_-12px_rgba(167,139,250,0.9)]"
-                  : "border-white/15 text-white/60 hover:border-violet-400/50 hover:bg-violet-500/10 hover:text-white"
+              className={`label border px-4 py-2 transition-all duration-300 hover:-translate-y-0.5 ${
+                category === c ? "border-white bg-white text-[#121212]" : "border-white/15 text-neutral-400 hover:border-white/40 hover:text-white"
               }`}
             >
               {c}
@@ -176,15 +170,15 @@ export default function ToolsPool() {
         {/* Detail card for the selected tool */}
         <div
           key={tool.id}
-          className="tp-card mx-auto mt-4 flex max-w-2xl flex-col items-center gap-5 rounded-3xl border border-white/10 bg-white/[0.03] p-6 text-center backdrop-blur sm:flex-row sm:text-left"
+          className="tp-card mx-auto mt-4 flex max-w-2xl flex-col items-center gap-5 border border-white/10 bg-white/[0.03] p-6 text-center backdrop-blur sm:flex-row sm:text-left"
           style={{ "--c": tool.color } as CSSProperties}
           aria-live="polite"
         >
-          <span className="tp-card-icon grid h-16 w-16 shrink-0 place-items-center rounded-2xl p-3.5">
+          <span className="tp-card-icon grid h-16 w-16 shrink-0 place-items-center p-3.5">
             {tool.icon}
           </span>
           <div className="min-w-0 flex-1">
-            <p className="flex items-center justify-center gap-2 text-[11px] uppercase tracking-[0.2em] text-white/40 sm:justify-start">
+            <p className="label flex items-center justify-center gap-2 text-neutral-500 sm:justify-start">
               {tool.app ? "My app · live now" : tool.category}
               {tool.app && (
                 <span className="relative flex h-1.5 w-1.5">
@@ -193,29 +187,19 @@ export default function ToolsPool() {
                 </span>
               )}
             </p>
-            <h3 className="mt-1 text-lg font-semibold text-white">{tool.name}</h3>
+            <h3 className="display-sm mt-1 text-xl text-white">{tool.name}</h3>
             {tool.app && <p className="mt-0.5 text-sm italic text-white/70">“{tool.app.tagline}”</p>}
             <p className="mt-1.5 text-sm leading-6 text-white/60">{tool.blurb}</p>
             {tool.app ? (
               <div className="mt-4 flex flex-wrap items-center justify-center gap-2 sm:justify-start">
-                <a
-                  href={tool.app.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn-shine inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-violet-500 to-fuchsia-500 px-5 py-2 text-xs font-medium uppercase tracking-wide text-white shadow-[0_12px_40px_-12px_rgba(217,70,239,0.8)] transition-transform duration-300 hover:-translate-y-0.5"
-                >
-                  Open {tool.name} ↗
-                </a>
-                <a
-                  href={tool.app.anchor}
-                  className="inline-flex items-center gap-2 rounded-full border border-white/15 px-5 py-2 text-xs uppercase tracking-wide text-white/80 transition-all duration-300 hover:border-violet-400/60 hover:bg-violet-500/10 hover:text-white"
-                >
-                  Use cases &amp; comparison
-                </a>
+                <Btn href={tool.app.href} solid>
+                  Open {tool.name}
+                </Btn>
+                <Btn href={tool.app.anchor}>Use cases &amp; comparison</Btn>
               </div>
             ) : (
             <div className="mt-3 flex flex-wrap items-center justify-center gap-2 sm:justify-start">
-              <span className="text-[11px] uppercase tracking-[0.2em] text-white/40">Used in</span>
+              <span className="label text-neutral-500">Used in</span>
               {links.map(({ label, href }) =>
                 href ? (
                   <a
@@ -223,14 +207,12 @@ export default function ToolsPool() {
                     href={href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="rounded-full border border-violet-400/40 bg-violet-500/10 px-3 py-1 text-xs text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-violet-500/25"
+                    className="border border-white/25 px-2.5 py-1 font-mono text-[11px] text-white transition-all duration-300 hover:-translate-y-0.5 hover:border-white"
                   >
                     {label} ↗
                   </a>
                 ) : (
-                  <span key={label} className="rounded-full border border-white/15 px-3 py-1 text-xs text-white/70">
-                    {label}
-                  </span>
+                  <Chip key={label}>{label}</Chip>
                 ),
               )}
             </div>

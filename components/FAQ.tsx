@@ -13,13 +13,13 @@ export default function FAQ({ items }: { items: FaqItem[] }) {
           {items.map((item) => (
             <details
               key={item.question}
-              className="group rounded-2xl border border-white/5 bg-gradient-to-br from-violet-900/40 to-[#1a0f38] p-6 open:pb-6"
+              className="group rounded-2xl border border-white/5 bg-[#1a1a1a] p-6 open:pb-6"
             >
               <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-medium text-white marker:content-none">
                 {item.question}
                 <span
                   aria-hidden="true"
-                  className="shrink-0 text-violet-400 transition-transform group-open:rotate-45"
+                  className="shrink-0 text-brand-400 transition-transform group-open:rotate-45"
                 >
                   +
                 </span>

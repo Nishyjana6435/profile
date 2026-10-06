@@ -22,7 +22,7 @@ export function renderProfileOgImage({
           justifyContent: "center",
           padding: "80px",
           background:
-            "radial-gradient(circle at 30% 30%, #3b1a6b 0%, #0a0514 70%)",
+            "radial-gradient(circle at 30% 30%, #2a2a2a 0%, #121212 70%)",
           color: "white",
           fontFamily: "sans-serif",
         }}
@@ -35,7 +35,7 @@ export function renderProfileOgImage({
             width: 64,
             height: 64,
             borderRadius: "50%",
-            background: "linear-gradient(135deg, #7c3aed, #d946ef)",
+            background: "linear-gradient(135deg, #e51e31, #ff5a6a)",
             marginBottom: 40,
           }}
         >
@@ -54,7 +54,7 @@ export function renderProfileOgImage({
           </svg>
         </div>
         {tagline && (
-          <div style={{ fontSize: 28, color: "#c4b5fd", marginBottom: 12 }}>
+          <div style={{ fontSize: 28, color: "#ff8a95", marginBottom: 12 }}>
             {tagline}
           </div>
         )}
@@ -85,7 +85,7 @@ export function renderProductOgImage({
   accent: "fuchsia" | "sky";
   byline?: string;
 }) {
-  const to = accent === "sky" ? "#38bdf8" : "#d946ef";
+  const to = accent === "sky" ? "#a5a5a5" : "#ff5a6a";
   return new ImageResponse(
     (
       <div
@@ -96,7 +96,7 @@ export function renderProductOgImage({
           flexDirection: "column",
           justifyContent: "center",
           padding: "80px",
-          background: `radial-gradient(circle at 75% 25%, ${to}33 0%, transparent 45%), radial-gradient(circle at 20% 60%, #3b1a6b 0%, #0a0514 70%)`,
+          background: `radial-gradient(circle at 75% 25%, ${to}33 0%, transparent 45%), radial-gradient(circle at 20% 60%, #2a2a2a 0%, #121212 70%)`,
           color: "white",
           fontFamily: "sans-serif",
         }}
@@ -108,11 +108,11 @@ export function renderProductOgImage({
               width: 56,
               height: 56,
               borderRadius: 16,
-              background: `linear-gradient(135deg, #7c3aed, ${to})`,
+              background: `linear-gradient(135deg, #e51e31, ${to})`,
             }}
           />
           <div style={{ fontSize: 30, fontWeight: 600 }}>{name}</div>
-          <div style={{ fontSize: 22, color: "#a78bfa", marginLeft: 8 }}>{byline}</div>
+          <div style={{ fontSize: 22, color: "#ff5a6a", marginLeft: 8 }}>{byline}</div>
         </div>
         <div style={{ fontSize: 66, fontWeight: 700, lineHeight: 1.1, maxWidth: 1000 }}>{tagline}</div>
         <div style={{ fontSize: 28, color: "rgba(255,255,255,0.7)", marginTop: 28, maxWidth: 980, lineHeight: 1.4 }}>

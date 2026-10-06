@@ -45,7 +45,7 @@ const CHIPS: Chip[] = [
     pos: "left-[1%] top-[52%] sm:-left-[9%]",
     z: 160,
     delay: 1.05,
-    dot: "bg-[#A78BFA]",
+    dot: "bg-[#ff5a6a]",
   },
 ];
 
@@ -131,11 +131,11 @@ export default function FlowsScene() {
           {/* ambient glow, pushed far back */}
           <div
             aria-hidden="true"
-            className="fx-glow absolute inset-6 rounded-[3rem] bg-gradient-to-br from-violet-600/70 via-fuchsia-500/40 to-emerald-400/20 blur-3xl"
+            className="fx-glow absolute inset-6 rounded-[3rem] bg-gradient-to-br from-white/15 via-white/5 to-transparent blur-3xl"
           />
 
           {/* browser window with the live-site screenshot */}
-          <div className="fx-frame absolute inset-0 overflow-hidden rounded-2xl border border-white/15 bg-[#0d0d10] shadow-[0_70px_160px_-50px_rgba(139,92,246,0.75)]">
+          <div className="fx-frame absolute inset-0 overflow-hidden rounded-2xl border border-white/15 bg-[#0d0d10] shadow-[0_70px_160px_-50px_rgba(0,0,0,0.9)]">
             <div className="flex h-9 items-center gap-2 border-b border-white/10 bg-[#16161a] px-3.5">
               <span className="h-2.5 w-2.5 rounded-full bg-[#ff5f57]" />
               <span className="h-2.5 w-2.5 rounded-full bg-[#febc2e]" />
@@ -168,15 +168,15 @@ export default function FlowsScene() {
           >
             <defs>
               <linearGradient id="fx-wire-grad" x1="0" y1="0" x2="1" y2="0">
-                <stop offset="0" stopColor="#a78bfa" />
-                <stop offset="1" stopColor="#e879f9" />
+                <stop offset="0" stopColor="#ff5a6a" />
+                <stop offset="1" stopColor="#ff8a95" />
               </linearGradient>
             </defs>
             <path id="fx-p1" d="M12 10 C 40 10, 55 -1, 82 -1" />
             <path id="fx-p2" d="M82 -1 C 96 6, 93 22, 88 34" />
             <path id="fx-p3" d="M12 10 C 3 24, 3 42, 11 56" />
             {["fx-p1", "fx-p2", "fx-p3"].map((id, i) => (
-              <circle key={id} r="0.8" fill="#f0abfc" className="fx-pulse">
+              <circle key={id} r="0.8" fill="#ff8a95" className="fx-pulse">
                 <animateMotion dur={`${2.2 + i * 0.5}s`} begin={`${i * 0.6}s`} repeatCount="indefinite">
                   <mpath href={`#${id}`} />
                 </animateMotion>
@@ -201,7 +201,7 @@ export default function FlowsScene() {
 
           {/* workflow panel, front depth */}
           <div
-            className="fx-layer absolute right-0 -bottom-[10%] w-[56%] overflow-hidden rounded-xl border border-white/20 bg-[#121317] shadow-[0_40px_100px_-24px_rgba(139,92,246,0.6)] sm:-right-[8%]"
+            className="fx-layer absolute right-0 -bottom-[10%] w-[56%] overflow-hidden rounded-xl border border-white/20 bg-[#121317] shadow-[0_40px_100px_-24px_rgba(0,0,0,0.6)] sm:-right-[8%]"
             style={{ "--z": "125px", "--m": 1.45, "--d": "0.25s" } as CSSProperties}
           >
             <Image
@@ -219,7 +219,7 @@ export default function FlowsScene() {
             <span
               key={chip.label}
               aria-hidden="true"
-              className={`fx-chip absolute ${chip.pos} flex items-center gap-2.5 rounded-xl border border-white/15 bg-[#160b2e]/90 px-3 py-2 shadow-[0_18px_40px_-16px_rgba(139,92,246,0.9)] backdrop-blur`}
+              className={`fx-chip absolute ${chip.pos} flex items-center gap-2.5 rounded-xl border border-white/15 bg-[#1a1a1a]/90 px-3 py-2 shadow-[0_18px_40px_-16px_rgba(0,0,0,0.9)] backdrop-blur`}
               style={{ "--z": `${chip.z}px`, "--m": 1.6, "--d": `${chip.delay}s` } as CSSProperties}
             >
               <span className={`h-2 w-2 shrink-0 rounded-full ${chip.dot} shadow-[0_0_10px_currentColor]`} />
@@ -237,7 +237,7 @@ export default function FlowsScene() {
           {/* product logo badge */}
           <span
             aria-hidden="true"
-            className="fx-chip absolute left-[43%] -top-[8%] grid h-12 w-12 place-items-center rounded-2xl bg-gradient-to-br from-violet-500 to-fuchsia-500 p-2 shadow-[0_20px_50px_-15px_rgba(217,70,239,0.9)] sm:h-14 sm:w-14"
+            className="fx-chip absolute left-[43%] -top-[8%] grid h-12 w-12 place-items-center rounded-2xl bg-brand-500 p-2 shadow-[0_20px_50px_-15px_rgba(0,0,0,0.9)] sm:h-14 sm:w-14"
             style={{ "--z": "185px", "--m": 1.6, "--d": "1.3s" } as CSSProperties}
           >
             <FlowsLogo className="h-full w-full drop-shadow" />

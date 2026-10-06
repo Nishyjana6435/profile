@@ -12,17 +12,17 @@ import ProductStructuredData from "./ProductStructuredData";
 
 const ACCENT = {
   fuchsia: {
-    gradient: "from-violet-500 to-fuchsia-500",
-    glow: "shadow-[0_12px_40px_-12px_rgba(217,70,239,0.8)]",
-    blob: "bg-fuchsia-600/10",
-    icon: "from-violet-500 via-fuchsia-500 to-violet-600",
+    gradient: "bg-brand-500",
+    glow: "shadow-[0_12px_40px_-12px_rgba(0,0,0,0.8)]",
+    blob: "bg-brand-600/10",
+    icon: "bg-brand-500",
     tilt: "tilt-right" as const,
   },
   sky: {
-    gradient: "from-violet-500 to-sky-500",
-    glow: "shadow-[0_12px_40px_-12px_rgba(56,189,248,0.8)]",
-    blob: "bg-sky-600/10",
-    icon: "from-violet-500 via-indigo-500 to-sky-500",
+    gradient: "bg-brand-500",
+    glow: "shadow-[0_12px_40px_-12px_rgba(0,0,0,0.8)]",
+    blob: "bg-brand-600/10",
+    icon: "bg-brand-500",
     tilt: "tilt-left" as const,
   },
 };
@@ -42,7 +42,7 @@ function withHighlight(text: string, highlight: string) {
 function SectionHeading({ id, eyebrow, title, intro }: { id?: string; eyebrow: string; title: string; intro: string }) {
   return (
     <div className="mx-auto max-w-3xl text-center">
-      <Reveal as="p" variant="fade" className="text-xs uppercase tracking-[0.3em] text-violet-300/70">
+      <Reveal as="p" variant="fade" className="text-xs uppercase tracking-[0.3em] text-brand-300/70">
         {eyebrow}
       </Reveal>
       <Reveal as="h2" delay={80} className="mt-4 text-3xl font-semibold leading-tight text-white sm:text-4xl">
@@ -61,7 +61,7 @@ function ExternalCta({ href, label, accent, big = false }: { href: string; label
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className={`btn-shine group/btn inline-flex items-center gap-2 rounded-full bg-gradient-to-r ${ACCENT[accent].gradient} ${ACCENT[accent].glow} ${big ? "px-8 py-3.5 text-sm" : "px-6 py-2.5 text-xs"} font-medium uppercase tracking-wide text-white transition-transform duration-300 hover:-translate-y-0.5`}
+      className={`btn-shine group/btn inline-flex items-center gap-2 rounded-full ${ACCENT[accent].gradient} ${ACCENT[accent].glow} ${big ? "px-8 py-3.5 text-sm" : "px-6 py-2.5 text-xs"} font-medium uppercase tracking-wide text-white transition-transform duration-300 hover:-translate-y-0.5`}
     >
       {label}
       <span aria-hidden="true" className="transition-transform duration-300 group-hover/btn:translate-x-1">
@@ -81,14 +81,14 @@ export default function ProductLanding({
   const a = ACCENT[config.accent];
 
   return (
-    <div className="flex min-h-full flex-1 flex-col bg-[#0a0514] text-white">
+    <div className="flex min-h-full flex-1 flex-col bg-[#121212] text-white">
       <ProductStructuredData config={config} />
       <Header />
       <main className="flex-1">
         {/* Hero */}
         <section className="relative overflow-hidden px-6 pb-20 pt-16 sm:pt-24">
           <div aria-hidden="true" className={`pointer-events-none absolute right-[-10%] top-1/3 h-[36rem] w-[36rem] rounded-full ${a.blob} blur-[140px]`} />
-          <div aria-hidden="true" className="pointer-events-none absolute left-[-10%] top-0 h-[28rem] w-[40rem] rounded-full bg-violet-700/15 blur-[140px]" />
+          <div aria-hidden="true" className="pointer-events-none absolute left-[-10%] top-0 h-[28rem] w-[40rem] rounded-full bg-brand-700/15 blur-[140px]" />
           <div className="relative mx-auto grid max-w-6xl items-center gap-16 lg:grid-cols-[1fr_1.1fr] lg:gap-12">
             <div>
               <nav aria-label="Breadcrumb" className="text-xs text-white/40">
@@ -98,7 +98,7 @@ export default function ProductLanding({
                   <li className="text-white/70">{config.name}</li>
                 </ol>
               </nav>
-              <Reveal as="p" variant="fade" delay={60} className="mt-6 inline-flex items-center gap-2.5 text-xs uppercase tracking-[0.25em] text-violet-300/70">
+              <Reveal as="p" variant="fade" delay={60} className="mt-6 inline-flex items-center gap-2.5 text-xs uppercase tracking-[0.25em] text-brand-300/70">
                 <span className="relative flex h-2 w-2">
                   <span className="fx-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400" />
                   <span className="relative h-2 w-2 rounded-full bg-emerald-400" />
@@ -117,7 +117,7 @@ export default function ProductLanding({
                 <ExternalCta href={config.hero.primary.href} label={config.hero.primary.label} accent={config.accent} />
                 <a
                   href={config.hero.secondary.href}
-                  className="inline-flex items-center gap-2 rounded-full border border-white/15 px-6 py-2.5 text-xs uppercase tracking-wide text-white/80 transition-all duration-300 hover:border-violet-400/60 hover:bg-violet-500/10 hover:text-white"
+                  className="inline-flex items-center gap-2 rounded-full border border-white/15 px-6 py-2.5 text-xs uppercase tracking-wide text-white/80 transition-all duration-300 hover:border-brand-400/60 hover:bg-brand-500/10 hover:text-white"
                 >
                   {config.hero.secondary.label}
                 </a>
@@ -150,16 +150,16 @@ export default function ProductLanding({
                 <article
                   key={item.title}
                   style={{ "--i": i } as CSSProperties}
-                  className="group flex flex-col rounded-3xl border border-white/10 bg-white/[0.03] p-6 transition-all duration-300 hover:-translate-y-1 hover:border-violet-400/40 hover:bg-violet-500/10"
+                  className="group flex flex-col rounded-3xl border border-white/10 bg-white/[0.03] p-6 transition-all duration-300 hover:-translate-y-1 hover:border-brand-400/40 hover:bg-brand-500/10"
                 >
-                  <span className="text-[11px] uppercase tracking-[0.2em] text-violet-300/70">{item.tag}</span>
+                  <span className="text-[11px] uppercase tracking-[0.2em] text-brand-300/70">{item.tag}</span>
                   <h3 className="mt-2 text-lg font-semibold text-white">{item.title}</h3>
                   <p className="mt-2 text-sm leading-6 text-white/60">{item.body}</p>
                   <ol className="mt-5 flex flex-wrap items-center gap-1.5 text-[11px] text-white/70">
                     {item.flow.map((step, j) => (
                       <li key={step} className="flex items-center gap-1.5">
-                        <span className="rounded-md border border-white/10 bg-[#130a26] px-2 py-1">{step}</span>
-                        {j < item.flow.length - 1 && <span aria-hidden="true" className="text-violet-400">→</span>}
+                        <span className="rounded-md border border-white/10 bg-[#1a1a1a] px-2 py-1">{step}</span>
+                        {j < item.flow.length - 1 && <span aria-hidden="true" className="text-brand-400">→</span>}
                       </li>
                     ))}
                   </ol>
@@ -178,9 +178,9 @@ export default function ProductLanding({
                 <div
                   key={step.title}
                   style={{ "--i": i } as CSSProperties}
-                  className="rounded-3xl border border-white/5 bg-gradient-to-br from-violet-900/40 to-[#1a0f38] p-6"
+                  className="rounded-3xl border border-white/5 bg-[#1a1a1a] p-6"
                 >
-                  <span className={`inline-grid h-10 w-10 place-items-center rounded-xl bg-gradient-to-br ${a.icon} font-mono text-sm font-semibold text-white`}>
+                  <span className={`inline-grid h-10 w-10 place-items-center rounded-xl ${a.icon} font-mono text-sm font-semibold text-white`}>
                     0{i + 1}
                   </span>
                   <h3 className="mt-5 text-lg font-semibold text-white">{step.title}</h3>
@@ -200,7 +200,7 @@ export default function ProductLanding({
                 <div
                   key={f.title}
                   style={{ "--i": i } as CSSProperties}
-                  className="rounded-2xl border border-white/10 bg-white/[0.03] p-5 transition-all duration-300 hover:-translate-y-0.5 hover:border-violet-400/40 hover:bg-violet-500/10"
+                  className="rounded-2xl border border-white/10 bg-white/[0.03] p-5 transition-all duration-300 hover:-translate-y-0.5 hover:border-brand-400/40 hover:bg-brand-500/10"
                 >
                   <h3 className="text-sm font-semibold text-white">{f.title}</h3>
                   <p className="mt-2 text-xs leading-6 text-white/55">{f.body}</p>
@@ -225,7 +225,7 @@ export default function ProductLanding({
                     <th scope="col" className="sticky left-0 z-10 bg-[#0d0718] px-5 py-4 text-xs font-medium uppercase tracking-[0.2em] text-white/40">
                       Criteria
                     </th>
-                    <th scope="col" className="bg-violet-500/10 px-5 py-4 text-sm font-semibold text-white">
+                    <th scope="col" className="bg-brand-500/10 px-5 py-4 text-sm font-semibold text-white">
                       {config.name}
                     </th>
                     {config.comparison.competitors.map((c) => (
@@ -244,7 +244,7 @@ export default function ProductLanding({
                       {row.cells.map((cell, i) => (
                         <td
                           key={i}
-                          className={`px-5 py-4 align-top text-xs leading-6 ${i === 0 ? "bg-violet-500/10 text-white" : "text-white/60"}`}
+                          className={`px-5 py-4 align-top text-xs leading-6 ${i === 0 ? "bg-brand-500/10 text-white" : "text-white/60"}`}
                         >
                           {cell}
                         </td>
@@ -272,12 +272,12 @@ export default function ProductLanding({
                   style={{ "--i": i } as CSSProperties}
                   className={`relative flex flex-col rounded-3xl border p-6 ${
                     plan.highlight
-                      ? "border-violet-400/60 bg-violet-500/10 shadow-[0_30px_80px_-40px_rgba(167,139,250,0.9)]"
+                      ? "border-brand-400/60 bg-brand-500/10 shadow-[0_30px_80px_-40px_rgba(229,30,49,0.9)]"
                       : "border-white/10 bg-white/[0.03]"
                   }`}
                 >
                   {plan.highlight && (
-                    <span className="absolute -top-3 left-6 rounded-full bg-gradient-to-r from-violet-500 to-fuchsia-500 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-white">
+                    <span className="absolute -top-3 left-6 rounded-full bg-brand-500 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-white">
                       Most popular
                     </span>
                   )}
@@ -301,8 +301,8 @@ export default function ProductLanding({
                     rel="noopener noreferrer"
                     className={`mt-6 inline-flex justify-center rounded-full px-4 py-2 text-xs font-medium uppercase tracking-wide transition-all duration-300 hover:-translate-y-0.5 ${
                       plan.highlight
-                        ? `bg-gradient-to-r ${a.gradient} text-white`
-                        : "border border-white/15 text-white/80 hover:border-violet-400/60 hover:bg-violet-500/10 hover:text-white"
+                        ? `${a.gradient} text-white`
+                        : "border border-white/15 text-white/80 hover:border-brand-400/60 hover:bg-brand-500/10 hover:text-white"
                     }`}
                   >
                     {plan.cta}
@@ -319,20 +319,20 @@ export default function ProductLanding({
         {/* Related product + CTA */}
         <section className="px-6 py-20 sm:py-24">
           <div className="mx-auto grid max-w-6xl gap-6 lg:grid-cols-[1.4fr_1fr_1fr]">
-            <Reveal className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-violet-900/50 to-[#1a0f38] p-8 sm:p-12">
+            <Reveal className="relative overflow-hidden rounded-3xl border border-white/10 bg-[#1a1a1a] p-8 sm:p-12">
               <div aria-hidden="true" className={`pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full ${a.blob} blur-3xl`} />
               <h2 className="text-3xl font-semibold leading-tight text-white sm:text-4xl">{config.cta.title}</h2>
               <p className="mt-4 max-w-xl text-sm leading-7 text-white/65">{config.cta.body}</p>
               <div className="mt-8 flex flex-wrap items-center gap-3">
                 <ExternalCta href={config.url} label={config.hero.primary.label} accent={config.accent} big />
-                <a href="#pricing" className="inline-flex items-center rounded-full border border-white/15 px-8 py-3.5 text-sm uppercase tracking-wide text-white/80 transition-all duration-300 hover:border-violet-400/60 hover:bg-violet-500/10 hover:text-white">
+                <a href="#pricing" className="inline-flex items-center rounded-full border border-white/15 px-8 py-3.5 text-sm uppercase tracking-wide text-white/80 transition-all duration-300 hover:border-brand-400/60 hover:bg-brand-500/10 hover:text-white">
                   See pricing
                 </a>
               </div>
             </Reveal>
             <Reveal variant="right" delay={120} className="flex flex-col justify-between rounded-3xl border border-white/10 bg-white/[0.03] p-8">
               <div>
-                <p className="text-xs uppercase tracking-[0.25em] text-violet-300/70">Also by Nishy</p>
+                <p className="text-xs uppercase tracking-[0.25em] text-brand-300/70">Also by Nishy</p>
                 <h3 className="mt-3 text-2xl font-semibold text-white">{config.related.name}</h3>
                 <p className="mt-3 text-sm leading-7 text-white/60">{config.related.blurb}</p>
               </div>
@@ -341,9 +341,9 @@ export default function ProductLanding({
                 <span aria-hidden="true" className="transition-transform duration-300 group-hover:translate-x-1">→</span>
               </Link>
             </Reveal>
-            <Reveal variant="right" delay={200} className="flex flex-col justify-between rounded-3xl border border-violet-400/30 bg-violet-500/10 p-8">
+            <Reveal variant="right" delay={200} className="flex flex-col justify-between rounded-3xl border border-brand-400/30 bg-brand-500/10 p-8">
               <div>
-                <p className="text-xs uppercase tracking-[0.25em] text-violet-300/70">Need something custom?</p>
+                <p className="text-xs uppercase tracking-[0.25em] text-brand-300/70">Need something custom?</p>
                 <h3 className="mt-3 text-2xl font-semibold text-white">I build AI agents and workflows for clients</h3>
                 <p className="mt-3 text-sm leading-7 text-white/60">
                   If {config.name} does not cover your process, I design and build custom agents, automations, RAG assistants and integrations on your data and tools, delivered in weeks.

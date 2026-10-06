@@ -39,7 +39,7 @@ function TiltCard({ project }: { project: MarqueeProject }) {
     <>
       {/* cursor-tracking gradient border */}
       <span aria-hidden="true" className="pm-border absolute inset-0 rounded-2xl" />
-      <span className="absolute inset-px overflow-hidden rounded-[15px] bg-[#110826]">
+      <span className="absolute inset-px overflow-hidden rounded-[15px] bg-[#161616]">
         {/* blurred backdrop of the cover for depth */}
         {project.imageUrl && (
           <Image
@@ -55,7 +55,7 @@ function TiltCard({ project }: { project: MarqueeProject }) {
         <span aria-hidden="true" className="pm-spotlight absolute inset-0" />
         <span
           aria-hidden="true"
-          className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(139,92,246,0.18),transparent_60%)]"
+          className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(0,0,0,0.18),transparent_60%)]"
         />
 
         {/* media */}
@@ -81,14 +81,14 @@ function TiltCard({ project }: { project: MarqueeProject }) {
         <span className="pm-caption absolute inset-x-0 bottom-0 flex items-center justify-between gap-3 border-t border-white/5 bg-black/20 px-5 py-3 backdrop-blur-sm">
           <span className="truncate text-sm font-medium text-white">{project.title}</span>
           {project.tags[0] && (
-            <span className="shrink-0 rounded-full bg-violet-500/15 px-2.5 py-0.5 text-[10px] uppercase tracking-wider text-violet-200 ring-1 ring-violet-400/30">
+            <span className="shrink-0 rounded-full bg-brand-500/15 px-2.5 py-0.5 text-[10px] uppercase tracking-wider text-brand-200 ring-1 ring-brand-400/30">
               {project.tags[0]}
             </span>
           )}
         </span>
 
         {/* hover detail panel */}
-        <span className="pm-detail absolute inset-x-0 bottom-0 flex flex-col gap-3 bg-gradient-to-t from-[#0a0514] via-[#0a0514]/95 to-transparent px-5 pb-5 pt-10">
+        <span className="pm-detail absolute inset-x-0 bottom-0 flex flex-col gap-3 bg-gradient-to-t from-[#121212] via-[#121212]/95 to-transparent px-5 pb-5 pt-10">
           <span className="text-sm font-semibold text-white">{project.title}</span>
           {project.summary && (
             <span className="line-clamp-3 text-xs leading-5 text-white/65">{project.summary}</span>
@@ -106,7 +106,7 @@ function TiltCard({ project }: { project: MarqueeProject }) {
             </span>
           )}
           {project.href && (
-            <span className="mt-1 inline-flex items-center gap-1 text-xs font-medium text-violet-300">
+            <span className="mt-1 inline-flex items-center gap-1 text-xs font-medium text-brand-300">
               Visit project
               <span aria-hidden="true" className="transition-transform duration-300 group-hover:translate-x-1">
                 →
@@ -119,7 +119,7 @@ function TiltCard({ project }: { project: MarqueeProject }) {
   );
 
   const className =
-    "pm-card group relative block h-56 w-[19rem] flex-none rounded-2xl outline-none focus-visible:ring-2 focus-visible:ring-violet-400 sm:w-[22rem]";
+    "pm-card group relative block h-56 w-[19rem] flex-none rounded-2xl outline-none focus-visible:ring-2 focus-visible:ring-brand-400 sm:w-[22rem]";
 
   if (project.href) {
     return (

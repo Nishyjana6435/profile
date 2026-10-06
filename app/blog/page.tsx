@@ -26,7 +26,7 @@ export default async function BlogPage() {
   const [posts, siteSettings] = await Promise.all([getPosts(), getSiteSettings()]);
 
   return (
-    <div className="flex min-h-full flex-1 flex-col bg-[#0a0514] text-white">
+    <div className="flex min-h-full flex-1 flex-col bg-[#121212] text-white">
       <Header />
       <main className="flex-1 px-6 py-20">
         <div className="mx-auto max-w-4xl">
@@ -40,7 +40,7 @@ export default async function BlogPage() {
                 <Link
                   key={post.sys.id}
                   href={`/blog/${post.fields.slug}`}
-                  className="rounded-2xl border border-white/5 bg-gradient-to-br from-violet-900/40 to-[#1a0f38] p-6 transition-colors hover:border-violet-400/40"
+                  className="rounded-2xl border border-white/5 bg-[#1a1a1a] p-6 transition-colors hover:border-brand-400/40"
                 >
                   <p className="text-xs uppercase tracking-wide text-white/40">
                     {new Date(post.fields.publishDate).toLocaleDateString("en-US", {

@@ -1,14 +1,14 @@
 import Link from "next/link";
 import type { SiteSettingsEntry } from "@/lib/contentful";
-import type { CSSProperties } from "react";
 import Reveal from "./Reveal";
+import { Btn } from "./ui";
 
 export const WHATSAPP_URL =
   "https://wa.me/94777125043?text=Hi%2C%20I%27d%20like%20to%20get%20in%20touch";
 
 export function WhatsAppIcon() {
   return (
-    <svg viewBox="0 0 24 24" fill="currentColor" className="h-5 w-5" aria-hidden="true">
+    <svg viewBox="0 0 24 24" fill="currentColor" className="h-4 w-4" aria-hidden="true">
       <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.149-.15.298-.347.446-.522.15-.174.198-.298.298-.497.099-.198.05-.371-.05-.52-.099-.148-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.29.173-1.414-.074-.124-.272-.198-.57-.347z" />
       <path d="M12.001 2C6.478 2 2 6.477 2 12c0 1.876.51 3.634 1.397 5.144L2 22l4.98-1.306A9.953 9.953 0 0 0 12 22c5.523 0 10-4.477 10-10S17.523 2 12.001 2Zm0 18.2a8.19 8.19 0 0 1-4.166-1.15l-.298-.177-2.955.775.79-2.881-.194-.297A8.183 8.183 0 0 1 3.8 12c0-4.522 3.679-8.2 8.201-8.2 4.521 0 8.199 3.678 8.199 8.2 0 4.521-3.678 8.2-8.199 8.2Z" />
     </svg>
@@ -45,77 +45,64 @@ const FOOTER_LINKS = [
   { label: "AI engineer in Sri Lanka", href: "/ai-engineer-sri-lanka" },
   { label: "Hire me", href: "/hire" },
   { label: "Blog", href: "/blog" },
+  { label: "News", href: "/news/agent-studio-flows" },
   { label: "For AI agents & crawlers", href: "/for-agents" },
 ];
 
-export default function Contact({
-  siteSettings,
-}: {
-  siteSettings: SiteSettingsEntry | null;
-}) {
+export default function Contact({ siteSettings }: { siteSettings: SiteSettingsEntry | null }) {
   const fields = siteSettings?.fields;
   const socialLinks = fields?.socialLinks ?? [];
 
   return (
-    <footer className="border-t border-white/5 px-6 py-16">
+    <footer className="px-6 pb-10 pt-16">
       <div className="mx-auto max-w-6xl">
-        <Reveal as="h2" className="text-2xl font-semibold text-white">
-          Contact
-        </Reveal>
-        {fields?.siteDescription && (
-          <Reveal as="p" delay={100} className="mt-4 max-w-xl text-sm leading-6 text-white/60">
-            {fields.siteDescription}
-          </Reveal>
-        )}
-        {fields?.contactEmail && (
-          <Reveal as="p" delay={200} className="mt-6 text-sm text-white/80">
-            {fields.contactEmail}
-          </Reveal>
-        )}
-
-        <Reveal variant="scale" delay={300} className="mt-6 inline-block">
-        <a
-          href={WHATSAPP_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Chat on WhatsApp"
-          className="btn-shine inline-flex items-center gap-2 rounded-full bg-[#25D366] px-5 py-3 text-sm font-semibold text-[#0a0514] shadow-lg shadow-[#25D366]/20 transition-all duration-300 hover:scale-[1.03] hover:shadow-xl hover:shadow-[#25D366]/40"
-        >
-          <WhatsAppIcon />
-          Chat on WhatsApp
-        </a>
-        </Reveal>
-
-        <p className="mt-10 text-xs text-white/50">
-          <Link href="/about" className="text-white/70 hover:text-white">Nishanthan Janarthanarajah (Nishy)</Link>, founder of{" "}
-          <Link href="/agent-studio" className="text-white/70 hover:text-white">Agent Studio</Link> and{" "}
-          <Link href="/flows" className="text-white/70 hover:text-white">Flows</Link>.
-        </p>
-        <nav aria-label="Site" className="mt-4 flex flex-wrap gap-x-6 gap-y-2 text-xs text-white/50">
-          {FOOTER_LINKS.map((link) => (
-            <Link key={link.href} href={link.href} className="transition-colors hover:text-white">
-              {link.label}
-            </Link>
-          ))}
-        </nav>
-
-        {socialLinks.length > 0 && (
-          <Reveal variant="fade" stagger delay={400} className="mt-6 flex gap-4">
-            {socialLinks.map((link, i) => (
-              <a
-                key={link.url}
-                href={link.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={link.platform}
-                style={{ "--i": i } as CSSProperties}
-                className="flex h-9 w-9 items-center justify-center rounded-full border border-white/15 text-white/70 transition-all duration-300 hover:-translate-y-1 hover:border-violet-400/60 hover:bg-violet-500/10 hover:text-white"
-              >
-                <SocialIcon platform={link.platform} />
-              </a>
+        <div className="grid gap-10 lg:grid-cols-[1.2fr_1fr]">
+          <div>
+            <Reveal as="h2" className="display text-5xl text-white sm:text-7xl">
+              Let&apos;s build<span className="text-brand-500">.</span>
+            </Reveal>
+            {fields?.contactEmail && (
+              <Reveal as="p" delay={100} className="mt-6">
+                <a href={`mailto:${fields.contactEmail}`} className="display-sm text-lg text-neutral-300 underline-offset-4 hover:text-white hover:underline sm:text-2xl">
+                  {fields.contactEmail}
+                </a>
+              </Reveal>
+            )}
+            <Reveal delay={200} className="mt-6 flex flex-wrap items-center gap-3">
+              <Btn href={WHATSAPP_URL} solid icon={<WhatsAppIcon />}>
+                Chat on WhatsApp
+              </Btn>
+              {socialLinks.map((link) => (
+                <a
+                  key={link.url}
+                  href={link.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={link.platform}
+                  className="grid h-10 w-10 place-items-center border hairline text-neutral-300 transition-all duration-300 hover:-translate-y-0.5 hover:border-white/40 hover:text-white"
+                >
+                  <SocialIcon platform={link.platform} />
+                </a>
+              ))}
+            </Reveal>
+          </div>
+          <nav aria-label="Site" className="grid grid-cols-2 gap-x-6 gap-y-3 self-end text-sm text-neutral-400">
+            {FOOTER_LINKS.map((link) => (
+              <Link key={link.href} href={link.href} className="transition-colors hover:text-white">
+                {link.label}
+              </Link>
             ))}
-          </Reveal>
-        )}
+          </nav>
+        </div>
+
+        <div className="mt-14 flex flex-col gap-2 border-t hairline pt-6 text-xs text-neutral-500 sm:flex-row sm:items-center sm:justify-between">
+          <p>
+            <Link href="/about" className="text-neutral-300 hover:text-white">Nishanthan Janarthanarajah (Nishy)</Link>, founder of{" "}
+            <Link href="/agent-studio" className="text-neutral-300 hover:text-white">Agent Studio</Link> and{" "}
+            <Link href="/flows" className="text-neutral-300 hover:text-white">Flows</Link>.
+          </p>
+          <p className="label">Colombo, Sri Lanka · worldwide</p>
+        </div>
       </div>
     </footer>
   );

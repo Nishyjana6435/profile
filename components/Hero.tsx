@@ -1,120 +1,122 @@
-import Link from "next/link";
-import { Fragment, type CSSProperties, type ReactNode } from "react";
+import Image from "next/image";
+import type { CSSProperties } from "react";
 import type { ProfileEntry } from "@/lib/contentful";
-import HeroNetwork from "./HeroNetwork";
-import HeroPortrait from "./HeroPortrait";
-import Reveal from "./Reveal";
+import { AGENT_STUDIO_FLOWS_NEWS as NEWS } from "@/lib/news";
+import { Arrow, Btn, Num } from "./ui";
+import Link from "next/link";
+import Parallax from "./Parallax";
 
-type Seg = { text: string; className?: string };
+/* ---------- Wording: the three answers every visitor needs first ---------- */
+const STATEMENT = ["I build AI agents", "and workflows that", "run the business."];
 
-/* ---------- Wording ---------- */
-const HEADLINE: Seg[] = [
-  { text: "Founder of" },
-  { text: "Agent Studio & Flows.", className: "text-shimmer" },
-  { text: "I build AI that runs the business." },
-];
-const SUMMARY: Seg[] = [
-  { text: "I started Agent Studio and Flows to get AI out of the demo and into daily work. I bring that" },
-  { text: "founder's ownership", className: "text-white" },
-  { text: "to every client build and every team I lead:" },
-  { text: "7+ years of full stack engineering,", className: "text-white" },
-  { text: "production RAG and agent systems, and engineering leadership as" },
-  { text: "Associate Technical Lead at Eight25Media.", className: "text-white" },
-];
-const DOORS = [
-  { who: "For businesses", label: "Build an AI system with me", href: "/build-ai-system-for-your-business", primary: true },
-  { who: "For recruiters", label: "See my career & leadership", href: "/about", primary: false },
-];
-const STATS = [
-  { value: "7+", label: "years shipping software" },
-  { value: "2", label: "AI products founded" },
-  { value: "6→31", label: "engineers led" },
-  { value: "US", label: "enterprise clients" },
+const ANSWERS = [
+  {
+    tag: "What I do",
+    title: "AI that does the job.",
+    body: "Agents, workflows and RAG assistants that complete real business processes. Not demos.",
+  },
+  {
+    tag: "How I do it",
+    title: "Products first. Custom when needed.",
+    body: "Agent Studio and Flows, the two products I founded, or a custom build on your data and your tools.",
+  },
+  {
+    tag: "How long",
+    title: "7+ years. 2 live products.",
+    body: "Production software since 2019, two AI products launched in 2026, teams of up to 31 engineers led.",
+  },
 ];
 
-const countWords = (segs: Seg[]) => segs.reduce((n, s) => n + s.text.split(/\s+/).filter(Boolean).length, 0);
-const HEAD_COUNT = countWords(HEADLINE);
-const TOTAL_WORDS = HEAD_COUNT + countWords(SUMMARY);
-
-/** Words stay in the HTML for crawlers; CSS types them in one by one. */
-function typeWords(segs: Seg[], start: number): ReactNode[] {
-  let i = start;
-  const out: ReactNode[] = [];
-  segs.forEach((seg, si) => {
-    seg.text.split(/\s+/).filter(Boolean).forEach((w, wi) => {
-      out.push(
-        <Fragment key={`${si}-${wi}`}>
-          <span className={`tw-word ${seg.className ?? ""}`} style={{ "--w": i } as CSSProperties}>
-            {w}
-          </span>{" "}
-        </Fragment>,
-      );
-      i += 1;
-    });
-  });
-  return out;
-}
+const d = (s: number) => ({ "--d": `${s}s` }) as CSSProperties;
 
 export default function Hero({ profile }: { profile: ProfileEntry | null }) {
   const fields = profile?.fields;
   const avatar = fields?.avatar && "fields" in fields.avatar ? fields.avatar : undefined;
-  const avatarFile = avatar?.fields.file;
+  const src = avatar?.fields.file?.url ? `https:${avatar.fields.file.url}` : undefined;
   const name = fields?.name ?? "Nishanthan Janarthanarajah";
+  const location = fields?.location ?? "Colombo, Sri Lanka";
 
   return (
-    <section className="hx relative overflow-hidden px-6 pb-16 pt-10 sm:pb-20 sm:pt-14">
-      {/* backdrop */}
-      <div aria-hidden="true" className="hx-grid pointer-events-none absolute inset-0" />
-      <div aria-hidden="true" className="hx-aurora pointer-events-none absolute left-1/2 top-[-10%] h-[46rem] w-[70rem] -translate-x-1/2" />
-      <HeroNetwork />
+    <section className="rules relative overflow-hidden border-b hairline">
+      {/* news line */}
+      <Link
+        href={NEWS.path}
+        className="group flex items-center justify-center gap-3 border-b hairline px-6 py-2.5 text-center transition-colors hover:bg-white/[0.03]"
+      >
+        <span className="bg-brand-500 px-1.5 py-0.5 font-mono text-[10px] font-bold uppercase tracking-[0.16em] text-white">New</span>
+        <span className="truncate text-xs text-neutral-300 sm:text-sm">{NEWS.title}</span>
+        <Arrow className="h-3 w-3 text-neutral-500 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-white" />
+      </Link>
 
-      <Reveal variant="fade" threshold={0.05} className="tw relative mx-auto max-w-6xl text-center">
-        <HeroPortrait
-          src={avatarFile?.url ? `https:${avatarFile.url}` : undefined}
-          alt={`${name} (Nishy), founder of Agent Studio and Flows`}
-        />
-
-        {/* copy */}
-        <p className="tw-eyebrow mt-4 text-xs uppercase tracking-[0.3em] text-white/55 sm:text-sm">
-          Hi, I&apos;m <span className="text-violet-300">{name}</span> · Nishy
+      <div className="relative mx-auto max-w-6xl px-6 pt-10 sm:pt-14">
+        <p className="label hero-up flex flex-wrap items-center gap-x-3 gap-y-1 text-neutral-400" style={d(0.05)}>
+          <Arrow className="h-3 w-3 text-brand-500" />
+          <span className="text-white">{name}</span>
+          <span className="hidden sm:inline">·</span>
+          <span>Founder of Agent Studio &amp; Flows</span>
+          <span className="hidden sm:inline">·</span>
+          <span>{location}</span>
         </p>
-        <h1 className="mx-auto mt-5 max-w-5xl text-4xl font-semibold leading-[1.06] tracking-tight text-white sm:text-6xl lg:text-7xl">
-          {typeWords(HEADLINE, 0)}
-        </h1>
-        <p className="mx-auto mt-7 max-w-3xl text-base leading-8 text-white/65 sm:text-lg sm:leading-9">{typeWords(SUMMARY, HEAD_COUNT)}</p>
 
-        {/* two doors */}
-        <div className="tw-chip mx-auto mt-10 grid max-w-2xl gap-3 sm:grid-cols-2" style={{ "--tw-end": TOTAL_WORDS, "--c": 0 } as CSSProperties}>
-          {DOORS.map((d) => (
-            <Link
-              key={d.href}
-              href={d.href}
-              className={`hx-door group relative flex items-center justify-between gap-3 overflow-hidden rounded-2xl px-5 py-4 text-left transition-all duration-300 hover:-translate-y-1 ${
-                d.primary
-                  ? "bg-gradient-to-r from-violet-600 to-fuchsia-600 shadow-[0_20px_50px_-20px_rgba(217,70,239,0.9)]"
-                  : "border border-white/15 bg-white/[0.04] hover:border-violet-400/60 hover:bg-violet-500/10"
-              }`}
-            >
-              <span>
-                <span className={`block text-[10px] uppercase tracking-[0.22em] ${d.primary ? "text-white/75" : "text-violet-300/80"}`}>{d.who}</span>
-                <span className="mt-0.5 block text-sm font-semibold text-white">{d.label}</span>
+        {/* name + portrait overlap */}
+        <div className="relative mt-6">
+          <h1 className="display hero-name text-white">
+            <span className="hero-mask">
+              <span style={d(0.15)}>Nishy</span>
+            </span>
+          </h1>
+
+          <div className="hero-portrait relative mt-6 w-[62%] max-w-[18rem] sm:w-[40%] lg:absolute lg:right-[2%] lg:top-[22%] lg:mt-0 lg:w-[27%] lg:max-w-[21rem]">
+            <Parallax strength={10}>
+            <div className="hero-portrait-float relative aspect-[4/5] overflow-hidden border border-white/15 bg-ink-700 shadow-[0_60px_120px_-40px_rgba(0,0,0,0.9)]">
+              {src ? (
+                <Image src={src} alt={`${name} (Nishy), founder of Agent Studio and Flows`} fill priority sizes="(min-width: 1024px) 336px, 60vw" className="object-cover" />
+              ) : (
+                <span className="grid h-full w-full place-items-center text-6xl font-semibold text-white/60">N</span>
+              )}
+              <span className="absolute bottom-3 left-3 inline-flex items-center gap-1.5 bg-[#121212]/85 px-2 py-1 font-mono text-[10px] uppercase tracking-[0.16em] text-white backdrop-blur">
+                <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
+                Available for projects
               </span>
-              <span aria-hidden="true" className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-white/15 text-white transition-transform duration-300 group-hover:translate-x-1">
-                →
-              </span>
-            </Link>
-          ))}
+            </div>
+            </Parallax>
+          </div>
         </div>
 
-        <ul className="mt-8 flex flex-wrap items-center justify-center gap-x-8 gap-y-4" style={{ "--tw-end": TOTAL_WORDS } as CSSProperties}>
-          {STATS.map((s, i) => (
-            <li key={s.label} className="tw-chip text-center" style={{ "--c": i + 1 } as CSSProperties}>
-              <span className="block text-2xl font-semibold text-white sm:text-3xl">{s.value}</span>
-              <span className="block text-[11px] uppercase tracking-[0.16em] text-white/45">{s.label}</span>
+        {/* statement + doors */}
+        <div className="mt-8 max-w-xl lg:mt-12 lg:min-h-[16rem]">
+          <p className="display text-2xl text-white sm:text-4xl">
+            {STATEMENT.map((line, i) => (
+              <span key={line} className="hero-mask">
+                <span style={d(0.55 + i * 0.1)}>{line}</span>
+              </span>
+            ))}
+          </p>
+          <div className="hero-up mt-7 flex flex-wrap gap-3" style={d(0.95)}>
+            <Btn href="/build-ai-system-for-your-business" solid>
+              Build with me
+            </Btn>
+            <Btn href="#proof">See the work</Btn>
+          </div>
+        </div>
+      </div>
+
+      {/* the three answers */}
+      <div className="mx-auto mt-14 max-w-6xl px-6 pb-10 sm:mt-20 sm:pb-14">
+        <ol className="grid border-t hairline sm:grid-cols-3 sm:border-x sm:border-b">
+          {ANSWERS.map((a, i) => (
+            <li
+              key={a.tag}
+              className="hero-up border-b hairline p-6 transition-colors duration-300 hover:bg-white/[0.025] sm:border-b-0 sm:border-r sm:last:border-r-0 sm:p-7"
+              style={d(1.05 + i * 0.12)}
+            >
+              <Num n={i + 1}>{a.tag}</Num>
+              <h2 className="display-sm mt-4 text-xl text-white sm:text-2xl">{a.title}</h2>
+              <p className="mt-2 text-sm leading-6 text-neutral-400">{a.body}</p>
             </li>
           ))}
-        </ul>
-      </Reveal>
+        </ol>
+      </div>
     </section>
   );
 }

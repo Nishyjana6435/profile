@@ -22,7 +22,7 @@ function withHighlight(text: string, highlight?: string) {
   return (
     <>
       {text.slice(0, index)}
-      <span className="text-violet-400">
+      <span className="text-brand-400">
         {text.slice(index, index + highlight.length)}
       </span>
       {text.slice(index + highlight.length)}
@@ -73,7 +73,7 @@ export default async function HirePage() {
     .map((item) => ({ question: item.fields.question, answer: item.fields.answer }));
 
   return (
-    <div className="flex min-h-full flex-1 flex-col bg-[#0a0514] text-white">
+    <div className="flex min-h-full flex-1 flex-col bg-[#121212] text-white">
       <Header />
       <main className="flex-1">
         <section className="px-6 pt-20 pb-16">
@@ -96,17 +96,17 @@ export default async function HirePage() {
 
             <p className="mt-6 text-sm text-white/60">
               Want someone to{" "}
-              <Link href="/build-ai-system-for-your-business" className="text-violet-300 underline-offset-4 hover:text-white hover:underline">
+              <Link href="/build-ai-system-for-your-business" className="text-brand-300 underline-offset-4 hover:text-white hover:underline">
                 build an AI system for your business
               </Link>
               ? Based in Sri Lanka?{" "}
-              <Link href="/ai-engineer-sri-lanka" className="text-violet-300 underline-offset-4 hover:text-white hover:underline">
+              <Link href="/ai-engineer-sri-lanka" className="text-brand-300 underline-offset-4 hover:text-white hover:underline">
                 Read how I work with local businesses
               </Link>
               , or start with my products{" "}
-              <Link href="/flows" className="text-violet-300 underline-offset-4 hover:text-white hover:underline">Flows</Link>
+              <Link href="/flows" className="text-brand-300 underline-offset-4 hover:text-white hover:underline">Flows</Link>
               {" "}and{" "}
-              <Link href="/agent-studio" className="text-violet-300 underline-offset-4 hover:text-white hover:underline">Agent Studio</Link>.
+              <Link href="/agent-studio" className="text-brand-300 underline-offset-4 hover:text-white hover:underline">Agent Studio</Link>.
             </p>
 
             {fields?.engagementTypes && fields.engagementTypes.length > 0 && (
@@ -132,7 +132,7 @@ export default async function HirePage() {
                 {services.map((service) => (
                   <div
                     key={service.sys.id}
-                    className="rounded-2xl border border-white/5 bg-gradient-to-br from-violet-900/40 to-[#1a0f38] p-6"
+                    className="rounded-2xl border border-white/5 bg-[#1a1a1a] p-6"
                   >
                     <h3 className="font-medium text-white">{service.fields.title}</h3>
                     <p className="mt-2 text-sm leading-6 text-white/60">
