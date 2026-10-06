@@ -33,7 +33,7 @@ export const PRESETS = {
 export type AccentScale = Record<50 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 950, string>;
 
 /** 👇 change this line to experiment */
-export const ACCENT: AccentScale = PRESETS.blue;
+export const ACCENT: AccentScale = PRESETS.green;
 
 export const STEPS = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950] as const;
 
