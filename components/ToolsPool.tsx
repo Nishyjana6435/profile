@@ -170,11 +170,11 @@ export default function ToolsPool() {
         {/* Detail card for the selected tool */}
         <div
           key={tool.id}
-          className="tp-card mx-auto mt-4 flex max-w-2xl flex-col items-center gap-5 border border-white/10 bg-white/[0.03] p-6 text-center backdrop-blur sm:flex-row sm:text-left"
+          className="tp-card tp-card--glass mx-auto mt-4 flex max-w-2xl flex-col items-center gap-6 rounded-3xl p-7 text-center backdrop-blur-xl sm:flex-row sm:p-8 sm:text-left"
           style={{ "--c": tool.color } as CSSProperties}
           aria-live="polite"
         >
-          <span className="tp-card-icon grid h-16 w-16 shrink-0 place-items-center p-3.5">
+          <span className="tp-card-icon grid h-20 w-20 shrink-0 place-items-center rounded-2xl p-4">
             {tool.icon}
           </span>
           <div className="min-w-0 flex-1">

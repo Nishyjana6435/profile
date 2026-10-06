@@ -1330,3 +1330,38 @@ html, body { overflow-x: clip; }
   }
   @media (prefers-reduced-motion: reduce) { .strip-sheen { display: none; } }
 }
+
+/* ---------- Tool kit detail card: curved glass with an accent edge ---------- */
+@layer components {
+  .tp-card--glass {
+    position: relative;
+    background:
+      linear-gradient(160deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.015) 60%),
+      radial-gradient(120% 90% at 0% 0%, color-mix(in srgb, var(--c, var(--accent)) 16%, transparent), transparent 55%),
+      #141414;
+    border: 1px solid transparent;
+    background-clip: padding-box;
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.1),
+      0 30px 80px -30px color-mix(in srgb, var(--c, var(--accent)) 55%, transparent),
+      0 0 0 1px color-mix(in srgb, var(--c, var(--accent)) 30%, rgba(255, 255, 255, 0.08));
+  }
+  /* gradient edge that fades around the corners */
+  .tp-card--glass::before {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(135deg, color-mix(in srgb, var(--c, var(--accent)) 70%, white 10%), transparent 40%, transparent 60%, color-mix(in srgb, var(--c, var(--accent)) 45%, transparent));
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+  .tp-card--glass .tp-card-icon {
+    border-radius: 1rem;
+    box-shadow: 0 16px 40px -14px var(--c, var(--accent)), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  }
+}
