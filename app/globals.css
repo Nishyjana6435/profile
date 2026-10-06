@@ -5,7 +5,9 @@
   --background: #121212;
   --foreground: #ffffff;
   --muted: #a5a5a5;
-  --line: rgba(255, 255, 255, 0.1);
+  /* hairlines carry a hint of the accent, so they follow lib/theme.ts */
+  --line: color-mix(in srgb, rgb(var(--accent-500-rgb)) 55%, rgba(255, 255, 255, 0.6));
+  --line-alpha: 0.28;
   --accent: var(--accent-500); /* set in lib/theme.ts */
 }
 
@@ -82,7 +84,7 @@ body {
   background-image: repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.035) 0 1px, transparent 1px 96px);
 }
 .hairline {
-  border-color: var(--line);
+  border-color: color-mix(in srgb, var(--line) calc(var(--line-alpha) * 100%), transparent);
 }
 }
 
