@@ -49,7 +49,7 @@ export default function FlowsShowcase() {
               <span className="label basis-full text-neutral-500">10 runs a month free · No card required</span>
             </Reveal>
           </div>
-          <Reveal variant="tilt-right" threshold={0.2} className="px-5 pb-14 pt-10 sm:px-12 lg:px-10">
+          <Reveal variant="tilt-right" threshold={0.2} className="py-4">
             <div data-cursor="Tilt">
             <FlowsScene />
             </div>

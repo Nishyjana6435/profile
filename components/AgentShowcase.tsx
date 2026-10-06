@@ -19,7 +19,7 @@ export default function AgentShowcase() {
           title={[{ text: `${AGENT_STUDIO.name}.` }, { text: AGENT_STUDIO.tagline, className: "text-neutral-500" }]}
         />
         <div className="mt-14 grid items-center gap-16 lg:grid-cols-[1.2fr_1fr] lg:gap-14">
-          <Reveal variant="tilt-left" threshold={0.2} className="order-last px-5 pb-14 pt-10 sm:px-12 lg:order-first lg:px-10">
+          <Reveal variant="tilt-left" threshold={0.2} className="order-last py-4 lg:order-first">
             <div data-cursor="Tilt">
             <AgentScene />
             </div>
