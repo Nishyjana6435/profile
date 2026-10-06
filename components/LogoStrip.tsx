@@ -27,18 +27,21 @@ export default function LogoStrip({ items }: { items: ExperienceItemEntry[] }) {
   if (list.length < 3) return null;
   const copies = 4;
   return (
-    <div className="strip overflow-hidden border-b hairline py-5 [mask-image:linear-gradient(to_right,transparent,black_6%,black_94%,transparent)]" aria-label="Companies and products">
+    <div className="strip strip--glow relative overflow-hidden border-y border-brand-500/40 py-5" aria-label="Companies and products">
+      <span aria-hidden="true" className="strip-sheen pointer-events-none absolute inset-y-0 left-0" />
       <div className="strip-track flex w-max" style={{ "--dur": `${Math.max(28, list.length * 5)}s`, "--copies": copies } as CSSProperties}>
         {Array.from({ length: copies }, (_, c) => (
           <ul key={c} className="flex gap-4 pr-4" aria-hidden={c > 0}>
             {list.map((m) => (
-              <li key={`${c}-${m.key}`} className="flex h-16 w-60 flex-none items-center gap-3 border hairline bg-white/[0.02] px-5 transition-colors duration-300 hover:bg-white/[0.05]">
-                {m.node ?? (
-                  <span className="relative block h-9 w-20 shrink-0">
-                    <Image src={m.logoUrl!} alt="" fill sizes="80px" unoptimized className="object-contain object-left brightness-0 invert" />
+              <li key={`${c}-${m.key}`} className="flex h-16 w-44 flex-none items-center justify-center border border-brand-500/50 bg-[#121212] px-5 shadow-[0_0_28px_-4px_rgb(var(--accent-500-rgb)/0.55)] transition-all duration-300 hover:border-brand-400 hover:shadow-[0_0_40px_-2px_rgb(var(--accent-500-rgb)/0.9)]">
+                {m.node ? (
+                  <span className="[&>svg]:h-9 [&>svg]:w-9">{m.node}</span>
+                ) : (
+                  <span className="relative block h-9 w-28">
+                    <Image src={m.logoUrl!} alt="" fill sizes="112px" unoptimized className="object-contain brightness-0 invert" />
                   </span>
                 )}
-                <span className="truncate text-sm font-medium text-neutral-300">{m.name}</span>
+                <span className="sr-only">{m.name}</span>
               </li>
             ))}
           </ul>

@@ -88,7 +88,7 @@ export default function Contact({ siteSettings }: { siteSettings: SiteSettingsEn
               ))}
             </Reveal>
           </div>
-          <nav aria-label="Site" className="grid grid-cols-2 gap-x-6 gap-y-3 self-end text-sm text-neutral-400">
+          <nav aria-label="Site" className="grid grid-cols-2 gap-x-6 gap-y-3 self-end text-[15px] font-medium text-neutral-300">
             {FOOTER_LINKS.map((link) => (
               <Link key={link.href} href={link.href} className="transition-colors hover:text-white">
                 {link.label}
@@ -97,13 +97,13 @@ export default function Contact({ siteSettings }: { siteSettings: SiteSettingsEn
           </nav>
         </div>
 
-        <div className="mt-14 flex flex-col gap-2 border-t hairline pt-6 text-xs text-neutral-500 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-14 flex flex-col gap-2 border-t hairline pt-6 text-sm font-medium text-neutral-400 sm:flex-row sm:items-center sm:justify-between">
           <p>
             <Link href="/about" className="text-neutral-300 hover:text-white">Nishanthan Janarthanarajah (Nishy)</Link>, founder of{" "}
             <Link href="/agent-studio" className="text-neutral-300 hover:text-white">Agent Studio</Link> and{" "}
             <Link href="/flows" className="text-neutral-300 hover:text-white">Flows</Link>.
           </p>
-          <p className="label">Colombo, Sri Lanka · worldwide</p>
+          <p className="nav-text text-neutral-400">Colombo, Sri Lanka · worldwide</p>
         </div>
       </div>
     </footer>

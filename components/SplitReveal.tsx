@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, type CSSProperties } from "react";
+import { Fragment, useEffect, useRef, type CSSProperties } from "react";
 
 export type Seg = { text: string; className?: string };
 
@@ -31,9 +31,11 @@ export default function SplitReveal({ segs, as = "h2", className = "" }: { segs:
     <Tag ref={ref as never} className={`sr ${className}`}>
       {segs.map((s, si) =>
         s.text.split(" ").filter(Boolean).map((w, wi) => (
-          <span key={`${si}-${wi}`} className="sr-word">
-            <span className={s.className} style={{ "--i": i++ } as CSSProperties}>{w}</span>{" "}
-          </span>
+          <Fragment key={`${si}-${wi}`}>
+            <span className="sr-word">
+              <span className={s.className} style={{ "--i": i++ } as CSSProperties}>{w}</span>
+            </span>{" "}
+          </Fragment>
         )),
       )}
     </Tag>

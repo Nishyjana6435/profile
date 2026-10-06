@@ -28,7 +28,7 @@
   --color-ink-700: #1a1a1a;
   --color-ink-600: #1f1f1f;
   --color-ink-500: #2a2a2a;
-  --font-sans: var(--font-geist-sans);
+  --font-sans: var(--font-inter);
   --font-mono: var(--font-geist-mono);
   --font-display: var(--font-space-grotesk);
 }
@@ -36,7 +36,8 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-geist-sans), Inter, system-ui, sans-serif;
+  /* explanatory copy reads in Inter; headings in Space Grotesk; labels in mono */
+  font-family: var(--font-inter), Inter, system-ui, sans-serif;
 }
 
 ::selection {
@@ -47,17 +48,28 @@ body {
 @layer components {
 /* Display type: big, bold, uppercase, tight */
 .display {
-  font-family: var(--font-space-grotesk), var(--font-geist-sans), sans-serif;
+  font-family: var(--font-space-grotesk), var(--font-inter), sans-serif;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: -0.03em;
   line-height: 0.92;
 }
 .display-sm {
-  font-family: var(--font-space-grotesk), var(--font-geist-sans), sans-serif;
+  font-family: var(--font-space-grotesk), var(--font-inter), sans-serif;
   font-weight: 600;
   letter-spacing: -0.02em;
   line-height: 1.05;
+}
+/* navigation and footer text: Inter, a touch heavier and larger than labels */
+.nav-text {
+  font-family: var(--font-inter), Inter, system-ui, sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+@media (min-width: 640px) {
+  .nav-text { font-size: 14px; }
 }
 .label {
   font-family: var(--font-geist-mono), monospace;
@@ -1234,6 +1246,7 @@ html, body { overflow-x: clip; }
 .btn {
   display: inline-flex; align-items: center; gap: 0.75rem;
   padding: 0.55rem 1rem 0.55rem 0.55rem;
+  border-radius: 8px;
   border: 1px solid rgba(255, 255, 255, 0.14);
   font-size: 11px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase;
   color: #fff; background: #121212;
@@ -1244,6 +1257,7 @@ html, body { overflow-x: clip; }
 .btn--solid:hover { background: #f1f1f1; border-color: #f1f1f1; }
 .btn-ico {
   display: grid; place-items: center; width: 1.6rem; height: 1.6rem; flex: none;
+  border-radius: 5px;
   background: var(--accent); color: #fff;
   transition: transform 0.3s cubic-bezier(0.2, 0.7, 0.2, 1);
 }
@@ -1473,4 +1487,19 @@ html, body { overflow-x: clip; }
     .hero-scan { display: none; }
     .hero-sheet img, .hero-sheet-tint { transition: none; }
   }
+}
+
+/* ---------- Logo strip: dark band with an accent glow and a sweeping sheen ---------- */
+@keyframes strip-sheen { from { transform: translateX(-100%); } to { transform: translateX(350%); } }
+@layer components {
+  .strip--glow {
+    background-image: radial-gradient(70% 180% at 50% 50%, rgb(var(--accent-500-rgb) / 0.16), transparent 72%);
+  }
+  .strip-sheen {
+    width: 30%;
+    background: linear-gradient(90deg, transparent, rgb(var(--accent-500-rgb) / 0.42) 50%, transparent);
+    mix-blend-mode: screen;
+    animation: strip-sheen 7s ease-in-out infinite;
+  }
+  @media (prefers-reduced-motion: reduce) { .strip-sheen { display: none; } }
 }

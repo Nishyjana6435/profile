@@ -52,7 +52,7 @@ export default function Hero({ profile }: { profile: ProfileEntry | null }) {
       </Link>
 
       <div className="relative mx-auto max-w-6xl px-6 pt-10 text-center sm:pt-14 lg:text-left">
-        <p className="label hero-up flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-neutral-400 lg:justify-start" style={d(0.05)}>
+        <p className="label hero-up flex flex-wrap items-center justify-center gap-x-3 gap-y-1 !text-[13px] text-neutral-400 sm:!text-sm lg:justify-start" style={d(0.05)}>
           <Arrow className="h-3 w-3 text-brand-500" />
           <span className="text-white">{name}</span>
           <span className="hidden sm:inline">·</span>

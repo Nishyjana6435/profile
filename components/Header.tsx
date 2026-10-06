@@ -23,12 +23,12 @@ export default function Header() {
             <Link
               key={link.href}
               href={link.href}
-              className={`nav-link label whitespace-nowrap text-neutral-300 transition-colors hover:text-white ${link.hideOnMobile ? "hidden sm:inline" : ""}`}
+              className={`nav-link nav-text whitespace-nowrap text-neutral-200 transition-colors hover:text-white ${link.hideOnMobile ? "hidden sm:inline" : ""}`}
             >
               {link.label}
             </Link>
           ))}
-          <Btn href="/build-ai-system-for-your-business" className="hidden md:inline-flex">
+          <Btn href="/build-ai-system-for-your-business" className="hidden !text-[12px] md:inline-flex">
             Build with me
           </Btn>
         </nav>
