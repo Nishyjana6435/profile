@@ -15,8 +15,8 @@ export function Arrow({ className = "h-3 w-3" }: { className?: string }) {
 /** Tiny uppercase section marker with the red arrow in front. */
 export function Eyebrow({ children, className = "" }: { children: ReactNode; className?: string }) {
   return (
-    <p className={`label inline-flex items-center gap-2 text-neutral-400 ${className}`}>
-      <Arrow className="h-3 w-3 text-brand-500" />
+    <p className={`eyebrow inline-flex items-center gap-2 text-neutral-300 ${className}`}>
+      <Arrow className="h-3.5 w-3.5 text-brand-500" />
       <span>{children}</span>
     </p>
   );
@@ -85,7 +85,7 @@ export function SectionHead({
   return (
     <div className={`${center ? "mx-auto max-w-3xl text-center" : "max-w-3xl"} ${className}`}>
       <div className={`flex items-center gap-3 ${center ? "justify-center" : ""}`}>
-        {n !== undefined && <span className="label text-brand-400">{pad(n)}</span>}
+        {n !== undefined && <span className="eyebrow text-brand-400">{pad(n)}</span>}
         <Eyebrow>{eyebrow}</Eyebrow>
       </div>
       <SplitReveal segs={typeof title === "string" ? [{ text: title }] : title} className="display mt-5 text-4xl text-white sm:text-6xl" />

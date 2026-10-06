@@ -62,6 +62,17 @@ body {
   letter-spacing: -0.02em;
   line-height: 1.05;
 }
+/* section eyebrows: Inter, slightly larger than the mono labels */
+.eyebrow {
+  font-family: var(--font-inter), Inter, system-ui, sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+@media (min-width: 640px) {
+  .eyebrow { font-size: 14px; }
+}
 /* navigation and footer text: Inter, a touch heavier and larger than labels */
 .nav-text {
   font-family: var(--font-inter), Inter, system-ui, sans-serif;
