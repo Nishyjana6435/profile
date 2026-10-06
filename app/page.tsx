@@ -7,6 +7,7 @@ import FlowsShowcase from "@/components/FlowsShowcase";
 import AgentShowcase from "@/components/AgentShowcase";
 import ToolsPool from "@/components/ToolsPool";
 import Process from "@/components/Process";
+import Intermission from "@/components/Intermission";
 import WorkExperience from "@/components/WorkExperience";
 import ProjectCarousel from "@/components/ProjectCarousel";
 import FeaturedProjects from "@/components/FeaturedProjects";
@@ -91,6 +92,7 @@ export default async function Home() {
         <AgentShowcase />
         <ToolsPool />
         <Process />
+        <Intermission />
         <WorkExperience items={experienceItems} />
         {projectCarousels.map((carousel) => (
           <ProjectCarousel key={carousel.sys.id} carousel={carousel} />

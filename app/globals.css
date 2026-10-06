@@ -1454,3 +1454,39 @@ html, body { overflow-x: clip; }
     .np-pulse { display: none; }
   }
 }
+
+/* ---------- Arcade game ---------- */
+@keyframes game-blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
+@keyframes game-glitch {
+  0%, 89%, 100% { clip-path: inset(0 0 0 0); transform: none; }
+  90% { clip-path: inset(10% 0 60% 0); transform: translate(-6px, 0); }
+  92% { clip-path: inset(50% 0 20% 0); transform: translate(6px, 0); }
+  94% { clip-path: inset(70% 0 5% 0); transform: translate(-3px, 0); }
+  96% { clip-path: inset(0 0 0 0); transform: none; }
+}
+@layer components {
+  .game-bezel {
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: #121212;
+    box-shadow: 0 0 0 6px #0b0b0c, 0 0 0 7px rgba(255, 255, 255, 0.08), 0 60px 120px -40px rgba(0, 0, 0, 0.9), inset 0 0 60px rgba(0, 0, 0, 0.6);
+  }
+  .game-scan {
+    background: repeating-linear-gradient(to bottom, rgba(255, 255, 255, 0.035) 0 1px, transparent 1px 3px);
+    mix-blend-mode: overlay;
+  }
+  .game-blink { animation: game-blink 1.4s ease-in-out infinite; }
+  .game-glitch { position: relative; }
+  .game-glitch::before,
+  .game-glitch::after {
+    content: attr(data-text);
+    position: absolute; inset: 0;
+    pointer-events: none;
+    animation: game-glitch 5s steps(1) infinite;
+  }
+  .game-glitch::before { color: #4df0ff; animation-delay: 0.1s; mix-blend-mode: screen; }
+  .game-glitch::after { color: #ff2bd6; animation-delay: 0.2s; mix-blend-mode: screen; }
+  @media (prefers-reduced-motion: reduce) {
+    .game-blink, .game-glitch::before, .game-glitch::after { animation: none; }
+    .game-glitch::before, .game-glitch::after { display: none; }
+  }
+}
