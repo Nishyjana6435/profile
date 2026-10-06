@@ -51,8 +51,8 @@ export default function Hero({ profile }: { profile: ProfileEntry | null }) {
         <Arrow className="h-3 w-3 text-neutral-500 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-white" />
       </Link>
 
-      <div className="relative mx-auto max-w-6xl px-6 pt-10 sm:pt-14">
-        <p className="label hero-up flex flex-wrap items-center gap-x-3 gap-y-1 text-neutral-400" style={d(0.05)}>
+      <div className="relative mx-auto max-w-6xl px-6 pt-10 text-center sm:pt-14 lg:text-left">
+        <p className="label hero-up flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-neutral-400 lg:justify-start" style={d(0.05)}>
           <Arrow className="h-3 w-3 text-brand-500" />
           <span className="text-white">{name}</span>
           <span className="hidden sm:inline">·</span>
@@ -71,7 +71,7 @@ export default function Hero({ profile }: { profile: ProfileEntry | null }) {
             </span>
           </h1>
 
-          <div className="hero-portrait relative mt-6 w-[62%] max-w-[18rem] sm:w-[40%] lg:absolute lg:right-[2%] lg:top-[22%] lg:mt-0 lg:w-[27%] lg:max-w-[21rem]">
+          <div className="hero-portrait relative mx-auto mt-6 w-[62%] max-w-[18rem] sm:w-[40%] lg:absolute lg:mx-0 lg:right-[2%] lg:top-[22%] lg:mt-0 lg:w-[27%] lg:max-w-[21rem]">
             <Parallax strength={10}>
             <div className="hero-portrait-float relative aspect-[4/5] overflow-hidden border border-white/15 bg-ink-700 shadow-[0_60px_120px_-40px_rgba(0,0,0,0.9)]">
               {src ? (
@@ -89,7 +89,7 @@ export default function Hero({ profile }: { profile: ProfileEntry | null }) {
         </div>
 
         {/* statement + doors */}
-        <div className="mt-8 max-w-xl lg:mt-12 lg:min-h-[16rem]">
+        <div className="mx-auto mt-8 max-w-xl lg:mx-0 lg:mt-12 lg:min-h-[16rem]">
           <p className="display text-2xl text-white sm:text-4xl">
             {STATEMENT.map((line, i) => (
               <span key={line} className="hero-mask">
@@ -97,7 +97,7 @@ export default function Hero({ profile }: { profile: ProfileEntry | null }) {
               </span>
             ))}
           </p>
-          <div className="hero-up mt-7 flex flex-wrap gap-3" style={d(0.95)}>
+          <div className="hero-up mt-7 flex flex-wrap justify-center gap-3 lg:justify-start" style={d(0.95)}>
             <Btn href="/build-ai-system-for-your-business" solid>
               Build with me
             </Btn>
@@ -112,7 +112,7 @@ export default function Hero({ profile }: { profile: ProfileEntry | null }) {
           {ANSWERS.map((a, i) => (
             <li
               key={a.tag}
-              className="hero-up border-b hairline p-6 transition-colors duration-300 hover:bg-white/[0.025] sm:border-b-0 sm:border-r sm:last:border-r-0 sm:p-7"
+              className="hero-up border-b hairline p-6 text-center transition-colors duration-300 hover:bg-white/[0.025] sm:border-b-0 sm:border-r sm:text-left sm:last:border-r-0 sm:p-7"
               style={d(1.05 + i * 0.12)}
             >
               <Num n={i + 1}>{a.tag}</Num>
