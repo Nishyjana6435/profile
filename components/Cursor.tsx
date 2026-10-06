@@ -42,6 +42,11 @@ export default function Cursor() {
       }
       const hot = (e.target as Element | null)?.closest?.(HOT);
       r.classList.toggle("is-hot", Boolean(hot));
+      const labelled = (e.target as Element | null)?.closest?.<HTMLElement>("[data-cursor]");
+      const label = labelled?.dataset.cursor ?? "";
+      if (label !== r.textContent) r.textContent = label;
+      r.classList.toggle("is-label", Boolean(label));
+      d.classList.toggle("is-hidden", Boolean(label));
       // magnetic buttons: .btn leans toward the pointer while hovered
       const btn = (e.target as Element | null)?.closest?.<HTMLElement>(".btn");
       if (btn !== magnet.current) {

@@ -1287,6 +1287,7 @@ html, body { overflow-x: clip; }
     mix-blend-mode: difference;
   }
   .cur-dot.is-on, .cur-ring.is-on { opacity: 1; }
+  .cur-dot.is-hidden { opacity: 0; }
   .cur-ring.is-hot { width: 64px; height: 64px; background: rgba(255, 255, 255, 0.18); border-color: transparent; }
   .cur-ring.is-down { width: 22px; height: 22px; background: rgb(var(--accent-500-rgb) / 0.5); border-color: var(--accent); mix-blend-mode: normal; }
   .cur-bubble {
@@ -1397,5 +1398,50 @@ html, body { overflow-x: clip; }
     .cs-slide.is-on, .cs-slide.is-out, .cs-ghost, .cs-tag, .cs-slide.is-on .cs-media { animation: none; }
     .cs-slide.is-out { display: none; }
     .cs-tilt { transform: none; transition: none; }
+  }
+}
+
+/* ---------- Interaction layer: split reveal, glide, spotlight, cursor labels ---------- */
+@layer components {
+  html.has-smooth { scroll-behavior: auto !important; }
+  .sr-word { display: inline-block; overflow: hidden; vertical-align: bottom; padding-bottom: 0.1em; margin-bottom: -0.1em; }
+  .sr-word > span { display: inline-block; transform: translateY(110%); transition: transform 0.9s cubic-bezier(0.2, 0.8, 0.2, 1); transition-delay: calc(var(--i, 0) * 70ms); will-change: transform; }
+  .sr.is-on .sr-word > span { transform: none; }
+  .glide {
+    height: 0; background: rgba(255, 255, 255, 0.04);
+    border-left: 2px solid var(--accent);
+    transition: opacity 0.3s ease;
+    will-change: transform, height;
+  }
+  .spot {
+    --mx: -999px; --my: -999px;
+    background: radial-gradient(520px circle at var(--mx) var(--my), rgb(var(--accent-500-rgb) / 0.12), transparent 60%);
+  }
+  .spot::after {
+    content: ""; position: absolute; inset: 0;
+    background-image: repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.12) 0 1px, transparent 1px 96px);
+    -webkit-mask-image: radial-gradient(360px circle at var(--mx) var(--my), #000, transparent 70%);
+    mask-image: radial-gradient(360px circle at var(--mx) var(--my), #000, transparent 70%);
+  }
+  .cur-ring { display: grid; place-items: center; font-family: var(--font-geist-mono), monospace; font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; color: #fff; }
+  .cur-ring.is-label { width: 72px; height: 72px; background: rgb(var(--accent-500-rgb) / 0.9); border-color: transparent; mix-blend-mode: normal; }
+  @media (prefers-reduced-motion: reduce) {
+    .sr-word > span { transform: none; transition: none; }
+    .glide { display: none; }
+    .spot { display: none; }
+  }
+}
+
+/* ---------- Live text: words near the pointer lift and brighten ---------- */
+@layer components {
+  .lw {
+    display: inline-block;
+    will-change: transform;
+    transform-origin: 50% 100%;
+    color: color-mix(in srgb, currentColor, #ffffff calc(var(--k, 0) * 75%));
+  }
+  .sr.is-live .sr-word > span { transition: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .lw { display: inline; transform: none !important; color: inherit; }
   }
 }

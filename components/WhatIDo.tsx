@@ -1,6 +1,7 @@
 import { Arrow, Btn, Num, SectionHead } from "./ui";
 import Reveal from "./Reveal";
 import ScrollWords from "./ScrollWords";
+import HoverGlide from "./HoverGlide";
 
 const SERVICES = [
   { title: "AI agents", body: "Plan, call your tools, finish the process. Approval gates keep autonomy safe." },
@@ -13,7 +14,7 @@ export default function WhatIDo() {
   return (
     <section id="what" className="border-b hairline px-6 py-24 sm:py-32">
       <div className="mx-auto max-w-6xl">
-        <SectionHead n={1} eyebrow="What I do" title={<>Business processes, <span className="text-neutral-500">run by AI.</span></>} />
+        <SectionHead n={1} eyebrow="What I do" title={[{ text: "Business processes," }, { text: "run by AI.", className: "text-neutral-500" }]} />
 
         <ScrollWords
           as="p"
@@ -23,6 +24,7 @@ export default function WhatIDo() {
         />
 
         <Reveal variant="fade" className="mt-16 border-t hairline">
+          <HoverGlide>
           <ol>
             {SERVICES.map((s, i) => (
               <li key={s.title} className="row group relative grid items-baseline gap-3 border-b hairline py-6 pr-10 sm:grid-cols-[6rem_1fr_1.2fr] sm:gap-8">
@@ -35,6 +37,7 @@ export default function WhatIDo() {
               </li>
             ))}
           </ol>
+          </HoverGlide>
         </Reveal>
 
         <Reveal delay={120} className="mt-10 flex flex-wrap items-center gap-3">

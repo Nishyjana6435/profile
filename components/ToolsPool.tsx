@@ -103,7 +103,7 @@ export default function ToolsPool() {
         <SectionHead
           n={2}
           eyebrow="How I do it · The tool kit"
-          title={<>Two apps, <span className="text-neutral-500">one pool of tools.</span></>}
+          title={[{ text: "Two apps," }, { text: "one pool of tools.", className: "text-neutral-500" }]}
           lead="Spin the ring. Everything behind Flows, Agent Studio and my client work, and what each piece does."
           align="center"
         />

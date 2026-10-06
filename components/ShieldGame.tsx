@@ -436,7 +436,7 @@ export default function ShieldGame() {
   const result = rank(final.score);
 
   return (
-    <div className="game-bezel relative">
+    <div className="game-bezel relative" data-live-skip>
       <div ref={wrap} className="relative aspect-[4/5] w-full overflow-hidden bg-[#0b0b0c] touch-none sm:aspect-[16/9]">
         <canvas ref={canvas} tabIndex={0} aria-label="Shield the agent, an arcade game" className="block h-full w-full cursor-none outline-none" />
         <div aria-hidden="true" className="game-scan pointer-events-none absolute inset-0" />

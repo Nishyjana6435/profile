@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { pad } from "@/lib/text";
+import SplitReveal, { type Seg } from "./SplitReveal";
 
 /** Small red arrow mark, the one accent the theme allows. */
 export function Arrow({ className = "h-3 w-3" }: { className?: string }) {
@@ -74,7 +75,8 @@ export function SectionHead({
 }: {
   n?: number;
   eyebrow: string;
-  title: ReactNode;
+  /** Plain string, or segments for a muted / accent tail. */
+  title: string | Seg[];
   lead?: ReactNode;
   align?: "left" | "center";
   className?: string;
@@ -86,7 +88,7 @@ export function SectionHead({
         {n !== undefined && <span className="label text-brand-400">{pad(n)}</span>}
         <Eyebrow>{eyebrow}</Eyebrow>
       </div>
-      <h2 className="display mt-5 text-4xl text-white sm:text-6xl">{title}</h2>
+      <SplitReveal segs={typeof title === "string" ? [{ text: title }] : title} className="display mt-5 text-4xl text-white sm:text-6xl" />
       {lead && <p className="mt-5 max-w-xl text-base leading-7 text-neutral-400">{lead}</p>}
     </div>
   );

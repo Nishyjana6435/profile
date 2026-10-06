@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { SiteSettingsEntry } from "@/lib/contentful";
 import Reveal from "./Reveal";
 import { Btn } from "./ui";
+import LiveType from "./LiveType";
 
 export const WHATSAPP_URL =
   "https://wa.me/94777125043?text=Hi%2C%20I%27d%20like%20to%20get%20in%20touch";
@@ -58,9 +59,10 @@ export default function Contact({ siteSettings }: { siteSettings: SiteSettingsEn
       <div className="mx-auto max-w-6xl">
         <div className="grid gap-10 lg:grid-cols-[1.2fr_1fr]">
           <div>
-            <Reveal as="h2" className="display text-5xl text-white sm:text-7xl">
-              Let&apos;s build<span className="text-brand-500">.</span>
-            </Reveal>
+            <h2 className="display text-5xl text-white sm:text-7xl">
+              <LiveType text="Let's build" reach={140} lift={12} />
+              <span className="text-brand-500">.</span>
+            </h2>
             {fields?.contactEmail && (
               <Reveal as="p" delay={100} className="mt-6">
                 <a href={`mailto:${fields.contactEmail}`} className="display-sm text-lg text-neutral-300 underline-offset-4 hover:text-white hover:underline sm:text-2xl">

@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useState, type ReactNode } from "react";
 import { Arrow, Chip } from "./ui";
 import { pad } from "@/lib/text";
+import HoverGlide from "./HoverGlide";
 
 export type ExperienceRow = {
   id: string;
@@ -24,6 +25,7 @@ export default function ExperienceRows({ items }: { items: ExperienceRow[] }) {
   const [open, setOpen] = useState(0);
 
   return (
+    <HoverGlide>
     <ol className="border-t hairline">
       {items.map((it, i) => {
         const on = i === open;
@@ -94,5 +96,6 @@ export default function ExperienceRows({ items }: { items: ExperienceRow[] }) {
         );
       })}
     </ol>
+    </HoverGlide>
   );
 }

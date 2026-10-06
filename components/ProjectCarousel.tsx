@@ -33,7 +33,7 @@ export default function ProjectCarousel({ carousel }: { carousel: ProjectCarouse
           <SectionHead
             n={4}
             eyebrow={carousel.fields.title ?? "Proof"}
-            title={<>Work that shipped<span className="text-neutral-500">.</span></>}
+            title={[{ text: "Work that" }, { text: "shipped.", className: "text-neutral-500" }]}
             lead={`${projects.length} projects across AI agents, B2B platforms, IoT and enterprise data. Pick one, or let the deck play.`}
           />
         </div>

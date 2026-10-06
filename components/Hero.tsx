@@ -5,6 +5,8 @@ import { AGENT_STUDIO_FLOWS_NEWS as NEWS } from "@/lib/news";
 import { Arrow, Btn, Num } from "./ui";
 import Link from "next/link";
 import Parallax from "./Parallax";
+import LiveType from "./LiveType";
+import Spotlight from "./Spotlight";
 
 /* ---------- Wording: the three answers every visitor needs first ---------- */
 const STATEMENT = ["I build AI agents", "and workflows that", "run the business."];
@@ -38,6 +40,7 @@ export default function Hero({ profile }: { profile: ProfileEntry | null }) {
 
   return (
     <section className="rules relative overflow-hidden border-b hairline">
+      <Spotlight />
       {/* news line */}
       <Link
         href={NEWS.path}
@@ -62,7 +65,9 @@ export default function Hero({ profile }: { profile: ProfileEntry | null }) {
         <div className="relative mt-6">
           <h1 className="display hero-name text-white">
             <span className="hero-mask">
-              <span style={d(0.15)}>Nishy</span>
+              <span style={d(0.15)}>
+                <LiveType text="Nishy" reach={220} lift={22} />
+              </span>
             </span>
           </h1>
 

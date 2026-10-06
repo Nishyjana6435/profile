@@ -1,7 +1,7 @@
 import { WHATSAPP_URL, WhatsAppIcon } from "./Contact";
 import Reveal from "./Reveal";
-import ScrollWords from "./ScrollWords";
 import { Btn, Eyebrow } from "./ui";
+import SplitReveal from "./SplitReveal";
 
 export default function CtaBand({ lookingFor }: { lookingFor?: string }) {
   return (
@@ -10,7 +10,7 @@ export default function CtaBand({ lookingFor }: { lookingFor?: string }) {
         <Reveal as="div" variant="fade">
           <Eyebrow>Next step</Eyebrow>
         </Reveal>
-        <ScrollWords as="h2" className="display mt-6 max-w-5xl text-4xl text-white sm:text-7xl" text="Have a process that should run itself?" />
+        <SplitReveal segs={[{ text: "Have a process that" }, { text: "should run itself?", className: "text-neutral-500" }]} className="display mt-6 max-w-5xl text-4xl text-white sm:text-7xl" />
         <Reveal as="p" delay={100} className="mt-6 max-w-xl text-base leading-7 text-neutral-400">
           {lookingFor ?? "Tell me the job. Within a day I will say whether Flows or Agent Studio already covers it, or what a custom build would take."}
         </Reveal>

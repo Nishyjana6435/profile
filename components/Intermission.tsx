@@ -2,6 +2,7 @@ import type { CSSProperties } from "react";
 import Reveal from "./Reveal";
 import ShieldGame from "./ShieldGame";
 import { Arrow, Eyebrow } from "./ui";
+import SplitReveal from "./SplitReveal";
 
 const TICKER = ["Intermission", "Take a break", "Insert coin", "Shield the agent"];
 
@@ -30,10 +31,7 @@ export default function Intermission() {
             <Reveal as="div" variant="fade">
               <Eyebrow>Intermission · Nishy Arcade</Eyebrow>
             </Reveal>
-            <Reveal as="h2" delay={80} className="display mt-5 text-5xl text-white sm:text-8xl">
-              Take a <span className="text-brand-400">break</span>
-              <span className="text-neutral-500">.</span>
-            </Reveal>
+            <SplitReveal segs={[{ text: "Take a" }, { text: "break.", className: "text-brand-400" }]} className="display mt-5 text-5xl text-white sm:text-8xl" />
           </div>
           <Reveal delay={160} className="relative border-l-2 border-brand-500 pl-6">
             <p className="display-sm text-xl leading-snug text-white sm:text-2xl">
@@ -51,7 +49,9 @@ export default function Intermission() {
         </div>
 
         <Reveal variant="scale" delay={200} threshold={0.15} className="mt-12">
-          <ShieldGame />
+          <div data-cursor="Play">
+            <ShieldGame />
+          </div>
         </Reveal>
       </div>
     </section>

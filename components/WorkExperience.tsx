@@ -68,7 +68,7 @@ export default function WorkExperience({ items }: { items: ExperienceItemEntry[]
         <SectionHead
           n={3}
           eyebrow="How long"
-          title={<>Seven years, <span className="text-neutral-500">one direction.</span></>}
+          title={[{ text: "Seven years," }, { text: "one direction.", className: "text-neutral-500" }]}
           lead="From freelance full stack work to leading enterprise delivery, and now two AI products of my own. Open a row for the short version."
         />
       </div>

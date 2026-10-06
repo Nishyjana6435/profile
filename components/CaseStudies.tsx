@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useEffect, useRef, useState, type MouseEvent } from "react";
 import { pad } from "@/lib/text";
 import { Arrow, Btn, Chip } from "./ui";
+import HoverGlide from "./HoverGlide";
 
 export type CaseStudy = {
   id: string;
@@ -63,7 +64,7 @@ export default function CaseStudies({ items }: { items: CaseStudy[] }) {
       {/* spotlight */}
       <div className="lg:order-2">
         <div className="sticky top-20 lg:top-24">
-          <div ref={stage} onMouseMove={onMove} onMouseLeave={onLeave} className="cs-stage relative aspect-[4/3] overflow-hidden border hairline bg-[#161616]">
+          <div ref={stage} onMouseMove={onMove} onMouseLeave={onLeave} data-cursor={current.liveUrl ? "Visit" : undefined} className="cs-stage relative aspect-[4/3] overflow-hidden border hairline bg-[#161616]">
             <div aria-hidden="true" className="rules absolute inset-0 opacity-70" />
             <span key={active} aria-hidden="true" className="cs-ghost display pointer-events-none absolute -left-3 -top-6 text-[11rem] leading-none text-white/[0.05] sm:text-[15rem]">
               {pad(active + 1)}
@@ -76,7 +77,7 @@ export default function CaseStudies({ items }: { items: CaseStudy[] }) {
                 if (!on && !out) return null;
                 return (
                   <div key={p.id} className={`cs-slide absolute inset-0 ${on ? "is-on" : "is-out"}`}>
-                    <div className="cs-frame absolute inset-x-[8%] top-[8%] bottom-[10%] overflow-hidden sm:bottom-[19%] border border-white/15 bg-[#0b0b0c] shadow-[0_50px_120px_-40px_rgba(0,0,0,0.9)]">
+                    <a href={p.liveUrl} target={p.liveUrl ? "_blank" : undefined} rel="noopener noreferrer" aria-label={p.liveUrl ? `Visit ${p.title}` : undefined} className="cs-frame absolute inset-x-[8%] top-[8%] bottom-[10%] overflow-hidden sm:bottom-[19%] border border-white/15 bg-[#0b0b0c] shadow-[0_50px_120px_-40px_rgba(0,0,0,0.9)]">
                       <div className="flex h-8 items-center gap-1.5 border-b border-white/10 bg-[#121212] px-3">
                         <span className="h-2 w-2 rounded-full bg-white/20" />
                         <span className="h-2 w-2 rounded-full bg-white/20" />
@@ -91,7 +92,7 @@ export default function CaseStudies({ items }: { items: CaseStudy[] }) {
                           <span className="grid h-full place-items-center text-2xl font-semibold text-black/40">{p.title}</span>
                         )}
                       </div>
-                    </div>
+                    </a>
                   </div>
                 );
               })}
@@ -122,7 +123,8 @@ export default function CaseStudies({ items }: { items: CaseStudy[] }) {
       </div>
 
       {/* index */}
-      <ol className="border-t hairline lg:order-1">
+      <HoverGlide className="lg:order-1">
+      <ol className="border-t hairline">
         {items.map((p, i) => {
           const on = i === active;
           return (
@@ -167,6 +169,7 @@ export default function CaseStudies({ items }: { items: CaseStudy[] }) {
           );
         })}
       </ol>
+      </HoverGlide>
     </div>
   );
 }

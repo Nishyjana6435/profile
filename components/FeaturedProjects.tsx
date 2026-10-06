@@ -4,6 +4,7 @@ import { firstSentence, pad } from "@/lib/text";
 import CaseStudies, { type CaseStudy } from "./CaseStudies";
 import Reveal from "./Reveal";
 import { Eyebrow } from "./ui";
+import SplitReveal from "./SplitReveal";
 
 function hostOf(url?: string) {
   if (!url) return undefined;
@@ -40,9 +41,7 @@ export default function FeaturedProjects({ projects }: { projects: ProjectEntry[
         <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <Eyebrow>Case studies</Eyebrow>
-            <h2 className="display mt-5 text-4xl text-white sm:text-6xl">
-              Real systems, <span className="text-neutral-500">real users.</span>
-            </h2>
+            <SplitReveal segs={[{ text: "Real systems," }, { text: "real users.", className: "text-neutral-500" }]} className="display mt-5 text-4xl text-white sm:text-6xl" />
           </div>
           <p className="label text-neutral-500">{pad(items.length)} selected · hover or tap a row</p>
         </div>

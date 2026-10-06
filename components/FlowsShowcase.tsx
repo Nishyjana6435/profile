@@ -16,7 +16,7 @@ export default function FlowsShowcase() {
         <SectionHead
           n={2}
           eyebrow="How I do it · Product one"
-          title={<>{FLOWS.name}<span className="text-neutral-500">.</span> {FLOWS.tagline}</>}
+          title={[{ text: `${FLOWS.name}.` }, { text: FLOWS.tagline, className: "text-neutral-500" }]}
         />
         <div className="mt-14 grid items-center gap-16 lg:grid-cols-[1fr_1.2fr] lg:gap-14">
           <div>
@@ -50,7 +50,9 @@ export default function FlowsShowcase() {
             </Reveal>
           </div>
           <Reveal variant="tilt-right" threshold={0.2} className="px-5 pb-14 pt-10 sm:px-12 lg:px-10">
+            <div data-cursor="Tilt">
             <FlowsScene />
+            </div>
           </Reveal>
         </div>
       </div>

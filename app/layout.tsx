@@ -5,6 +5,8 @@ import { accentCss } from "@/lib/theme";
 import "./globals.css";
 import AssistantWidget from "@/components/AssistantWidget";
 import Cursor from "@/components/Cursor";
+import SmoothScroll from "@/components/SmoothScroll";
+import LiveText from "@/components/LiveText";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -69,6 +71,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         {children}
         <AssistantWidget />
         <Cursor />
+        <SmoothScroll />
+        <LiveText />
       </body>
     </html>
   );
