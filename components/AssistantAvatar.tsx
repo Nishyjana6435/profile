@@ -11,12 +11,17 @@ export default function AssistantAvatar({ size = 56, talking = false }: { size?:
             <stop offset="0.7" stopColor="var(--accent-500)" />
             <stop offset="1" stopColor="#2a2a2a" />
           </radialGradient>
+          <radialGradient id="as-sphere-ink" cx="35%" cy="28%" r="75%">
+            <stop offset="0" stopColor="#3a3a3a" />
+            <stop offset="0.5" stopColor="#1a1a1a" />
+            <stop offset="1" stopColor="#050505" />
+          </radialGradient>
           <radialGradient id="as-shine" cx="30%" cy="22%" r="30%">
             <stop offset="0" stopColor="#fff" stopOpacity="0.85" />
             <stop offset="1" stopColor="#fff" stopOpacity="0" />
           </radialGradient>
         </defs>
-        <circle cx="32" cy="32" r="28" fill="url(#as-sphere)" />
+        <circle className="as-sphere" cx="32" cy="32" r="28" fill="url(#as-sphere)" />
         <circle cx="32" cy="32" r="28" fill="url(#as-shine)" />
         <rect x="16" y="24" width="32" height="18" rx="9" fill="#1a1a1a" opacity="0.9" />
         <g className="as-eyes">

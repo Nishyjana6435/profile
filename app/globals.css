@@ -1433,3 +1433,15 @@ html, body { overflow-x: clip; }
   }
   @media (prefers-reduced-motion: reduce) { .news-accent::after { animation: none; } }
 }
+
+/* ---------- Assistant avatar over the accent footer: ink sphere, accent eyes ---------- */
+@layer components {
+  .as-sphere, .as-eyes ellipse { transition: fill 0.4s ease; }
+  .as-launcher.is-ink .as-sphere { fill: url(#as-sphere-ink); }
+  .as-launcher.is-ink .as-eyes ellipse { fill: var(--accent); filter: drop-shadow(0 0 3px rgb(var(--accent-500-rgb) / 0.9)); }
+  .as-launcher.is-ink .as-avatar svg { filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.6)); }
+  .as-launcher.is-ink .as-orbit { background: conic-gradient(from 0deg, transparent 0 55%, #0b0b0c 70%, #ffffff 85%, transparent 100%); }
+  .as-launcher.is-ink .as-halo { background: radial-gradient(circle, rgba(11, 11, 12, 0.45), transparent 65%); }
+  .as-launcher.is-ink .as-launch-close { background: #0b0b0c; }
+  .as-launcher.is-ink .fx-ping, .as-launcher.is-ink .fx-ping + span { background: #0b0b0c; border-color: var(--accent); }
+}

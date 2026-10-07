@@ -110,9 +110,29 @@ export default function AssistantWidget() {
   const [busy, setBusy] = useState(false);
   const [hint, setHint] = useState(false);
   const [ready, setReady] = useState(false);
+  const [onFooter, setOnFooter] = useState(false);
+  const launcherRef = useRef<HTMLButtonElement | null>(null);
   const listRef = useRef<HTMLDivElement | null>(null);
   const inputRef = useRef<HTMLTextAreaElement | null>(null);
   const panelRef = useRef<HTMLDivElement | null>(null);
+
+  // When the launcher floats over the accent footer, the avatar turns ink with accent eyes.
+  useEffect(() => {
+    let raf = 0;
+    const update = () => {
+      raf = 0;
+      const btn = launcherRef.current;
+      const footer = document.querySelector<HTMLElement>(".footer-accent");
+      if (!btn || !footer) return;
+      const b = btn.getBoundingClientRect(), f = footer.getBoundingClientRect();
+      setOnFooter(b.top + b.height / 2 >= f.top && b.top + b.height / 2 <= f.bottom);
+    };
+    const onScroll = () => { if (!raf) raf = requestAnimationFrame(update); };
+    update();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    return () => { window.removeEventListener("scroll", onScroll); window.removeEventListener("resize", onScroll); if (raf) cancelAnimationFrame(raf); };
+  }, [ready]);
 
   // Only appear when the server says the agent is configured.
   useEffect(() => {
@@ -373,7 +393,8 @@ export default function AssistantWidget() {
         }}
         aria-label={open ? "Close chat" : "Chat with Nishy's assistant"}
         aria-expanded={open}
-        className={`as-launcher relative grid h-16 w-16 place-items-center rounded-full ${open ? "is-open" : ""}`}
+        ref={launcherRef}
+        className={`as-launcher relative grid h-16 w-16 place-items-center rounded-full ${open ? "is-open" : ""} ${onFooter ? "is-ink" : ""}`}
       >
         <span aria-hidden="true" className="as-halo absolute inset-0 rounded-full" />
         <span className="as-launch-face relative">
