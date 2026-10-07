@@ -1234,3 +1234,44 @@ html, body { overflow-x: clip; }
   .game-bezel .touch-none, .game-bezel canvas { border-radius: var(--r-md); }
   .hero-notch { clip-path: none; }
 }
+
+/* ---------- Water text: dripping surface that ripples on touch ---------- */
+@keyframes wt-drip {
+  0%, 62% { transform: translate(-50%, 0) scaleY(0.4); opacity: 1; }
+  72% { transform: translate(-50%, 0.06em) scaleY(1.4); opacity: 1; }
+  78% { transform: translate(-50%, 0.3em) scaleY(1.1); opacity: 1; }
+  92% { transform: translate(-50%, 1.1em) scaleY(0.9); opacity: 0.9; }
+  100% { transform: translate(-50%, 1.4em) scaleY(0.6); opacity: 0; }
+}
+@keyframes wt-ring {
+  from { transform: translate(-50%, -50%) scale(0.2); opacity: 0.8; }
+  to { transform: translate(-50%, -50%) scale(3); opacity: 0; }
+}
+@layer components {
+  .wt { cursor: none; padding-bottom: 0.9em; margin-bottom: -0.9em; }
+  .wt-surface { will-change: filter; }
+  .wt-drop {
+    position: absolute;
+    left: var(--x, 50%);
+    bottom: 0.04em;
+    width: 0.07em;
+    height: 0.12em;
+    border-radius: 9999px 9999px 60% 60%;
+    background: currentColor;
+    transform-origin: 50% 0;
+    animation: wt-drip var(--dur, 8s) cubic-bezier(0.4, 0, 0.8, 1) var(--d, 0s) infinite;
+  }
+  .wt-ring {
+    position: absolute;
+    width: 120px; height: 120px;
+    border-radius: 9999px;
+    border: 2px solid rgba(255, 255, 255, 0.55);
+    box-shadow: 0 0 0 10px rgba(255, 255, 255, 0.06), inset 0 0 24px rgba(255, 255, 255, 0.12);
+    pointer-events: none;
+    animation: wt-ring 0.9s cubic-bezier(0.1, 0.8, 0.2, 1) both;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .wt-drop, .wt-ring { display: none; }
+    .wt-surface { filter: none !important; }
+  }
+}

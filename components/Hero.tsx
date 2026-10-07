@@ -4,7 +4,7 @@ import type { ProfileEntry } from "@/lib/contentful";
 import { AGENT_STUDIO_FLOWS_NEWS as NEWS } from "@/lib/news";
 import { Arrow, Btn, Num } from "./ui";
 import Link from "next/link";
-import LiveType from "./LiveType";
+import WaterText from "./WaterText";
 import Parallax from "./Parallax";
 import Spotlight from "./Spotlight";
 
@@ -66,7 +66,7 @@ export default function Hero({ profile }: { profile: ProfileEntry | null }) {
           <h1 className="display hero-name text-white">
             <span className="hero-mask">
               <span style={d(0.15)}>
-                <LiveType text="Nishy" reach={220} lift={22} />
+                <WaterText text="Nishy" />
               </span>
             </span>
           </h1>
