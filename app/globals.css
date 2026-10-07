@@ -1402,3 +1402,34 @@ html, body { overflow-x: clip; }
   }
   @media (prefers-reduced-motion: reduce) { .strip-curl { display: none; } }
 }
+
+/* ---------- Footer in the accent colour ---------- */
+@layer components {
+  .footer-accent { background: var(--accent); }
+  .footer-accent ::selection { background: #0b0b0c; color: #fff; }
+  /* dark button on the accent band */
+  .btn--ink { background: #0b0b0c; color: #fff; border-color: #0b0b0c; }
+  .btn--ink:hover { background: #1a1a1a; border-color: #1a1a1a; }
+  .btn--ink .btn-ico { background: #fff; color: #0b0b0c; }
+  .btn--ink::after { border-color: rgba(11, 11, 12, 0.6); }
+  /* headline floods from white to ink on the accent */
+  .footer-accent .flood .lt {
+    background: linear-gradient(to top, #0b0b0c 0 calc(var(--p, 0) * 100%), rgba(255, 255, 255, 0.92) calc(var(--p, 0) * 100% + 3px));
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .footer-accent .sig-text { stroke: #0b0b0c; fill: #0b0b0c; }
+  .footer-accent .sig-line { stroke: #0b0b0c; }
+}
+
+/* ---------- News banner in the accent colour ---------- */
+@keyframes news-glow { 0%, 100% { opacity: 0.75; } 50% { opacity: 1; } }
+@layer components {
+  .news-accent { background: var(--accent); }
+  /* glow cast downward onto the hero */
+  .news-accent::after {
+    content: ""; position: absolute; left: 0; right: 0; top: 100%; height: 120px; pointer-events: none;
+    background: linear-gradient(to bottom, rgb(var(--accent-500-rgb) / 0.22), rgb(var(--accent-500-rgb) / 0.06) 45%, transparent);
+    animation: news-glow 4s ease-in-out infinite;
+  }
+  @media (prefers-reduced-motion: reduce) { .news-accent::after { animation: none; } }
+}

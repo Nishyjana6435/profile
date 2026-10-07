@@ -57,25 +57,25 @@ export default function Contact({ siteSettings }: { siteSettings: SiteSettingsEn
   const socialLinks = fields?.socialLinks ?? [];
 
   return (
-    <footer className="px-6 pb-10 pt-16">
+    <footer className="footer-accent px-6 pb-10 pt-16 text-[#0b0b0c]">
       <div className="mx-auto max-w-6xl">
         <div className="grid gap-10 lg:grid-cols-[1.2fr_1fr]">
           <div>
             <ScrollVar mode="end" className="flood">
-              <h2 className="display text-5xl text-white sm:text-7xl">
+              <h2 className="display text-5xl text-[#0b0b0c] sm:text-7xl">
                 <LiveType text="Let's build" reach={140} lift={12} />
-                <span className="text-brand-500">.</span>
+                <span className="text-white">.</span>
               </h2>
             </ScrollVar>
             {fields?.contactEmail && (
               <Reveal as="p" delay={100} className="mt-6">
-                <a href={`mailto:${fields.contactEmail}`} className="display-sm text-lg text-neutral-300 underline-offset-4 hover:text-white hover:underline sm:text-2xl">
+                <a href={`mailto:${fields.contactEmail}`} className="display-sm text-lg text-[#0b0b0c]/80 underline-offset-4 hover:text-[#0b0b0c] hover:underline sm:text-2xl">
                   {fields.contactEmail}
                 </a>
               </Reveal>
             )}
             <Reveal delay={200} className="mt-6 flex flex-wrap items-center gap-3">
-              <Btn href={WHATSAPP_URL} solid icon={<WhatsAppIcon />}>
+              <Btn href={WHATSAPP_URL} className="btn--ink" icon={<WhatsAppIcon />}>
                 Chat on WhatsApp
               </Btn>
               {socialLinks.map((link) => (
@@ -85,31 +85,31 @@ export default function Contact({ siteSettings }: { siteSettings: SiteSettingsEn
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={link.platform}
-                  className="grid h-10 w-10 place-items-center rounded-lg border hairline text-neutral-300 transition-all duration-300 hover:-translate-y-0.5 hover:border-white/40 hover:text-white"
+                  className="grid h-10 w-10 place-items-center rounded-lg border border-[#0b0b0c]/30 text-[#0b0b0c] transition-all duration-300 hover:-translate-y-0.5 hover:border-[#0b0b0c] hover:bg-[#0b0b0c] hover:text-white"
                 >
                   <SocialIcon platform={link.platform} />
                 </a>
               ))}
             </Reveal>
           </div>
-          <nav aria-label="Site" className="grid grid-cols-2 gap-x-6 gap-y-3 self-end text-[15px] font-medium text-neutral-300">
+          <nav aria-label="Site" className="grid grid-cols-2 gap-x-6 gap-y-3 self-end text-[15px] font-medium text-[#0b0b0c]/80">
             {FOOTER_LINKS.map((link) => (
-              <Link key={link.href} href={link.href} className="transition-colors hover:text-white">
+              <Link key={link.href} href={link.href} className="transition-colors hover:text-[#0b0b0c] hover:underline">
                 {link.label}
               </Link>
             ))}
           </nav>
         </div>
 
-        <div className="mt-14 flex flex-col gap-2 border-t hairline pt-6 text-sm font-medium text-neutral-400 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-14 flex flex-col gap-2 border-t border-[#0b0b0c]/25 pt-6 text-sm font-medium text-[#0b0b0c]/75 sm:flex-row sm:items-center sm:justify-between">
           <p>
-            <Link href="/about" className="text-neutral-300 hover:text-white">Nishanthan Janarthanarajah (Nishy)</Link>, founder of{" "}
-            <Link href="/agent-studio" className="text-neutral-300 hover:text-white">Agent Studio</Link> and{" "}
-            <Link href="/flows" className="text-neutral-300 hover:text-white">Flows</Link>.
+            <Link href="/about" className="text-[#0b0b0c] hover:underline">Nishanthan Janarthanarajah (Nishy)</Link>, founder of{" "}
+            <Link href="/agent-studio" className="text-[#0b0b0c] hover:underline">Agent Studio</Link> and{" "}
+            <Link href="/flows" className="text-[#0b0b0c] hover:underline">Flows</Link>.
           </p>
           <div className="flex items-center gap-6">
             <Signature className="h-14 w-auto" />
-            <p className="nav-text text-neutral-400">Colombo, Sri Lanka · worldwide</p>
+            <p className="nav-text text-[#0b0b0c]/75">Colombo, Sri Lanka · worldwide</p>
           </div>
         </div>
       </div>
