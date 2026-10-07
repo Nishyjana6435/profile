@@ -4,7 +4,7 @@
  * the same session skip the draw. The check runs inline while the HTML parses,
  * so the entrance never waits for hydration.
  */
-const SCRIPT = `try{var s=document.currentScript.parentElement;if(sessionStorage.getItem("hero-drawn")==="1")s.classList.add("hero-instant");sessionStorage.setItem("hero-drawn","1")}catch(e){}`;
+const SCRIPT = `try{var s=document.currentScript.parentElement;if(sessionStorage.getItem("hero-drawn")==="1")s.setAttribute("data-instant","");sessionStorage.setItem("hero-drawn","1")}catch(e){}`;
 
 export default function HeroRules() {
   return (

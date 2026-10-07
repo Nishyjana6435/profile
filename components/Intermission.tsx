@@ -1,6 +1,6 @@
 import type { CSSProperties } from "react";
 import Reveal from "./Reveal";
-import ShieldGame from "./ShieldGame";
+import Arcade from "./Arcade";
 import { Arrow, Eyebrow } from "./ui";
 import SplitReveal from "./SplitReveal";
 
@@ -50,7 +50,7 @@ export default function Intermission() {
 
         <Reveal variant="scale" delay={200} threshold={0.15} className="mt-12">
           <div data-cursor="Play">
-            <ShieldGame />
+            <Arcade />
           </div>
         </Reveal>
       </div>

@@ -1,6 +1,7 @@
 "use client";
 
 import { usePathname } from "next/navigation";
+import { reducedMotion } from "@/lib/a11y";
 import { useEffect } from "react";
 
 /**
@@ -16,7 +17,7 @@ const REACH = 150;
 export default function LiveText() {
   const pathname = usePathname();
   useEffect(() => {
-    if (!window.matchMedia("(pointer: fine)").matches || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (!window.matchMedia("(pointer: fine)").matches || reducedMotion()) return;
     const root = document.querySelector("main");
     if (!root) return;
 

@@ -28,7 +28,7 @@ export default function Parallax({ children, strength = 14, className = "" }: { 
     };
   }, [strength]);
   return (
-    <div ref={ref} className={className}>
+    <div ref={ref} className={`plx ${className}`}>
       {children}
     </div>
   );

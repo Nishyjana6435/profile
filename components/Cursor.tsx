@@ -1,5 +1,7 @@
 "use client";
 
+import { reducedMotion } from "@/lib/a11y";
+
 import { useEffect, useRef } from "react";
 
 const HOT = "a, button, [role='button'], input, textarea, select, summary, label";
@@ -20,7 +22,7 @@ export default function Cursor() {
 
   useEffect(() => {
     const fine = window.matchMedia("(pointer: fine)").matches;
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const reduced = reducedMotion();
     const d = dot.current, r = ring.current, p = pops.current;
     if (!fine || reduced || !d || !r || !p) return;
 

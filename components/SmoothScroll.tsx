@@ -1,5 +1,7 @@
 "use client";
 
+import { reducedMotion } from "@/lib/a11y";
+
 import { useEffect } from "react";
 
 /**
@@ -10,7 +12,7 @@ import { useEffect } from "react";
  */
 export default function SmoothScroll() {
   useEffect(() => {
-    if (window.matchMedia("(pointer: coarse)").matches || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (window.matchMedia("(pointer: coarse)").matches || reducedMotion()) return;
     const html = document.documentElement;
     // native smooth scrolling would compound with ours; take it over, anchors included
     html.classList.add("has-smooth");
@@ -40,7 +42,7 @@ export default function SmoothScroll() {
       raf = requestAnimationFrame(loop);
     };
     const onWheel = (e: WheelEvent) => {
-      if (e.ctrlKey || e.metaKey) return;
+      if (e.ctrlKey || e.metaKey || (document.documentElement.getAttribute("data-a11y") ?? "").includes("motion")) return;
       if (scrollableAncestor(e.target as Element | null, e.deltaY)) return;
       e.preventDefault();
       const dy = e.deltaMode === 1 ? e.deltaY * 16 : e.deltaMode === 2 ? e.deltaY * window.innerHeight : e.deltaY;

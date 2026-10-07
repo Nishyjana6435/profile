@@ -2,6 +2,8 @@ import type { Metadata, Viewport } from "next";
 import { Caveat, Geist_Mono, Inter, Space_Grotesk } from "next/font/google";
 import { SITE_NAME, SITE_URL } from "@/lib/seo";
 import { accentCss } from "@/lib/theme";
+import { A11Y_BOOT } from "@/lib/a11y";
+import AccessibilityPanel from "@/components/AccessibilityPanel";
 import "./globals.css";
 import AssistantWidget from "@/components/AssistantWidget";
 import Cursor from "@/components/Cursor";
@@ -70,10 +72,13 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <head>
         {/* accent colour tokens: edit lib/theme.ts */}
         <style dangerouslySetInnerHTML={{ __html: accentCss() }} />
+        {/* accessibility preferences, applied before first paint */}
+        <script dangerouslySetInnerHTML={{ __html: A11Y_BOOT }} />
       </head>
       <body className="min-h-full flex flex-col bg-[#121212]">
         {children}
         <AssistantWidget />
+        <AccessibilityPanel />
         <Cursor />
         <SmoothScroll />
         <LiveText />

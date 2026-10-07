@@ -1329,12 +1329,12 @@ html, body { overflow-x: clip; }
     -webkit-mask-size: 100% 0%; mask-size: 100% 0%;
   }
   .hero .hero-rules { animation: hero-rules-draw 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
-  .hero.hero-instant .hero-rules { animation: none; -webkit-mask-size: 100% 100%; mask-size: 100% 100%; }
+  .hero[data-instant] .hero-rules { animation: none; -webkit-mask-size: 100% 100%; mask-size: 100% 100%; }
   /* the content lands once the grid has drawn: same entrance, pushed back half a second */
   .hero .hero-mask > span, .hero .hero-up { animation-delay: calc(var(--d, 0s) + 0.5s); }
   .hero .hero-portrait { animation-delay: 0.45s; }
-  .hero.hero-instant .hero-mask > span, .hero.hero-instant .hero-up { animation-delay: var(--d, 0s); }
-  .hero.hero-instant .hero-portrait { animation-delay: 0.1s; }
+  .hero[data-instant] .hero-mask > span, .hero[data-instant] .hero-up { animation-delay: var(--d, 0s); }
+  .hero[data-instant] .hero-portrait { animation-delay: 0.1s; }
   /* phones: the portrait is the largest paint, so it never fades in; it only settles into place */
   @media (max-width: 1023px) {
     .hero .hero-portrait { animation-name: hero-portrait-slide; animation-delay: 0.2s; animation-duration: 0.7s; }
@@ -1436,4 +1436,65 @@ html, body { overflow-x: clip; }
   .as-launcher.is-ink .as-halo { background: radial-gradient(circle, rgba(11, 11, 12, 0.45), transparent 65%); }
   .as-launcher.is-ink .as-launch-close { background: #0b0b0c; }
   .as-launcher.is-ink .fx-ping, .as-launcher.is-ink .fx-ping + span { background: #0b0b0c; border-color: var(--accent); }
+}
+
+/* ---------- Accessibility switchboard ---------- */
+@layer components {
+  .a11y-switch {
+    appearance: none; width: 34px; height: 20px; border-radius: 9999px; flex: none;
+    background: rgba(255, 255, 255, 0.15); position: relative; cursor: pointer; transition: background-color 0.25s ease;
+  }
+  .a11y-switch::after { content: ""; position: absolute; top: 2px; left: 2px; width: 16px; height: 16px; border-radius: 9999px; background: #fff; transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1); }
+  .a11y-switch:checked { background: var(--accent); }
+  .a11y-switch:checked::after { transform: translateX(14px); }
+  .a11y-switch:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .a11y-panel[hidden] { display: none; }
+
+  /* reduce motion: everything stops, including JS-driven transforms and effects */
+  html[data-a11y~="motion"] *, html[data-a11y~="motion"] *::before, html[data-a11y~="motion"] *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+  html[data-a11y~="motion"] .lw, html[data-a11y~="motion"] .lt, html[data-a11y~="motion"] .ex-stage, html[data-a11y~="motion"] .cs-tilt, html[data-a11y~="motion"] .hero-portrait-float, html[data-a11y~="motion"] .plx { transform: none !important; }
+  html[data-a11y~="motion"] .wt-surface { filter: none !important; }
+  html[data-a11y~="motion"] .wt-drop, html[data-a11y~="motion"] .wt-ring, html[data-a11y~="motion"] .lq-flood, html[data-a11y~="motion"] .lq-drops, html[data-a11y~="motion"] .lq-block, html[data-a11y~="motion"] .lq-gap, html[data-a11y~="motion"] .lq-stream,
+  html[data-a11y~="motion"] .cur-dot, html[data-a11y~="motion"] .cur-ring, html[data-a11y~="motion"] .cur-pops, html[data-a11y~="motion"] .st-canvas, html[data-a11y~="motion"] .strip-sheen, html[data-a11y~="motion"] .hero-scan, html[data-a11y~="motion"] .spot { display: none !important; }
+  html[data-a11y~="motion"] .st.is-sand .st-text, html[data-a11y~="motion"] .st.is-sand .st-text .st-w { color: inherit !important; }
+  html[data-a11y~="motion"] .sw-word { color: #fff !important; }
+  html[data-a11y~="motion"] .reveal, html[data-a11y~="motion"] .reveal-stagger > *, html[data-a11y~="motion"] .sr-word > span, html[data-a11y~="motion"] .hero-mask > span, html[data-a11y~="motion"] .hero-up, html[data-a11y~="motion"] .hero-portrait, html[data-a11y~="motion"] .ex-plate, html[data-a11y~="motion"] .ex-callout, html[data-a11y~="motion"] .ex-leaders g { opacity: 1 !important; transform: none !important; }
+  html[data-a11y~="motion"] .hero-rules { -webkit-mask-size: 100% 100% !important; mask-size: 100% 100% !important; }
+  html[data-a11y~="motion"] .sig-text { stroke-dashoffset: 0; fill-opacity: 1; }
+  html[data-a11y~="motion"] .sig-line { stroke-dashoffset: 0; }
+  html[data-a11y~="motion"], html[data-a11y~="motion"] * { cursor: auto !important; }
+  html[data-a11y~="motion"] .btn, html[data-a11y~="motion"] a, html[data-a11y~="motion"] button { cursor: pointer !important; }
+
+  /* high contrast */
+  html[data-a11y~="contrast"] { --background: #000; --color-neutral-400: #e5e5e5; --color-neutral-500: #d4d4d4; --color-neutral-300: #f5f5f5; --line-alpha: 0.7; }
+  html[data-a11y~="contrast"] body, html[data-a11y~="contrast"] [class*="bg-[#121212]"], html[data-a11y~="contrast"] [class*="bg-[#161616]"], html[data-a11y~="contrast"] [class*="bg-[#0e0e0f]"], html[data-a11y~="contrast"] [class*="bg-[#0b0b0c]"] { background-color: #000 !important; }
+  html[data-a11y~="contrast"] [class*="text-white/6"], html[data-a11y~="contrast"] [class*="text-white/5"], html[data-a11y~="contrast"] [class*="text-white/7"] { color: #fff !important; }
+  html[data-a11y~="contrast"] [class*="border-white/1"], html[data-a11y~="contrast"] [class*="border-white/2"] { border-color: rgba(255, 255, 255, 0.7) !important; }
+  html[data-a11y~="contrast"] .sheet { display: none; }
+
+  /* larger text */
+  html[data-a11y~="text"] { font-size: 120%; }
+  html[data-a11y~="text"] .label, html[data-a11y~="text"] .eyebrow, html[data-a11y~="text"] .nav-text { font-size: 0.85rem; }
+
+  /* plain headings */
+  html[data-a11y~="font"] .display, html[data-a11y~="font"] .display-sm, html[data-a11y~="font"] h1, html[data-a11y~="font"] h2, html[data-a11y~="font"] h3 { font-family: var(--font-inter), Inter, system-ui, sans-serif !important; letter-spacing: -0.01em !important; text-transform: none !important; }
+
+  /* underline links */
+  html[data-a11y~="links"] a:not(.btn):not(.a11y-btn) { text-decoration: underline !important; text-underline-offset: 3px; }
+
+  /* strong focus */
+  html[data-a11y~="focus"] :focus-visible { outline: 3px solid var(--accent) !important; outline-offset: 3px !important; box-shadow: 0 0 0 6px rgba(0, 0, 0, 0.8) !important; }
+}
+
+/* ---------- Memory cards ---------- */
+@layer components {
+  .mem-card { perspective: 800px; background: none; border: 0; padding: 0; cursor: pointer; }
+  .mem-card:disabled { cursor: default; }
+  .mem-face { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; backface-visibility: hidden; transition: transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.3s ease; }
+  .mem-front { transform: rotateY(180deg); border-color: color-mix(in srgb, var(--c, var(--accent)) 45%, transparent); }
+  .mem-card.is-up .mem-back { transform: rotateY(-180deg); }
+  .mem-card.is-up .mem-front { transform: rotateY(0); }
+  .mem-card.is-done .mem-front { box-shadow: 0 0 0 1px var(--c, var(--accent)), 0 0 24px -6px var(--c, var(--accent)); }
+  .mem-card:focus-visible .mem-face { outline: 2px solid var(--accent); outline-offset: 2px; }
+  @media (prefers-reduced-motion: reduce) { .mem-face { transition: none; } }
 }
