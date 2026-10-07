@@ -4,6 +4,7 @@ import type { ProfileEntry } from "@/lib/contentful";
 import { AGENT_STUDIO_FLOWS_NEWS as NEWS } from "@/lib/news";
 import { Arrow, Btn, Num } from "./ui";
 import Link from "next/link";
+import HeroRules from "./HeroRules";
 import LiquidTiles from "./LiquidTiles";
 import WaterText from "./WaterText";
 import Parallax from "./Parallax";
@@ -40,7 +41,8 @@ export default function Hero({ profile }: { profile: ProfileEntry | null }) {
   const location = fields?.location ?? "Colombo, Sri Lanka";
 
   return (
-    <section className="rules relative overflow-hidden border-b hairline">
+    <section className="hero relative overflow-hidden border-b hairline">
+      <HeroRules />
       <Spotlight />
       {/* news line */}
       <Link

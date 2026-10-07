@@ -14,6 +14,9 @@ export default function Cursor() {
   const ring = useRef<HTMLDivElement | null>(null);
   const pops = useRef<HTMLDivElement | null>(null);
   const magnet = useRef<HTMLElement | null>(null);
+  const ghost = useRef({ x: 0, y: 0 });
+  const ghostTarget = useRef({ x: 0, y: 0 });
+  const ghostRaf = useRef(0);
 
   useEffect(() => {
     const fine = window.matchMedia("(pointer: fine)").matches;
@@ -22,6 +25,16 @@ export default function Cursor() {
     if (!fine || reduced || !d || !r || !p) return;
 
     document.documentElement.classList.add("has-cursor");
+    // the ghost eases toward where the button is, always a beat behind; on leave it springs back
+    const ghostLoop = () => {
+      const g = ghost.current, t = ghostTarget.current;
+      g.x += (t.x - g.x) * 0.1; g.y += (t.y - g.y) * 0.1;
+      const live = document.querySelector<HTMLElement>(".btn.is-magnet") ?? magnet.current;
+      live?.style.setProperty("--gx", `${g.x.toFixed(1)}px`);
+      live?.style.setProperty("--gy", `${g.y.toFixed(1)}px`);
+      const settled = Math.abs(t.x - g.x) + Math.abs(t.y - g.y) < 0.2;
+      ghostRaf.current = settled ? 0 : requestAnimationFrame(ghostLoop);
+    };
     let x = -100, y = -100, rx = -100, ry = -100, raf = 0, shown = false;
 
     const loop = () => {
@@ -47,17 +60,21 @@ export default function Cursor() {
       if (label !== r.textContent) r.textContent = label;
       r.classList.toggle("is-label", Boolean(label));
       d.classList.toggle("is-hidden", Boolean(label));
-      // magnetic buttons: .btn leans toward the pointer while hovered
+      // magnetic buttons: .btn leans toward the pointer while hovered, and a ghost outline lags behind
       const btn = (e.target as Element | null)?.closest?.<HTMLElement>(".btn");
       if (btn !== magnet.current) {
-        magnet.current?.style.setProperty("--mx", "0px");
-        magnet.current?.style.setProperty("--my", "0px");
+        const prev = magnet.current;
+        if (prev) { prev.style.setProperty("--mx", "0px"); prev.style.setProperty("--my", "0px"); prev.classList.remove("is-magnet"); ghostTarget.current = { x: 0, y: 0 }; }
         magnet.current = btn ?? null;
+        if (btn) { btn.classList.add("is-magnet"); ghost.current = { x: 0, y: 0 }; }
       }
       if (btn) {
         const b = btn.getBoundingClientRect();
-        btn.style.setProperty("--mx", `${((x - (b.left + b.width / 2)) * 0.22).toFixed(1)}px`);
-        btn.style.setProperty("--my", `${((y - (b.top + b.height / 2)) * 0.3).toFixed(1)}px`);
+        const mx = (x - (b.left + b.width / 2)) * 0.22, my = (y - (b.top + b.height / 2)) * 0.3;
+        btn.style.setProperty("--mx", `${mx.toFixed(1)}px`);
+        btn.style.setProperty("--my", `${my.toFixed(1)}px`);
+        ghostTarget.current = { x: mx, y: my };
+        if (!ghostRaf.current) ghostRaf.current = requestAnimationFrame(ghostLoop);
       }
     };
     const onLeave = () => {

@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono, Inter, Space_Grotesk } from "next/font/google";
+import { Caveat, Geist, Geist_Mono, Inter, Space_Grotesk } from "next/font/google";
 import { SITE_NAME, SITE_URL } from "@/lib/seo";
 import { accentCss } from "@/lib/theme";
 import "./globals.css";
@@ -21,6 +21,12 @@ const geistMono = Geist_Mono({
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
+});
+
+const caveat = Caveat({
+  variable: "--font-caveat",
+  subsets: ["latin"],
+  weight: ["600"],
 });
 
 const spaceGrotesk = Space_Grotesk({
@@ -63,7 +69,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} ${inter.variable} ${spaceGrotesk.variable} h-full scroll-smooth antialiased motion-reduce:scroll-auto`}
+      className={`${geistSans.variable} ${geistMono.variable} ${inter.variable} ${spaceGrotesk.variable} ${caveat.variable} h-full scroll-smooth antialiased motion-reduce:scroll-auto`}
     >
       <head>
         {/* accent colour tokens: edit lib/theme.ts */}

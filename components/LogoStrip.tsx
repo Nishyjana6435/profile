@@ -1,5 +1,6 @@
 import Image from "next/image";
 import type { CSSProperties } from "react";
+import ScrollVar from "./ScrollVar";
 import type { ExperienceItemEntry } from "@/lib/contentful";
 import { AgentLogo } from "./AgentScene";
 import { FlowsLogo } from "./FlowsScene";
@@ -27,8 +28,9 @@ export default function LogoStrip({ items }: { items: ExperienceItemEntry[] }) {
   if (list.length < 3) return null;
   const copies = 4;
   return (
-    <div className="strip strip--glow relative overflow-hidden border-y border-brand-500/40 py-5" aria-label="Companies and products">
+    <ScrollVar from={0.5} to={0.08} className="strip strip--glow relative overflow-hidden border-y border-brand-500/40 py-5" >
       <span aria-hidden="true" className="strip-sheen pointer-events-none absolute inset-y-0 left-0" />
+      <span aria-hidden="true" className="strip-curl pointer-events-none absolute bottom-0 right-0" />
       <div className="strip-track flex w-max" style={{ "--dur": `${Math.max(28, list.length * 5)}s`, "--copies": copies } as CSSProperties}>
         {Array.from({ length: copies }, (_, c) => (
           <ul key={c} className="flex gap-4 pr-4" aria-hidden={c > 0}>
@@ -47,6 +49,6 @@ export default function LogoStrip({ items }: { items: ExperienceItemEntry[] }) {
           </ul>
         ))}
       </div>
-    </div>
+    </ScrollVar>
   );
 }
