@@ -12,12 +12,12 @@ import { Arrow } from "./ui";
  */
 export default function NewsPoster() {
   return (
-    <div className="np relative overflow-hidden border hairline bg-[#161616] p-6 sm:p-8">
+    <div className="np relative overflow-hidden rounded-2xl border hairline bg-[#161616] p-6 sm:p-8">
       <div aria-hidden="true" className="rules absolute inset-0 opacity-60" />
 
       <div className="relative">
         <p className="label flex items-center gap-2 text-neutral-400">
-          <span className="bg-brand-500 px-1.5 py-0.5 text-[10px] font-bold text-white">New</span>
+          <span className="rounded bg-brand-500 px-1.5 py-0.5 text-[10px] font-bold text-white">New</span>
           <time dateTime={N.date}>28 Sep 2026</time>
         </p>
         <h2 className="display mt-5 text-3xl text-white sm:text-5xl">
@@ -25,14 +25,14 @@ export default function NewsPoster() {
         </h2>
 
         {/* Agent Studio: deploy dialog */}
-        <div className="np-card mt-8 border hairline bg-[#121212] p-4" style={{ "--d": "0.2s" } as React.CSSProperties}>
+        <div className="np-card mt-8 rounded-xl border hairline bg-[#121212] p-4" style={{ "--d": "0.2s" } as React.CSSProperties}>
           <div className="flex items-center gap-3">
             <AgentLogo className="h-8 w-8" />
             <div className="min-w-0 flex-1">
               <p className="label text-neutral-500">{AGENT_STUDIO.name} · Deploy</p>
               <p className="truncate text-sm font-semibold text-white">Support Copilot</p>
             </div>
-            <span className="label border border-white/15 px-2 py-1 text-white">v3</span>
+            <span className="label rounded-md border border-white/15 px-2 py-1 text-white">v3</span>
           </div>
           <div className="mt-4 flex items-center justify-between gap-4 border-t hairline pt-4">
             <p className="text-sm text-neutral-200">Add this agent to Flows automatically</p>
@@ -49,7 +49,7 @@ export default function NewsPoster() {
         </div>
 
         {/* Flows: the workflow with the new step */}
-        <div className="np-card border hairline bg-[#121212] p-4" style={{ "--d": "0.6s" } as React.CSSProperties}>
+        <div className="np-card rounded-xl border hairline bg-[#121212] p-4" style={{ "--d": "0.6s" } as React.CSSProperties}>
           <div className="flex items-center gap-3">
             <FlowsLogo className="h-8 w-8" />
             <div className="min-w-0 flex-1">
@@ -64,11 +64,11 @@ export default function NewsPoster() {
             {N.example.map((step, i) => (
               <li
                 key={step}
-                className={`np-step flex items-center gap-3 border px-3 py-2 text-sm ${i === 1 ? "np-step--new border-brand-500 bg-brand-500/10 text-white" : "border-white/10 text-neutral-300"}`}
+                className={`np-step flex items-center gap-3 rounded-md border px-3 py-2 text-sm ${i === 1 ? "np-step--new border-brand-500 bg-brand-500/10 text-white" : "border-white/10 text-neutral-300"}`}
               >
                 <span className="label w-8 text-brand-400">({String(i + 1).padStart(2, "0")})</span>
                 <span className="flex-1">{step}</span>
-                {i === 1 && <span className="label bg-brand-500 px-1.5 py-0.5 text-[9px] text-white">Agent</span>}
+                {i === 1 && <span className="label rounded bg-brand-500 px-1.5 py-0.5 text-[9px] text-white">Agent</span>}
               </li>
             ))}
           </ol>

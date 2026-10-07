@@ -36,11 +36,14 @@ export default function FeaturedProjects({ projects }: { projects: ProjectEntry[
   const items = projects.map(toCase);
 
   return (
-    <section id="featured" className="border-b hairline px-6 py-24 sm:py-32">
+    <section id="proof" className="border-b hairline px-6 py-24 sm:py-32">
       <div className="mx-auto max-w-6xl">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <Eyebrow>Case studies</Eyebrow>
+            <div className="flex items-center gap-3">
+              <span className="eyebrow text-brand-400">04</span>
+              <Eyebrow>Proof · Case studies</Eyebrow>
+            </div>
             <SplitReveal segs={[{ text: "Real systems," }, { text: "real users.", className: "text-neutral-500" }]} className="display mt-5 text-4xl text-white sm:text-6xl" />
           </div>
           <p className="label text-neutral-500">{pad(items.length)} selected · hover or tap a row</p>

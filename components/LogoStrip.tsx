@@ -33,7 +33,7 @@ export default function LogoStrip({ items }: { items: ExperienceItemEntry[] }) {
         {Array.from({ length: copies }, (_, c) => (
           <ul key={c} className="flex gap-4 pr-4" aria-hidden={c > 0}>
             {list.map((m) => (
-              <li key={`${c}-${m.key}`} className="flex h-16 w-44 flex-none items-center justify-center border border-brand-500/50 bg-[#121212] px-5 shadow-[0_0_28px_-4px_rgb(var(--accent-500-rgb)/0.55)] transition-all duration-300 hover:border-brand-400 hover:shadow-[0_0_40px_-2px_rgb(var(--accent-500-rgb)/0.9)]">
+              <li key={`${c}-${m.key}`} className="flex h-16 w-44 flex-none items-center justify-center rounded-xl border border-brand-500/50 bg-[#121212] px-5 shadow-[0_0_28px_-4px_rgb(var(--accent-500-rgb)/0.55)] transition-all duration-300 hover:border-brand-400 hover:shadow-[0_0_40px_-2px_rgb(var(--accent-500-rgb)/0.9)]">
                 {m.node ? (
                   <span className="[&>svg]:h-9 [&>svg]:w-9">{m.node}</span>
                 ) : (

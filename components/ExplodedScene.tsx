@@ -87,7 +87,7 @@ export default function ExplodedScene({
 
   return (
     <div ref={ref} className="ex-scene relative aspect-[4/3] w-full sm:aspect-[5/4]" onMouseMove={onMove} onMouseLeave={onLeave}>
-      <div aria-hidden="true" className="rules absolute inset-0 border hairline opacity-80" />
+      <div aria-hidden="true" className="rules absolute inset-0 rounded-2xl border hairline opacity-80" />
       {/* dimension marks */}
       <span aria-hidden="true" className="label absolute left-3 top-3 text-neutral-500">{host}</span>
       <span aria-hidden="true" className="label absolute bottom-3 right-3 text-neutral-500">Exploded view · 1:1</span>
@@ -134,7 +134,7 @@ export default function ExplodedScene({
           {plates.map((p, i) => (
             <div
               key={p.src}
-              className={`ex-plate absolute overflow-hidden border bg-[#0b0b0c] ${p.pos} ${
+              className={`ex-plate absolute overflow-hidden rounded-lg border bg-[#0b0b0c] ${p.pos} ${
                 active === null ? "border-white/20" : active === i ? "is-active border-brand-400" : "is-dim border-white/10"
               }`}
               style={{ "--z": `${p.z}px`, "--d": `${p.delay}s`, "--m": 1 + i * 0.35 } as CSSProperties}
@@ -148,7 +148,7 @@ export default function ExplodedScene({
           ))}
 
           {/* logo + status chip */}
-          <div className="ex-plate absolute right-[3%] top-[12%] flex items-center gap-2 border border-white/15 bg-[#121212] px-2.5 py-2" style={{ "--z": "200px", "--d": "1.1s", "--m": 2 } as CSSProperties}>
+          <div className="ex-plate absolute right-[3%] top-[12%] flex items-center gap-2 rounded-lg border border-white/15 bg-[#121212] px-2.5 py-2" style={{ "--z": "200px", "--d": "1.1s", "--m": 2 } as CSSProperties}>
             <span className="[&>svg]:h-7 [&>svg]:w-7">{logo}</span>
             <span className="leading-tight">
               <span className="block font-mono text-[9px] uppercase tracking-[0.16em] text-white/45">Status</span>

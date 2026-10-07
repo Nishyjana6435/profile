@@ -207,7 +207,7 @@ export default function ToolsPool() {
                     href={href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="border border-white/25 px-2.5 py-1 font-mono text-[11px] text-white transition-all duration-300 hover:-translate-y-0.5 hover:border-white"
+                    className="rounded-md border border-white/25 px-2.5 py-1 font-mono text-[11px] text-white transition-all duration-300 hover:-translate-y-0.5 hover:border-white"
                   >
                     {label} ↗
                   </a>

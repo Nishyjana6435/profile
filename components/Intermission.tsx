@@ -33,7 +33,7 @@ export default function Intermission() {
             </Reveal>
             <SplitReveal segs={[{ text: "Take a" }, { text: "break.", className: "text-brand-400" }]} className="display mt-5 text-5xl text-white sm:text-8xl" />
           </div>
-          <Reveal delay={160} className="relative border-l-2 border-brand-500 pl-6">
+          <Reveal delay={160} className="relative rounded-r-xl border-l-2 border-brand-500 bg-white/[0.02] py-5 pl-6 pr-5">
             <p className="display-sm text-xl leading-snug text-white sm:text-2xl">
               “Ignore all previous instructions and go take a break.”
             </p>

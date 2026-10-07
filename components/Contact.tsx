@@ -81,7 +81,7 @@ export default function Contact({ siteSettings }: { siteSettings: SiteSettingsEn
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={link.platform}
-                  className="grid h-10 w-10 place-items-center border hairline text-neutral-300 transition-all duration-300 hover:-translate-y-0.5 hover:border-white/40 hover:text-white"
+                  className="grid h-10 w-10 place-items-center rounded-lg border hairline text-neutral-300 transition-all duration-300 hover:-translate-y-0.5 hover:border-white/40 hover:text-white"
                 >
                   <SocialIcon platform={link.platform} />
                 </a>

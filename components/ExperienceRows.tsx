@@ -47,7 +47,7 @@ export default function ExperienceRows({ items }: { items: ExperienceRow[] }) {
                 <span className="block text-sm font-medium leading-5 text-white">{it.role}</span>
                 {it.period && <span className="label mt-1 block text-neutral-500">{it.period}</span>}
               </span>
-              <span className="row-plus grid h-9 w-9 place-items-center border hairline text-lg leading-none text-white" aria-hidden="true">
+              <span className="row-plus grid h-9 w-9 place-items-center rounded-md border hairline text-lg leading-none text-white" aria-hidden="true">
                 +
               </span>
             </button>
@@ -63,7 +63,7 @@ export default function ExperienceRows({ items }: { items: ExperienceRow[] }) {
                         <Image src={it.logoUrl} alt="" fill sizes="48px" unoptimized className="object-contain p-1" />
                       </span>
                     ) : (
-                      <span className="grid h-12 w-12 place-items-center border hairline font-mono text-sm text-white">{it.company.charAt(0)}</span>
+                      <span className="grid h-12 w-12 place-items-center rounded-lg border hairline font-mono text-sm text-white">{it.company.charAt(0)}</span>
                     )}
                   </div>
                   <div className="max-w-3xl">

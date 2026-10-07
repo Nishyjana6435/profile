@@ -11,7 +11,7 @@ const STATS = [
 
 export default function StatsBand() {
   return (
-    <Reveal variant="fade" stagger className="grid border-y hairline sm:grid-cols-2 lg:grid-cols-4">
+    <Reveal variant="fade" stagger className="grid overflow-hidden rounded-2xl border hairline sm:grid-cols-2 lg:grid-cols-4">
       {STATS.map((s, i) => (
         <div key={s.label} className="border-b hairline p-6 sm:border-b-0 sm:border-r sm:last:border-r-0 sm:p-8" style={{ "--i": i } as CSSProperties}>
           <p className="display text-5xl text-white sm:text-6xl">

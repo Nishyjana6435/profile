@@ -436,8 +436,8 @@ export default function ShieldGame() {
   const result = rank(final.score);
 
   return (
-    <div className="game-bezel relative" data-live-skip>
-      <div ref={wrap} className="relative aspect-[4/5] w-full overflow-hidden bg-[#0b0b0c] touch-none sm:aspect-[16/9]">
+    <div className="game-bezel relative overflow-hidden rounded-2xl" data-live-skip>
+      <div ref={wrap} className="relative aspect-[4/5] w-full overflow-hidden rounded-t-2xl bg-[#0b0b0c] touch-none sm:aspect-[16/9]">
         <canvas ref={canvas} tabIndex={0} aria-label="Shield the agent, an arcade game" className="block h-full w-full cursor-none outline-none" />
         <div aria-hidden="true" className="game-scan pointer-events-none absolute inset-0" />
 
@@ -445,7 +445,7 @@ export default function ShieldGame() {
         <button
           type="button"
           onClick={() => { sfx.current.muted = !muted; setMuted(!muted); }}
-          className="label absolute bottom-3 left-3 z-10 border border-white/15 bg-[#121212]/80 px-2.5 py-1.5 text-white/70 hover:text-white"
+          className="label absolute bottom-3 left-3 z-10 rounded-md border border-white/15 bg-[#121212]/80 px-2.5 py-1.5 text-white/70 hover:text-white"
           aria-pressed={muted}
         >
           {muted ? "Sound off" : "Sound on"}

@@ -76,7 +76,7 @@ export default async function BlogPostPage(props: PageProps<"/blog/[slug]">) {
           )}
 
           {coverUrl && (
-            <figure className="mt-10 overflow-hidden border hairline bg-[#161616]">
+            <figure className="mt-10 overflow-hidden rounded-2xl border hairline bg-[#161616]">
               <Image
                 src={`https:${coverUrl}`}
                 alt={cover?.fields.title || post.fields.title}

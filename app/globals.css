@@ -266,97 +266,6 @@ body {
   }
 }
 
-/* ---------- Project marquee ---------- */
-.pm-row {
-  animation: carousel-scroll var(--dur, 50s) linear infinite;
-}
-.pm-row--reverse {
-  animation-direction: reverse;
-}
-.pm-marquee:hover .pm-row,
-.pm-marquee:focus-within .pm-row {
-  animation-play-state: paused;
-}
-.pm-card {
-  transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
-  transform-style: preserve-3d;
-  transition:
-    transform 0.25s cubic-bezier(0.2, 0.7, 0.2, 1),
-    filter 0.3s ease;
-  will-change: transform;
-}
-.pm-card:hover,
-.pm-card:focus-visible {
-  transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) scale(1.04);
-  z-index: 2;
-  filter: drop-shadow(0 30px 50px rgb(var(--accent-500-rgb) / 0.35));
-}
-.pm-border {
-  background:
-    radial-gradient(
-      220px circle at var(--mx, 50%) var(--my, 50%),
-      rgb(var(--accent-400-rgb) / 0.9),
-      rgb(var(--accent-500-rgb) / 0.5) 40%,
-      rgba(255, 255, 255, 0.08) 75%
-    );
-  opacity: 0.35;
-  transition: opacity 0.3s ease;
-}
-.pm-card:hover .pm-border,
-.pm-card:focus-visible .pm-border {
-  opacity: 1;
-}
-.pm-spotlight {
-  background: radial-gradient(
-    260px circle at var(--mx, 50%) var(--my, 50%),
-    rgb(var(--accent-400-rgb) / 0.22),
-    transparent 60%
-  );
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-.pm-card:hover .pm-spotlight {
-  opacity: 1;
-}
-.pm-backdrop {
-  transform: scale(1.25);
-  transition:
-    opacity 0.5s ease,
-    transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1);
-}
-.pm-card:hover .pm-backdrop {
-  opacity: 0.45;
-  transform: scale(1.4);
-}
-.pm-media {
-  transition:
-    transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1),
-    opacity 0.4s ease,
-    filter 0.4s ease;
-}
-.pm-card:hover .pm-media {
-  transform: translateY(-14px) scale(0.92);
-  opacity: 0.35;
-  filter: blur(1px);
-}
-.pm-caption {
-  transition:
-    transform 0.4s cubic-bezier(0.2, 0.7, 0.2, 1),
-    opacity 0.3s ease;
-}
-.pm-card:hover .pm-caption {
-  transform: translateY(100%);
-  opacity: 0;
-}
-.pm-detail {
-  transform: translateY(100%);
-  transition: transform 0.45s cubic-bezier(0.2, 0.7, 0.2, 1);
-}
-.pm-card:hover .pm-detail,
-.pm-card:focus-visible .pm-detail {
-  transform: translateY(0);
-}
-
 /* ---------- Experience showcase ---------- */
 @keyframes exp-panel-in {
   from {
@@ -811,119 +720,6 @@ body {
   }
 }
 
-/* ---------- Key projects: 3D deck ---------- */
-@keyframes pd-progress {
-  from { transform: scaleX(0); }
-  to { transform: scaleX(1); }
-}
-@keyframes pd-float {
-  0%, 100% { translate: 0 0; }
-  50% { translate: 0 -8px; }
-}
-.pd-stage {
-  --rx: 0deg;
-  --ry: 0deg;
-  --mx: 50%;
-  --my: 50%;
-  perspective: 1600px;
-  transform-style: preserve-3d;
-}
-.pd-glow {
-  transform: translateZ(-160px);
-  transition: opacity 0.6s ease;
-}
-.pd-card {
-  transform-style: preserve-3d;
-  transform:
-    translate3d(calc(var(--k) * 6.5%), calc(var(--k) * -9%), calc(var(--k) * -90px))
-    rotateY(calc(var(--k) * -8deg))
-    scale(calc(1 - var(--k) * 0.05));
-  opacity: calc(1 - var(--k) * 0.22);
-  filter: saturate(calc(1 - var(--k) * 0.25)) brightness(calc(1 - var(--k) * 0.18));
-  transition:
-    transform 0.9s cubic-bezier(0.2, 0.75, 0.2, 1),
-    opacity 0.7s ease,
-    filter 0.7s ease;
-  cursor: pointer;
-  will-change: transform, opacity;
-}
-.pd-card:not(.is-front) .pd-face {
-  box-shadow: 0 0 0 1px rgb(var(--accent-400-rgb) / 0.35), 0 30px 60px -30px rgba(0, 0, 0, 0.9);
-}
-.pd-card.is-hidden {
-  opacity: 0;
-  pointer-events: none;
-}
-.pd-card.is-front {
-  cursor: default;
-  transform: rotateX(var(--rx)) rotateY(var(--ry));
-  transition:
-    transform 0.9s cubic-bezier(0.2, 0.75, 0.2, 1),
-    opacity 0.7s ease,
-    filter 0.7s ease;
-}
-.pd-stage:hover .pd-card.is-front {
-  transition: transform 0.25s ease-out, opacity 0.7s ease, filter 0.7s ease;
-}
-.pd-card.is-front .pd-face {
-  box-shadow:
-    0 70px 140px -50px rgb(var(--accent-500-rgb) / 0.8),
-    0 0 0 1px rgb(var(--accent-400-rgb) / 0.25);
-  animation: pd-float 7s ease-in-out infinite;
-}
-.pd-card:not(.is-front) .pd-copy,
-.pd-card:not(.is-front) .pd-media {
-  opacity: 0.55;
-}
-.pd-media {
-  transition: transform 1.2s cubic-bezier(0.2, 0.75, 0.2, 1);
-}
-.pd-card.is-front .pd-media {
-  transform: translateZ(0) scale(1.03);
-}
-.pd-card:not(.is-front) .pd-media {
-  transform: scale(0.94);
-}
-.pd-copy {
-  transition: opacity 0.6s ease, transform 0.8s cubic-bezier(0.2, 0.75, 0.2, 1);
-}
-.pd-card:not(.is-front) .pd-copy {
-  transform: translateY(12px);
-}
-.pd-spot {
-  background: radial-gradient(420px circle at var(--mx) var(--my), rgba(255, 255, 255, 0.14), transparent 55%);
-  opacity: 0;
-  transition: opacity 0.35s ease;
-}
-.pd-stage:hover .pd-card.is-front .pd-spot {
-  opacity: 1;
-}
-.pd-progress {
-  animation: pd-progress var(--t, 5500ms) linear forwards;
-}
-.pd-progress.is-paused {
-  animation-play-state: paused;
-}
-@media (max-width: 640px) {
-  .pd-card {
-    transform:
-      translate3d(0, calc(var(--k) * -4.5%), calc(var(--k) * -60px))
-      scale(calc(1 - var(--k) * 0.05));
-  }
-}
-@media (prefers-reduced-motion: reduce) {
-  .pd-card,
-  .pd-card.is-front,
-  .pd-media,
-  .pd-copy {
-    transition: opacity 0.3s ease;
-  }
-  .pd-card.is-front .pd-face,
-  .pd-progress {
-    animation: none;
-  }
-}
-
 /* ---------- Assistant widget ---------- */
 @keyframes as-float { 0%,100% { translate: 0 0; } 50% { translate: 0 -5px; } }
 @keyframes as-spin { to { transform: rotate(360deg); } }
@@ -1262,6 +1058,7 @@ html, body { overflow-x: clip; }
   .glide {
     height: 0; background: rgba(255, 255, 255, 0.04);
     border-left: 2px solid var(--accent);
+    border-radius: 0 var(--r-md, 10px) var(--r-md, 10px) 0;
     transition: opacity 0.3s ease;
     will-change: transform, height;
   }
@@ -1423,4 +1220,17 @@ html, body { overflow-x: clip; }
   .rt tr:last-child td { border-bottom: 0; }
   .rt td p, .rt th p { margin: 0; }
   @media (max-width: 640px) { .rt { font-size: 16px; } .rt h2 { font-size: 1.6rem; } }
+}
+
+/* ---------- Curved corners everywhere: one radius scale for boxed elements ---------- */
+@layer components {
+  :root { --r-sm: 6px; --r-md: 10px; --r-lg: 16px; --r-xl: 22px; }
+  /* small: chips, labels, arrow boxes, strip tiles, logo tiles */
+  .chip-r, .row-plus, .btn-ico, .np-step, .cs-tag, .tp-tile-badge { border-radius: var(--r-sm); }
+  /* medium: cards, rows, frames, tiles */
+  .card-r, .cs-frame, .np-card, .hero-sheet, .hero-notch, .strip li, .ex-plate, .game-bezel, .rt-figure img, .rt-figure video, .rt-table, .tp-tile-face { border-radius: var(--r-md); }
+  /* large: stages and big panels */
+  .cs-stage, .np, .ex-scene > .rules, .hero-portrait-float > div { border-radius: var(--r-lg); }
+  .game-bezel .touch-none, .game-bezel canvas { border-radius: var(--r-md); }
+  .hero-notch { clip-path: none; }
 }

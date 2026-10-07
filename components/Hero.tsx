@@ -46,7 +46,7 @@ export default function Hero({ profile }: { profile: ProfileEntry | null }) {
         href={NEWS.path}
         className="group flex items-center justify-center gap-3 border-b hairline px-6 py-2.5 text-center transition-colors hover:bg-white/[0.03]"
       >
-        <span className="bg-brand-500 px-1.5 py-0.5 font-mono text-[10px] font-bold uppercase tracking-[0.16em] text-white">New</span>
+        <span className="rounded bg-brand-500 px-1.5 py-0.5 font-mono text-[10px] font-bold uppercase tracking-[0.16em] text-white">New</span>
         <span className="truncate text-xs text-neutral-300 sm:text-sm">{NEWS.title}</span>
         <Arrow className="h-3 w-3 text-neutral-500 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-white" />
       </Link>
@@ -74,8 +74,8 @@ export default function Hero({ profile }: { profile: ProfileEntry | null }) {
           <div className="hero-portrait relative mx-auto mt-6 w-[62%] max-w-[18rem] sm:w-[40%] lg:absolute lg:right-[9%] lg:top-[74%] lg:mx-0 lg:mt-0 lg:w-[27%] lg:max-w-[21rem]">
             <Parallax strength={10}>
             <div className="hero-portrait-float group relative aspect-[4/5]">
-              <div className="hero-notch absolute inset-0 bg-white/20 p-px">
-                <div className="hero-notch hero-sheet relative h-full w-full overflow-hidden bg-ink-700">
+              <div className="absolute inset-0 overflow-hidden rounded-2xl bg-white/20 p-px">
+                <div className="hero-sheet relative h-full w-full overflow-hidden rounded-2xl bg-ink-700">
                   {src ? (
                     <Image src={src} alt={`${name} (Nishy), founder of Agent Studio and Flows`} fill priority sizes="(min-width: 1024px) 336px, 60vw" className="object-cover" />
                   ) : (
@@ -85,7 +85,7 @@ export default function Hero({ profile }: { profile: ProfileEntry | null }) {
                   <span aria-hidden="true" className="hero-scan pointer-events-none absolute inset-x-0 top-0 h-1/4" />
                 </div>
               </div>
-              <div className="absolute left-0 top-0 flex h-[24%] w-[30%] flex-col justify-end pb-2 pr-2">
+              <div className="absolute left-3 top-3 flex flex-col rounded-md bg-[#121212]/85 px-2 py-1.5 backdrop-blur">
                 <span className="label text-brand-400">(01)</span>
                 <span className="label text-white">Founder</span>
               </div>
@@ -93,7 +93,7 @@ export default function Hero({ profile }: { profile: ProfileEntry | null }) {
                 Fig. 01
                 <span className="mt-1 block text-white/35">6.9°N 79.8°E</span>
               </span>
-              <span className="absolute bottom-3 left-3 inline-flex items-center gap-1.5 bg-[#121212]/85 px-2 py-1 font-mono text-[10px] uppercase tracking-[0.16em] text-white backdrop-blur">
+              <span className="absolute bottom-3 left-3 inline-flex items-center gap-1.5 rounded-md bg-[#121212]/85 px-2 py-1 font-mono text-[10px] uppercase tracking-[0.16em] text-white backdrop-blur">
                 <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
                 Available for projects
               </span>
@@ -122,7 +122,7 @@ export default function Hero({ profile }: { profile: ProfileEntry | null }) {
 
       {/* the three answers */}
       <div className="mx-auto mt-14 max-w-6xl px-6 pb-10 sm:mt-20 sm:pb-14">
-        <ol className="grid border-t hairline sm:grid-cols-3 sm:border-x sm:border-b">
+        <ol className="grid overflow-hidden rounded-2xl border hairline sm:grid-cols-3">
           {ANSWERS.map((a, i) => (
             <li
               key={a.tag}

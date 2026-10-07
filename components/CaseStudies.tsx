@@ -64,7 +64,7 @@ export default function CaseStudies({ items }: { items: CaseStudy[] }) {
       {/* spotlight */}
       <div className="lg:order-2">
         <div className="sticky top-20 lg:top-24">
-          <div ref={stage} onMouseMove={onMove} onMouseLeave={onLeave} data-cursor={current.liveUrl ? "Visit" : undefined} className="cs-stage relative aspect-[4/3] overflow-hidden border hairline bg-[#161616]">
+          <div ref={stage} onMouseMove={onMove} onMouseLeave={onLeave} data-cursor={current.liveUrl ? "Visit" : undefined} className="cs-stage relative aspect-[4/3] overflow-hidden rounded-2xl border hairline bg-[#161616]">
             <div aria-hidden="true" className="rules absolute inset-0 opacity-70" />
             <span key={active} aria-hidden="true" className="cs-ghost display pointer-events-none absolute -left-3 -top-6 text-[11rem] leading-none text-white/[0.05] sm:text-[15rem]">
               {pad(active + 1)}
@@ -104,7 +104,7 @@ export default function CaseStudies({ items }: { items: CaseStudy[] }) {
             <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-4 p-4">
               <div className="hidden flex-wrap gap-1.5 sm:flex">
                 {current.tags.slice(0, 3).map((t) => (
-                  <span key={`${current.id}-${t}`} className="cs-tag label border border-white/15 bg-[#121212]/85 px-2 py-1 text-white backdrop-blur">
+                  <span key={`${current.id}-${t}`} className="cs-tag label rounded-md border border-white/15 bg-[#121212]/85 px-2 py-1 text-white backdrop-blur">
                     {t}
                   </span>
                 ))}
@@ -139,7 +139,7 @@ export default function CaseStudies({ items }: { items: CaseStudy[] }) {
                 <span className="label text-brand-400">{pad(i + 1)}</span>
                 <span className={`row-ghost display-sm block text-xl sm:text-2xl lg:text-[1.7rem] ${on ? "text-white" : "text-neutral-500"}`}>{p.title}</span>
                 <span className="label hidden truncate text-right text-neutral-500 sm:block">{p.tags[0]}</span>
-                <span className={`grid h-9 w-9 place-items-center border hairline transition-all duration-400 ${on ? "bg-brand-500 text-white" : "text-white/60"}`} aria-hidden="true">
+                <span className={`grid h-9 w-9 place-items-center rounded-md border hairline transition-all duration-400 ${on ? "bg-brand-500 text-white" : "text-white/60"}`} aria-hidden="true">
                   <Arrow className="h-3.5 w-3.5" />
                 </span>
               </button>

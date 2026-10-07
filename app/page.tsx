@@ -9,7 +9,6 @@ import ToolsPool from "@/components/ToolsPool";
 import Process from "@/components/Process";
 import Intermission from "@/components/Intermission";
 import WorkExperience from "@/components/WorkExperience";
-import ProjectCarousel from "@/components/ProjectCarousel";
 import FeaturedProjects from "@/components/FeaturedProjects";
 import CtaBand from "@/components/CtaBand";
 import Contact from "@/components/Contact";
@@ -18,7 +17,6 @@ import {
   getProfile,
   getExperienceItems,
   getFeaturedProjects,
-  getProjectCarousels,
   getSiteSettings,
 } from "@/lib/contentful";
 import { faqItems } from "@/lib/faq";
@@ -71,11 +69,10 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function Home() {
-  const [profile, experienceItems, featuredProjects, projectCarousels, siteSettings] = await Promise.all([
+  const [profile, experienceItems, featuredProjects, siteSettings] = await Promise.all([
     getProfile(),
     getExperienceItems(),
     getFeaturedProjects(),
-    getProjectCarousels(),
     getSiteSettings(),
   ]);
 
@@ -94,9 +91,6 @@ export default async function Home() {
         <Process />
         <Intermission />
         <WorkExperience items={experienceItems} />
-        {projectCarousels.map((carousel) => (
-          <ProjectCarousel key={carousel.sys.id} carousel={carousel} />
-        ))}
         <FeaturedProjects projects={featuredProjects} />
         <CtaBand lookingFor={profile?.fields.lookingForText} />
       </main>

@@ -96,7 +96,7 @@ export function SectionHead({
 
 export function Chip({ children }: { children: ReactNode }) {
   return (
-    <span className="border border-white/10 px-2.5 py-1 font-mono text-[11px] text-neutral-300 transition-colors duration-300 hover:border-white/30 hover:text-white">
+    <span className="rounded-md border border-white/10 px-2.5 py-1 font-mono text-[11px] text-neutral-300 transition-colors duration-300 hover:border-white/30 hover:text-white">
       {children}
     </span>
   );
