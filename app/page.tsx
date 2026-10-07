@@ -11,6 +11,7 @@ import Intermission from "@/components/Intermission";
 import WorkExperience from "@/components/WorkExperience";
 import FeaturedProjects from "@/components/FeaturedProjects";
 import CtaBand from "@/components/CtaBand";
+import FAQ from "@/components/FAQ";
 import Contact from "@/components/Contact";
 import StructuredData from "@/components/StructuredData";
 import {
@@ -78,7 +79,7 @@ export default async function Home() {
 
   // The story: who (hero) -> what I do -> how I do it -> how long -> proof -> next step.
   return (
-    <div className="flex min-h-full flex-1 flex-col bg-[#121212] text-white">
+    <div className="relative isolate flex min-h-full flex-1 flex-col bg-[#121212] text-white">
       <StructuredData profile={profile} siteSettings={siteSettings} projects={featuredProjects} faqItems={faqItems} />
       <Header />
       <main className="flex-1">
@@ -89,10 +90,11 @@ export default async function Home() {
         <AgentShowcase />
         <ToolsPool />
         <Process />
-        <Intermission />
         <WorkExperience items={experienceItems} />
         <FeaturedProjects projects={featuredProjects} />
+        <Intermission />
         <CtaBand lookingFor={profile?.fields.lookingForText} />
+        <FAQ items={faqItems} eyebrow="Questions" title="Asked often." />
       </main>
       <Contact siteSettings={siteSettings} />
     </div>

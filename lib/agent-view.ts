@@ -136,6 +136,9 @@ export async function getAgentView(): Promise<AgentView> {
     { path: "/news/agent-studio-flows", title: "News (2026-09-28): Agent Studio agents now run inside Flows automatically", description: "One switch in the Deploy dialog adds an agent to Flows as a workflow step.", markdown: "" },
     { path: "/about", title: "About Nishanthan Janarthanarajah (Nishy), founder of Agent Studio and Flows", description: "Founder bio, products, experience and links.", markdown: "" },
     { path: "/hire", title: "Hire me: services, engagement types and FAQ", description: "All services with engagement types.", markdown: "" },
+    { path: "/engagements", title: "Engagements and pricing: discovery sprint, production build, operate", description: "Price anchors, process, contracts, NDA, invoicing and international payment.", markdown: "" },
+    { path: "/book", title: "Book a 20-minute discovery call", description: "Live calendar slots in the visitor's time zone; a Google Meet invite follows.", markdown: "" },
+    { path: "/privacy", title: "Privacy policy for nishyai.com", description: "What the site collects and how to control it.", markdown: "" },
     { path: "/blog", title: "Blog", description: "Engineering articles.", markdown: "" },
     { path: "/for-agents", title: "Agent view", description: "Every key fact on one page for crawlers and AI agents.", markdown: MARKDOWN_TWINS["/for-agents"] },
   ];

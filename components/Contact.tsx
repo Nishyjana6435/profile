@@ -47,9 +47,12 @@ const FOOTER_LINKS = [
   { label: "Build an AI system for your business", href: "/build-ai-system-for-your-business" },
   { label: "AI engineer in Sri Lanka", href: "/ai-engineer-sri-lanka" },
   { label: "Hire me", href: "/hire" },
+  { label: "Engagements & pricing", href: "/engagements" },
+  { label: "Book a discovery call", href: "/book" },
   { label: "Blog", href: "/blog" },
   { label: "News", href: "/news/agent-studio-flows" },
   { label: "For AI agents & crawlers", href: "/for-agents" },
+  { label: "Privacy", href: "/privacy" },
 ];
 
 export default function Contact({ siteSettings }: { siteSettings: SiteSettingsEntry | null }) {
