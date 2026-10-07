@@ -1223,11 +1223,20 @@ html, body { overflow-x: clip; }
 }
 
 /* ---------- Water text: dripping surface that ripples on touch ---------- */
+/* a bead swells on the baseline, sags into a neck and pinches off at the end of the cycle;
+   the free drop is then carried on by LiquidTiles (see wt-drip-solo for layouts without a tank) */
 @keyframes wt-drip {
-  0%, 62% { transform: translate(-50%, 0) scaleY(0.4); }
-  72% { transform: translate(-50%, 0.06em) scaleY(1.4); }
-  78% { transform: translate(-50%, 0.3em) scaleY(1.1); }
-  100% { transform: translate(-50%, 1.4em) scaleY(1); }
+  0%, 58% { transform: translate(-50%, 0) scaleY(0.4); animation-timing-function: cubic-bezier(0.4, 0, 0.6, 1); }
+  76% { transform: translate(-50%, 0.03em) scaleY(1.45); animation-timing-function: cubic-bezier(0.5, 0, 0.9, 0.6); }
+  90% { transform: translate(-50%, 0.14em) scaleY(1.9); animation-timing-function: cubic-bezier(0.5, 0, 0.75, 0.5); }
+  100% { transform: translate(-50%, 0.46em) scaleY(2.4); }
+}
+@keyframes wt-drip-solo {
+  0%, 58% { transform: translate(-50%, 0) scaleY(0.4); opacity: 1; animation-timing-function: cubic-bezier(0.4, 0, 0.6, 1); }
+  76% { transform: translate(-50%, 0.03em) scaleY(1.45); opacity: 1; animation-timing-function: cubic-bezier(0.5, 0, 0.9, 0.6); }
+  88% { transform: translate(-50%, 0.14em) scaleY(1.9); opacity: 1; animation-timing-function: cubic-bezier(0.33, 0, 0.67, 0.33); }
+  96% { opacity: 1; }
+  100% { transform: translate(-50%, 1.5em) scaleY(1.3); opacity: 0; }
 }
 @keyframes wt-ring {
   from { transform: translate(-50%, -50%) scale(0.2); opacity: 0.8; }
@@ -1245,8 +1254,10 @@ html, body { overflow-x: clip; }
     border-radius: 9999px 9999px 60% 60%;
     background: currentColor;
     transform-origin: 50% 0;
-    animation: wt-drip var(--dur, 8s) cubic-bezier(0.4, 0, 0.8, 1) var(--d, 0s) infinite;
+    animation: wt-drip var(--dur, 8s) linear var(--d, 0s) infinite;
   }
+  /* below the desktop layout nothing catches the drop, so it falls a little and fades inside the name */
+  @media (max-width: 1023px) { .wt-drop { animation-name: wt-drip-solo; } }
   .wt-ring {
     position: absolute;
     width: 120px; height: 120px;
@@ -1264,7 +1275,13 @@ html, body { overflow-x: clip; }
 }
 
 /* ---------- Liquid tiles: the tank under the hero ---------- */
-@keyframes lq-fall { 0% { transform: translateY(0) scaleY(1); } 100% { transform: translateY(var(--fall)) scaleY(1.3); } }
+@keyframes lq-fall { 0% { transform: translateY(0) scaleY(1.25); } 100% { transform: translateY(var(--fall)) scaleY(1.45); } }
+@keyframes lq-ring { 0% { transform: translate(-50%, -50%) scale(0.25); opacity: 0.95; } 100% { transform: translate(-50%, -50%) scale(1); opacity: 0; } }
+@keyframes lq-bead {
+  0% { transform: translate(0, 0) rotate(0deg); opacity: 1; animation-timing-function: cubic-bezier(0.2, 0.6, 0.5, 1); }
+  48% { transform: translate(calc(var(--dx) * 0.55), calc(var(--dy) * -1)) rotate(var(--spin)); opacity: 1; animation-timing-function: cubic-bezier(0.5, 0, 0.8, 0.4); }
+  100% { transform: translate(var(--dx), calc(var(--dy) * 0.15)) rotate(var(--spin)); opacity: 0; }
+}
 @keyframes lq-wave { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 @keyframes lq-stream { 0% { opacity: 0; transform: scaleY(0.2); } 20% { opacity: 1; transform: scaleY(1); } 100% { opacity: 0; transform: scaleY(1) translateY(10px); } }
 @layer components {
@@ -1275,7 +1292,26 @@ html, body { overflow-x: clip; }
     background: #fff;
     transform-origin: 50% 0;
     filter: blur(0.8px);
-    animation: lq-fall var(--dur, 1s) cubic-bezier(0.45, 0, 0.85, 0.5) both;
+    will-change: transform;
+    /* y = x², i.e. constant acceleration, with a touch of the velocity it had leaving the neck */
+    animation: lq-fall var(--dur, 1s) cubic-bezier(0.25, 0.1, 0.66, 0.34) both;
+  }
+  /* the splash where a drop meets the surface: ripple rings plus a crown of beads */
+  .lq-ring {
+    position: absolute;
+    border-radius: 9999px;
+    border: 2px solid rgba(255, 255, 255, 0.9);
+    /* a dark edge outside the white line so the ripple also reads where it crosses the white liquid */
+    box-shadow: 0 0 0 1.5px rgba(18, 18, 18, 0.45), 0 0 10px rgba(255, 255, 255, 0.35);
+    animation: lq-ring 0.6s cubic-bezier(0.1, 0.7, 0.3, 1) both;
+  }
+  .lq-ring--late { animation-delay: 0.14s; animation-duration: 0.7s; }
+  .lq-bead {
+    position: absolute;
+    border-radius: 9999px;
+    background: #fff;
+    box-shadow: 0 0 0 1px rgba(18, 18, 18, 0.35), 0 0 4px rgba(255, 255, 255, 0.5);
+    animation: lq-bead 0.55s linear both;
   }
   .lq-liquid {
     top: calc((1 - var(--level, 0)) * 100%);

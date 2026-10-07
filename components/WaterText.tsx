@@ -27,14 +27,19 @@ export default function WaterText({ text, className = "" }: { text: string; clas
       io.observe(el);
       s.io = io;
     }
-    // the drip's cycle has already restarted when this fires, so compute where it ended:
-    // 1.4em below its resting place, at its unstretched size
+    // the cycle restarts the moment the neck pinches off, so the free drop starts where the
+    // stretched bead's tip was: 0.46em down plus a 0.12em bead stretched 2.4x (see @keyframes wt-drip)
+    const TIP = 0.46 + 0.12 * 2.4;
+    // offsetTop/offsetLeft are layout positions and ignore the transform, so they are the same
+    // whether the event is handled before or after the style has snapped back to the bead
     const onIter = (e: Event) => {
       const d = e.target as HTMLElement;
       if (!d.classList.contains("wt-drop")) return;
-      const r = d.getBoundingClientRect();
+      const host = d.offsetParent?.getBoundingClientRect();
+      if (!host) return;
       const fs = parseFloat(getComputedStyle(d).fontSize);
-      window.dispatchEvent(new CustomEvent("nishy:drip", { detail: { x: r.left + r.width / 2, top: r.top + fs * 1.4, w: r.width, h: fs * 0.12 } }));
+      const w = d.offsetWidth;
+      window.dispatchEvent(new CustomEvent("nishy:drip", { detail: { x: host.left + d.offsetLeft, tip: host.top + d.offsetTop + fs * TIP, w, h: fs * 0.12 } }));
     };
     el?.addEventListener("animationiteration", onIter);
     // once the entrance reveal has played, let drips fall past the mask
