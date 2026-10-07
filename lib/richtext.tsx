@@ -99,7 +99,7 @@ function EmbeddedAsset({ asset }: { asset: AssetLike }) {
     return (
       <figure className="rt-figure">
         <a href={url} target="_blank" rel="noopener noreferrer" className="block">
-          <Image src={url} alt={title} width={w} height={h} sizes="(min-width: 768px) 720px, 100vw" className="h-auto w-full" unoptimized={type === "image/gif" || type === "image/svg+xml"} />
+          <Image src={url} alt={title} width={w} height={h} sizes="(min-width: 768px) 720px, 100vw" className="h-auto w-full" unoptimized={type === "image/gif" || type === "image/svg+xml" || !url.includes("ctfassets.net")} />
         </a>
         {(caption || title) && <figcaption>{caption || title}</figcaption>}
       </figure>
