@@ -134,7 +134,7 @@ export default function ExplodedScene({
           {plates.map((p, i) => (
             <div
               key={p.src}
-              className={`ex-plate absolute overflow-hidden rounded-lg border bg-[#0b0b0c] ${p.pos} ${
+              className={`ex-plate absolute overflow-clip rounded-lg border bg-[#0b0b0c] ${p.pos} ${
                 active === null ? "border-white/20" : active === i ? "is-active border-brand-400" : "is-dim border-white/10"
               }`}
               style={{ "--z": `${p.z}px`, "--d": `${p.delay}s`, "--m": 1 + i * 0.35 } as CSSProperties}

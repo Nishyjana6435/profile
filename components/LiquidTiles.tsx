@@ -57,9 +57,12 @@ export default function LiquidTiles({ children, source = ".hero-name" }: { child
     };
     window.addEventListener("nishy:drip", onDrip);
 
+    let frame = 0;
     const tick = (now: number) => {
       if (!visible) { raf = 0; return; }
-      const t = ((now - t0) / 1000) % TOTAL;
+      // every other frame is plenty for a liquid level, and the loop waits for the hero entrance
+      if (now - t0 < 1600 || frame++ % 2) { raf = requestAnimationFrame(tick); return; }
+      const t = ((now - t0 - 1600) / 1000) % TOTAL;
       let level = 0, gate = 0, drain = 0;
       if (t < FILL) { level = t / FILL; phase = "fill"; }
       else if (t < FILL + HOLD) { level = 1; phase = "hold"; }
@@ -83,7 +86,7 @@ export default function LiquidTiles({ children, source = ".hero-name" }: { child
       {/* dry layer */}
       <div className="lq-dry">{children}</div>
       {/* flooded copy: white liquid with the same content in black, clipped to the level */}
-      <div aria-hidden="true" className="lq-flood pointer-events-none absolute inset-0 overflow-hidden rounded-2xl">
+      <div aria-hidden="true" className="lq-flood pointer-events-none absolute inset-0 overflow-clip rounded-2xl">
         <div className="lq-liquid absolute inset-x-0">
           <svg className="lq-wave absolute inset-x-0 bottom-full h-3 w-[200%]" viewBox="0 0 1200 12" preserveAspectRatio="none" aria-hidden="true">
             <path d="M0 12 C 50 2, 100 2, 150 12 S 250 22, 300 12 S 400 2, 450 12 S 550 22, 600 12 S 700 2, 750 12 S 850 22, 900 12 S 1000 2, 1050 12 S 1150 22, 1200 12 V 12 H 0 Z" fill="#fff" />

@@ -103,9 +103,9 @@ export default function Contact({ siteSettings }: { siteSettings: SiteSettingsEn
 
         <div className="mt-14 flex flex-col gap-2 border-t border-[#0b0b0c]/25 pt-6 text-sm font-medium text-[#0b0b0c]/75 sm:flex-row sm:items-center sm:justify-between">
           <p>
-            <Link href="/about" className="text-[#0b0b0c] hover:underline">Nishanthan Janarthanarajah (Nishy)</Link>, founder of{" "}
-            <Link href="/agent-studio" className="text-[#0b0b0c] hover:underline">Agent Studio</Link> and{" "}
-            <Link href="/flows" className="text-[#0b0b0c] hover:underline">Flows</Link>.
+            <Link href="/about" className="text-[#0b0b0c] underline decoration-[#0b0b0c]/40 underline-offset-4 hover:decoration-[#0b0b0c]">Nishanthan Janarthanarajah (Nishy)</Link>, founder of{" "}
+            <Link href="/agent-studio" className="text-[#0b0b0c] underline decoration-[#0b0b0c]/40 underline-offset-4 hover:decoration-[#0b0b0c]">Agent Studio</Link> and{" "}
+            <Link href="/flows" className="text-[#0b0b0c] underline decoration-[#0b0b0c]/40 underline-offset-4 hover:decoration-[#0b0b0c]">Flows</Link>.
           </p>
           <div className="flex items-center gap-6">
             <Signature className="h-14 w-auto" />

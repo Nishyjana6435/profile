@@ -34,7 +34,8 @@ export default function LiveType({ text, className = "", reach = 180, lift = 18 
     return () => { window.removeEventListener("pointermove", onMove); document.documentElement.removeEventListener("mouseleave", onLeave); if (raf) cancelAnimationFrame(raf); };
   }, [reach, lift]);
   return (
-    <span ref={ref} className={className} aria-label={text}>
+    <span ref={ref} className={className}>
+      <span className="sr-only">{text}</span>
       {Array.from(text).map((ch, i) => (
         <span key={i} className="lt inline-block will-change-transform" aria-hidden="true">
           {ch === " " ? " " : ch}

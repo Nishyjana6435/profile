@@ -93,7 +93,7 @@ export default function ToolsPool() {
   );
 
   return (
-    <section id="tools" className="relative overflow-hidden px-6 py-24 sm:py-32">
+    <section id="tools" className="relative overflow-clip px-6 py-24 sm:py-32">
       <div
         aria-hidden="true"
         className="pointer-events-none absolute left-1/2 top-1/2 h-[40rem] w-[60rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-brand-700/10 blur-[160px]"

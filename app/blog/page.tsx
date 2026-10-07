@@ -42,7 +42,7 @@ export default async function BlogPage() {
                   href={`/blog/${post.fields.slug}`}
                   className="rounded-2xl border border-white/5 bg-[#1a1a1a] p-6 transition-colors hover:border-brand-400/40"
                 >
-                  <p className="text-xs uppercase tracking-wide text-white/40">
+                  <p className="text-xs uppercase tracking-wide text-white/60">
                     {new Date(post.fields.publishDate).toLocaleDateString("en-US", {
                       year: "numeric",
                       month: "long",

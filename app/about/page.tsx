@@ -90,10 +90,10 @@ export default async function AboutPage() {
     <div className="flex min-h-full flex-1 flex-col bg-[#121212] text-white">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <Header />
-      <main className="relative flex-1 overflow-hidden px-6 pb-20 pt-16">
+      <main className="relative flex-1 overflow-clip px-6 pb-20 pt-16">
         <div aria-hidden="true" className="pointer-events-none absolute left-[-10%] top-0 h-[32rem] w-[40rem] rounded-full bg-brand-700/20 blur-[140px]" />
         <article className="relative mx-auto max-w-4xl">
-          <nav aria-label="Breadcrumb" className="text-xs text-white/40">
+          <nav aria-label="Breadcrumb" className="text-xs text-white/60">
             <ol className="flex items-center gap-2">
               <li><Link href="/" className="hover:text-white">Home</Link></li>
               <li aria-hidden="true">/</li>

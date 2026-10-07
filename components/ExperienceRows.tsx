@@ -52,14 +52,14 @@ export default function ExperienceRows({ items }: { items: ExperienceRow[] }) {
               </span>
             </button>
 
-            <div id={`exp-${it.id}`} className="row-grid" aria-hidden={!on}>
+            <div id={`exp-${it.id}`} className="row-grid" inert={!on}>
               <div>
                 <div className="grid gap-6 pb-8 sm:grid-cols-[5rem_1fr] sm:gap-8">
                   <div className="hidden sm:block">
                     {it.logo ? (
                       it.logo
                     ) : it.logoUrl ? (
-                      <span className="relative block h-12 w-12 overflow-hidden rounded-md bg-white/90 p-1.5">
+                      <span className="relative block h-12 w-12 overflow-clip rounded-md bg-white/90 p-1.5">
                         <Image src={it.logoUrl} alt="" fill sizes="48px" unoptimized className="object-contain p-1" />
                       </span>
                     ) : (

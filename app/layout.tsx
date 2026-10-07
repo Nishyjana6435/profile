@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Caveat, Geist, Geist_Mono, Inter, Space_Grotesk } from "next/font/google";
+import { Caveat, Geist_Mono, Inter, Space_Grotesk } from "next/font/google";
 import { SITE_NAME, SITE_URL } from "@/lib/seo";
 import { accentCss } from "@/lib/theme";
 import "./globals.css";
@@ -7,11 +7,6 @@ import AssistantWidget from "@/components/AssistantWidget";
 import Cursor from "@/components/Cursor";
 import SmoothScroll from "@/components/SmoothScroll";
 import LiveText from "@/components/LiveText";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
@@ -27,12 +22,13 @@ const caveat = Caveat({
   variable: "--font-caveat",
   subsets: ["latin"],
   weight: ["600"],
+  preload: false, // only the footer signature uses it
 });
 
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-space-grotesk",
   subsets: ["latin"],
-  weight: ["500", "600", "700"],
+  weight: ["600", "700"],
 });
 
 export const metadata: Metadata = {
@@ -69,16 +65,13 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} ${inter.variable} ${spaceGrotesk.variable} ${caveat.variable} h-full scroll-smooth antialiased motion-reduce:scroll-auto`}
+      className={`${geistMono.variable} ${inter.variable} ${spaceGrotesk.variable} ${caveat.variable} h-full scroll-smooth antialiased motion-reduce:scroll-auto`}
     >
       <head>
         {/* accent colour tokens: edit lib/theme.ts */}
         <style dangerouslySetInnerHTML={{ __html: accentCss() }} />
       </head>
       <body className="min-h-full flex flex-col bg-[#121212]">
-        <noscript>
-          <style>{`.reveal,.reveal-stagger>*{opacity:1!important;transform:none!important}`}</style>
-        </noscript>
         {children}
         <AssistantWidget />
         <Cursor />

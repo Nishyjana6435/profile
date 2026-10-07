@@ -63,7 +63,7 @@ export function GET() {
       agentHost: endpoint ? new URL(endpoint).host : null,
       envNamesSeen: candidateNames(), // names only, never values
     },
-    { headers: { "Cache-Control": "no-store" } },
+    { headers: { "Cache-Control": "public, max-age=300, stale-while-revalidate=3600" } },
   );
 }
 

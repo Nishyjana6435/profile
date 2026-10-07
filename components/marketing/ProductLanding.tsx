@@ -86,12 +86,12 @@ export default function ProductLanding({
       <Header />
       <main className="flex-1">
         {/* Hero */}
-        <section className="relative overflow-hidden px-6 pb-20 pt-16 sm:pt-24">
+        <section className="relative overflow-clip px-6 pb-20 pt-16 sm:pt-24">
           <div aria-hidden="true" className={`pointer-events-none absolute right-[-10%] top-1/3 h-[36rem] w-[36rem] rounded-full ${a.blob} blur-[140px]`} />
           <div aria-hidden="true" className="pointer-events-none absolute left-[-10%] top-0 h-[28rem] w-[40rem] rounded-full bg-brand-700/15 blur-[140px]" />
           <div className="relative mx-auto grid max-w-6xl items-center gap-16 lg:grid-cols-[1fr_1.1fr] lg:gap-12">
             <div>
-              <nav aria-label="Breadcrumb" className="text-xs text-white/40">
+              <nav aria-label="Breadcrumb" className="text-xs text-white/60">
                 <ol className="flex items-center gap-2">
                   <li><Link href="/" className="hover:text-white">Home</Link></li>
                   <li aria-hidden="true">/</li>
@@ -121,7 +121,7 @@ export default function ProductLanding({
                 >
                   {config.hero.secondary.label}
                 </a>
-                <span className="basis-full text-xs text-white/40">{config.hero.trust}</span>
+                <span className="basis-full text-xs text-white/60">{config.hero.trust}</span>
               </Reveal>
               <Reveal variant="fade" stagger delay={360} className="mt-8 flex flex-wrap gap-2">
                 {config.hero.audience.map((who, i) => (
@@ -214,7 +214,7 @@ export default function ProductLanding({
         <section id="compare" className="scroll-mt-24 px-6 py-20 sm:py-24">
           <div className="mx-auto max-w-6xl">
             <SectionHeading eyebrow="Comparison" title={config.comparison.heading} intro={config.comparison.intro} />
-            <p className="mt-10 text-center text-[11px] uppercase tracking-[0.2em] text-white/40 lg:hidden">
+            <p className="mt-10 text-center text-[11px] uppercase tracking-[0.2em] text-white/60 lg:hidden">
               Swipe the table to compare →
             </p>
             <Reveal delay={200} className="mt-4 overflow-x-auto rounded-3xl border border-white/10 bg-white/[0.02] lg:mt-12">
@@ -222,7 +222,7 @@ export default function ProductLanding({
                 <caption className="sr-only">{config.comparison.heading}</caption>
                 <thead>
                   <tr className="border-b border-white/10">
-                    <th scope="col" className="sticky left-0 z-10 bg-[#0d0718] px-5 py-4 text-xs font-medium uppercase tracking-[0.2em] text-white/40">
+                    <th scope="col" className="sticky left-0 z-10 bg-[#0d0718] px-5 py-4 text-xs font-medium uppercase tracking-[0.2em] text-white/60">
                       Criteria
                     </th>
                     <th scope="col" className="bg-brand-500/10 px-5 py-4 text-sm font-semibold text-white">
@@ -257,7 +257,7 @@ export default function ProductLanding({
             <Reveal as="p" delay={260} className="mx-auto mt-8 max-w-3xl text-center text-sm leading-7 text-white/70">
               {config.comparison.verdict}
             </Reveal>
-            <p className="mx-auto mt-4 max-w-3xl text-center text-[11px] leading-5 text-white/35">{config.comparison.note}</p>
+            <p className="mx-auto mt-4 max-w-3xl text-center text-[11px] leading-5 text-white/55">{config.comparison.note}</p>
           </div>
         </section>
 
@@ -310,7 +310,7 @@ export default function ProductLanding({
                 </div>
               ))}
             </Reveal>
-            <p className="mx-auto mt-6 max-w-3xl text-center text-xs leading-6 text-white/40">{config.pricing.note}</p>
+            <p className="mx-auto mt-6 max-w-3xl text-center text-xs leading-6 text-white/60">{config.pricing.note}</p>
           </div>
         </section>
 
@@ -319,7 +319,7 @@ export default function ProductLanding({
         {/* Related product + CTA */}
         <section className="px-6 py-20 sm:py-24">
           <div className="mx-auto grid max-w-6xl gap-6 lg:grid-cols-[1.4fr_1fr_1fr]">
-            <Reveal className="relative overflow-hidden rounded-3xl border border-white/10 bg-[#1a1a1a] p-8 sm:p-12">
+            <Reveal className="relative overflow-clip rounded-3xl border border-white/10 bg-[#1a1a1a] p-8 sm:p-12">
               <div aria-hidden="true" className={`pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full ${a.blob} blur-3xl`} />
               <h2 className="text-3xl font-semibold leading-tight text-white sm:text-4xl">{config.cta.title}</h2>
               <p className="mt-4 max-w-xl text-sm leading-7 text-white/65">{config.cta.body}</p>

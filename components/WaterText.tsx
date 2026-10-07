@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useId, useRef, type CSSProperties, type PointerEvent } from "react";
+import { useEffect, useId, useRef, useState, type CSSProperties, type PointerEvent } from "react";
 
 /**
  * Display text rendered as a liquid surface: a gooey filter lets drops bead off
@@ -12,7 +12,8 @@ export default function WaterText({ text, className = "" }: { text: string; clas
   const wrap = useRef<HTMLSpanElement | null>(null);
   const disp = useRef<SVGFEDisplacementMapElement | null>(null);
   const turb = useRef<SVGFETurbulenceElement | null>(null);
-  const state = useRef({ amp: 0, t: 0, raf: 0, last: 0, reduced: false });
+  const state = useRef<{ amp: number; t: number; raf: number; last: number; reduced: boolean; io?: IntersectionObserver }>({ amp: 0, t: 0, raf: 0, last: 0, reduced: false });
+  const [live, setLive] = useState(false); // noise animates only on fine pointers while in view
   const IDLE = 2.5;
 
   useEffect(() => {
@@ -21,6 +22,11 @@ export default function WaterText({ text, className = "" }: { text: string; clas
     disp.current?.setAttribute("scale", s.reduced ? "0" : String(IDLE));
     // when a drip reaches the end of its fall, tell the page where it landed so it can carry on falling
     const el = wrap.current;
+    if (el && window.matchMedia("(pointer: fine)").matches && !s.reduced) {
+      const io = new IntersectionObserver((es) => setLive(es.some((e) => e.isIntersecting)), { threshold: 0.05 });
+      io.observe(el);
+      s.io = io;
+    }
     // the drip's cycle has already restarted when this fires, so compute where it ended:
     // 1.4em below its resting place, at its unstretched size
     const onIter = (e: Event) => {
@@ -34,7 +40,7 @@ export default function WaterText({ text, className = "" }: { text: string; clas
     // once the entrance reveal has played, let drips fall past the mask
     const mask = el?.closest<HTMLElement>(".hero-mask");
     const release = window.setTimeout(() => { if (mask) mask.style.overflow = "visible"; }, 1400);
-    return () => { cancelAnimationFrame(s.raf); el?.removeEventListener("animationiteration", onIter); clearTimeout(release); };
+    return () => { cancelAnimationFrame(s.raf); el?.removeEventListener("animationiteration", onIter); clearTimeout(release); s.io?.disconnect(); };
   }, []);
 
   const loop = (now: number) => {
@@ -95,7 +101,7 @@ export default function WaterText({ text, className = "" }: { text: string; clas
           <feGaussianBlur in="SourceGraphic" stdDeviation="4" result="blur" />
           <feColorMatrix in="blur" type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 22 -10" result="goo" />
           <feTurbulence ref={turb} type="fractalNoise" baseFrequency="0.012 0.028" numOctaves="2" seed="3" result="noise">
-            <animate attributeName="baseFrequency" values="0.012 0.028;0.016 0.022;0.012 0.028" dur="9s" repeatCount="indefinite" />
+            {live && <animate attributeName="baseFrequency" values="0.012 0.028;0.016 0.022;0.012 0.028" dur="9s" repeatCount="indefinite" />}
           </feTurbulence>
           <feDisplacementMap ref={disp} in="goo" in2="noise" scale="2.5" xChannelSelector="R" yChannelSelector="G" />
         </filter>

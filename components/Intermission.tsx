@@ -10,12 +10,12 @@ export default function Intermission() {
   return (
     <section id="intermission" className="relative border-y border-brand-500/60 bg-[#0e0e0f]">
       {/* full-bleed ticker */}
-      <div className="strip overflow-hidden border-b hairline bg-brand-500 py-3 text-[#0b0b0c]" aria-hidden="true">
+      <div className="strip overflow-clip border-b hairline bg-brand-500 py-3 text-[#0b0b0c]" aria-hidden="true">
         <div className="strip-track flex w-max" style={{ "--dur": "26s", "--copies": 4 } as CSSProperties}>
           {Array.from({ length: 4 }, (_, c) => (
             <ul key={c} className="flex items-center gap-8 pr-8">
               {TICKER.map((t) => (
-                <li key={t} className="display flex items-center gap-8 whitespace-nowrap text-2xl sm:text-3xl">
+                <li key={t} className="display flex items-center gap-8 whitespace-nowrap bg-brand-500 text-2xl sm:text-3xl">
                   {t}
                   <span className="inline-block h-2.5 w-2.5 rotate-45 bg-[#0b0b0c]" />
                 </li>

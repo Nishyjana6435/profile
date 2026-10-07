@@ -130,7 +130,7 @@ export default async function ForAgentsPage() {
             {MACHINE_SURFACES.map((s) => (
               <li key={s.path}>
                 <a href={s.path} className="rounded-full border border-white/15 px-3 py-1 text-white/70 hover:border-brand-400/60 hover:text-white">
-                  {s.path} <span className="text-white/40">({s.type})</span>
+                  {s.path} <span className="text-white/60">({s.type})</span>
                 </a>
               </li>
             ))}
@@ -241,7 +241,7 @@ export default async function ForAgentsPage() {
             ))}
           </Section>
 
-          <p className="mt-6 text-xs text-white/40">Generated {v.generatedAt}. Canonical: {url}</p>
+          <p className="mt-6 text-xs text-white/60">Generated {v.generatedAt}. Canonical: {url}</p>
         </article>
       </main>
       <Contact siteSettings={siteSettings} />

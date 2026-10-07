@@ -41,7 +41,7 @@ export default function Hero({ profile }: { profile: ProfileEntry | null }) {
   const location = fields?.location ?? "Colombo, Sri Lanka";
 
   return (
-    <section className="hero relative overflow-hidden border-b hairline">
+    <section className="hero relative overflow-clip border-b hairline">
       <HeroRules />
       <Spotlight />
       {/* news line */}
@@ -77,10 +77,10 @@ export default function Hero({ profile }: { profile: ProfileEntry | null }) {
           <div className="hero-portrait relative mx-auto mt-6 w-[62%] max-w-[18rem] sm:w-[40%] lg:absolute lg:right-[9%] lg:top-[74%] lg:mx-0 lg:mt-0 lg:w-[27%] lg:max-w-[21rem]">
             <Parallax strength={10}>
             <div className="hero-portrait-float group relative aspect-[4/5]">
-              <div className="absolute inset-0 overflow-hidden rounded-2xl bg-white/20 p-px">
-                <div className="hero-sheet relative h-full w-full overflow-hidden rounded-2xl bg-ink-700">
+              <div className="absolute inset-0 overflow-clip rounded-2xl bg-white/20 p-px">
+                <div className="hero-sheet relative h-full w-full overflow-clip rounded-2xl bg-ink-700">
                   {src ? (
-                    <Image src={src} alt={`${name} (Nishy), founder of Agent Studio and Flows`} fill priority sizes="(min-width: 1024px) 336px, 60vw" className="object-cover" />
+                    <Image src={src} alt={`${name} (Nishy), founder of Agent Studio and Flows`} fill priority quality={70} sizes="(min-width: 1024px) 336px, 60vw" className="object-cover" />
                   ) : (
                     <span className="grid h-full w-full place-items-center text-6xl font-semibold text-white/60">N</span>
                   )}
@@ -126,7 +126,7 @@ export default function Hero({ profile }: { profile: ProfileEntry | null }) {
       {/* the three answers */}
       <div className="mx-auto mt-14 max-w-6xl px-6 pb-10 sm:mt-20 sm:pb-14">
         <LiquidTiles>
-        <ol className="grid overflow-hidden rounded-2xl border hairline sm:grid-cols-3">
+        <ol className="grid overflow-clip rounded-2xl border hairline sm:grid-cols-3">
           {ANSWERS.map((a, i) => (
             <li
               key={a.tag}

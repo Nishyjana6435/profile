@@ -143,11 +143,11 @@ export default function AiEngineerLanding({ config: P, siteSettings }: { config:
       <Header />
       <main className="flex-1">
         {/* Hero */}
-        <section className="relative overflow-hidden px-6 pb-16 pt-16 sm:pt-24">
+        <section className="relative overflow-clip px-6 pb-16 pt-16 sm:pt-24">
           <div aria-hidden="true" className="pointer-events-none absolute right-[-10%] top-0 h-[36rem] w-[36rem] rounded-full bg-brand-600/10 blur-[140px]" />
           <div aria-hidden="true" className="pointer-events-none absolute left-[-10%] top-1/2 h-[28rem] w-[40rem] rounded-full bg-brand-700/15 blur-[140px]" />
           <div className="relative mx-auto max-w-4xl">
-            <nav aria-label="Breadcrumb" className="text-xs text-white/40">
+            <nav aria-label="Breadcrumb" className="text-xs text-white/60">
               <ol className="flex items-center gap-2">
                 <li><Link href="/" className="hover:text-white">Home</Link></li>
                 <li aria-hidden="true">/</li>
@@ -175,7 +175,7 @@ export default function AiEngineerLanding({ config: P, siteSettings }: { config:
               </Btn>
               <Btn href="#products">See my AI products</Btn>
               <Btn href="/hire">All services</Btn>
-              <span className="basis-full text-xs text-white/40">{P.hero.trust}</span>
+              <span className="basis-full text-xs text-white/60">{P.hero.trust}</span>
             </Reveal>
             <Reveal variant="fade" stagger delay={360} className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-4">
               {P.hero.stats.map((s, i) => (
@@ -300,7 +300,7 @@ export default function AiEngineerLanding({ config: P, siteSettings }: { config:
         <FAQ items={P.faqs} />
 
         <section className="px-6 py-20 sm:py-24">
-          <Reveal className="relative mx-auto max-w-6xl overflow-hidden rounded-3xl border border-white/10 bg-[#1a1a1a] p-8 sm:p-12">
+          <Reveal className="relative mx-auto max-w-6xl overflow-clip rounded-3xl border border-white/10 bg-[#1a1a1a] p-8 sm:p-12">
             <div aria-hidden="true" className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-brand-600/15 blur-3xl" />
             <h2 className="text-3xl font-semibold leading-tight text-white sm:text-4xl">{P.cta.title}</h2>
             <p className="mt-4 max-w-xl text-sm leading-7 text-white/65">{P.cta.body}</p>

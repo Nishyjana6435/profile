@@ -57,10 +57,10 @@ export default async function Page() {
     <div className="flex min-h-full flex-1 flex-col bg-[#121212] text-white">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <Header />
-      <main className="relative flex-1 overflow-hidden px-6 pb-20 pt-16">
+      <main className="relative flex-1 overflow-clip px-6 pb-20 pt-16">
         <article className="relative mx-auto grid max-w-6xl gap-14 lg:grid-cols-[1fr_1fr] lg:items-start">
           <div>
-            <nav aria-label="Breadcrumb" className="text-xs text-white/40">
+            <nav aria-label="Breadcrumb" className="text-xs text-white/60">
               <ol className="flex items-center gap-2">
                 <li><Link href="/" className="hover:text-white">Home</Link></li>
                 <li aria-hidden="true">/</li>

@@ -12,7 +12,7 @@ import { Arrow } from "./ui";
  */
 export default function NewsPoster() {
   return (
-    <div className="np relative overflow-hidden rounded-2xl border hairline bg-[#161616] p-6 sm:p-8">
+    <div className="np relative overflow-clip rounded-2xl border hairline bg-[#161616] p-6 sm:p-8">
       <div aria-hidden="true" className="rules absolute inset-0 opacity-60" />
 
       <div className="relative">

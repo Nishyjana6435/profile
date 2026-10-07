@@ -137,7 +137,7 @@ export default function AssistantWidget() {
   // Only appear when the server says the agent is configured.
   useEffect(() => {
     let live = true;
-    fetch("/api/assistant", { cache: "no-store" })
+    fetch("/api/assistant")
       .then((r) => r.json())
       .then((d: { configured?: boolean }) => live && setReady(Boolean(d.configured)))
       .catch(() => {});
@@ -254,7 +254,7 @@ export default function AssistantWidget() {
         role="dialog"
         aria-modal="false"
         aria-label="Chat with Nishy's assistant"
-        className={`as-panel fixed inset-x-3 bottom-24 top-20 flex flex-col overflow-hidden rounded-3xl border border-white/15 sm:absolute sm:inset-auto sm:bottom-20 sm:right-0 sm:h-[min(640px,calc(100vh-8rem))] sm:w-[400px] ${open ? "is-open" : ""}`}
+        className={`as-panel fixed inset-x-3 bottom-24 top-20 flex flex-col overflow-clip rounded-3xl border border-white/15 sm:absolute sm:inset-auto sm:bottom-20 sm:right-0 sm:h-[min(640px,calc(100vh-8rem))] sm:w-[400px] ${open ? "is-open" : ""}`}
       >
         <div aria-hidden="true" className="pointer-events-none absolute -right-16 -top-20 h-56 w-56 rounded-full bg-brand-500/25 blur-3xl" />
         <div aria-hidden="true" className="pointer-events-none absolute -left-20 bottom-10 h-56 w-56 rounded-full bg-brand-500/15 blur-3xl" />

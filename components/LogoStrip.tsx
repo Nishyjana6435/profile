@@ -26,9 +26,9 @@ function marks(items: ExperienceItemEntry[]): Mark[] {
 export default function LogoStrip({ items }: { items: ExperienceItemEntry[] }) {
   const list = marks(items);
   if (list.length < 3) return null;
-  const copies = 4;
+  const copies = 3;
   return (
-    <ScrollVar from={0.5} to={0.08} className="strip strip--glow relative overflow-hidden border-y border-brand-500/40 py-5" >
+    <ScrollVar from={0.5} to={0.08} className="strip strip--glow relative overflow-clip border-y border-brand-500/40 py-5" >
       <span aria-hidden="true" className="strip-sheen pointer-events-none absolute inset-y-0 left-0" />
       <span aria-hidden="true" className="strip-curl pointer-events-none absolute bottom-0 right-0" />
       <div className="strip-track flex w-max" style={{ "--dur": `${Math.max(28, list.length * 5)}s`, "--copies": copies } as CSSProperties}>
@@ -40,7 +40,7 @@ export default function LogoStrip({ items }: { items: ExperienceItemEntry[] }) {
                   <span className="[&>svg]:h-9 [&>svg]:w-9">{m.node}</span>
                 ) : (
                   <span className="relative block h-9 w-28">
-                    <Image src={m.logoUrl!} alt="" fill sizes="112px" unoptimized className="object-contain brightness-0 invert" />
+                    <Image src={m.logoUrl!} alt="" fill sizes="112px" unoptimized={m.logoUrl!.endsWith(".svg")} className="object-contain brightness-0 invert" />
                   </span>
                 )}
                 <span className="sr-only">{m.name}</span>

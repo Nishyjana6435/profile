@@ -5,11 +5,16 @@ import { notFound } from "next/navigation";
 import Header from "@/components/Header";
 import Contact from "@/components/Contact";
 import { Arrow, Chip, Eyebrow } from "@/components/ui";
-import { getPostBySlug, getSiteSettings } from "@/lib/contentful";
+import { getPostBySlug, getPosts, getSiteSettings } from "@/lib/contentful";
 import { RichText, readingMinutes, richTextToPlainText } from "@/lib/richtext";
 import { SITE_NAME, SITE_URL } from "@/lib/seo";
 
 export const revalidate = 60000;
+
+export async function generateStaticParams() {
+  const posts = await getPosts();
+  return posts.map((p) => ({ slug: p.fields.slug }));
+}
 
 export async function generateMetadata(props: PageProps<"/blog/[slug]">): Promise<Metadata> {
   const { slug } = await props.params;
@@ -76,7 +81,7 @@ export default async function BlogPostPage(props: PageProps<"/blog/[slug]">) {
           )}
 
           {coverUrl && (
-            <figure className="mt-10 overflow-hidden rounded-2xl border hairline bg-[#161616]">
+            <figure className="mt-10 overflow-clip rounded-2xl border hairline bg-[#161616]">
               <Image
                 src={`https:${coverUrl}`}
                 alt={cover?.fields.title || post.fields.title}
@@ -95,7 +100,7 @@ export default async function BlogPostPage(props: PageProps<"/blog/[slug]">) {
 
           <footer className="mt-16 flex flex-col gap-4 border-t hairline pt-8 sm:flex-row sm:items-center sm:justify-between">
             <p className="text-sm text-neutral-400">
-              Written by <Link href="/about" className="text-white hover:underline">Nishanthan Janarthanarajah (Nishy)</Link>, founder of Agent Studio and Flows.
+              Written by <Link href="/about" className="text-white underline decoration-white/40 underline-offset-4 hover:decoration-white">Nishanthan Janarthanarajah (Nishy)</Link>, founder of Agent Studio and Flows.
             </p>
             <Link href="/blog" className="label inline-flex items-center gap-1.5 text-white hover:text-brand-300">
               More posts <Arrow className="h-3 w-3" />
