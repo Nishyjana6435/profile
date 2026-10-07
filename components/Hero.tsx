@@ -4,6 +4,7 @@ import type { ProfileEntry } from "@/lib/contentful";
 import { AGENT_STUDIO_FLOWS_NEWS as NEWS } from "@/lib/news";
 import { Arrow, Btn, Num } from "./ui";
 import Link from "next/link";
+import LiquidTiles from "./LiquidTiles";
 import WaterText from "./WaterText";
 import Parallax from "./Parallax";
 import Spotlight from "./Spotlight";
@@ -122,6 +123,7 @@ export default function Hero({ profile }: { profile: ProfileEntry | null }) {
 
       {/* the three answers */}
       <div className="mx-auto mt-14 max-w-6xl px-6 pb-10 sm:mt-20 sm:pb-14">
+        <LiquidTiles>
         <ol className="grid overflow-hidden rounded-2xl border hairline sm:grid-cols-3">
           {ANSWERS.map((a, i) => (
             <li
@@ -135,6 +137,7 @@ export default function Hero({ profile }: { profile: ProfileEntry | null }) {
             </li>
           ))}
         </ol>
+        </LiquidTiles>
       </div>
     </section>
   );

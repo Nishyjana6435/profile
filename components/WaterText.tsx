@@ -19,7 +19,22 @@ export default function WaterText({ text, className = "" }: { text: string; clas
     const s = state.current;
     s.reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     disp.current?.setAttribute("scale", s.reduced ? "0" : String(IDLE));
-    return () => cancelAnimationFrame(s.raf);
+    // when a drip reaches the end of its fall, tell the page where it landed so it can carry on falling
+    const el = wrap.current;
+    // the drip's cycle has already restarted when this fires, so compute where it ended:
+    // 1.4em below its resting place, at its unstretched size
+    const onIter = (e: Event) => {
+      const d = e.target as HTMLElement;
+      if (!d.classList.contains("wt-drop")) return;
+      const r = d.getBoundingClientRect();
+      const fs = parseFloat(getComputedStyle(d).fontSize);
+      window.dispatchEvent(new CustomEvent("nishy:drip", { detail: { x: r.left + r.width / 2, top: r.top + fs * 1.4, w: r.width, h: fs * 0.12 } }));
+    };
+    el?.addEventListener("animationiteration", onIter);
+    // once the entrance reveal has played, let drips fall past the mask
+    const mask = el?.closest<HTMLElement>(".hero-mask");
+    const release = window.setTimeout(() => { if (mask) mask.style.overflow = "visible"; }, 1400);
+    return () => { cancelAnimationFrame(s.raf); el?.removeEventListener("animationiteration", onIter); clearTimeout(release); };
   }, []);
 
   const loop = (now: number) => {
@@ -69,13 +84,14 @@ export default function WaterText({ text, className = "" }: { text: string; clas
   };
 
   const drops = [
-    { x: 9, d: 0, dur: 7 }, { x: 31, d: 2.4, dur: 8.5 }, { x: 52, d: 4.1, dur: 6.5 }, { x: 70, d: 1.3, dur: 9 }, { x: 88, d: 5.6, dur: 7.5 },
+    // drips sit under S, H and the start of Y: the column that is clear of the statement and the portrait
+    { x: 49, d: 0, dur: 7 }, { x: 57, d: 2.4, dur: 8.5 }, { x: 65, d: 4.1, dur: 6.5 }, { x: 74, d: 1.3, dur: 9 }, { x: 82, d: 5.6, dur: 7.5 },
   ];
 
   return (
     <span ref={wrap} className={`wt relative inline-block ${className}`} onPointerEnter={splash} onPointerMove={stir}>
       <svg aria-hidden="true" width="0" height="0" className="absolute">
-        <filter id={`wt-${id}`} x="-10%" y="-20%" width="120%" height="160%" colorInterpolationFilters="sRGB">
+        <filter id={`wt-${id}`} x="-10%" y="-20%" width="120%" height="300%" colorInterpolationFilters="sRGB">
           <feGaussianBlur in="SourceGraphic" stdDeviation="4" result="blur" />
           <feColorMatrix in="blur" type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 22 -10" result="goo" />
           <feTurbulence ref={turb} type="fractalNoise" baseFrequency="0.012 0.028" numOctaves="2" seed="3" result="noise">
