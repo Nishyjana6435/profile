@@ -4,7 +4,7 @@ import { useEffect, useRef, type CSSProperties, type ReactNode } from "react";
 
 /**
  * The hero's three answer tiles as a tank. Drops fall from the name above and
- * the tank fills with white liquid; text turns black as it goes under. When it
+ * the tank fills with accent-coloured liquid; text turns black as it goes under. When it
  * is full a block in the right wall slides out, the liquid drains through the
  * gap, the block slides back and the fill starts again.
  */
@@ -120,11 +120,11 @@ export default function LiquidTiles({ children, source = ".hero-name" }: { child
       <div ref={drops} aria-hidden="true" className="lq-drops pointer-events-none absolute z-20" />
       {/* dry layer */}
       <div className="lq-dry">{children}</div>
-      {/* flooded copy: white liquid with the same content in black, clipped to the level */}
+      {/* flooded copy: accent liquid with the same content in black, clipped to the level */}
       <div aria-hidden="true" className="lq-flood pointer-events-none absolute inset-0 overflow-clip rounded-2xl">
         <div className="lq-liquid absolute inset-x-0">
           <svg className="lq-wave absolute inset-x-0 bottom-full h-3 w-[200%]" viewBox="0 0 1200 12" preserveAspectRatio="none" aria-hidden="true">
-            <path d="M0 12 C 50 2, 100 2, 150 12 S 250 22, 300 12 S 400 2, 450 12 S 550 22, 600 12 S 700 2, 750 12 S 850 22, 900 12 S 1000 2, 1050 12 S 1150 22, 1200 12 V 12 H 0 Z" fill="#fff" />
+            <path d="M0 12 C 50 2, 100 2, 150 12 S 250 22, 300 12 S 400 2, 450 12 S 550 22, 600 12 S 700 2, 750 12 S 850 22, 900 12 S 1000 2, 1050 12 S 1150 22, 1200 12 V 12 H 0 Z" style={{ fill: "var(--accent)" }} />
           </svg>
         </div>
         <div className="lq-ink absolute inset-0">{children}</div>

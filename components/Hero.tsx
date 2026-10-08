@@ -47,11 +47,11 @@ export default function Hero({ profile }: { profile: ProfileEntry | null }) {
       {/* news line */}
       <Link
         href={NEWS.path}
-        className="group news-accent relative z-10 flex items-center justify-center gap-3 px-6 py-2.5 text-center text-[#0b0b0c] transition-[filter] hover:brightness-110"
+        className="group news-accent relative z-10 flex items-center justify-center gap-3 px-6 py-2.5 text-center text-white transition-[filter] hover:brightness-110"
       >
-        <span className="rounded bg-[#0b0b0c] px-1.5 py-0.5 font-mono text-[10px] font-bold uppercase tracking-[0.16em] text-white">New</span>
+        <span className="rounded bg-brand-500 px-1.5 py-0.5 font-mono text-[10px] font-bold uppercase tracking-[0.16em] text-black">New</span>
         <span className="truncate text-xs font-semibold sm:text-sm">{NEWS.title}</span>
-        <Arrow className="h-3 w-3 text-inherit transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+        <Arrow className="h-3 w-3 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
       </Link>
 
       <div className="relative mx-auto max-w-6xl px-6 pt-10 text-center sm:pt-14 lg:text-left">
@@ -66,7 +66,7 @@ export default function Hero({ profile }: { profile: ProfileEntry | null }) {
 
         {/* name + portrait overlap */}
         <div className="relative mt-6">
-          <h1 className="display hero-name text-white">
+          <h1 className="display hero-name text-brand-500">
             <span className="hero-mask">
               <span style={d(0.15)}>
                 <WaterText text="Nishy" />

@@ -1290,7 +1290,7 @@ html, body { overflow-x: clip; }
   .lq-drop {
     position: absolute;
     border-radius: 9999px;
-    background: #fff;
+    background: var(--accent);
     transform-origin: 50% 0;
     filter: blur(0.8px);
     will-change: transform;
@@ -1301,23 +1301,23 @@ html, body { overflow-x: clip; }
   .lq-ring {
     position: absolute;
     border-radius: 9999px;
-    border: 2px solid rgba(255, 255, 255, 0.9);
-    /* a dark edge outside the white line so the ripple also reads where it crosses the white liquid */
-    box-shadow: 0 0 0 1.5px rgba(18, 18, 18, 0.45), 0 0 10px rgba(255, 255, 255, 0.35);
+    border: 2px solid rgb(var(--accent-300-rgb) / 0.95);
+    /* a dark edge outside the light line so the ripple also reads where it crosses the accent liquid */
+    box-shadow: 0 0 0 1.5px rgba(18, 18, 18, 0.45), 0 0 10px rgb(var(--accent-300-rgb) / 0.4);
     animation: lq-ring 0.6s cubic-bezier(0.1, 0.7, 0.3, 1) both;
   }
   .lq-ring--late { animation-delay: 0.14s; animation-duration: 0.7s; }
   .lq-bead {
     position: absolute;
     border-radius: 9999px;
-    background: #fff;
-    box-shadow: 0 0 0 1px rgba(18, 18, 18, 0.35), 0 0 4px rgba(255, 255, 255, 0.5);
+    background: var(--accent);
+    box-shadow: 0 0 0 1px rgba(18, 18, 18, 0.35), 0 0 4px rgb(var(--accent-300-rgb) / 0.6);
     animation: lq-bead 0.55s linear both;
   }
   .lq-liquid {
     top: calc((1 - var(--level, 0)) * 100%);
     bottom: -10%;
-    background: #fff;
+    background: var(--accent);
     transition: top 0.15s linear;
   }
   .lq[data-phase="drain"] .lq-liquid { clip-path: polygon(0 0, 100% 10%, 100% 100%, 0 100%); }
@@ -1325,7 +1325,7 @@ html, body { overflow-x: clip; }
   .lq[data-phase="hold"] .lq-wave, .lq[data-phase="rest"] .lq-wave { animation-duration: 6s; }
   .lq-ink { clip-path: inset(calc((1 - var(--level, 0)) * 100% - 4px) 0 0 0); }
   .lq-ink, .lq-ink * { color: #0b0b0c !important; }
-  .lq-ink .text-brand-400 { color: var(--accent-700) !important; }
+  .lq-ink .text-brand-400 { color: var(--accent-950) !important; }
   .lq-ink .hairline { border-color: rgba(11, 11, 12, 0.15) !important; }
   .lq-ink li:hover { background: transparent !important; }
   .lq-flood { opacity: calc(min(1, var(--level, 0) * 40)); }
@@ -1342,7 +1342,7 @@ html, body { overflow-x: clip; }
   /* liquid pouring out through the gap while draining */
   .lq-stream {
     right: -3px; top: calc(58% + 2px); width: 10px; height: 46%;
-    background: linear-gradient(to bottom, #fff, rgba(255, 255, 255, 0.6) 60%, transparent);
+    background: linear-gradient(to bottom, var(--accent), rgb(var(--accent-500-rgb) / 0.6) 60%, transparent);
     border-radius: 0 0 9999px 9999px;
     transform-origin: 50% 0;
     opacity: 0;
@@ -1450,10 +1450,10 @@ html, body { overflow-x: clip; }
   .footer-accent .sig-line { stroke: #0b0b0c; }
 }
 
-/* ---------- News banner in the accent colour ---------- */
+/* ---------- News banner: black bar, accent badge and arrow, accent glow cast below ---------- */
 @keyframes news-glow { 0%, 100% { opacity: 0.75; } 50% { opacity: 1; } }
 @layer components {
-  .news-accent { background: var(--accent); }
+  .news-accent { background: #0b0b0c; border-bottom: 1px solid rgb(var(--accent-500-rgb) / 0.35); }
   /* glow cast downward onto the hero */
   .news-accent::after {
     content: ""; position: absolute; left: 0; right: 0; top: 100%; height: 120px; pointer-events: none;
