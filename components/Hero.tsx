@@ -51,7 +51,7 @@ export default function Hero({ profile }: { profile: ProfileEntry | null }) {
       >
         <span className="rounded bg-[#0b0b0c] px-1.5 py-0.5 font-mono text-[10px] font-bold uppercase tracking-[0.16em] text-white">New</span>
         <span className="truncate text-xs font-semibold sm:text-sm">{NEWS.title}</span>
-        <Arrow className="h-3 w-3 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+        <Arrow className="h-3 w-3 text-inherit transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
       </Link>
 
       <div className="relative mx-auto max-w-6xl px-6 pt-10 text-center sm:pt-14 lg:text-left">

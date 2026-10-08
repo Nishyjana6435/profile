@@ -148,7 +148,7 @@ export default function CaseStudies({ items }: { items: CaseStudy[] }) {
                 <span className="label text-brand-400">{pad(i + 1)}</span>
                 <span className={`row-ghost display-sm block text-xl sm:text-2xl lg:text-[1.7rem] ${on ? "text-white" : "text-neutral-500"}`}>{p.title}</span>
                 <span className="label hidden truncate text-right text-neutral-500 sm:block">{p.tags[0]}</span>
-                <span className={`grid h-9 w-9 place-items-center rounded-md border hairline transition-all duration-400 ${on ? "bg-brand-500 text-white" : "text-white/60"}`} aria-hidden="true">
+                <span className={`grid h-9 w-9 place-items-center rounded-md border hairline transition-all duration-400 ${on ? "border-brand-500/70 bg-brand-500/15" : ""}`} aria-hidden="true">
                   <Arrow className="h-3.5 w-3.5" />
                 </span>
               </button>

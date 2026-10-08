@@ -47,7 +47,7 @@ export default function ExperienceRows({ items }: { items: ExperienceRow[] }) {
                 <span className="block text-sm font-medium leading-5 text-white">{it.role}</span>
                 {it.period && <span className="label mt-1 block text-neutral-500">{it.period}</span>}
               </span>
-              <span className="row-plus grid h-9 w-9 place-items-center rounded-md border hairline text-lg leading-none text-white" aria-hidden="true">
+              <span className="row-plus grid h-9 w-9 place-items-center rounded-md border border-brand-500/60 text-lg leading-none text-brand-500" aria-hidden="true">
                 +
               </span>
             </button>

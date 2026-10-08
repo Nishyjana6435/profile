@@ -3,10 +3,11 @@ import type { ReactNode } from "react";
 import { pad } from "@/lib/text";
 import SplitReveal, { type Seg } from "./SplitReveal";
 
-/** Small red arrow mark, the one accent the theme allows. */
+/** Small arrow mark in the accent colour. Pass a `text-*` class to override the colour (e.g. on an accent background). */
 export function Arrow({ className = "h-3 w-3" }: { className?: string }) {
+  const colour = /\btext-/.test(className) ? "" : "text-brand-500 ";
   return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className={`${colour}${className}`} aria-hidden="true">
       <path d="M7 17 17 7M9 7h8v8" />
     </svg>
   );

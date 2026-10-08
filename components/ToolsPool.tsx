@@ -209,7 +209,7 @@ export default function ToolsPool() {
                     rel="noopener noreferrer"
                     className="rounded-md border border-white/25 px-2.5 py-1 font-mono text-[11px] text-white transition-all duration-300 hover:-translate-y-0.5 hover:border-white"
                   >
-                    {label} ↗
+                    {label} <span className="text-brand-500">↗</span>
                   </a>
                 ) : (
                   <Chip key={label}>{label}</Chip>

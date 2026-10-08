@@ -215,7 +215,7 @@ export default function ProductLanding({
           <div className="mx-auto max-w-6xl">
             <SectionHeading eyebrow="Comparison" title={config.comparison.heading} intro={config.comparison.intro} />
             <p className="mt-10 text-center text-[11px] uppercase tracking-[0.2em] text-white/60 lg:hidden">
-              Swipe the table to compare →
+              Swipe the table to compare <span className="text-brand-500">→</span>
             </p>
             <Reveal delay={200} className="mt-4 overflow-x-auto rounded-3xl border border-white/10 bg-white/[0.02] lg:mt-12">
               <table className="w-full min-w-[56rem] border-collapse text-left text-sm">
@@ -338,7 +338,7 @@ export default function ProductLanding({
               </div>
               <Link href={config.related.href} className="group mt-8 inline-flex items-center gap-2 text-sm font-medium text-white">
                 Explore {config.related.name}
-                <span aria-hidden="true" className="transition-transform duration-300 group-hover:translate-x-1">→</span>
+                <span aria-hidden="true" className="text-brand-500 transition-transform duration-300 group-hover:translate-x-1">→</span>
               </Link>
             </Reveal>
             <Reveal variant="right" delay={200} className="flex flex-col justify-between rounded-3xl border border-brand-400/30 bg-brand-500/10 p-8">
@@ -351,7 +351,7 @@ export default function ProductLanding({
               </div>
               <Link href="/build-ai-system-for-your-business" className="group mt-8 inline-flex items-center gap-2 text-sm font-medium text-white">
                 Build an AI system for your business
-                <span aria-hidden="true" className="transition-transform duration-300 group-hover:translate-x-1">→</span>
+                <span aria-hidden="true" className="text-brand-500 transition-transform duration-300 group-hover:translate-x-1">→</span>
               </Link>
             </Reveal>
           </div>

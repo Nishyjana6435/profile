@@ -31,7 +31,7 @@ export default function WhatIDo() {
                 <Num n={i + 1} />
                 <h3 className="row-ghost display-sm text-2xl text-neutral-300 sm:text-3xl">{s.title}</h3>
                 <p className="text-sm leading-6 text-neutral-400">{s.body}</p>
-                <span aria-hidden="true" className="absolute right-0 top-1/2 grid h-9 w-9 -translate-y-1/2 translate-x-3 place-items-center bg-brand-500 text-white opacity-0 transition-all duration-400 group-hover:translate-x-0 group-hover:opacity-100">
+                <span aria-hidden="true" className="absolute right-0 top-1/2 grid h-9 w-9 -translate-y-1/2 translate-x-3 place-items-center rounded-md border border-brand-500/60 bg-brand-500/15 opacity-0 transition-all duration-400 group-hover:translate-x-0 group-hover:opacity-100">
                   <Arrow className="h-4 w-4" />
                 </span>
               </li>
